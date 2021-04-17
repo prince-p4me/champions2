@@ -16,6 +16,7 @@ import WinnerAll from '../screens/Dashboard/WinnerAll';
 import RecipieAll from '../screens/Dashboard/RecipieAll';
 import EditProfile from '../screens/Dashboard/EditProfile';
 import MyReward from '../screens/Dashboard/MyReward';
+import Help from '../screens/Dashboard/Help';
 // import SplashScreen from '../screens/Auth/Splash';
 
 const Stack = createStackNavigator();
@@ -51,8 +52,9 @@ const StackNavigator = () => {
           <Stack.Screen name="OfferAll" component={OfferAll} />
           <Stack.Screen name="WinnerAll" component={WinnerAll} />
           <Stack.Screen name="recipeall" component={RecipieAll} />
-          <Stack.Screen name="editprofile" component={EditProfile} />
+          <Stack.Screen name="Editprofile" component={EditProfile} />
           <Stack.Screen name="myreward" component={MyReward} />
+          <Stack.Screen name="Help" component={Help} />
 
         </>
       ) : (

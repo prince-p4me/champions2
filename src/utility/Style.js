@@ -73,9 +73,10 @@ export default StyleSheet.create({
     height: 50,
     width: '100%',
     backgroundColor: Color.theme,
-    justifyContent: 'center',
-    // alignItems: 'center',
-    paddingLeft: 60,
+    // justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: "row",
+    paddingHorizontal: 15,
   },
   drawerButton: {
     width: 55,
@@ -180,22 +181,22 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop:10,
+    marginTop: 10,
     marginStart: 10,
     marginBottom: 10,
   },
   winnerlayout: {
-     alignItems: 'center',
+    alignItems: 'center',
     justifyContent: 'flex-start',
     marginStart: 10,
     marginBottom: 10,
-    width:200
+    width: 200
   },
   pointTypesContainer: {
     backgroundColor: Color.white,
     height: 175,
     borderRadius: 7,
-     
+
     borderColor: Color.darkBGgray,
     marginStart: 1,
     marginEnd: 1,
@@ -210,12 +211,12 @@ export default StyleSheet.create({
     backgroundColor: Color.theme,
     height: 175,
     borderRadius: 10,
-    marginTop:5,
-    marginLeft:5,
-    marginRight:2,
-    
+    marginTop: 5,
+    marginLeft: 5,
+    marginRight: 2,
+
     borderColor: Color.darkBGgray,
-      flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     // paddingStart: 20,
     // paddingEnd: 20,
@@ -226,10 +227,10 @@ export default StyleSheet.create({
     backgroundColor: Color.white,
     height: 125,
     borderRadius: 7,
-     
-    marginTop:10,
+
+    marginTop: 10,
     borderColor: Color.darkBGgray,
-     
+
     marginEnd: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -241,54 +242,54 @@ export default StyleSheet.create({
   winnercontainer: {
     backgroundColor: Color.white,
     height: 175,
-    width:130,
-    margin:3,
+    width: 130,
+    margin: 3,
     borderRadius: 7,
-    paddingTop:20,
-    flexDirection:'column',
-    alignItems:'center',
-     shadowRadius:20,
-     shadowColor:Color.bgGray
+    paddingTop: 20,
+    flexDirection: 'column',
+    alignItems: 'center',
+    shadowRadius: 20,
+    shadowColor: Color.bgGray
   },
   pointwoncontainer: {
-    backgroundColor:"#F1FFF2",
+    backgroundColor: "#F1FFF2",
     height: 175,
-    width:150,
-    margin:3,
+    width: 150,
+    margin: 3,
     borderRadius: 15,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 100,
-    shadowRadius: 1,  
-    paddingTop:20,
-    flexDirection:'column',
-    alignItems:'center',
-     shadowRadius:20,
-     shadowColor:Color.bgGray
+    shadowRadius: 1,
+    paddingTop: 20,
+    flexDirection: 'column',
+    alignItems: 'center',
+    shadowRadius: 20,
+    shadowColor: Color.bgGray
   },
   winnercontainerfull: {
     backgroundColor: Color.white,
     height: 100,
-    
-    margin:3,
+
+    margin: 3,
     borderRadius: 7,
-    paddingTop:20,
-    flexDirection:'row',
-    alignItems:'center',
-     shadowRadius:20,
-     shadowColor:Color.bgGray
+    paddingTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowRadius: 20,
+    shadowColor: Color.bgGray
   },
   offercontainer: {
     backgroundColor: Color.white,
     height: 120,
-   
-    margin:5,
+
+    margin: 5,
     borderRadius: 7,
-   
-    flexDirection:'row',
-    alignItems:'center',
-     shadowRadius:20,
-     shadowColor:Color.bgGray
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowRadius: 20,
+    shadowColor: Color.bgGray
   },
   pointTypeCol: {
     flex: 1,
@@ -319,8 +320,8 @@ export default StyleSheet.create({
   },
   rewardmiddle: {
     flex: 1,
-     
-     flexDirection: 'column',
+
+    flexDirection: 'column',
     marginBottom: 20,
     marginTop: 10,
     marginStart: 10,
