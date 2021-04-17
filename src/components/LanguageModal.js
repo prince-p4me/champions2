@@ -6,32 +6,33 @@ import {
   TouchableOpacity,
   // Modal
 } from 'react-native';
-import {TextSemiBold, TextLite} from './TextView';
+import { TextSemiBold, TextLite } from './TextView';
 import I18n from '../services/i18n';
 import Sizes from '../utility/Sizes';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import Modal from 'react-native-modal';
 import Icon1 from 'react-native-vector-icons/dist/MaterialIcons';
+import Color from '../utility/Color';
 
 const LanguageModal = props => {
-  const {visible, Language} = props;
+  const { visible, Language } = props;
   const isRtl = useSelector(state => state.isRtl);
-  const {onPress, onChangeLanguage} = props;
+  const { onPress, onChangeLanguage } = props;
   const align = isRtl ? 'right' : 'left';
 
   return (
-    <Modal isVisible={visible} style={{margin: 30}}>
-      <View style={{flex: 1 / 1.7, backgroundColor: '#FFF'}}>
-        <View style={styles.title}>
+    <Modal isVisible={visible} style={{ margin: 30 }}>
+      <View style={{ flex: 1 / 1.7, backgroundColor: '#FFF' }}>
+        <View style={[styles.title, { marginBottom: 0 }]}>
           <TextSemiBold
             text={I18n.t('sele_lang')}
-            style={{textAlign: align, fontSize: Sizes.large, color: '#000'}}
+            style={{ textAlign: align, fontSize: Sizes.large, color: '#000' }}
           />
         </View>
         <View style={styles.title}>
           <Icon1 name="search" size={30} color="#000" />
           <TextInput
-            style={{flex: 1, padding: 7}}
+            style={{ flex: 1, padding: 7 }}
             placeholder=""
             keyboardType="phone-pad"
             height={30}
@@ -55,8 +56,8 @@ const LanguageModal = props => {
                     text={item.name}
                     style={{
                       textAlign: align,
-                      fontSize: Sizes.extraLarge,
-                      color: '#636363',
+                      fontSize: Sizes.medium,
+                      color: Color.text,
                     }}
                   />
                 </TouchableOpacity>
@@ -66,9 +67,7 @@ const LanguageModal = props => {
 
         <View style={[styles.closeBtn]}>
           <TouchableOpacity
-            style={{
-              width: 60,
-            }}
+            style={styles.close}
             onPress={() => onPress()}>
             <TextLite
               text={I18n.t('close')}
@@ -86,14 +85,16 @@ const LanguageModal = props => {
 };
 
 const styles = StyleSheet.create({
+  close: {
+    width: 60, height: 40,
+    marginEnd: 10,
+    justifyContent: "center",
+    alignItems: "center"
+  },
   closeBtn: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
-    margin: 17,
+    marginTop: 17,
   },
   title: {
     margin: 17,

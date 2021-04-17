@@ -21,18 +21,27 @@ import Language from '../../assets/language/language.json';
 import LanguageModal from '../../components/LanguageModal';
 import RNRestart from 'react-native-restart';
 import ProfilePicModal from '../../components/ProfilePicModal';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Color from '../../utility/Color';
+const languages = ['English', 'Hindi', 'Punjabi', 'Bangla', 'Urdu'];
+const langTypes = ['en', 'hn', 'pu', 'ba', 'ur'];
 
 const Profilemain = props => {
     const user = useSelector(state => state.getUser);
     let [modalVisible, setModalVisible] = useState(false);
     let [languageList, updateLanguageList] = useState(Language);
-    let [AllLanguage] = useState(Language);
+    let [profilePicVisible, setProfilePicVisible] = useState(false);
     let language = useSelector(state => state.getLanguage);
     const forceUpdate = React.useReducer(bool => !bool)[1];
 
     const dispatch = useDispatch();
-    let [profilePicVisible, setProfilePicVisible] = useState(false);
 
+    const getLanguage = () => {
+        let index = langTypes.findIndex(
+            (lang) => lang === language,
+        );
+        return languages[index]
+    }
     console.log('user', user);
 
     useEffect(() => {
@@ -108,27 +117,6 @@ const Profilemain = props => {
     const upperSection = () => {
         return (
             <>
-                <TouchableOpacity
-                    style={[
-                        styles.closeImage,
-                        {
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-around',
-                        },
-                    ]}
-                    onPress={() => {
-                        setModalVisible(true);
-                    }}>
-                    <Image
-                        source={Images.language}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('chooselanguage')}
-                    />
-                </TouchableOpacity>
                 <View style={styles.closeImage}>
                     <Image source={Images.address}
                         style={styles.image}
@@ -139,16 +127,39 @@ const Profilemain = props => {
                     />
                 </View>
                 <View style={styles.line} />
-                <View style={styles.closeImage}>
-                    <Image
-                        source={Images.language}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('language')}
-                    />
-                </View>
+                <TouchableOpacity
+                    style={[
+                        styles.closeImage,
+                        {
+                            alignItems: 'center',
+                            // justifyContent: 'space-around',
+                        },
+                    ]}
+                    onPress={() => {
+                        setModalVisible(true);
+                    }}>
+                    <View style={{
+                        flex: 7,
+                        flexDirection: "row", alignItems: "center"
+                    }}>
+                        <Image
+                            source={Images.language}
+                            style={styles.image}
+                            resizeMode="contain"></Image>
+                        <TextRegular
+                            style={styles.textstyle}
+                            text={I18n.t('language')}
+                        />
+                    </View>
+                    <View style={{
+                        flex: 3, alignItems: "flex-end"
+                    }}>
+                        <TextRegular
+                            style={[styles.textstyle, { color: Color.green }]}
+                            text={getLanguage()}
+                        />
+                    </View>
+                </TouchableOpacity>
                 <View style={styles.line} />
                 <View style={styles.closeImage}>
                     <Image source={Images.aadhar}
@@ -237,6 +248,9 @@ const Profilemain = props => {
                         <Image source={Images.user}
                             style={{ width: "100%", height: "100%", borderRadius: 100 }}
                             resizeMode="cover"></Image>
+                        <View style={{ position: "relative", bottom: "45%", alignSelf: "center" }}>
+                            <Icon name="camera" size={30} color="#fff" />
+                        </View>
                     </TouchableOpacity>
 
                     <View style={{ flex: 1, justifyContent: "center", alignItems: "flex-start" }}>
