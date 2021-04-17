@@ -28,11 +28,13 @@ import LinkButton from './LinkButton';
 import Sizes from '../../utility/Sizes';
 import ChangeLanguage from './ChangeLanguage';
 import Toast from 'react-native-simple-toast';
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 
 const LoginScreen = () => {
   const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector((state) => state.getLanguage);
+  const isRtl = useSelector((state) => state.isRtl);
   const forceUpdate = React.useReducer((bool) => !bool)[1];
 
   useEffect(() => {
@@ -68,13 +70,19 @@ const LoginScreen = () => {
           paddingHorizontal: 16,
         }}>
 
-        <TouchableOpacity onPress={() => Navigation.goBack()}
+        <TouchableOpacity style={{
+          width: 30, alignSelf: "flex-start"
+        }} onPress={() => Navigation.goBack()}
         >
-          <Image
-            source={Images.back}
+          {
+            isRtl ?
+              <Icon name="arrow-right-alt" size={30} color="#000" /> :
+              <Image
+                source={Images.back}
 
-            style={{ tintColor: "#000" }}
-            resizeMode="contain"></Image>
+                style={{ tintColor: "#000" }}
+                resizeMode="contain"></Image>
+          }
         </TouchableOpacity>
         <TextBold
           text={I18n.t('login')}
@@ -88,7 +96,7 @@ const LoginScreen = () => {
 
         <View style={styles.inputBox}>
           <View style={styles.dialCode}>
-            <TextSemiBold text="+91-" />
+            <TextSemiBold text={isRtl ? "-91+" : "+91-"} />
           </View>
           <TextInput
             style={{ flex: 1, padding: 7 }}

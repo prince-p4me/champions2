@@ -27,6 +27,7 @@ const StackNavigator = () => {
   // const isRtl = true;
 
   useEffect(() => {
+    console.log('isRtl is ', isRtl);
     console.log('language is ', language);
     // I18n.locale = language;
     I18nManager.allowRTL(isRtl);
