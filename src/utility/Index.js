@@ -8,4 +8,8 @@ function showResponse(response) {
   }
 }
 
-export { showResponse };
+function showToast(message) {
+  Toast.showWithGravity(message, Toast.SHORT, Toast.BOTTOM);
+}
+
+export { showResponse, showToast };

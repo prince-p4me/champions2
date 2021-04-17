@@ -17,11 +17,16 @@ import RecipieAll from '../screens/Dashboard/RecipieAll';
 import EditProfile from '../screens/Dashboard/EditProfile';
 import MyReward from '../screens/Dashboard/MyReward';
 import Help from '../screens/Dashboard/Help';
+import ContactUs from '../screens/Dashboard/ContactUs';
+import SendQuery from '../screens/Dashboard/SendQuery';
+import AboutUs from '../screens/Dashboard/AboutUs';
 // import SplashScreen from '../screens/Auth/Splash';
+import * as Actions from '../redux/action';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.getUser);
   const isRtl = useSelector((state) => state.isRtl);
   const language = useSelector((state) => state.getLanguage);
@@ -31,6 +36,7 @@ const StackNavigator = () => {
     console.log('isRtl is ', isRtl);
     console.log('language is ', language);
     // I18n.locale = language;
+    dispatch(Actions.setRtl(false));
     I18nManager.allowRTL(isRtl);
     I18nManager.forceRTL(isRtl);
     SplashScreen.hide();
@@ -51,11 +57,11 @@ const StackNavigator = () => {
           <Stack.Screen name="Profilemain" component={Profilemain} />
           <Stack.Screen name="OfferAll" component={OfferAll} />
           <Stack.Screen name="WinnerAll" component={WinnerAll} />
-          <Stack.Screen name="recipeall" component={RecipieAll} />
+          <Stack.Screen name="SendQuery" component={SendQuery} />
           <Stack.Screen name="Editprofile" component={EditProfile} />
-          <Stack.Screen name="myreward" component={MyReward} />
+          <Stack.Screen name="ContactUs" component={ContactUs} />
           <Stack.Screen name="Help" component={Help} />
-
+          <Stack.Screen name="AboutUs" component={AboutUs} />
         </>
       ) : (
         <>

@@ -20,7 +20,7 @@ import Sizes from '../../utility/Sizes';
 import { showToast } from '../../utility/Index';
 
 
-const Help = (props) => {
+const ContactUs = (props) => {
     const dispatch = useDispatch();
     const [query, setQuery] = useState("");
     const user = useSelector(state => state.getUser)
@@ -40,7 +40,7 @@ const Help = (props) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.lightGreen }}>
-            <Header title={I18n.t("help")} dashboard={false} back={true} />
+            <Header title={I18n.t("contactus")} dashboard={false} back={true} help={true} />
             <View style={{ flex: 1, padding: 16, paddingTop: 25 }}>
                 <TextBold text={I18n.t("yourquery")} style={{ fontSize: Sizes.medium, alignSelf: "flex-start" }}></TextBold>
                 <TextInput style={styles.input}
@@ -53,7 +53,7 @@ const Help = (props) => {
                     returnKeyType="done"
                     onSubmitEditing={sentQuery}></TextInput>
                 <View style={{ width: "100%", height: 40, justifyContent: "center", alignItems: "flex-end" }}>
-                    <TextLite text={(query.length) + "/" + (500 - query.length)} />
+                    <TextLite text={(query.length) + "/" + (1000 - query.length)} />
                 </View>
                 <TouchableOpacity style={styles.send}
                     onPress={sentQuery}>
@@ -63,6 +63,7 @@ const Help = (props) => {
         </View>
     );
 };
+
 const styles = StyleSheet.create({
     input: {
         height: 150, width: "100%",
@@ -84,4 +85,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Help;
+export default ContactUs;

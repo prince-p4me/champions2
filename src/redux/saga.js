@@ -170,6 +170,26 @@ function* scanQr({ type, payload }) {
   }
 }
 
+function* sendQuery({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+
+    let response = yield call(Apiservice.sendQuery, payload); //calling Api
+
+    console.log('response in sendQuery saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    showResponse(response);
+    if (response && response.status) {
+      // store.dispatch(Actions.getPoints());
+      // store.dispatch(Actions.setSuccessModal(true));
+      Navigation.goBack();
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -182,4 +202,5 @@ export default function* watcher() {
   yield takeLatest(Types.GET_POINTS, getPoints);
   yield takeLatest(Types.SCAN_QR, scanQr);
   yield takeLatest(Types.HELP, help);
+  yield takeLatest(Types.SEND_QUERY, sendQuery);
 }

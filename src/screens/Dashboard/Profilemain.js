@@ -25,67 +25,83 @@ const Profilemain = (props) => {
     const user = useSelector(state => state.getUser)
     console.log("user", user);
 
-    return (
-        <ScrollView>
+    const renderHelpSection = () => {
+        return (
+            <>
+                <TextSemiBold text={I18n.t("help")} style={{ margin: 10, alignSelf: "flex-start" }} />
+                <TouchableOpacity style={styles.closeImage}
+                    onPress={() => Navigation.navigate("ContactUs")}>
+                    <Image source={Images.contactus}
+                        style={styles.image}
+                        resizeMode="contain"></Image>
+                    <TextRegular style={styles.textstyle}
+                        text={I18n.t('Contactus')}
+                    />
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity style={styles.closeImage}
+                    onPress={() => Navigation.navigate("SendQuery")}>
+                    <Image source={Images.about}
+                        style={styles.image}
+                        resizeMode="contain"></Image>
+                    <TextRegular style={styles.textstyle}
+                        text={I18n.t('sendquery')}
+                    />
+                </TouchableOpacity>
 
-            <View  >
-
-                <Header title={'Profile'} dashboard={false} back={true} help={true} />
-
-                <View style={{ flexDirection: 'row', backgroundColor: "white", marginTop: 10, paddingBottom: 10 }}>
-
-                    <View style={{ height: 100, width: 100, padding: 10, }} >
-                        <Image source={Images.user}
-                            style={{ width: "100%", height: "100%", borderRadius: 100 }}
-                            resizeMode="cover"></Image>
-                    </View>
-
-                    <View style={{ flex: 1, justifyContent: "center", alignItems: "flex-start" }}>
-                        <TextRegular
-                            style={[styles.textstyle, { marginTop: 15 }]}
-                            text={user.name}
-                        />
-                        {user.email ? <TextRegular
-                            style={[styles.textstyle, { marginTop: 7 }]}
-                            text={user.email}
-                        /> : null}
-                        <TextRegular
-                            style={[styles.textstyle, { marginTop: 7 }]}
-                            text={user.mobile}
-                        />
-                    </View>
-
-                    <TouchableOpacity style={{
-                        width: 80,
-                        justifyContent: "center"
-                    }} onPress={() => {
-                        Navigation.navigate('Editprofile');
-                    }}>
-                        <Image source={Images.edit}
-                            style={{ height: 30, width: 30, alignSelf: 'center', marginEnd: 15 }}
-                            resizeMode="contain"></Image>
-                    </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity style={styles.closeImage} onPress={() => {
+                    Navigation.navigate("AboutUs")
+                }}>
+                    <Image
+                        source={Images.about}
+                        style={styles.image}
+                        resizeMode="contain"></Image>
+                    <TextRegular
+                        style={styles.textstyle}
+                        text={I18n.t('about')}
+                    />
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <View style={styles.closeImage}>
+                    <Image source={Images.termcondition}
+                        style={styles.image}
+                        resizeMode="contain"></Image>
+                    <TextRegular style={styles.textstyle}
+                        text={I18n.t('termcondition')}
+                    />
                 </View>
                 <View style={styles.line} />
-                <TouchableOpacity style={[styles.closeImage, { flexDirection: "row", alignItems: "center", justifyContent: "space-around" }]}>
+                <View style={styles.closeImage}>
+                    <Image
+                        source={Images.privacypolicy}
+                        style={styles.image}
+                        resizeMode="contain"></Image>
+                    <TextRegular
+                        style={styles.textstyle}
+                        text={I18n.t('Privacy')}
+                    />
+                </View>
+            </>
+        )
+    }
 
+    const upperSection = () => {
+        return (
+            <>
+                <TouchableOpacity style={[styles.closeImage, { flexDirection: "row", alignItems: "center", justifyContent: "space-around" }]}>
                     <Image
                         source={Images.language}
-
                         style={styles.image}
                         resizeMode="contain"></Image>
                     <TextRegular
                         style={styles.textstyle}
                         text={I18n.t('chooselanguage')}
-
                     />
                     <ChangeLanguage />
-
-
                 </TouchableOpacity>
                 <View style={styles.closeImage}>
-                    <Image
-                        source={Images.address}
+                    <Image source={Images.address}
                         style={styles.image}
                         resizeMode="contain"></Image>
                     <TextRegular
@@ -126,61 +142,51 @@ const Profilemain = (props) => {
                     />
                 </View>
                 <View style={styles.line} />
-                <TextSemiBold text="Help" style={{ margin: 10 }} />
-                <View style={styles.closeImage}>
-                    <Image source={Images.contactus}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('Contactus')}
-                    />
-                </View>
-                <View style={styles.line} />
-                <View style={styles.closeImage}>
-                    <Image
-                        source={Images.about}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('sendquery')}
-                    />
-                </View>
+            </>
+        )
+    }
 
-                <View style={styles.line} />
-                <View style={styles.closeImage}>
-                    <Image
-                        source={Images.about}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('about')}
-                    />
+    return (
+        <View style={{ flex: 1 }}>
+            <Header title={'Profile'} dashboard={false} back={true} help={true} />
+            <ScrollView>
+                <View style={{ flexDirection: 'row', backgroundColor: "white", marginTop: 10, paddingBottom: 10 }}>
+
+                    <View style={{ height: 100, width: 100, padding: 10, }} >
+                        <Image source={Images.user}
+                            style={{ width: "100%", height: "100%", borderRadius: 100 }}
+                            resizeMode="cover"></Image>
+                    </View>
+
+                    <View style={{ flex: 1, justifyContent: "center", alignItems: "flex-start" }}>
+                        <TextRegular
+                            style={[styles.textstyle, { marginTop: 15 }]}
+                            text={user.name}
+                        />
+                        {user.email ? <TextRegular
+                            style={[styles.textstyle, { marginTop: 7 }]}
+                            text={user.email}
+                        /> : null}
+                        <TextRegular
+                            style={[styles.textstyle, { marginTop: 7 }]}
+                            text={user.mobile}
+                        />
+                    </View>
+
+                    <TouchableOpacity style={{
+                        width: 80,
+                        justifyContent: "center"
+                    }} onPress={() => {
+                        Navigation.navigate('Editprofile');
+                    }}>
+                        <Image source={Images.edit}
+                            style={{ height: 30, width: 30, alignSelf: 'center', marginEnd: 15 }}
+                            resizeMode="contain"></Image>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
-                <View style={styles.closeImage}>
-                    <Image
-                        source={Images.termcondition}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('termcondition')}
-                    />
-                </View>
-                <View style={styles.line} />
-                <View style={styles.closeImage}>
-                    <Image
-                        source={Images.privacypolicy}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('Privacy')}
-                    />
-                </View>
+                {upperSection()}
+                {renderHelpSection()}
                 <TouchableOpacity
                     style={[styles.closeImage, { backgroundColor: "transparent" }]}
                     onPress={() => {
@@ -195,8 +201,8 @@ const Profilemain = (props) => {
                     <TextSemiBold text={I18n.t('logout')} style={{ marginStart: 5, }} />
 
                 </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 };
 const styles = StyleSheet.create({

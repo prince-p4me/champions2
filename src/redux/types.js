@@ -17,3 +17,4 @@ export const SIGN_UP = 'SIGN_UP';
 export const SCAN_QR = 'SCAN_QR';
 export const IS_SUCCESS = 'IS_SUCCESS';
 export const HELP = 'HELP';
+export const SEND_QUERY = 'SEND_QUERY';

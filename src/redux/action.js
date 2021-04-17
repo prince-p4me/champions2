@@ -14,6 +14,13 @@ export function help(payload) {
   };
 }
 
+export function sendQuery(payload) {
+  return {
+    type: Types.SEND_QUERY,
+    payload,
+  };
+}
+
 export function resendOtp(payload) {
   return {
     type: Types.RESEND_OTP,
