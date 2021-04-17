@@ -7,6 +7,13 @@ export function doLogin(payload) {
   };
 }
 
+export function help(payload) {
+  return {
+    type: Types.HELP,
+    payload,
+  };
+}
+
 export function resendOtp(payload) {
   return {
     type: Types.RESEND_OTP,

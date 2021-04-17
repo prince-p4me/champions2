@@ -25,6 +25,14 @@ const Help = (props) => {
     const user = useSelector(state => state.getUser)
     console.log("user", user);
 
+    const sentQuery = () => {
+        let obj = {
+            mobile: user.mobile,
+            query,
+        }
+        dispatch(Actions.help(obj));
+    }
+
     return (
         <View style={{ flex: 1, backgroundColor: Colors.lightGreen }}>
             <Header title={I18n.t("help")} dashboard={false} back={true} />
@@ -36,17 +44,14 @@ const Help = (props) => {
                     onChangeText={query => setQuery(query)}
                     numberOfLines={10}
                     maxLength={500}
-                    multiline={true}></TextInput>
+                    multiline={true}
+                    returnKeyType="done"
+                    onSubmitEditing={sentQuery}></TextInput>
                 <View style={{ width: "100%", height: 40, justifyContent: "center", alignItems: "flex-end" }}>
                     <TextLite text={(query.length) + "/" + (500 - query.length)} />
                 </View>
-                <TouchableOpacity style={{
-                    backgroundColor: Colors.white,
-                    paddingVertical: 13, paddingHorizontal: 20,
-                    borderWidth: 1, borderRadius: 8,
-                    borderColor: Colors.text,
-                    alignSelf: "center"
-                }}>
+                <TouchableOpacity style={styles.send}
+                    onPress={sentQuery}>
                     <TextRegular text={I18n.t("requestcall")} style={{ color: Colors.text }}></TextRegular>
                 </TouchableOpacity>
             </View>
@@ -64,6 +69,13 @@ const styles = StyleSheet.create({
         padding: 10,
         color: Colors.text,
         justifyContent: "flex-start"
+    },
+    send: {
+        backgroundColor: Colors.white,
+        paddingVertical: 13, paddingHorizontal: 20,
+        borderWidth: 1, borderRadius: 8,
+        borderColor: Colors.text,
+        alignSelf: "center"
     }
 });
 

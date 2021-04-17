@@ -38,6 +38,25 @@ function* verifyOtp({ type, payload }) {
   }
 }
 
+function* help({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+
+    let response = yield call(Apiservice.help, payload); //calling Api
+
+    console.log('response in help saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    if (response && response.status) {
+      Navigation.goBack();
+      showResponse({ message: "Query has been sent successfully . . ." });
+      // yield put({ type: Types.USER, payload: response }); //hide loading
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 function* resendOtp({ type, payload }) {
   try {
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
@@ -162,4 +181,5 @@ export default function* watcher() {
   yield takeLatest(Types.SIGN_UP, signUp);
   yield takeLatest(Types.GET_POINTS, getPoints);
   yield takeLatest(Types.SCAN_QR, scanQr);
+  yield takeLatest(Types.HELP, help);
 }

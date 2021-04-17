@@ -91,3 +91,8 @@ export function verifyOtp(body) {
   console.log('----------resendOtp Api Call ------------------');
   return callApi(Constants.API_URL + 'user_otp_verify.php', body, 'POST');
 }
+
+export function help(body) {
+  console.log('----------resendOtp Api Call ------------------');
+  return callApi(Constants.API_URL + 'help.php', body, 'POST');
+}
