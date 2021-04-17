@@ -1,0 +1,21 @@
+[{
+        "name": "English",
+        "code": "en"
+    },
+    {
+        "name": "Hindi",
+        "code": "hn"
+    },
+    {
+        "name": "Punjabi",
+        "code": "pu"
+    },
+    {
+        "name": "Bangla",
+        "code": "ba"
+    },
+    {
+        "name": "Urdu",
+        "code": "ur"
+    }
+]

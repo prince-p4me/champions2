@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -14,10 +14,13 @@ import Color from '../../utility/Color';
 import I18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 import { useSelector, useDispatch } from 'react-redux';
+// import LanguageModal from '../../components/LanguageModal';
+// import Language from '../../assets/Language/language.json';
 
 const LandingScreen = props => {
-  let language = useSelector((state) => state.getLanguage);
-  const forceUpdate = useReducer((bool) => !bool)[1];
+  let language = useSelector(state => state.getLanguage);
+  const forceUpdate = useReducer(bool => !bool)[1];
+  let [modalVisible, setModalVisible] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -72,6 +75,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: '5%',
     // backgroundColor: "red",
-    justifyContent: "space-around"
+    justifyContent: 'space-around',
   },
 });

@@ -46,8 +46,8 @@ const ChangeLanguage = props => {
           // setLanguage(langTypes[langIndex]);
           dispatch(Actions.setLanguage(langTypes[langIndex]));
           dispatch(Actions.setRtl(true));
-          // dispatch(Actions.setRtl(langTypes[langIndex] == 'ur'));
-          I18n.locale = langTypes[langIndex];
+          dispatch(Actions.setRtl(langTypes[langIndex] == 'ur'));
+          // I18n.locale = langTypes[langIndex];
           console.log('language changed ', language);
           // console.log('restarting');
           setTimeout(() => {

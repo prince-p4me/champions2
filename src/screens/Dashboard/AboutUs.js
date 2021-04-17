@@ -29,7 +29,10 @@ const AboutUs = (props) => {
                 </Text>
                 <Text style={styles.normalText}>The reward points program is one of the interesting features offered by
                     <Text style={styles.boldInlineText}> Grm FoodKraft Pvt Ltd. </Text>
-                    You'll get a QR code some reward points are saved in your application wallet.
+                    The program allows
+                    <Text style={styles.boldInlineText}> 10x Champion </Text>
+                    distributors to earn while they spend, making it a cutomer-centric feature.
+                    competing to offer more and more redemption benefits, the feature has become truly rewarding for customers.
                 </Text>
             </ScrollView>
         </View>

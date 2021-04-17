@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Image,
@@ -14,16 +14,31 @@ import I18n from '../../services/i18n';
 import Images from '../../utility/Image';
 import Header from '../../components/Header';
 import * as Navigation from '../../navigation/navigation';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import * as Actions from '../../redux/action';
 import ChangeLanguage from '../Auth/ChangeLanguage';
+import Language from '../../assets/language/language.json';
+import LanguageModal from '../../components/LanguageModal';
+import RNRestart from 'react-native-restart';
 
-
-const Profilemain = (props) => {
+const Profilemain = props => {
     const dispatch = useDispatch();
 
-    const user = useSelector(state => state.getUser)
-    console.log("user", user);
+    const user = useSelector(state => state.getUser);
+    let [modalVisible, setModalVisible] = useState(false);
+    let [languageList, updateLanguageList] = useState(Language);
+    let [AllLanguage] = useState(Language);
+    let language = useSelector(state => state.getLanguage);
+    const forceUpdate = React.useReducer(bool => !bool)[1];
+
+    console.log('user', user);
+
+    useEffect(() => {
+        setTimeout(() => {
+            I18n.locale = language;
+            forceUpdate();
+        }, 10);
+    }, [language]);
 
     const renderHelpSection = () => {
         return (
@@ -89,7 +104,18 @@ const Profilemain = (props) => {
     const upperSection = () => {
         return (
             <>
-                <TouchableOpacity style={[styles.closeImage, { flexDirection: "row", alignItems: "center", justifyContent: "space-around" }]}>
+                <TouchableOpacity
+                    style={[
+                        styles.closeImage,
+                        {
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-around',
+                        },
+                    ]}
+                    onPress={() => {
+                        setModalVisible(true);
+                    }}>
                     <Image
                         source={Images.language}
                         style={styles.image}
@@ -98,7 +124,6 @@ const Profilemain = (props) => {
                         style={styles.textstyle}
                         text={I18n.t('chooselanguage')}
                     />
-                    <ChangeLanguage />
                 </TouchableOpacity>
                 <View style={styles.closeImage}>
                     <Image source={Images.address}
@@ -146,8 +171,48 @@ const Profilemain = (props) => {
         )
     }
 
+    const renderModal = () => {
+        return (
+            <LanguageModal
+                visible={modalVisible}
+                Language={languageList}
+                onPress={item => {
+                    if (item && item.code) {
+                        dispatch(Actions.setLanguage(item.code));
+                        // dispatch(Actions.setRtl(true));
+                        dispatch(Actions.setRtl(item.code == 'ur'));
+
+                        I18n.locale = item.code;
+                        setTimeout(() => {
+                            RNRestart.Restart();
+                        }, 2500);
+                    }
+                    setModalVisible(false);
+                }}
+                onChangeLanguage={text => {
+                    console.log(text);
+                    if (text == '' || !text) {
+                        //   alert(Language.length);
+                        console.log({ Language: Language });
+                        updateLanguageList(Language);
+                        return;
+                    }
+
+                    languageList = Language.filter(function (item) {
+                        console.log('232');
+                        console.log(item.name.toLowerCase());
+                        console.log(text.toLowerCase());
+                        return item.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
+                    });
+                    updateLanguageList(languageList);
+                }}
+            />
+        )
+    }
+
     return (
         <View style={{ flex: 1 }}>
+            {renderModal()}
             <Header title={'Profile'} dashboard={false} back={true} help={true} />
             <ScrollView>
                 <View style={{ flexDirection: 'row', backgroundColor: "white", marginTop: 10, paddingBottom: 10 }}>
@@ -207,24 +272,24 @@ const Profilemain = (props) => {
 };
 const styles = StyleSheet.create({
     closeImage: {
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         padding: 20,
         flexDirection: 'row',
-        alignItems: "center",
+        alignItems: 'center',
     },
     line: {
         borderBottomColor: 'lightgrey',
         borderBottomWidth: 0.5,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
     },
     textstyle: {
-        marginStart: 20
+        marginStart: 20,
     },
     image: {
         height: 25,
-        width: 25
-    }
+        width: 25,
+    },
 });
 
 export default Profilemain;

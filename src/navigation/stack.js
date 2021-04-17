@@ -54,7 +54,7 @@ const StackNavigator = () => {
         <>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Scan" component={ScanQrCode} />
-          <Stack.Screen name="Profilemain" component={Profilemain} />
+
           <Stack.Screen name="OfferAll" component={OfferAll} />
           <Stack.Screen name="WinnerAll" component={WinnerAll} />
           <Stack.Screen name="SendQuery" component={SendQuery} />
@@ -62,15 +62,18 @@ const StackNavigator = () => {
           <Stack.Screen name="ContactUs" component={ContactUs} />
           <Stack.Screen name="Help" component={Help} />
           <Stack.Screen name="AboutUs" component={AboutUs} />
+          <Stack.Screen name="Profilemain" component={Profilemain} />
         </>
       ) : (
         <>
           {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
+
           <Stack.Screen name="Landing" component={LandingScreen} />
           <Stack.Screen name="SignIn" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Otp" component={OtpScreen} />
           <Stack.Screen name="sucessmodel" component={SuccessModal} />
+          <Stack.Screen name="Profilemain" component={Profilemain} />
         </>
       )}
     </Stack.Navigator>
