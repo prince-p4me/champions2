@@ -230,18 +230,18 @@ const Profilemain = props => {
           onChangeLanguage={text => {
             console.log(text);
             if (text == '' || !text) {
+              //   alert(Language.length);
+              console.log({Language: Language});
               updateLanguageList(Language);
+              return;
             }
-            languageList = languageList.filter(function (item) {
+
+            languageList = Language.filter(function (item) {
               console.log('232');
               console.log(item.name.toLowerCase());
               console.log(text.toLowerCase());
               return item.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
             });
-            //   .map(function ({name, code}) {
-            //     return {name, code};
-            //   });
-            console.log({languageList: languageList});
             updateLanguageList(languageList);
           }}
         />
