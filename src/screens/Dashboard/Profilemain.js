@@ -252,7 +252,7 @@ const Profilemain = props => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
-                {/* {upperSection()} */}
+                {upperSection()}
                 {renderHelpSection()}
                 <TouchableOpacity
                     style={[styles.closeImage, { backgroundColor: "transparent" }]}
