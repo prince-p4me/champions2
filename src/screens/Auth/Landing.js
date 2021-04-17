@@ -14,8 +14,9 @@ import Color from '../../utility/Color';
 import I18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 import { useSelector, useDispatch } from 'react-redux';
-// import LanguageModal from '../../components/LanguageModal';
-// import Language from '../../assets/Language/language.json';
+import LanguageModal from '../../components/LanguageModal';
+import Language from '../../assets/language/language.json';
+import ProfilePicModal from '../../components/ProfilePicModal';
 
 const LandingScreen = props => {
   let language = useSelector(state => state.getLanguage);
