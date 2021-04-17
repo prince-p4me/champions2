@@ -58,8 +58,6 @@ const LandingScreen = props => {
         source={Images.saina}
         style={{flex: 5}}
         resizeMode="contain"></Image>
-
-      <ProfilePicModal visible={true} />
     </ImageBackground>
   );
 };

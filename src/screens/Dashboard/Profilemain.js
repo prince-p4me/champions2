@@ -20,12 +20,16 @@ import ChangeLanguage from '../Auth/ChangeLanguage';
 import Language from '../../assets/Language/language.json';
 import LanguageModal from '../../components/LanguageModal';
 import RNRestart from 'react-native-restart';
+import ProfilePicModal from '../../components/ProfilePicModal';
 
 const Profilemain = props => {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.getUser);
   let [modalVisible, setModalVisible] = useState(false);
+
+  let [profilePicVisible, setProfilePicVisible] = useState(false);
+
   let [languageList, updateLanguageList] = useState(Language);
   let [AllLanguage] = useState(Language);
 
@@ -54,10 +58,15 @@ const Profilemain = props => {
             paddingBottom: 10,
           }}>
           <View style={{height: 100, width: 100, padding: 10}}>
-            <Image
-              source={Images.user}
-              style={{width: '100%', height: '100%', borderRadius: 100}}
-              resizeMode="cover"></Image>
+            <TouchableOpacity
+              onPress={() => {
+                setProfilePicVisible(true);
+              }}>
+              <Image
+                source={Images.user}
+                style={{width: '100%', height: '100%', borderRadius: 100}}
+                resizeMode="cover"></Image>
+            </TouchableOpacity>
           </View>
 
           <View
@@ -243,6 +252,14 @@ const Profilemain = props => {
               return item.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
             });
             updateLanguageList(languageList);
+          }}
+        />
+
+        <ProfilePicModal
+          visible={profilePicVisible}
+          onPress={imageType => {
+            console.log(imageType);
+            setProfilePicVisible(false);
           }}
         />
       </View>
