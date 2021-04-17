@@ -16,6 +16,7 @@ import FullButton from '../../components/FullButton';
 import {useSelector, useDispatch} from 'react-redux';
 import LanguageModal from '../../components/LanguageModal';
 import Language from '../../assets/Language/language.json';
+import ProfilePicModal from '../../components/ProfilePicModal';
 
 const LandingScreen = props => {
   let language = useSelector(state => state.getLanguage);
@@ -57,6 +58,8 @@ const LandingScreen = props => {
         source={Images.saina}
         style={{flex: 5}}
         resizeMode="contain"></Image>
+
+      <ProfilePicModal visible={true} />
     </ImageBackground>
   );
 };
