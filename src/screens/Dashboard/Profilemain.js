@@ -78,16 +78,18 @@ const Profilemain = props => {
                     />
                 </TouchableOpacity>
                 <View style={styles.line} />
-                <View style={styles.closeImage}>
+                <TouchableOpacity style={styles.closeImage}
+                    onPress={() => Navigation.navigate("Terms")}>
                     <Image source={Images.termcondition}
                         style={styles.image}
                         resizeMode="contain"></Image>
                     <TextRegular style={styles.textstyle}
                         text={I18n.t('termcondition')}
                     />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.line} />
-                <View style={styles.closeImage}>
+                <TouchableOpacity style={styles.closeImage}
+                    onPress={() => Navigation.navigate("Privacy")}>
                     <Image
                         source={Images.privacypolicy}
                         style={styles.image}
@@ -96,7 +98,7 @@ const Profilemain = props => {
                         style={styles.textstyle}
                         text={I18n.t('Privacy')}
                     />
-                </View>
+                </TouchableOpacity>
             </>
         )
     }
@@ -250,7 +252,7 @@ const Profilemain = props => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
-                {upperSection()}
+                {/* {upperSection()} */}
                 {renderHelpSection()}
                 <TouchableOpacity
                     style={[styles.closeImage, { backgroundColor: "transparent" }]}

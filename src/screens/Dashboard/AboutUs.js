@@ -34,6 +34,24 @@ const AboutUs = (props) => {
                     distributors to earn while they spend, making it a cutomer-centric feature.
                     competing to offer more and more redemption benefits, the feature has become truly rewarding for customers.
                 </Text>
+                <Text style={styles.normalText}>
+                    Despite the polularity of reward points, some of us are still not sure about earning and redeeminh them to get the maximum benefit.
+                </Text>
+                <Text style={styles.header}>
+                    How did reward points work?
+                </Text>
+                <Text style={styles.normalText}>
+                    Even before knowing the tricks to use the reward points wisely, let's first know how the reward points program works.
+                    Though the feature varies from one bank to another and is known by different names, the concept remains the same.
+                    </Text>
+                <Text style={styles.normalText}>Whenever a
+                    <Text style={styles.boldInlineText}> 10x chapmion </Text>
+                    basmati rice purchased by customers, a certain number of points get credited to the distributor account. The same points can be
+                    redeemed or exchanged for various rewards offered by
+                    <Text style={styles.boldInlineText}> GRM FOODCRAFT Pvt Ltd. </Text>
+                </Text>
+                <Text style={styles.normalText}>To become eligible for redemption, a customer needs to earn a certain number of reward points.
+                    </Text>
             </ScrollView>
         </View>
     );
@@ -51,7 +69,8 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: Sizes.semiLarge,
-        fontFamily: Font.bold
+        fontFamily: Font.bold,
+        marginTop: 25
     }
 });
 

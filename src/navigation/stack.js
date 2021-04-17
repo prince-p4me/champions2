@@ -20,6 +20,8 @@ import Help from '../screens/Dashboard/Help';
 import ContactUs from '../screens/Dashboard/ContactUs';
 import SendQuery from '../screens/Dashboard/SendQuery';
 import AboutUs from '../screens/Dashboard/AboutUs';
+import Terms from '../screens/Dashboard/Terms';
+import Privacy from '../screens/Dashboard/Privacy';
 // import SplashScreen from '../screens/Auth/Splash';
 import * as Actions from '../redux/action';
 
@@ -54,8 +56,9 @@ const StackNavigator = () => {
         <>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Scan" component={ScanQrCode} />
-
           <Stack.Screen name="OfferAll" component={OfferAll} />
+          <Stack.Screen name="Privacy" component={Privacy} />
+          <Stack.Screen name="Terms" component={Terms} />
           <Stack.Screen name="WinnerAll" component={WinnerAll} />
           <Stack.Screen name="SendQuery" component={SendQuery} />
           <Stack.Screen name="Editprofile" component={EditProfile} />
