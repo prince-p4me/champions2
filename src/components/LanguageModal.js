@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  // Modal
-} from 'react-native';
+import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { TextSemiBold, TextLite } from './TextView';
 import I18n from '../services/i18n';
 import Sizes from '../utility/Sizes';
@@ -42,41 +36,29 @@ const LanguageModal = props => {
             }}></TextInput>
         </View>
 
-        <View>
-          {Language &&
-            Language.map((item, index) => (
-              <View>
-                <TouchableOpacity
-                  style={[
-                    styles.item,
-                    index == 0 ? styles.itemBorderFirstItem : {},
-                  ]}
-                  onPress={() => onPress(item)}>
-                  <TextLite
-                    text={item.name}
-                    style={{
-                      textAlign: align,
-                      fontSize: Sizes.medium,
-                      color: Color.text,
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
-            ))}
-        </View>
+        {Language &&
+          Language.map((item, index) => (
+            <TouchableOpacity key={index}
+              style={[styles.item,
+              index == 0 ? styles.itemBorderFirstItem : {},
+              ]} onPress={() => onPress(item)}>
+              <TextLite text={item.name}
+                style={{
+                  textAlign: align,
+                  fontSize: Sizes.medium,
+                  color: Color.text,
+                }} />
+            </TouchableOpacity>
+          ))}
 
         <View style={[styles.closeBtn]}>
-          <TouchableOpacity
-            style={styles.close}
-            onPress={() => onPress()}>
-            <TextLite
-              text={I18n.t('close')}
+          <TouchableOpacity style={styles.close} onPress={() => onPress()}>
+            <TextLite text={I18n.t('close')}
               style={{
                 textAlign: align,
                 fontSize: Sizes.medium,
                 color: '#636363',
-              }}
-            />
+              }} />
           </TouchableOpacity>
         </View>
       </View>

@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import {
+    View,
+    Image,
+    TouchableOpacity,
+    StyleSheet,
+    ScrollView,
+    Platform,
+} from 'react-native';
 import { TextRegular, TextSemiBold } from '../../components/TextView';
 import I18n from '../../services/i18n';
 import Images from '../../utility/Image';
@@ -13,10 +20,30 @@ import RNRestart from 'react-native-restart';
 import ProfilePicModal from '../../components/ProfilePicModal';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import Color from '../../utility/Color';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import Constant from '../../utility/Constant';
+import { showToast } from '../../utility/Index';
 const languages = ['English', 'Hindi', 'Punjabi', 'Bangla', 'Urdu'];
 const langTypes = ['en', 'hn', 'pu', 'ba', 'ur'];
 
-const Profilemain = () => {
+const createFormData = (photo, body) => {
+    const data = new FormData();
+
+    data.append('photo', {
+        name: photo.fileName,
+        type: photo.type,
+        uri:
+            Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+    });
+
+    Object.keys(body).forEach(key => {
+        data.append(key, body[key]);
+    });
+
+    return data;
+};
+
+const Profilemain = props => {
     const user = useSelector(state => state.getUser);
     let [modalVisible, setModalVisible] = useState(false);
     let [languageList, updateLanguageList] = useState(Language);
@@ -24,14 +51,13 @@ const Profilemain = () => {
     let language = useSelector(state => state.getLanguage);
     const forceUpdate = React.useReducer(bool => !bool)[1];
     const dispatch = useDispatch();
+    let [responseImg, setResponse] = useState(null);
     console.log('user', user);
 
     const getLanguage = () => {
-        let index = langTypes.findIndex(
-            (lang) => lang === language,
-        );
-        return languages[index]
-    }
+        let index = langTypes.findIndex(lang => lang === language);
+        return languages[index];
+    };
 
     useEffect(() => {
         setTimeout(() => {
@@ -43,77 +69,78 @@ const Profilemain = () => {
     const renderHelpSection = () => {
         return (
             <>
-                <TextSemiBold text={I18n.t("help")} style={{ margin: 10, alignSelf: "flex-start" }} />
-                <TouchableOpacity style={styles.closeImage}
-                    onPress={() => Navigation.navigate("ContactUs")}>
-                    <Image source={Images.contactus}
+                <TextSemiBold
+                    text={I18n.t('help')}
+                    style={{ margin: 10, alignSelf: 'flex-start' }}
+                />
+                <TouchableOpacity
+                    style={styles.closeImage}
+                    onPress={() => Navigation.navigate('ContactUs')}>
+                    <Image
+                        source={Images.contactus}
                         style={styles.image}
                         resizeMode="contain"></Image>
-                    <TextRegular style={styles.textstyle}
-                        text={I18n.t('Contactus')}
-                    />
+                    <TextRegular style={styles.textstyle} text={I18n.t('Contactus')} />
                 </TouchableOpacity>
                 <View style={styles.line} />
-                <TouchableOpacity style={styles.closeImage}
-                    onPress={() => Navigation.navigate("SendQuery")}>
-                    <Image source={Images.about}
-                        style={styles.image}
-                        resizeMode="contain"></Image>
-                    <TextRegular style={styles.textstyle}
-                        text={I18n.t('sendquery')}
-                    />
-                </TouchableOpacity>
-
-                <View style={styles.line} />
-                <TouchableOpacity style={styles.closeImage} onPress={() => {
-                    Navigation.navigate("AboutUs")
-                }}>
+                <TouchableOpacity
+                    style={styles.closeImage}
+                    onPress={() => Navigation.navigate('SendQuery')}>
                     <Image
                         source={Images.about}
                         style={styles.image}
                         resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('about')}
-                    />
+                    <TextRegular style={styles.textstyle} text={I18n.t('sendquery')} />
                 </TouchableOpacity>
+
                 <View style={styles.line} />
-                <TouchableOpacity style={styles.closeImage}
-                    onPress={() => Navigation.navigate("Terms")}>
-                    <Image source={Images.termcondition}
+                <TouchableOpacity
+                    style={styles.closeImage}
+                    onPress={() => {
+                        Navigation.navigate('AboutUs');
+                    }}>
+                    <Image
+                        source={Images.about}
                         style={styles.image}
                         resizeMode="contain"></Image>
-                    <TextRegular style={styles.textstyle}
+                    <TextRegular style={styles.textstyle} text={I18n.t('about')} />
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                    style={styles.closeImage}
+                    onPress={() => Navigation.navigate('Terms')}>
+                    <Image
+                        source={Images.termcondition}
+                        style={styles.image}
+                        resizeMode="contain"></Image>
+                    <TextRegular
+                        style={styles.textstyle}
                         text={I18n.t('termcondition')}
                     />
                 </TouchableOpacity>
                 <View style={styles.line} />
-                <TouchableOpacity style={styles.closeImage}
-                    onPress={() => Navigation.navigate("Privacy")}>
+                <TouchableOpacity
+                    style={styles.closeImage}
+                    onPress={() => Navigation.navigate('Privacy')}>
                     <Image
                         source={Images.privacypolicy}
                         style={styles.image}
                         resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('Privacy')}
-                    />
+                    <TextRegular style={styles.textstyle} text={I18n.t('Privacy')} />
                 </TouchableOpacity>
             </>
-        )
-    }
+        );
+    };
 
     const upperSection = () => {
         return (
             <>
                 <View style={styles.closeImage}>
-                    <Image source={Images.address}
+                    <Image
+                        source={Images.address}
                         style={styles.image}
                         resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('address')}
-                    />
+                    <TextRegular style={styles.textstyle} text={I18n.t('address')} />
                 </View>
                 <View style={styles.line} />
                 <TouchableOpacity
@@ -127,22 +154,23 @@ const Profilemain = () => {
                     onPress={() => {
                         setModalVisible(true);
                     }}>
-                    <View style={{
-                        flex: 7,
-                        flexDirection: "row", alignItems: "center"
-                    }}>
+                    <View
+                        style={{
+                            flex: 7,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                        }}>
                         <Image
                             source={Images.language}
                             style={styles.image}
                             resizeMode="contain"></Image>
-                        <TextRegular
-                            style={styles.textstyle}
-                            text={I18n.t('language')}
-                        />
+                        <TextRegular style={styles.textstyle} text={I18n.t('language')} />
                     </View>
-                    <View style={{
-                        flex: 3, alignItems: "flex-end"
-                    }}>
+                    <View
+                        style={{
+                            flex: 3,
+                            alignItems: 'flex-end',
+                        }}>
                         <TextRegular
                             style={[styles.textstyle, { color: Color.green }]}
                             text={getLanguage()}
@@ -151,13 +179,11 @@ const Profilemain = () => {
                 </TouchableOpacity>
                 <View style={styles.line} />
                 <View style={styles.closeImage}>
-                    <Image source={Images.aadhar}
+                    <Image
+                        source={Images.aadhar}
                         style={styles.image}
                         resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('Aadhar')}
-                    />
+                    <TextRegular style={styles.textstyle} text={I18n.t('Aadhar')} />
                 </View>
                 <View style={styles.line} />
                 <View style={styles.closeImage}>
@@ -165,20 +191,35 @@ const Profilemain = () => {
                         source={Images.feedback}
                         style={styles.image}
                         resizeMode="contain"></Image>
-                    <TextRegular
-                        style={styles.textstyle}
-                        text={I18n.t('Sendfeedback')}
-                    />
+                    <TextRegular style={styles.textstyle} text={I18n.t('Sendfeedback')} />
                 </View>
                 <View style={styles.line} />
             </>
-        )
-    }
+        );
+    };
+
+    const uploadImage = () => {
+        fetch(Constant.API_URL + 'user_photo_update.php', {
+            method: 'POST',
+            body: createFormData(responseImg, {
+                userId: user.id,
+                profile_photo: responseImg && responseImg.uri ? responseImg.uri : null,
+            }),
+        }).then(response => {
+            console.log('upload succes', response);
+            alert('Upload success!');
+        })
+            .catch(error => {
+                console.log('upload error', error);
+                alert('Upload failed!');
+            });
+    };
 
     const renderModal = () => {
         return (
             <>
-                <LanguageModal visible={modalVisible}
+                <LanguageModal
+                    visible={modalVisible}
                     Language={languageList}
                     onPress={item => {
                         if (item && item.code) {
@@ -214,53 +255,115 @@ const Profilemain = () => {
                 <ProfilePicModal visible={profilePicVisible}
                     onPress={imageType => {
                         console.log(imageType);
-                        setProfilePicVisible(false);
+                        let option = {
+                            mediaType: 'photo',
+                            includeBase64: false,
+                            maxHeight: 200,
+                            maxWidth: 200,
+                        };
+                        if (imageType == 'camera') {
+                            launchCamera(option, response => {
+                                setResponse(response);
+
+                                setTimeout(() => {
+                                    uploadImage();
+                                    setProfilePicVisible(false);
+                                }, 0);
+                            });
+                        } else {
+                            launchImageLibrary(option, response => {
+                                console.log({ response: response });
+                                if (response.didCancel) {
+                                    showToast("Please select your profile picture");
+                                    return;
+                                } else {
+                                    setResponse(response);
+                                    setTimeout(() => {
+                                        uploadImage();
+                                        setProfilePicVisible(false);
+                                    }, 0);
+                                }
+                            });
+                        }
                     }}
                 />
             </>
-        )
-    }
+        );
+    };
 
     return (
         <View style={{ flex: 1 }}>
             {renderModal()}
             <Header title={'Profile'} dashboard={false} back={true} help={true} />
             <ScrollView>
-                <View style={{ flexDirection: 'row', backgroundColor: "white", marginTop: 10, paddingBottom: 10 }}>
-
-                    <TouchableOpacity style={{ height: 100, width: 100, padding: 10, }}
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        backgroundColor: 'white',
+                        marginTop: 10,
+                        paddingBottom: 10,
+                    }}>
+                    <TouchableOpacity
+                        style={{ height: 100, width: 100, padding: 10 }}
                         onPress={() => {
                             setProfilePicVisible(true);
                         }}>
-                        <Image source={Images.user}
-                            style={{ width: "100%", height: "100%", borderRadius: 100 }}
+                        <Image
+                            source={
+                                responseImg && responseImg.uri
+                                    ? { uri: responseImg.uri }
+                                    : Images.user
+                            }
+                            style={{ width: '100%', height: '100%', borderRadius: 100 }}
                             resizeMode="cover"></Image>
-                        <View style={{ position: "relative", bottom: "45%", alignSelf: "center" }}>
+                        <View
+                            style={{
+                                position: 'relative',
+                                bottom: '45%',
+                                alignSelf: 'center',
+                            }}>
                             <Icon name="camera" size={30} color="#fff" />
                         </View>
                     </TouchableOpacity>
 
-                    <View style={{ flex: 1, justifyContent: "center", alignItems: "flex-start" }}>
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'flex-start',
+                        }}>
                         <TextRegular
                             style={[styles.textstyle, { marginTop: 15 }]}
                             text={user.name}
                         />
-                        {user.email ? <TextRegular
-                            style={[styles.textstyle, { marginTop: 7 }]}
-                            text={user.email}
-                        /> : null}
+                        {user.email ? (
+                            <TextRegular
+                                style={[styles.textstyle, { marginTop: 7 }]}
+                                text={user.email}
+                            />
+                        ) : null}
                         <TextRegular
                             style={[styles.textstyle, { marginTop: 7 }]}
                             text={user.mobile}
                         />
                     </View>
 
-                    <TouchableOpacity style={{
-                        width: 80,
-                        justifyContent: "center"
-                    }} onPress={() => Navigation.navigate('Editprofile')}>
-                        <Image source={Images.edit}
-                            style={{ height: 30, width: 30, alignSelf: 'center', marginEnd: 15 }}
+                    <TouchableOpacity
+                        style={{
+                            width: 80,
+                            justifyContent: 'center',
+                        }}
+                        onPress={() => {
+                            Navigation.navigate('Editprofile');
+                        }}>
+                        <Image
+                            source={Images.edit}
+                            style={{
+                                height: 30,
+                                width: 30,
+                                alignSelf: 'center',
+                                marginEnd: 15,
+                            }}
                             resizeMode="contain"></Image>
                     </TouchableOpacity>
                 </View>
@@ -268,20 +371,20 @@ const Profilemain = () => {
                 {upperSection()}
                 {renderHelpSection()}
                 <TouchableOpacity
-                    style={[styles.closeImage, { backgroundColor: "transparent" }]}
+                    style={[styles.closeImage, { backgroundColor: 'transparent' }]}
                     onPress={() => {
                         dispatch(Actions.logOut());
                     }}>
-                    <View style={{ width: 40, }}>
-                        <Image source={Images.logout}
+                    <View style={{ width: 40 }}>
+                        <Image
+                            source={Images.logout}
                             style={{ height: 18, width: 18 }}
                             resizeMode="contain"></Image>
                     </View>
-                    <TextSemiBold text={I18n.t('logout')} style={{ marginStart: 5, }} />
-
+                    <TextSemiBold text={I18n.t('logout')} style={{ marginStart: 5 }} />
                 </TouchableOpacity>
             </ScrollView>
-        </View >
+        </View>
     );
 };
 
