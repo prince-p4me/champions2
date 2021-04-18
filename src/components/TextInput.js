@@ -1,0 +1,90 @@
+import React from "react";
+import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
+import { TextMedium, TextRegular } from "./TextView";
+import PropTypes from "prop-types";
+import Sizes from "../utility/Sizes";
+import Colors from "../utility/Color";
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+
+const InputBox = props => {
+  const { rightButton, rightPress, onPress, iconColor, lable, keyboardType, returnKeyType, icon, value, onChangeText, placeholder } = props;
+  const size = icon == "mobile-phone" ? 40 : 24;
+  if (onPress) {
+    return <TouchableOpacity style={styles.container}
+      activeOpacity={.7} onPress={onPress}>
+      {icon && <View style={styles.iconBox}>
+        <Icon name={icon} color={iconColor ? iconColor : Colors.parrot} size={size} ></Icon>
+      </View>}
+      <View style={styles.inputBox}>
+        <TextRegular text={lable} style={{ fontSize: Sizes.regular }} />
+        <View style={styles.input}>
+          <TextRegular text={value ? value : (placeholder ? placeholder : "N/A")} />
+        </View>
+      </View>
+      {rightButton && <TouchableOpacity style={{
+        height: 45, paddingHorizontal: 10,
+        justifyContent: "center",
+      }} onPress={onPress}>
+        <TextMedium text={rightButton} style={{ color: Colors.parrot, fontSize: Sizes.regular }} />
+      </TouchableOpacity>}
+    </TouchableOpacity>
+  }
+  return (
+    <View style={styles.container}>
+      {icon && <View style={styles.iconBox}>
+        <Icon name={icon} color={iconColor ? iconColor : Colors.parrot} size={size} ></Icon>
+      </View>}
+      <View style={styles.inputBox}>
+        <TextRegular text={lable} style={{ fontSize: Sizes.regular }} />
+        <TextInput style={styles.input}
+          value={value}
+          placeholder={placeholder}
+          placeholderTextColor={Colors.text}
+          onChangeText={text => onChangeText(text)}
+          keyboardType={keyboardType || "default"}
+          onSubmitEditing={props?.onSubmitEditing}
+          returnKeyType={returnKeyType || "next"}
+        />
+      </View>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%", height: 45,
+    flexDirection: "row",
+    marginBottom: 20
+  },
+  iconBox: {
+    width: 50, height: 50,
+    justifyContent: "center", alignItems: "center"
+  },
+  inputBox: {
+    flex: 1, borderBottomWidth: 1,
+    borderColor: Colors.bgGray,
+  },
+  input: {
+    flex: 1, justifyContent: "center",
+    color: Colors.text
+  }
+})
+
+const propTypes = {
+  lable: PropTypes.string,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  returnKeyType: PropTypes.string,
+  icon: PropTypes.any,
+  keyboardType: PropTypes.oneOf(["default", "email-address", "phone-pad"]),
+  onChangeText: PropTypes.func,
+  onSubmitEditing: PropTypes.func,
+  onPress: PropTypes.func,
+  iconColor: PropTypes.string,
+  rightButton: PropTypes.string,
+  rightPress: PropTypes.func
+}
+
+InputBox.propTypes = propTypes;
+
+export default InputBox;

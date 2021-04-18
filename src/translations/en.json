@@ -60,7 +60,7 @@
     "Earlier": "Earlier Notification",
     "homeaddress": "Home Address",
     "edit": "Edit",
-    "addnewaddress": "Add New Address",
+    "addnewaddress": "Add Address",
     "fillther": "Fill the given blank fields",
     "saveas": "Save As",
     "home": "Home",
@@ -92,5 +92,6 @@
     "sele_lang": "Select Language",
     "close": "Close",
     "gallery": "Gallery",
-    "camera": "Camera"
+    "camera": "Camera",
+    "full_name": "Full Name"
 }

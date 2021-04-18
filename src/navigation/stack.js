@@ -22,6 +22,9 @@ import SendQuery from '../screens/Dashboard/SendQuery';
 import AboutUs from '../screens/Dashboard/AboutUs';
 import Terms from '../screens/Dashboard/Terms';
 import Privacy from '../screens/Dashboard/Privacy';
+import Address from '../screens/Dashboard/Address';
+import SendFeedback from '../screens/Dashboard/SendFeedback';
+import AddEditAddress from '../screens/Dashboard/AddEditAddress';
 // import SplashScreen from '../screens/Auth/Splash';
 import * as Actions from '../redux/action';
 
@@ -66,6 +69,9 @@ const StackNavigator = () => {
           <Stack.Screen name="Help" component={Help} />
           <Stack.Screen name="AboutUs" component={AboutUs} />
           <Stack.Screen name="Profilemain" component={Profilemain} />
+          {/* <Stack.Screen name="Address" component={Address} /> */}
+          {/* <Stack.Screen name="SendFeedback" component={SendFeedback} /> */}
+          {/* <Stack.Screen name="AddEditAddress" component={AddEditAddress} /> */}
         </>
       ) : (
         <>

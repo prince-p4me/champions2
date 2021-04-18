@@ -8,7 +8,7 @@ const TextBold = props => {
     return (
         <Text allowFontScaling={false} ellipsizeMode={props.ellipsizeMode} numberOfLines={props.numberOfLines}
             style={[
-                { color: Color.black },
+                { color: Color.text },
                 { fontFamily: Fonts.bold },
                 props.style]}>{props.text}</Text>
     );
@@ -18,7 +18,7 @@ const TextSemiBold = props => {
     return (
         <Text allowFontScaling={false} ellipsizeMode={props.ellipsizeMode} numberOfLines={props.numberOfLines}
             style={[
-                { color: Color.black },
+                { color: Color.text },
                 { fontFamily: Fonts.semiBold },
                 props.style]}>{props.text}</Text>
     );
@@ -27,7 +27,7 @@ const TextMedium = props => {
     return (
         <Text allowFontScaling={false} ellipsizeMode={props.ellipsizeMode} numberOfLines={props.numberOfLines}
             style={[
-                { color: Color.black },
+                { color: Color.text },
                 { fontFamily: Fonts.medium },
                 props.style]}>{props.text}</Text>
     );
@@ -36,7 +36,7 @@ const TextRegular = props => {
     return (
         <Text allowFontScaling={false} ellipsizeMode={props.ellipsizeMode} numberOfLines={props.numberOfLines}
             style={[
-                { color: Color.black },
+                { color: Color.text },
                 { fontFamily: Fonts.regular },
                 props.style]}>{props.text}</Text>
     );
@@ -46,7 +46,7 @@ const TextLite = props => {
     return (
         <Text allowFontScaling={false} ellipsizeMode={props.ellipsizeMode} numberOfLines={props.numberOfLines}
             style={[
-                { color: Color.black },
+                { color: Color.text },
                 { fontFamily: Fonts.regular, fontWeight: '400' },
                 props.style]}>{props.text}</Text>
     );
@@ -56,7 +56,7 @@ const TextThin = props => {
     return (
         <Text allowFontScaling={false} ellipsizeMode={props.ellipsizeMode} numberOfLines={props.numberOfLines}
             style={[
-                { color: Color.black },
+                { color: Color.text },
                 { fontWeight: '100', fontFamily: Fonts.regular },
                 props.style]}>{props.text}</Text>
     );
