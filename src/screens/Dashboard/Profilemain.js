@@ -303,7 +303,7 @@ const Profilemain = props => {
                         marginTop: 10,
                         paddingBottom: 10,
                     }}>
-                    <TouchableOpacity
+                    <TouchableOpacity disabled={true}
                         style={{ height: 100, width: 100, padding: 10 }}
                         onPress={() => {
                             setProfilePicVisible(true);
@@ -348,7 +348,7 @@ const Profilemain = props => {
                         />
                     </View>
 
-                    <TouchableOpacity
+                    <TouchableOpacity disabled={true}
                         style={{
                             width: 80,
                             justifyContent: 'center',

@@ -15,7 +15,7 @@ const LanguageModal = props => {
   const align = isRtl ? 'right' : 'left';
 
   return (
-    <Modal isVisible={visible} style={{ margin: 30 }}>
+    <Modal isVisible={visible} style={{ margin: 30 }} hasBackdrop={true} onBackdropPress={onPress}>
       <View style={{ flex: 1 / 1.7, backgroundColor: '#FFF' }}>
         <View style={[styles.title, { marginBottom: 0 }]}>
           <TextSemiBold
