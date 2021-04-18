@@ -136,7 +136,7 @@ const Profilemain = props => {
         return (
             <>
                 <TouchableOpacity style={styles.closeImage}
-                    onPress={() => Navigation.navigate("AddEditAddress")}>
+                    onPress={() => Navigation.navigate("Address")}>
                     <Image
                         source={Images.address}
                         style={styles.image}
