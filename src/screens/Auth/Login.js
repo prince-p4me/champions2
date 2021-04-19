@@ -31,7 +31,7 @@ import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 
 const LoginScreen = () => {
-  const [mobile, setMobile] = useState('');
+  const [mobile, setMobile] = useState('8802854433');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
   const isRtl = useSelector(state => state.isRtl);

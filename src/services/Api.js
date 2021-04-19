@@ -1,7 +1,7 @@
 import Constants from '../utility/Constant';
-import { store } from "../redux/store";
-import { BackHandler } from "react-native";
-import { showResponse } from "../utility/Index";
+import {store} from '../redux/store';
+import {BackHandler} from 'react-native';
+import {showResponse} from '../utility/Index';
 
 async function callApi(urlString, body, methodType) {
   console.log('-----------AXIOS  Api request is----------- ');
@@ -15,7 +15,7 @@ async function callApi(urlString, body, methodType) {
 
   const options = {
     method: methodType,
-    headers
+    headers,
   };
   if (methodType == 'POST' || methodType == 'PUT') {
     options.body = {};
@@ -23,13 +23,17 @@ async function callApi(urlString, body, methodType) {
       options.body = JSON.stringify(body);
     }
   }
-  console.log("options", options);
+  console.log('options', options);
   try {
     const response = await fetch(urlString, options);
     const jsonResposne = await response.json();
     console.log('result :--', JSON.stringify(jsonResposne));
     if (jsonResposne && jsonResposne.status && jsonResposne.status == 100) {
-      Toast.showWithGravity("Your account has been suspended . . .", Toast.SHORT, Toast.BOTTOM);
+      Toast.showWithGravity(
+        'Your account has been suspended . . .',
+        Toast.SHORT,
+        Toast.BOTTOM,
+      );
       setTimeout(() => {
         BackHandler.exitApp();
       }, 1000);
@@ -55,7 +59,7 @@ export function signUp(body) {
 export function getPoints(body) {
   const state = store.getState();
   let obj = {
-    user_id: state.getUser.id
+    user_id: state.getUser.id,
   };
   console.log('----------Points Api Call ------------------');
   return callApi(Constants.API_URL + 'points.php', obj, 'POST');
@@ -64,7 +68,7 @@ export function getPoints(body) {
 export function getOffers(body) {
   const state = store.getState();
   let obj = {
-    user_id: state.getUser.id
+    user_id: state.getUser.id,
   };
   console.log('----------Points Api Call ------------------');
   return callApi(Constants.API_URL + 'offer_list.php', obj, 'POST');
@@ -82,7 +86,7 @@ export function getBanners(body) {
 
 export function scanQr(body) {
   const state = store.getState();
-  body.user_id = state.getUser.id
+  body.user_id = state.getUser.id;
   console.log('----------scanQr Api Call ------------------');
   return callApi(Constants.API_URL + 'scan_qr.php', body, 'POST');
 }
@@ -100,4 +104,14 @@ export function help(body) {
 export function sendQuery(body) {
   console.log('----------resendOtp Api Call ------------------');
   return callApi(Constants.API_URL + 'user_query.php', body, 'POST');
+}
+
+export function uploadApi(body) {
+  console.log('----------Upload Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_photo_update.php', body, 'POST');
+}
+
+export function updateProfileApi(body) {
+  console.log('----------Update Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_profile_update.php', body, 'POST');
 }

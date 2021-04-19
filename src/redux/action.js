@@ -59,43 +59,50 @@ export function scanQr(payload) {
 export function setRtl(payload) {
   return {
     type: Types.IS_RTL,
-    payload
-  }
+    payload,
+  };
 }
 
 export function setSuccessModal(payload) {
   return {
     type: Types.IS_SUCCESS,
-    payload
-  }
+    payload,
+  };
 }
 
 export function setLanguage(payload) {
   return {
     type: Types.LANGUAGE,
-    payload
-  }
+    payload,
+  };
+}
+
+export function uploadImage(payload) {
+  return {
+    type: Types.UPLOAD_IMAGE,
+    payload,
+  };
 }
 
 export function verifyOtp(payload) {
   return {
     type: Types.VERIFY_OTP,
-    payload
-  }
+    payload,
+  };
 }
 
 export function logOut(payload) {
   return {
     type: Types.LOG_OUT,
-    payload
-  }
+    payload,
+  };
 }
 
 export function signUp(payload) {
   return {
     type: Types.SIGN_UP,
-    payload
-  }
+    payload,
+  };
 }
 
 // add another actions further
