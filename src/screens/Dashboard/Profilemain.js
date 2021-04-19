@@ -135,42 +135,33 @@ const Profilemain = props => {
     const upperSection = () => {
         return (
             <>
-                <View style={styles.closeImage}>
+                <TouchableOpacity style={styles.closeImage}
+                    onPress={() => Navigation.navigate("Address")}>
                     <Image
                         source={Images.address}
                         style={styles.image}
                         resizeMode="contain"></Image>
                     <TextRegular style={styles.textstyle} text={I18n.t('address')} />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.line} />
                 <TouchableOpacity
-                    style={[
-                        styles.closeImage,
-                        {
-                            alignItems: 'center',
-                            // justifyContent: 'space-around',
-                        },
-                    ]}
-                    onPress={() => {
-                        setModalVisible(true);
+                    style={[styles.closeImage, { alignItems: 'center', }]}
+                    onPress={() => setModalVisible(true)}>
+                    <View style={{
+                        flex: 7,
+                        flexDirection: 'row',
+                        alignItems: 'center',
                     }}>
-                    <View
-                        style={{
-                            flex: 7,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                        }}>
                         <Image
                             source={Images.language}
                             style={styles.image}
                             resizeMode="contain"></Image>
                         <TextRegular style={styles.textstyle} text={I18n.t('language')} />
                     </View>
-                    <View
-                        style={{
-                            flex: 3,
-                            alignItems: 'flex-end',
-                        }}>
+                    <View style={{
+                        flex: 3,
+                        alignItems: 'flex-end',
+                    }}>
                         <TextRegular
                             style={[styles.textstyle, { color: Color.green }]}
                             text={getLanguage()}
@@ -178,21 +169,23 @@ const Profilemain = props => {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.line} />
-                <View style={styles.closeImage}>
+                <TouchableOpacity style={styles.closeImage}
+                    onPress={() => Navigation.navigate("Editprofile")}>
                     <Image
                         source={Images.aadhar}
                         style={styles.image}
                         resizeMode="contain"></Image>
                     <TextRegular style={styles.textstyle} text={I18n.t('Aadhar')} />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.line} />
-                <View style={styles.closeImage}>
+                <TouchableOpacity style={styles.closeImage}
+                    onPress={() => Navigation.navigate("SendFeedback")}>
                     <Image
                         source={Images.feedback}
                         style={styles.image}
                         resizeMode="contain"></Image>
                     <TextRegular style={styles.textstyle} text={I18n.t('Sendfeedback')} />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.line} />
             </>
         );
@@ -295,82 +288,89 @@ const Profilemain = props => {
         );
     };
 
+    const renderProfile = () => {
+        return (
+            <View
+                style={{
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    marginTop: 10,
+                    paddingBottom: 10,
+                }}>
+                <TouchableOpacity disabled={true}
+                    style={{ height: 100, width: 100, padding: 10 }}
+                    onPress={() => {
+                        setProfilePicVisible(true);
+                    }}>
+                    <Image
+                        source={
+                            responseImg && responseImg.uri
+                                ? { uri: responseImg.uri }
+                                : Images.user
+                        }
+                        style={{ width: '100%', height: '100%', borderRadius: 100 }}
+                        resizeMode="cover"></Image>
+                    <View
+                        style={{
+                            position: 'relative',
+                            bottom: '45%',
+                            alignSelf: 'center',
+                        }}>
+                        <Icon name="camera" size={30} color="#fff" />
+                    </View>
+                </TouchableOpacity>
+
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                    }}>
+                    <TextRegular
+                        style={[styles.textstyle, { marginTop: 15 }]}
+                        text={user.name}
+                    />
+                    {user.email ? (
+                        <TextRegular
+                            style={[styles.textstyle, { marginTop: 7 }]}
+                            text={user.email}
+                        />
+                    ) : null}
+                    <TextRegular
+                        style={[styles.textstyle, { marginTop: 7 }]}
+                        text={user.mobile}
+                    />
+                </View>
+
+                <TouchableOpacity
+                    // disabled={true}
+                    style={{
+                        width: 80,
+                        justifyContent: 'center',
+                    }}
+                    onPress={() => {
+                        Navigation.navigate('Editprofile');
+                    }}>
+                    <Image
+                        source={Images.edit}
+                        style={{
+                            height: 30,
+                            width: 30,
+                            alignSelf: 'center',
+                            marginEnd: 15,
+                        }}
+                        resizeMode="contain"></Image>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
     return (
         <View style={{ flex: 1 }}>
             {renderModal()}
             <Header title={'Profile'} dashboard={false} back={true} help={true} />
             <ScrollView>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        backgroundColor: 'white',
-                        marginTop: 10,
-                        paddingBottom: 10,
-                    }}>
-                    <TouchableOpacity
-                        style={{ height: 100, width: 100, padding: 10 }}
-                        onPress={() => {
-                            setProfilePicVisible(true);
-                        }}>
-                        <Image
-                            source={
-                                responseImg && responseImg.uri
-                                    ? { uri: responseImg.uri }
-                                    : Images.user
-                            }
-                            style={{ width: '100%', height: '100%', borderRadius: 100 }}
-                            resizeMode="cover"></Image>
-                        <View
-                            style={{
-                                position: 'relative',
-                                bottom: '45%',
-                                alignSelf: 'center',
-                            }}>
-                            <Icon name="camera" size={30} color="#fff" />
-                        </View>
-                    </TouchableOpacity>
-
-                    <View
-                        style={{
-                            flex: 1,
-                            justifyContent: 'center',
-                            alignItems: 'flex-start',
-                        }}>
-                        <TextRegular
-                            style={[styles.textstyle, { marginTop: 15 }]}
-                            text={user.name}
-                        />
-                        {user.email ? (
-                            <TextRegular
-                                style={[styles.textstyle, { marginTop: 7 }]}
-                                text={user.email}
-                            />
-                        ) : null}
-                        <TextRegular
-                            style={[styles.textstyle, { marginTop: 7 }]}
-                            text={user.mobile}
-                        />
-                    </View>
-
-                    <TouchableOpacity
-                        style={{
-                            width: 80,
-                            justifyContent: 'center',
-                        }}
-                        onPress={() => {
-                            Navigation.navigate('Editprofile');
-                        }}>
-                        <Image
-                            source={Images.edit}
-                            style={{
-                                height: 30,
-                                width: 30,
-                                alignSelf: 'center',
-                                marginEnd: 15,
-                            }}
-                            resizeMode="contain"></Image>
-                    </TouchableOpacity>
-                </View>
+                {renderProfile()}
                 <View style={styles.line} />
                 {upperSection()}
                 {renderHelpSection()}

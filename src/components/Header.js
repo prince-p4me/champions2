@@ -27,16 +27,16 @@ import * as Navigation from '../navigation/navigation';
 import Color from '../utility/Color';
 
 const Header = (props) => {
-  const { title, back, dashboard, help } = props;
+  const { title, transparent, back, dashboard, help } = props;
   const isRtl = useSelector((state) => state.isRtl);
 
   const dispatch = useDispatch();
   console.log('back', back);
   return (
     <View style={{ width: '100%' }}>
-      <SafeAreaView style={styles.safeArea}></SafeAreaView>
+      <SafeAreaView style={[styles.safeArea, transparent && { backgroundColor: Color.white }]}></SafeAreaView>
       {!dashboard && (
-        <View style={styles.header}>
+        <View style={[styles.header, transparent && { backgroundColor: Color.white }]}>
           {back && (
             <TouchableOpacity
               style={[styles.drawerButton, { position: "relative", alignItems: "flex-start" }]}
@@ -44,19 +44,19 @@ const Header = (props) => {
               onPress={() => Navigation.goBack()}>
               {
                 isRtl ?
-                  <Icon1 name="arrow-right-alt" size={30} color="#fff" /> :
-                  <Image source={Back} style={styles.sideIcon}></Image>
+                  <Icon1 name="arrow-right-alt" size={30} color={transparent ? Color.black : "#fff"} /> :
+                  <Image source={Back} style={[styles.sideIcon, transparent && { tintColor: Color.black }]}></Image>
               }
             </TouchableOpacity>
           )}
           <View style={{ flex: 1, alignItems: "flex-start" }}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={[styles.title, transparent && { color: Color.text }]}>{title}</Text>
           </View>
           {help && <TouchableOpacity
             style={[styles.drawerButton, { position: "relative", alignItems: "flex-end" }]}
             activeOpacity={0.7}
             onPress={() => Navigation.navigate("Help")}>
-            <Icon name="help-circle-outline" size={30} color="#fff" />
+            <Icon name="help-circle-outline" size={30} color={transparent ? Color.black : "#fff"} />
           </TouchableOpacity>}
         </View>
       )}
