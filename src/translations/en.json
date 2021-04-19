@@ -70,7 +70,7 @@
     "signupwith": "or Sign Up with",
     "alreay": "Already have an Account?",
     "Feedback": "Feedback",
-    "feedbacklongtext": "< ![CDATA[we are happy to give a rating & send us \nyour feedback for app]]>",
+    "feedbacklongtext": "We are happy to give a rating & send us \nyour feedback for app",
     "yourquery": "Your Query",
     "describequery": "Describe your query____",
     "contactus": "Contact Us",
@@ -93,5 +93,7 @@
     "close": "Close",
     "gallery": "Gallery",
     "camera": "Camera",
-    "full_name": "Full Name"
+    "full_name": "Full Name",
+    "hi": "Hi",
+    "rate": "Rate"
 }

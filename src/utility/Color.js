@@ -9,6 +9,7 @@ export default Colors = {
   bgGray: '#eeeeee',
   darkBGgray: '#6e6e6e',
   semiGold: '#c2ad7f',
+  orange: 'orange',
   green: '#3cb244',
   lightgrey: '#6AB8B8B8',
 };

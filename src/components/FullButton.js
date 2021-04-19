@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import Color from '../utility/Color';
 import Sizes from '../utility/Sizes';
-import { TextBold, TextRegular } from './TextView';
+import { TextBold, TextMedium, TextRegular } from './TextView';
 
 const FullButton = props => {
   const { onPress, text, textColor, textStyle, bgColor, btnStyle } = props;
@@ -13,11 +13,11 @@ const FullButton = props => {
     btnStyle && btnStyle
     ]} activeOpacity={.7}
       onPress={() => onPress()}>
-      <TextBold text={text}
+      <TextMedium text={text}
         style={[
           {
             color: (textColor ? textColor : Color.theme),
-            fontSize: Sizes.medium
+            fontSize: Sizes.semiLarge
           },
           textStyle && textStyle
         ]} />

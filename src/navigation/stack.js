@@ -69,8 +69,8 @@ const StackNavigator = () => {
           <Stack.Screen name="Help" component={Help} />
           <Stack.Screen name="AboutUs" component={AboutUs} />
           <Stack.Screen name="Profilemain" component={Profilemain} />
-          {/* <Stack.Screen name="Address" component={Address} /> */}
-          {/* <Stack.Screen name="SendFeedback" component={SendFeedback} /> */}
+          <Stack.Screen name="Address" component={Address} />
+          <Stack.Screen name="SendFeedback" component={SendFeedback} />
           {/* <Stack.Screen name="AddEditAddress" component={AddEditAddress} /> */}
         </>
       ) : (
