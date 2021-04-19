@@ -201,10 +201,14 @@ const Profilemain = props => {
     const uploadImage = () => {
         fetch(Constant.API_URL + 'user_photo_update.php', {
             method: 'POST',
-            body: createFormData(responseImg, {
-                userId: user.id,
-                profile_photo: responseImg && responseImg.uri ? responseImg.uri : null,
-            }),
+            // body: createFormData(responseImg, {
+            //     userId: user.id,
+            //     profile_photo: responseImg && responseImg.uri ? responseImg.uri : null,
+            // }),
+            body: {
+              userId: user.id,
+              profile_photo: responseImg && responseImg.uri ? responseImg.uri : null,
+            },
         }).then(response => {
             console.log('upload succes', response);
             alert('Upload success!');
