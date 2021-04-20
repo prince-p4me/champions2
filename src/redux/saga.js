@@ -197,33 +197,47 @@ function* uploadImage({type, payload}) {
       profile_photo: payload.profile_photo,
     };
     let response = yield call(Apiservice.uploadApi, payload2); //calling Api
-    // showResponse(response);
-
-    console.log({response: response});
     if (response && response.status) {
-      // payload.profile_photo = response.profile_photo;
       payload.profile_photo = response.profile_photo;
       try {
         let response = yield call(Apiservice.updateProfileApi, payload); //calling Api
         showResponse(response);
-        console.log({profileUpdated: response});
         yield put({type: Types.USER, payload: payload});
-
         if (response && response.status) {
         }
-        // yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
       } catch (error) {
-        // yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
         console.log('upload error login', JSON.stringify(error));
       }
     }
-    // yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  } catch (error) {}
+}
+
+function* updateProfile({type, payload}) {
+  try {
+    let response = yield call(Apiservice.updateProfileApi, payload); //calling Api
+    showResponse(response);
+    yield put({type: Types.USER, payload: payload});
+    if (response && response.status) {
+    }
   } catch (error) {
-    // yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-    console.log('error login', JSON.stringify(error));
+    console.log('upload error login', JSON.stringify(error));
   }
 }
 
+function* uploadAdharImage({type, payload}) {
+  try {
+    let payload2 = {
+      user_id: payload.user_id,
+      aadhaar_photo: payload.aadhaar_photo,
+    };
+    let response = yield call(Apiservice.uploadApi, payload2); //calling Api
+    if (response && response.status) {
+      payload.aadhaar_photo = response.profile_photo;
+      yield put({type: Types.USER, payload: payload});
+      showResponse(response);
+    }
+  } catch (error) {}
+}
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -238,4 +252,6 @@ export default function* watcher() {
   yield takeLatest(Types.HELP, help);
   yield takeLatest(Types.SEND_QUERY, sendQuery);
   yield takeLatest(Types.UPLOAD_IMAGE, uploadImage);
+  yield takeLatest(Types.UPLOAD_ADHAR_IMAGE, uploadAdharImage);
+  yield takeLatest(Types.UPDATE_PROFILE, updateProfile);
 }

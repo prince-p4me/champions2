@@ -83,6 +83,19 @@ export function uploadImage(payload) {
     payload,
   };
 }
+export function uploadAdharImage(payload) {
+  return {
+    type: Types.UPLOAD_ADHAR_IMAGE,
+    payload,
+  };
+}
+
+export function updateProfile(payload) {
+  return {
+    type: Types.UPDATE_PROFILE,
+    payload,
+  };
+}
 
 export function verifyOtp(payload) {
   return {

@@ -19,3 +19,5 @@ export const IS_SUCCESS = 'IS_SUCCESS';
 export const HELP = 'HELP';
 export const SEND_QUERY = 'SEND_QUERY';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const UPLOAD_ADHAR_IMAGE = 'UPLOAD_ADHAR_IMAGE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';

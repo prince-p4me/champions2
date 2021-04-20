@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { I18nManager } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import {I18nManager} from 'react-native';
 import Home from '../screens/Dashboard/Home';
 import LoginScreen from '../screens/Auth/Login';
 import OtpScreen from '../screens/Auth/Otp';
 import SignUpScreen from '../screens/Auth/SignUp';
 import LandingScreen from '../screens/Auth/Landing';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import ScanQrCode from '../screens/Dashboard/ScanQrCode';
 import SuccessModal from '../screens/Dashboard/SuccessModal';
@@ -32,9 +32,9 @@ const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.getUser);
-  const isRtl = useSelector((state) => state.isRtl);
-  const language = useSelector((state) => state.getLanguage);
+  const user = useSelector(state => state.getUser);
+  const isRtl = useSelector(state => state.isRtl);
+  const language = useSelector(state => state.getLanguage);
   // const isRtl = true;
 
   useEffect(() => {
@@ -76,13 +76,15 @@ const StackNavigator = () => {
       ) : (
         <>
           {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
-
+          {/* <Stack.Screen name="Editprofile" component={EditProfile} />
+          <Stack.Screen name="Profilemain" component={Profilemain} /> */}
           <Stack.Screen name="Landing" component={LandingScreen} />
           <Stack.Screen name="SignIn" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Otp" component={OtpScreen} />
           <Stack.Screen name="sucessmodel" component={SuccessModal} />
           <Stack.Screen name="Profilemain" component={Profilemain} />
+          <Stack.Screen name="Editprofile" component={EditProfile} />
         </>
       )}
     </Stack.Navigator>
