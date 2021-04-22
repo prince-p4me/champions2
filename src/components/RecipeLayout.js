@@ -18,14 +18,15 @@ import I18n from '../services/i18n';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
 
-const RecipeLayout = () => {
+const RecipeLayout = props => {
+  const { hideTitle } = props;
   const isRtl = useSelector(state => state.isRtl);
-  const align = isRtl ? 'right' : 'left';
+  const align = isRtl ? 'left' : 'right';
   const data = useSelector(state => state.getPoints);
 
   return (
     <View>
-      <View style={styles.title}>
+      {!hideTitle && <View style={styles.title}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TextBold
             text={I18n.t('recipe')}
@@ -35,7 +36,7 @@ const RecipeLayout = () => {
             name="star"
             size={20} />
         </View>
-        <TouchableOpacity onPress={() => Navigation.navigate('OfferAll')}>
+        <TouchableOpacity onPress={() => Navigation.navigate('RecipieAll')}>
           <View style={{ alignItems: 'center', flexDirection: 'row' }}>
             <TextRegular text={I18n.t('Seeall')} />
             <Icon
@@ -43,7 +44,7 @@ const RecipeLayout = () => {
               size={30} />
           </View>
         </TouchableOpacity>
-      </View>
+      </View>}
       <View style={styles.offercontainer}>
         <View style={{ width: 130 }}>
           <Image source={Images.dish}
@@ -51,15 +52,15 @@ const RecipeLayout = () => {
             resizeMode="cover"></Image>
         </View>
         <View style={styles.secondSection}>
-          <View style={{ flex: 1, }}>
+          <View style={{ flex: 1, alignItems: "flex-start" }}>
             <TextMedium
               text="Veg Dum Briyani"
-              style={{ textAlign: align, fontSize: Sizes.semiLarge, color: '#000' }}
+              style={[{ fontSize: Sizes.semiLarge }, isRtl && { textAlign: "left" }]}
             />
 
             <TextRegular
               text="Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. "
-              style={{ textAlign: align, fontSize: Sizes.regular, marginTop: 5 }}
+              style={[{ fontSize: Sizes.regular, marginTop: 5 }, isRtl && { textAlign: "left" }]}
             />
           </View>
           <View style={{ width: "100%", alignItems: "flex-end" }}>

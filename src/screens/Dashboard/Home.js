@@ -158,13 +158,14 @@ class HomeScreen extends React.Component {
       <View style={styles.containerDashboard}>
 
         <Header title={'Home'} dashboard={true} />
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
           {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
 
           <PointsContainer />
           <QRCodeContainer />
           <OfferLayout />
           <RecipeLayout />
+          <View style={{ height: 50 }}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
       </View>

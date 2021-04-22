@@ -13,7 +13,6 @@ import SuccessModal from '../screens/Dashboard/SuccessModal';
 import Profilemain from '../screens/Dashboard/Profilemain';
 import OfferAll from '../screens/Dashboard/OfferAll';
 import WinnerAll from '../screens/Dashboard/WinnerAll';
-import RecipieAll from '../screens/Dashboard/RecipieAll';
 import EditProfile from '../screens/Dashboard/EditProfile';
 import MyReward from '../screens/Dashboard/MyReward';
 import Help from '../screens/Dashboard/Help';
@@ -26,6 +25,7 @@ import Address from '../screens/Dashboard/Address';
 import SendFeedback from '../screens/Dashboard/SendFeedback';
 import AddEditAddress from '../screens/Dashboard/AddEditAddress';
 import OfferDetail from '../screens/Dashboard/OfferDetail';
+import RecipieAll from '../screens/Dashboard/RecipieAll';
 // import SplashScreen from '../screens/Auth/Splash';
 import * as Actions from '../redux/action';
 
@@ -74,6 +74,7 @@ const StackNavigator = () => {
           <Stack.Screen name="SendFeedback" component={SendFeedback} />
           <Stack.Screen name="OfferDetail" component={OfferDetail} />
           <Stack.Screen name="AddEditAddress" component={AddEditAddress} />
+          <Stack.Screen name="RecipieAll" component={RecipieAll} />
         </>
       ) : (
         <>

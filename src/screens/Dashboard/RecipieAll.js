@@ -1,64 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  ScrollView, Image
-  , Button
+  ScrollView,
 } from 'react-native';
 import Header from '../../components/Header';
-import { TextBold, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
 import styles from '../../utility/Style';
+import { useSelector, useDispatch } from 'react-redux';
 import SliderImg from '../../components/SliderImg';
-import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
+import * as Navigation from '../../navigation/navigation';
+import I18n from '../../services/i18n';
+import RecipeLayout from '../../components/RecipeLayout';
 
-import { connect } from 'react-redux'
+const OfferAll = props => {
+  const list = useSelector(state => state.getBanners);
 
-class RecipieAll extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      points: ""
-    }
-
-  }
-
-
-
-  render() {
-    let { visible, list } = this.props;
-    let { points } = this.state;
-    return (
-      <View style={styles.containerDashboard}>
-
-        <Header title={'All Recipes'} dashboard={false} back={true} />
-
-
-
-        <RecipeLayout />
-        <RecipeLayout />
-        <RecipeLayout />
-        <RecipeLayout />
-        <RecipeLayout />
-        <RecipeLayout />
-
-      </View>
-    );
-  }
+  return (
+    <View style={styles.containerDashboard}>
+      <Header title={I18n.t("recipe")} dashboard={false} back={true} help={true} />
+      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingTop: 14 }} showsVerticalScrollIndicator={false}>
+        <RecipeLayout hideTitle={true} />
+        <View style={{ height: 50 }}></View>
+      </ScrollView>
+    </View>
+  );
 };
 
-
-const mapStateToProps = (state) => ({
-  list: state.getBanners,
-  visible: state.isSuccess
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    scanQr: (data) => dispatch(Actions.scanQr(data)),
-    getBanners: () => dispatch(Actions.getBanners()),
-    getPoints: () => dispatch(Actions.getPoints()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecipieAll)
+export default OfferAll
