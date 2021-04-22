@@ -9,7 +9,6 @@ import Header from '../../components/Header';
 import { TextBold, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
 import styles from '../../utility/Style';
 import Imagess from '../../utility/Image';
-import { useSelector, useDispatch } from 'react-redux';
 import SliderImg from '../../components/SliderImg';
 import i18n from '../../services/i18n';
 import Sizes from "../../utility/Sizes"

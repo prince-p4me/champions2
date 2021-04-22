@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -19,29 +19,16 @@ import Images from '../../utility/Image';
 import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
-import i18n from '../../services/i18n';
-import FullButton from '../../components/FullButton';
-
-import {
-  TextRegular,
-  TextBold,
-  TextSemiBold,
-  TextMedium,
-} from '../../components/TextView';
-import TextDevider from '../../components/TextDevider';
-import LinkButton from '../Auth/LinkButton';
-import Sizes from '../../utility/Sizes';
-import ChangeLanguage from '../Auth/ChangeLanguage';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import BottomTile from '../../components/BottomTile';
 import Color from '../../utility/Color';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import TextInput from '../../components/TextInput';
 import ProfilePicModal from '../../components/ProfilePicModal';
 
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
-import {showToast} from '../../utility/Index';
+import { showToast } from '../../utility/Index';
 import DatePicker from 'react-native-datepicker';
 
 const EditProfile = () => {
@@ -79,10 +66,10 @@ const EditProfile = () => {
       setUploaded(user.aadhaar_photo);
     }
   }, []);
+
   const chooseImage = imageType => {
     let option = {
       mediaType: 'photo',
-      includeBase64: false,
       maxHeight: 200,
       maxWidth: 200,
       includeBase64: true,
@@ -106,7 +93,7 @@ const EditProfile = () => {
       });
     } else if (imageType == 'gallery') {
       launchImageLibrary(option, response => {
-        console.log({response: response});
+        console.log({ response: response });
         if (response.didCancel) {
           showToast('Please select your profile picture');
           return;
@@ -122,50 +109,61 @@ const EditProfile = () => {
       setProfilePicVisible(false);
     }
   };
+
   const uploadImage = () => {
     let uploadInfo = user;
     uploadInfo.aadhaar_photo =
       responseImg && responseImg.base64 ? responseImg.base64 : null;
     dispatch(Actions.uploadAdharImage(uploadInfo));
   };
+
+  const updateProfile = () => {
+    let userInfo = {
+      user_id: user.id,
+      name: name,
+      email: email,
+      mobile: mobile,
+      birth_date: dob,
+      aadhaar_number: aadhar,
+      aadhaar_photo: user.aadhaar_photo,
+      profile_photo: user.profile_photo,
+    };
+
+    dispatch(Actions.updateProfile(userInfo));
+  }
+
   return (
-    <View style={{flex: 1}}>
-      <Header
+    <View style={{ flex: 1 }}>
+      <Header back={true}
         title={I18n.t('editdetails')}
         dashboard={false}
-        back={true}
         help={true}
       />
-      <ScrollView
-        contentContainerStyle={[
-          styles.container,
-          {padding: 14, backgroundColor: Colors.white},
-        ]}>
-        <TextInput
-          value={name}
+      <ScrollView contentContainerStyle={[
+        styles.container,
+        { padding: 14, backgroundColor: Colors.white },
+      ]}>
+        <TextInput value={name}
           lable="Full Name"
           icon="user-o"
           placeholder="Full name of user"
           onChangeText={full_name => setName(full_name)}
         />
-        <TextInput
-          value={mobile}
+        <TextInput value={mobile}
           lable="Mobile Number"
           icon="mobile-phone"
           placeholder="+91-**********"
           keyboardType="phone-pad"
           onChangeText={mobile => setMobile(mobile)}
         />
-        <TextInput
-          value={email}
+        <TextInput value={email}
           lable="Email"
           icon="envelope"
           placeholder="abc@your-domain.com"
           keyboardType="email-address"
           onChangeText={email => setEmail(email)}
         />
-        <TextInput
-          value={dob}
+        <TextInput value={dob}
           lable="Date of Birth"
           icon="calendar-o"
           placeholder="03-JAN-1994"
@@ -174,8 +172,7 @@ const EditProfile = () => {
             datePickerRef.current.onPressDate();
           }}
         />
-        <TextInput
-          value={aadhar}
+        <TextInput value={aadhar}
           lable="Aadhar Card ID Number"
           icon="dashboard"
           iconColor="rgb(203,86,91)"
@@ -183,8 +180,7 @@ const EditProfile = () => {
           keyboardType="email-address"
           onChangeText={aadhar => setAadhar(aadhar)}
         />
-        <TextInput
-          value={responseImg && responseImg.fileName}
+        <TextInput value={responseImg && responseImg.fileName}
           lable="Upload Aadhar ID Photo"
           icon="address-card-o"
           placeholder="aadhar_photo.png"
@@ -196,11 +192,9 @@ const EditProfile = () => {
         />
       </ScrollView>
 
-      <ProfilePicModal
-        visible={profilePicVisible}
+      <ProfilePicModal visible={profilePicVisible}
         onPress={imageType => {
           console.log(imageType);
-
           if (imageType == 'camera' || imageType == 'gallery') {
             chooseImage(imageType);
           } else {
@@ -209,9 +203,8 @@ const EditProfile = () => {
         }}
       />
 
-      <DatePicker
-        style={{width: 0, height: 0, opacity: 0}}
-        date={dob}
+      <DatePicker date={dob}
+        style={{ width: 0, height: 0, opacity: 0 }}
         ref={datePickerRef}
         mode="date"
         placeholder="select date"
@@ -227,22 +220,9 @@ const EditProfile = () => {
 
       <BottomTile
         title={I18n.t('uploadprofile')}
-        onPress={() => {
-          let userInfo = {
-            user_id: user.id,
-            name: name,
-            email: email,
-            mobile: mobile,
-            birth_date: dob,
-            aadhaar_number: aadhar,
-            aadhaar_photo: user.aadhaar_photo,
-            profile_photo: user.profile_photo,
-          };
-
-          dispatch(Actions.updateProfile(userInfo));
-        }}
+        onPress={updateProfile}
       />
-      <SafeAreaView style={{backgroundColor: Colors.parrot}}></SafeAreaView>
+      <SafeAreaView style={{ backgroundColor: Colors.parrot }}></SafeAreaView>
     </View>
   );
 };

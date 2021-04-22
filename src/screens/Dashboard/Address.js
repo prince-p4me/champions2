@@ -61,7 +61,7 @@ const Address = () => {
         </View>
       </ScrollView>
       <BottomTile title={I18n.t("addnewaddress")} onPress={() => {
-        alert("saving details")
+        Navigation.navigate("AddEditAddress");
       }} />
       <SafeAreaView style={{ backgroundColor: Colors.parrot }}></SafeAreaView>
     </View>

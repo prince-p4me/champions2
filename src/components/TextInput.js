@@ -1,16 +1,18 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
-import {TextMedium, TextRegular} from './TextView';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { TextMedium, TextRegular } from './TextView';
 import PropTypes from 'prop-types';
 import Sizes from '../utility/Sizes';
 import Colors from '../utility/Color';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import { useSelector, useDispatch } from 'react-redux';
 
 const InputBox = props => {
   const {
     rightButton,
     rightTick,
     rightPress,
+    borderColor,
     onPress,
     iconColor,
     lable,
@@ -20,7 +22,10 @@ const InputBox = props => {
     value,
     onChangeText,
     placeholder,
+    rightIcon
   } = props;
+  const isRtl = useSelector(state => state.isRtl);
+  console.log("isRtl", isRtl);
   const size = icon == 'mobile-phone' ? 40 : 24;
   if (onPress) {
     return (
@@ -36,8 +41,8 @@ const InputBox = props => {
               size={size}></Icon>
           </View>
         )}
-        <View style={styles.inputBox}>
-          <TextRegular text={lable} style={{fontSize: Sizes.regular}} />
+        <View style={[styles.inputBox, borderColor && { borderBottomColor: borderColor }]}>
+          <TextRegular text={lable} style={{ fontSize: Sizes.regular }} />
           <View style={styles.input}>
             <TextRegular
               text={value ? value : placeholder ? placeholder : 'N/A'}
@@ -52,6 +57,14 @@ const InputBox = props => {
             size={size}></Icon>
         )}
 
+        {rightIcon && (
+          <View style={[{
+            position: "absolute", bottom: 8
+          }, isRtl ? { left: 5 } : { right: 5, }]}>
+            <Icon name={rightIcon} color={Colors.text} size={size} />
+          </View>
+        )}
+
         {rightButton && (
           <TouchableOpacity
             style={{
@@ -62,7 +75,7 @@ const InputBox = props => {
             onPress={onPress}>
             <TextMedium
               text={rightButton}
-              style={{color: Colors.parrot, fontSize: Sizes.regular}}
+              style={{ color: Colors.parrot, fontSize: Sizes.regular }}
             />
           </TouchableOpacity>
         )}
@@ -79,8 +92,8 @@ const InputBox = props => {
             size={size}></Icon>
         </View>
       )}
-      <View style={styles.inputBox}>
-        <TextRegular text={lable} style={{fontSize: Sizes.regular}} />
+      <View style={[styles.inputBox, borderColor && { borderBottomColor: borderColor }]}>
+        <TextRegular text={lable} style={{ fontSize: Sizes.regular }} />
         <TextInput
           style={styles.input}
           value={value}
