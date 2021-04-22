@@ -118,4 +118,11 @@ export function signUp(payload) {
   };
 }
 
+export function getAddressList(payload) {
+  return {
+    type: Types.USER_ADDRESS_LIST,
+    payload,
+  };
+}
+
 // add another actions further

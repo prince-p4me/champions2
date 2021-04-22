@@ -1,21 +1,21 @@
 import * as Types from './types';
 let user = {
-  "status": 1,
-  "message": "Login Successfully!!",
-  "id": "23",
-  "name": "Prince Kumar",
-  "email": "",
-  "mobile": "8285724681",
-  "birth_date": "",
-  "aadhaar_number": "",
-  "aadhaar_photo": "",
-  "profile_photo": ""
+  status: 1,
+  message: 'Login Successfully!!',
+  id: '23',
+  name: 'Prince Kumar',
+  email: '',
+  mobile: '8285724681',
+  birth_date: '',
+  aadhaar_number: '',
+  aadhaar_photo: '',
+  profile_photo: '',
 };
 
 let points = {
-  "total_earned": "0",
-  "total_redeemed": "0",
-  "balance": 0
+  total_earned: '0',
+  total_redeemed: '0',
+  balance: 0,
 };
 
 export const getBanners = (state = [], action) => {
@@ -70,16 +70,16 @@ export const isRtl = (state = false, action) => {
     default:
       return state;
   }
-}
+};
 
-export const getLanguage = (state = "en", action) => {
+export const getLanguage = (state = 'en', action) => {
   switch (action.type) {
     case Types.LANGUAGE:
       return action.payload;
     default:
       return state;
   }
-}
+};
 
 export const getUser = (state = {}, action) => {
   switch (action.type) {
@@ -88,4 +88,14 @@ export const getUser = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
+
+export const getUserAddress = (state = {}, action) => {
+  switch (action.type) {
+    case Types.USER_ADDRESS_LIST:
+      return action.payload;
+    default:
+      // return state;
+      return [];
+  }
+};

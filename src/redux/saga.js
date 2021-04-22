@@ -238,6 +238,23 @@ function* uploadAdharImage({type, payload}) {
     }
   } catch (error) {}
 }
+
+function* getAddressList({type, payload}) {
+  try {
+    let payload2 = {
+      user_id: payload,
+    };
+    let response = yield call(Apiservice.userAddressListApi, payload2); //calling Api
+
+    console.log({response: response});
+    if (response && response.status) {
+      yield put({type: Types.USER_ADDRESS_LIST, payload: response.data});
+      // showResponse(response);
+    } else {
+      showResponse(response);
+    }
+  } catch (error) {}
+}
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -254,4 +271,5 @@ export default function* watcher() {
   yield takeLatest(Types.UPLOAD_IMAGE, uploadImage);
   yield takeLatest(Types.UPLOAD_ADHAR_IMAGE, uploadAdharImage);
   yield takeLatest(Types.UPDATE_PROFILE, updateProfile);
+  yield takeLatest(Types.USER_ADDRESS_LIST, getAddressList);
 }

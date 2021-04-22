@@ -115,3 +115,8 @@ export function updateProfileApi(body) {
   console.log('----------Update Api Call ------------------');
   return callApi(Constants.API_URL + 'user_profile_update.php', body, 'POST');
 }
+
+export function userAddressListApi(body) {
+  console.log('----------Address Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_address_list.php', body, 'POST');
+}

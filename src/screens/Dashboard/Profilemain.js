@@ -139,7 +139,7 @@ const Profilemain = props => {
     return (
       <>
         <TouchableOpacity
-          disabled={true}
+          disabled={false}
           style={styles.closeImage}
           onPress={() => Navigation.navigate('Address')}>
           <Image
