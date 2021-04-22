@@ -1,7 +1,7 @@
 import Constants from '../utility/Constant';
-import {store} from '../redux/store';
-import {BackHandler} from 'react-native';
-import {showResponse} from '../utility/Index';
+import { store } from '../redux/store';
+import { BackHandler } from 'react-native';
+import { showResponse } from '../utility/Index';
 
 async function callApi(urlString, body, methodType) {
   console.log('-----------AXIOS  Api request is----------- ');
@@ -116,7 +116,11 @@ export function updateProfileApi(body) {
   return callApi(Constants.API_URL + 'user_profile_update.php', body, 'POST');
 }
 
-export function userAddressListApi(body) {
+export function getAddressList() {
+  const state = store.getState();
+  let obj = {
+    "user_id": state.getUser.id
+  }
   console.log('----------Address Api Call ------------------');
-  return callApi(Constants.API_URL + 'user_address_list.php', body, 'POST');
+  return callApi(Constants.API_URL + 'user_address_list.php', obj, 'POST');
 }

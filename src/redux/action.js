@@ -120,7 +120,7 @@ export function signUp(payload) {
 
 export function getAddressList(payload) {
   return {
-    type: Types.USER_ADDRESS_LIST,
+    type: Types.GET_ADDRESS_LIST,
     payload,
   };
 }

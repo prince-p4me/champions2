@@ -90,12 +90,11 @@ export const getUser = (state = {}, action) => {
   }
 };
 
-export const getUserAddress = (state = {}, action) => {
+export const getAddressList = (state = [], action) => {
   switch (action.type) {
-    case Types.USER_ADDRESS_LIST:
+    case Types.ADDRESS_LIST:
       return action.payload;
     default:
-      // return state;
-      return [];
+      return state;
   }
 };
