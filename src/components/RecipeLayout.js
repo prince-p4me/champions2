@@ -16,6 +16,7 @@ import About from '../assets/imgs/user.jpeg';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import I18n from '../services/i18n';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Navigation from '../navigation/navigation';
 
 const RecipeLayout = () => {
   const isRtl = useSelector(state => state.isRtl);
@@ -44,53 +45,33 @@ const RecipeLayout = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.offercontainer}>
-        <View style={{ width: 150 }}>
-          <Image
-            source={Images.dish}
-            style={{
-              width: 130,
-              height: 120,
-              borderTopLeftRadius: 20,
-              borderBottomLeftRadius: 20,
-            }}
+        <View style={{ width: 130 }}>
+          <Image source={Images.dish}
+            style={styles.img}
             resizeMode="cover"></Image>
         </View>
-        <View>
-          <TextMedium
-            text="Veg Dum Briyani"
-            style={{ textAlign: align, fontSize: Sizes.semiLarge, color: '#000' }}
-          />
-
-          <TextRegular
-            text="Very Tasty Briyani Very "
-            style={{ textAlign: align, fontSize: Sizes.regular, marginTop: 5 }}
-          />
-
-          <TouchableOpacity
-            style={{
-              alignSelf: 'flex-end',
-              backgroundColor: Color.theme,
-              height: 30,
-              width: 120,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 3,
-              marginLeft: 130,
-              marginTop: 20,
-            }}
-            onPress={() => {
-              // onPress()
-            }}>
-            <TextRegular
-              text={I18n.t('readmore')}
-              style={[
-                {
-                  color: Color.white,
-                  fontSize: Sizes.medium,
-                },
-              ]}
+        <View style={styles.secondSection}>
+          <View style={{ flex: 1, }}>
+            <TextMedium
+              text="Veg Dum Briyani"
+              style={{ textAlign: align, fontSize: Sizes.semiLarge, color: '#000' }}
             />
-          </TouchableOpacity>
+
+            <TextRegular
+              text="Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. "
+              style={{ textAlign: align, fontSize: Sizes.regular, marginTop: 5 }}
+            />
+          </View>
+          <View style={{ width: "100%", alignItems: "flex-end" }}>
+            <TouchableOpacity style={styles.readBtn}
+              onPress={() => {
+                // onPress()
+              }}>
+              <TextRegular text={I18n.t('readmore')}
+                style={{ color: Color.white, fontSize: Sizes.medium, textTransform: "uppercase" }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -100,9 +81,30 @@ const RecipeLayout = () => {
 export default RecipeLayout;
 
 const styles = StyleSheet.create({
+  readBtn: {
+    alignSelf: 'flex-end',
+    backgroundColor: Color.theme,
+    height: 30,
+    width: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 3,
+    // marginTop: 20,
+    alignSelf: "flex-end"
+  },
+  img: {
+    width: 130,
+    height: 120,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
   secondSection: {
-    flex: 1, height: "100%",
-    paddingTop: 5,
+    flexDirection: "column",
+    flex: 1,
+    paddingTop: 15,
+    // alignItems: "flex-start",
+    paddingStart: 10,
+    // justifyContent: "space-between"
   },
   title: {
     flexDirection: 'row',
@@ -118,6 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.white,
     // height: 120,
     marginVertical: 5,
+    marginHorizontal: 8,
     borderRadius: 7,
     flexDirection: 'row',
     alignItems: 'center',

@@ -32,52 +32,20 @@ import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 
-class OfferAll extends React.Component {
+const OfferAll = props => {
+  const list = useSelector(state => state.getBanners);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      points: ""
-    }
-     
-}
-
-   
-
-  render() {
-    let { visible, list } = this.props;
-    let { points } = this.state;
-    return (
-      <View style={styles.containerDashboard}>
-
-        <Header title={'All Offer'} dashboard={false}back={true} />
-
+  return (
+    <View style={styles.containerDashboard}>
+      <Header title={'All Offer'} dashboard={false} back={true} help={true} />
+      <ScrollView>
         {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
 
         <OfferLayout />
-          <OfferLayout />
-          <OfferLayout />
-
-          <OfferLayout />
-          <OfferLayout />
-
-        </View>
-    );
-  }
+        <View style={{ height: 50 }}></View>
+      </ScrollView>
+    </View>
+  );
 };
 
-
-const mapStateToProps = (state) => ({
-  list: state.getBanners,
-  visible: state.isSuccess
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    scanQr: (data) => dispatch(Actions.scanQr(data)),
-    getBanners: () => dispatch(Actions.getBanners()),
-    getPoints: () => dispatch(Actions.getPoints()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OfferAll)
+export default OfferAll
