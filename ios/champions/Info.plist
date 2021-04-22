@@ -74,7 +74,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Please Give access to your camera for scanning that QR code through it and some reward 10X Champions points are received.</string>
+  <string>Please Give access to your camera for scanning that QR code through it and some reward 10X Champions points are received.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Please Give access to your gallery for scanning that QR code through it and some reward 10X Champions points are received.</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>Please Give access to your gallery for scanning that QR code through it and some reward 10X Champions points are received.</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>10X Champions would like to use your microphone (for videos)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>

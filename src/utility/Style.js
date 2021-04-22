@@ -279,24 +279,11 @@ export default StyleSheet.create({
     shadowRadius: 20,
     shadowColor: Color.bgGray
   },
-  offercontainer: {
-    backgroundColor: Color.white,
-    height: 120,
-
-    margin: 5,
-    borderRadius: 7,
-
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowRadius: 20,
-    shadowColor: Color.bgGray
-  },
   pointTypeCol: {
     flex: 1,
     flexDirection: 'column',
     marginBottom: 20,
     marginTop: 10,
-    // marginStart: 10,
     alignItems: 'center',
   },
   pointTypeColMiddle: {

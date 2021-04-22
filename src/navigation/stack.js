@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {I18nManager} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { I18nManager } from 'react-native';
 import Home from '../screens/Dashboard/Home';
 import LoginScreen from '../screens/Auth/Login';
 import OtpScreen from '../screens/Auth/Otp';
 import SignUpScreen from '../screens/Auth/SignUp';
 import LandingScreen from '../screens/Auth/Landing';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import ScanQrCode from '../screens/Dashboard/ScanQrCode';
 import SuccessModal from '../screens/Dashboard/SuccessModal';
@@ -25,6 +25,7 @@ import Privacy from '../screens/Dashboard/Privacy';
 import Address from '../screens/Dashboard/Address';
 import SendFeedback from '../screens/Dashboard/SendFeedback';
 import AddEditAddress from '../screens/Dashboard/AddEditAddress';
+import OfferDetail from '../screens/Dashboard/OfferDetail';
 // import SplashScreen from '../screens/Auth/Splash';
 import * as Actions from '../redux/action';
 
@@ -71,6 +72,7 @@ const StackNavigator = () => {
           <Stack.Screen name="Profilemain" component={Profilemain} />
           <Stack.Screen name="Address" component={Address} />
           <Stack.Screen name="SendFeedback" component={SendFeedback} />
+          <Stack.Screen name="OfferDetail" component={OfferDetail} />
           {/* <Stack.Screen name="AddEditAddress" component={AddEditAddress} /> */}
         </>
       ) : (

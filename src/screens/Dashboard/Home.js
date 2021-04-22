@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   ScrollView, Image
-  , Button
+  , Button,
+  SafeAreaView
 } from 'react-native';
 import Header from '../../components/Header';
 import { TextBold, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
@@ -67,31 +68,6 @@ class HomeScreen extends React.Component {
   renderStaticData = () => {
     return (
       <>
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ flexDirection: 'column', flex: 1 }}>
-            <TextBold
-              text={i18n.t('alloffer')}
-              style={{ fontSize: Sizes.large, marginLeft: 10 }}
-            />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              Navigation.navigate('OfferAll');
-            }}>
-            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-              <TextRegular text={i18n.t('Seeall')} />
-              <Icon
-                name='keyboard-arrow-right'
-                size={30}
-                iconStyle={{}} />
-            </View>
-          </TouchableOpacity>
-        </View>
-        <OfferLayout />
-        <OfferLayout />
-        <OfferLayout />
-        <OfferLayout />
-        <OfferLayout />
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ flexDirection: 'column', flex: 1 }}>
             <TextBold
@@ -186,11 +162,11 @@ class HomeScreen extends React.Component {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
 
-          <QRCodeContainer />
           <PointsContainer />
-          {/* <RewardLayout /> */}
-
+          <QRCodeContainer />
+          <OfferLayout />
         </ScrollView>
+        <SafeAreaView></SafeAreaView>
       </View>
     );
   }
@@ -199,7 +175,8 @@ class HomeScreen extends React.Component {
 
 const mapStateToProps = (state) => ({
   list: state.getBanners,
-  visible: state.isSuccess
+  visible: state.isSuccess,
+  isRtl: state.isRtl
 })
 
 const mapDispatchToProps = (dispatch) => {
