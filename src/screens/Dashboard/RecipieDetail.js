@@ -104,9 +104,6 @@ const RecipieDetail = props => {
           {<SendFeedback />}
         </ScrollView>
       </View>
-      {/*<ScrollView contentContainerStyle={{ flexGrow: 1, paddingTop: 14 }} showsVerticalScrollIndicator={false}>
-        <View style={{ height: 50 }}></View>
-      </ScrollView> */}
     </View>
   );
 };
