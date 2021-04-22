@@ -12,7 +12,7 @@ import styles from '../utility/Style';
 import Constants from '../utility/Constant';
 import SideIcon from '../assets/imgs/arrow.png';
 import About from '../assets/imgs/user.jpeg';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as Actions from '../redux/action';
 
 import Logout from '../assets/imgs/home-logout.png';
@@ -25,34 +25,36 @@ import Icon1 from 'react-native-vector-icons/dist/MaterialIcons';
 
 import * as Navigation from '../navigation/navigation';
 import Color from '../utility/Color';
-import {TextMedium} from './TextView';
+import { TextMedium } from './TextView';
 
 const Header = props => {
-  const {title, transparent, back, dashboard, help} = props;
+  const { title, transparent, bgColor, back, dashboard, help } = props;
   const isRtl = useSelector(state => state.isRtl);
   const user = useSelector(state => state.getUser);
 
   const dispatch = useDispatch();
   console.log('back', back);
-  console.log({user: user});
+  console.log({ user: user });
   return (
-    <View style={{width: '100%'}}>
+    <View style={{ width: '100%' }}>
       <SafeAreaView
         style={[
           styles.safeArea,
-          transparent && {backgroundColor: Color.white},
+          transparent && { backgroundColor: Color.white },
+          bgColor && { backgroundColor: bgColor }
         ]}></SafeAreaView>
       {!dashboard && (
         <View
           style={[
             styles.header,
-            transparent && {backgroundColor: Color.white},
+            transparent && { backgroundColor: Color.white },
+            bgColor && { backgroundColor: bgColor }
           ]}>
           {back && (
             <TouchableOpacity
               style={[
                 styles.drawerButton,
-                {position: 'relative', alignItems: 'flex-start'},
+                { position: 'relative', alignItems: 'flex-start' },
               ]}
               activeOpacity={0.7}
               onPress={() => Navigation.goBack()}>
@@ -67,13 +69,13 @@ const Header = props => {
                   source={Back}
                   style={[
                     styles.sideIcon,
-                    transparent && {tintColor: Color.black},
+                    transparent && { tintColor: Color.black },
                   ]}></Image>
               )}
             </TouchableOpacity>
           )}
-          <View style={{flex: 1, alignItems: 'flex-start'}}>
-            <Text style={[styles.title, transparent && {color: Color.text}]}>
+          <View style={{ flex: 1, alignItems: 'flex-start' }}>
+            <Text style={[styles.title, transparent && { color: Color.text }]}>
               {title}
             </Text>
           </View>
@@ -81,7 +83,7 @@ const Header = props => {
             <TouchableOpacity
               style={[
                 styles.drawerButton,
-                {position: 'relative', alignItems: 'flex-end'},
+                { position: 'relative', alignItems: 'flex-end' },
               ]}
               activeOpacity={0.7}
               onPress={() => Navigation.navigate('Help')}>
@@ -105,7 +107,7 @@ const Header = props => {
                 <Image
                   source={
                     user.profile_photo
-                      ? {uri: Constants.IMAGE_URL + user.profile_photo}
+                      ? { uri: Constants.IMAGE_URL + user.profile_photo }
                       : About
                   }
                   style={styles.profileIcon}></Image>

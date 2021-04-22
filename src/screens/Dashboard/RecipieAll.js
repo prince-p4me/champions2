@@ -12,7 +12,7 @@ import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
 import RecipeLayout from '../../components/RecipeLayout';
 
-const OfferAll = props => {
+const RecipieAll = props => {
   const list = useSelector(state => state.getBanners);
 
   return (
@@ -26,4 +26,4 @@ const OfferAll = props => {
   );
 };
 
-export default OfferAll
+export default RecipieAll

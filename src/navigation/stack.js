@@ -26,6 +26,7 @@ import SendFeedback from '../screens/Dashboard/SendFeedback';
 import AddEditAddress from '../screens/Dashboard/AddEditAddress';
 import OfferDetail from '../screens/Dashboard/OfferDetail';
 import RecipieAll from '../screens/Dashboard/RecipieAll';
+import RecipieDetail from '../screens/Dashboard/RecipieDetail';
 // import SplashScreen from '../screens/Auth/Splash';
 import * as Actions from '../redux/action';
 
@@ -75,6 +76,7 @@ const StackNavigator = () => {
           <Stack.Screen name="OfferDetail" component={OfferDetail} />
           <Stack.Screen name="AddEditAddress" component={AddEditAddress} />
           <Stack.Screen name="RecipieAll" component={RecipieAll} />
+          <Stack.Screen name="RecipieDetail" component={RecipieDetail} />
         </>
       ) : (
         <>

@@ -21,7 +21,7 @@ import { showToast } from '../../utility/Index';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import FullButton from '../../components/FullButton';
 
-const ContactUs = (props) => {
+const SendFeedback = (props) => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
   const user = useSelector(state => state.getUser);
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ContactUs;
+export default SendFeedback;

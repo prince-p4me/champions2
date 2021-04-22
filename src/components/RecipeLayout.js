@@ -65,9 +65,7 @@ const RecipeLayout = props => {
           </View>
           <View style={{ width: "100%", alignItems: "flex-end" }}>
             <TouchableOpacity style={styles.readBtn}
-              onPress={() => {
-                // onPress()
-              }}>
+              onPress={() => Navigation.navigate("RecipieDetail")}>
               <TextRegular text={I18n.t('readmore')}
                 style={{ color: Color.white, fontSize: Sizes.medium, textTransform: "uppercase" }}
               />
