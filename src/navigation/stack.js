@@ -42,7 +42,7 @@ const StackNavigator = () => {
     console.log('isRtl is ', isRtl);
     console.log('language is ', language);
     // I18n.locale = language;
-    dispatch(Actions.setRtl(false));
+    dispatch(Actions.setRtl(isRtl));
     I18nManager.allowRTL(isRtl);
     I18nManager.forceRTL(isRtl);
     SplashScreen.hide();

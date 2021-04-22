@@ -164,6 +164,7 @@ class HomeScreen extends React.Component {
           <PointsContainer />
           <QRCodeContainer />
           <OfferLayout />
+          <RecipeLayout />
         </ScrollView>
         <SafeAreaView></SafeAreaView>
       </View>

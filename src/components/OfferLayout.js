@@ -38,29 +38,33 @@ const OfferLayout = () => {
                 resizeMode="contain"></Image>
             </View>
             <View style={styles.secondSection}>
-              <TextThin
-                text="Ends on 15 April 2021" style={[styles.date, { textAlign: !isRtl ? "right" : "left", }]} />
+              <View style={{ width: "100%", alignItems: "flex-end" }}>
+                <TextThin
+                  text="Ends on 15 April 2021" style={[styles.date]} />
+              </View>
               <TextThin
                 text={"Product Name " + (index + 1)}
-                style={{ textAlign: align, fontSize: Sizes.regular, }}
+                style={{ fontSize: Sizes.regular, }}
               />
               <TextMedium
                 text="Offer's Name"
-                style={{ textAlign: align, fontSize: Sizes.semiLarge, marginTop: 10, color: Color.text }}
+                style={{ fontSize: Sizes.semiLarge, marginTop: 10, color: Color.text }}
               />
               <View style={{ flexDirection: 'row', }}>
                 <TextRegular
                   text="On 10 Points"
-                  style={{ textAlign: align, fontSize: Sizes.regular, marginTop: 5, color: Color.semiGold }}
+                  style={{ textAlign: isRtl ? "left" : "right", fontSize: Sizes.regular, marginTop: 5, color: Color.semiGold }}
                 />
                 <Image source={Images.star} style={{ height: 15, width: 15, alignSelf: 'center', tintColor: Color.semiGold }}
                   resizeMode="contain"></Image>
               </View>
-              <TouchableOpacity style={[styles.redeem, { backgroundColor: Color.theme, }]}
-                onPress={() => Navigation.navigate("OfferDetail", { name: ("Product Name " + (index + 1)) })}>
-                <TextRegular text={I18n.t('redeemnow')}
-                  style={{ color: Color.white, fontSize: Sizes.medium }} />
-              </TouchableOpacity>
+              <View style={{ width: "100%", alignItems: "flex-end" }}>
+                <TouchableOpacity style={[styles.redeem, { backgroundColor: Color.theme, }]}
+                  onPress={() => Navigation.navigate("OfferDetail", { name: ("Product Name " + (index + 1)) })}>
+                  <TextRegular text={I18n.t('redeemnow')}
+                    style={{ color: Color.white, fontSize: Sizes.medium }} />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         ))
@@ -75,6 +79,7 @@ const styles = StyleSheet.create({
   secondSection: {
     flex: 1, height: "100%",
     paddingTop: 5,
+    alignItems: "flex-start"
   },
   title: {
     flexDirection: 'row',
