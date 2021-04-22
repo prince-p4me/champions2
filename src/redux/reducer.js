@@ -36,7 +36,7 @@ export const getPoints = (state = points, action) => {
   }
 };
 
-export const getOffers = (state = points, action) => {
+export const getOffers = (state = [], action) => {
   switch (action.type) {
     case Types.OFFERS:
       return action.payload;

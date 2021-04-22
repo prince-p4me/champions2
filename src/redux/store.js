@@ -8,6 +8,7 @@ import {
   getLanguage,
   isRtl,
   getAddressList,
+  getOffers
 } from './reducer';
 import getListSaga from './saga';
 import { all, fork } from 'redux-saga/effects';
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   getPoints,
   getAddressList,
   isSuccess,
+  getOffers
 });
 
 //creating, applying sagas

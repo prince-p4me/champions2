@@ -28,16 +28,30 @@ import Sizes from '../../utility/Sizes';
 import Color from '../../utility/Color';
 import ChangeLanguage from '../Auth/ChangeLanguage';
 import { useSelector, useDispatch } from 'react-redux';
+import HTML from "react-native-render-html";
+import SuccessModal from './SuccessModal';
 
 const OfferDetail = ({ route, navigation }) => {
-  const { name } = route.params;
-  console.log("name", name);
+  const { offer } = route.params;
+  const dispatch = useDispatch();
+  console.log("offer", offer);
   const isRtl = useSelector((state) => state.isRtl);
+  const isSuccess = useSelector((state) => state.isSuccess);
   const align = isRtl ? "right" : "left";
+  const expired = new Date(offer.expiry_date) < new Date();
+
+  const redeemOffer = () => {
+    let obj = {
+      "offer_id": offer.id,
+      "points": offer.points
+    }
+    dispatch(Actions.redeemOffer(obj));
+  }
 
   return (
     <View style={{ flex: 1 }}>
-      <Header title={name} dashboard={false} back={true} help={true} />
+      {/* <SuccessModal visible={isSuccess} points={offer.points} /> */}
+      <Header title={offer?.offer_name} dashboard={false} back={true} help={true} />
       <View style={{ flex: 1, backgroundColor: Colors.backgroundColor, padding: 10 }}>
         <View style={{ backgroundColor: Colors.white, paddingStart: 5 }}>
           <View style={styles.offercontainer} >
@@ -47,16 +61,16 @@ const OfferDetail = ({ route, navigation }) => {
             </View>
             <View style={styles.secondSection}>
               <TextMedium
-                text={name}
+                text={offer?.product_name}
                 style={{ textAlign: align, fontSize: Sizes.medium, color: Color.text }}
               />
               <TextSemiBold
-                text="Offer's Name"
+                text={offer?.offer_name}
                 style={{ textAlign: align, fontSize: Sizes.large, marginTop: 10, color: Color.text }}
               />
               <View style={{ flexDirection: 'row', marginTop: 10 }}>
                 <TextMedium
-                  text="On 10 Points"
+                  text={"On " + offer.points + " Points"}
                   style={{ textAlign: align, fontSize: Sizes.medium, marginTop: 5, color: Color.semiGold }}
                 />
                 <Image source={Images.star} style={{ height: 15, width: 15, alignSelf: 'center', tintColor: Color.semiGold }}
@@ -67,13 +81,12 @@ const OfferDetail = ({ route, navigation }) => {
           <TextMedium text={"Description"}
             style={{ textAlign: align, fontSize: Sizes.medium, color: Color.text }}
           />
-          <TextThin text={"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book."}
-            style={[styles.descText, { textAlign: align, }]} />
+          <HTML source={{ html: offer?.description }} contentWidth={Constant.width} />
           <View style={styles.btnLine}>
             <TextThin
-              text="Ends on: 15 April 2021" style={[styles.date, { textAlign: !isRtl ? "right" : "left", }]} />
+              text={"Ends on: " + offer.expiry_date} style={[styles.date, { textAlign: !isRtl ? "right" : "left", }]} />
             <TouchableOpacity style={[styles.redeem, { backgroundColor: Color.theme, }]}
-              onPress={() => Navigation.navigate("OfferDetail", { name: ("Product Name " + (index + 1)) })}>
+              onPress={redeemOffer}>
               <TextRegular text={I18n.t('redeemnow')}
                 style={{ color: Color.white, fontSize: Sizes.medium }} />
             </TouchableOpacity>

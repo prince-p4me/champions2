@@ -9,10 +9,13 @@ import I18n from '../services/i18n';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
 import { Icon } from 'react-native-elements'
+import Constant from '../utility/Constant';
+import HTML from "react-native-render-html";
 
 const OfferLayout = () => {
   const isRtl = useSelector((state) => state.isRtl);
   const align = isRtl ? "right" : "left";
+  const list = useSelector(state => state.getOffers);
 
   return (
     <View>
@@ -31,43 +34,48 @@ const OfferLayout = () => {
         </TouchableOpacity>
       </View>
       {
-        [1, 2, 3, 4, 5].map((value, index) => (
-          <View style={styles.offercontainer} key={index}>
-            <View style={styles.imgBox}>
-              <Image source={Images.iphone} style={{ height: 70, width: 70 }}
-                resizeMode="contain"></Image>
-            </View>
-            <View style={styles.secondSection}>
-              <View style={{ width: "100%", alignItems: "flex-end" }}>
-                <TextThin
-                  text="Ends on 15 April 2021" style={[styles.date]} />
+        list.map((item, index) => {
+          const expired = new Date(item.expiry_date) < new Date();
+          return (
+            (
+              <View style={styles.offercontainer} key={index}>
+                <View style={styles.imgBox}>
+                  <Image source={{ uri: Constant.IMAGE_URL + item.image }} style={{ height: 70, width: 70 }}
+                    resizeMode="contain"></Image>
+                </View>
+                <View style={styles.secondSection}>
+                  <View style={{ width: "100%", alignItems: "flex-end" }}>
+                    <TextThin
+                      text={"Ends on " + item.expiry_date} style={[styles.date, expired && { color: "red" }]} />
+                  </View>
+                  <TextThin
+                    text={item.product_name}
+                    style={{ fontSize: Sizes.regular, }}
+                  />
+                  <TextMedium
+                    text={item.offer_name}
+                    style={{ fontSize: Sizes.semiLarge, marginTop: 10, color: Color.text }}
+                  />
+                  <View style={{ flexDirection: 'row', }}>
+                    <TextRegular
+                      text={"On " + item.points + " Points"}
+                      style={{ textAlign: isRtl ? "left" : "right", fontSize: Sizes.regular, marginTop: 5, color: Color.semiGold }}
+                    />
+                    <Image source={Images.star} style={{ height: 15, width: 15, alignSelf: 'center', tintColor: Color.semiGold }}
+                      resizeMode="contain"></Image>
+                  </View>
+                  <View style={{ width: "100%", alignItems: "flex-end" }}>
+                    <TouchableOpacity style={[styles.redeem, { backgroundColor: Color.theme, }]}
+                      onPress={() => Navigation.navigate("OfferDetail", { offer: item })}>
+                      <TextRegular text={I18n.t('redeemnow')}
+                        style={{ color: Color.white, fontSize: Sizes.medium }} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
-              <TextThin
-                text={"Product Name " + (index + 1)}
-                style={{ fontSize: Sizes.regular, }}
-              />
-              <TextMedium
-                text="Offer's Name"
-                style={{ fontSize: Sizes.semiLarge, marginTop: 10, color: Color.text }}
-              />
-              <View style={{ flexDirection: 'row', }}>
-                <TextRegular
-                  text="On 10 Points"
-                  style={{ textAlign: isRtl ? "left" : "right", fontSize: Sizes.regular, marginTop: 5, color: Color.semiGold }}
-                />
-                <Image source={Images.star} style={{ height: 15, width: 15, alignSelf: 'center', tintColor: Color.semiGold }}
-                  resizeMode="contain"></Image>
-              </View>
-              <View style={{ width: "100%", alignItems: "flex-end" }}>
-                <TouchableOpacity style={[styles.redeem, { backgroundColor: Color.theme, }]}
-                  onPress={() => Navigation.navigate("OfferDetail", { name: ("Product Name " + (index + 1)) })}>
-                  <TextRegular text={I18n.t('redeemnow')}
-                    style={{ color: Color.white, fontSize: Sizes.medium }} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        ))
+            )
+          )
+        })
       }
     </View>
   );

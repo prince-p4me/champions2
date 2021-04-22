@@ -9,9 +9,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import SliderImg from '../../components/SliderImg';
 import * as Actions from '../../redux/action';
 import * as Navigation from '../../navigation/navigation';
+import OfferLayout from '../../components/OfferLayout';
 
 const OfferAll = props => {
-  const list = useSelector(state => state.getBanners);
+  const list = useSelector(state => state.getOffers);
 
   return (
     <View style={styles.containerDashboard}>

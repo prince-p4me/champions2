@@ -87,9 +87,6 @@ const StackNavigator = () => {
           <Stack.Screen name="SignIn" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Otp" component={OtpScreen} />
-          <Stack.Screen name="sucessmodel" component={SuccessModal} />
-          <Stack.Screen name="Profilemain" component={Profilemain} />
-          <Stack.Screen name="Editprofile" component={EditProfile} />
         </>
       )}
     </Stack.Navigator>

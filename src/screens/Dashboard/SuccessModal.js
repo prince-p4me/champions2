@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  SafeAreaView,
   // Modal
 } from 'react-native';
 import Colors from '../../utility/Color';
@@ -56,6 +57,7 @@ const SuccessModal = (props) => {
 
   return (
     <Modal isVisible={visible} style={{ margin: 0 }}>
+      <SafeAreaView style={{ backgroundColor: Colors.parrot }} />
       <View style={{ flex: 1, backgroundColor: Colors.bgColor }}>
         <View style={styles.firstSection}>
           <TouchableOpacity onPress={() => dispatch(Actions.setSuccessModal(false))}

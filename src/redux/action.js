@@ -125,4 +125,11 @@ export function getAddressList(payload) {
   };
 }
 
+export function redeemOffer(payload) {
+  return {
+    type: Types.REDEEM_OFFER,
+    payload,
+  };
+}
+
 // add another actions further

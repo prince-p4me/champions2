@@ -124,3 +124,10 @@ export function getAddressList() {
   console.log('----------Address Api Call ------------------');
   return callApi(Constants.API_URL + 'user_address_list.php', obj, 'POST');
 }
+
+export function redeemOffer(body) {
+  const state = store.getState();
+  body.user_id = state.getUser.id;
+  console.log('----------scanQr Api Call ------------------');
+  return callApi(Constants.API_URL + 'redeem_offer.php', body, 'POST');
+}
