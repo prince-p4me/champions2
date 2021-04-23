@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   View,
   ScrollView,
 } from 'react-native';
 import Header from '../../components/Header';
 import styles from '../../utility/Style';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SliderImg from '../../components/SliderImg';
-import * as Actions from '../../redux/action';
-import * as Navigation from '../../navigation/navigation';
 import OfferLayout from '../../components/OfferLayout';
 
 const OfferAll = props => {
