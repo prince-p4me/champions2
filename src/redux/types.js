@@ -24,3 +24,7 @@ export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const ADDRESS_LIST = 'ADDRESS_LIST';
 export const GET_ADDRESS_LIST = "GET_ADDRESS_LIST";
 export const REDEEM_OFFER = "REDEEM_OFFER";
+export const REVIEWS = "REVIEWS";
+export const GET_REVIEWS = "GET_REVIEWS";
+export const RECIPES = "RECIPES";
+export const GET_RECIPES = "GET_RECIPES";

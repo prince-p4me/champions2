@@ -98,3 +98,21 @@ export const getAddressList = (state = [], action) => {
       return state;
   }
 };
+
+export const getReviews = (state = [], action) => {
+  switch (action.type) {
+    case Types.REVIEWS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const getRecipes = (state = [], action) => {
+  switch (action.type) {
+    case Types.RECIPES:
+      return action.payload;
+    default:
+      return state;
+  }
+};

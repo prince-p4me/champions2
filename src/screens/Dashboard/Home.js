@@ -164,7 +164,7 @@ class HomeScreen extends React.Component {
           <PointsContainer />
           <QRCodeContainer />
           <OfferLayout />
-          {/* <RecipeLayout /> */}
+          <RecipeLayout horizontal={true} />
           <View style={{ height: 50 }}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
@@ -172,7 +172,6 @@ class HomeScreen extends React.Component {
     );
   }
 };
-
 
 const mapStateToProps = (state) => ({
   list: state.getBanners,

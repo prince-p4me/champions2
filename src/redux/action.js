@@ -125,6 +125,20 @@ export function getAddressList(payload) {
   };
 }
 
+export function getReviews(payload) {
+  return {
+    type: Types.GET_REVIEWS,
+    payload,
+  };
+}
+
+export function getRecipes(payload) {
+  return {
+    type: Types.GET_RECIPES,
+    payload,
+  };
+}
+
 export function redeemOffer(payload) {
   return {
     type: Types.REDEEM_OFFER,

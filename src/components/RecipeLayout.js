@@ -1,28 +1,52 @@
 import React, { Component } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, FlatList, StyleSheet } from 'react-native';
 import { TextMedium, TextRegular, TextBold } from './TextView';
 import Color from '../utility/Color';
 import { Icon } from 'react-native-elements'
-
-import star from '../assets/imgs/star.png';
-import Images from '../utility/Image';
-import earned from '../assets/imgs/earned.png';
-import Redeem from '../assets/imgs/Redeem.png';
-import Balance from '../assets/imgs/Balance.png';
 import Sizes from '../utility/Sizes';
-import FullButton from './FullButton';
-import About from '../assets/imgs/user.jpeg';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import I18n from '../services/i18n';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
+import Constant from '../utility/Constant';
 
 const RecipeLayout = props => {
-  const { hideTitle } = props;
+  const { hideTitle, horizontal } = props;
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'left' : 'right';
-  const data = useSelector(state => state.getPoints);
+  const data = useSelector(state => state.getRecipes);
+
+  const renderItem = item => {
+    const text = item?.description.replace(/<\/?[^>]+>/ig, " ");
+    return (
+      <View style={[styles.offercontainer, horizontal && { width: Constant.width - 28 }]}>
+        <View style={{ width: 130 }}>
+          <Image source={{ uri: Constant.IMAGE_URL + item.logo }}
+            style={styles.img}
+            resizeMode="cover"></Image>
+        </View>
+        <View style={styles.secondSection}>
+          <View style={{ flex: 1, alignItems: "flex-start", flexWrap: "wrap" }}>
+            <TextMedium
+              text={item.title}
+              style={[{ fontSize: Sizes.semiLarge }, isRtl && { textAlign: "left" }]}
+            />
+            <TextRegular text={text.slice(0, 80) + " . . ."}
+              style={[{ fontSize: Sizes.regular }, isRtl && { textAlign: "left" }]}
+            />
+          </View>
+          <View style={{ width: "100%", alignItems: "flex-end" }}>
+            <TouchableOpacity style={styles.readBtn}
+              onPress={() => Navigation.navigate("RecipieDetail", { item })}>
+              <TextRegular text={I18n.t('readmore')}
+                style={{ color: Color.white, fontSize: Sizes.medium, textTransform: "uppercase" }}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    )
+  }
 
   return (
     <View>
@@ -45,34 +69,13 @@ const RecipeLayout = props => {
           </View>
         </TouchableOpacity>
       </View>}
-      <View style={styles.offercontainer}>
-        <View style={{ width: 130 }}>
-          <Image source={Images.dish}
-            style={styles.img}
-            resizeMode="cover"></Image>
-        </View>
-        <View style={styles.secondSection}>
-          <View style={{ flex: 1, alignItems: "flex-start" }}>
-            <TextMedium
-              text="Veg Dum Briyani"
-              style={[{ fontSize: Sizes.semiLarge }, isRtl && { textAlign: "left" }]}
-            />
-
-            <TextRegular
-              text="Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. "
-              style={[{ fontSize: Sizes.regular, marginTop: 5 }, isRtl && { textAlign: "left" }]}
-            />
-          </View>
-          <View style={{ width: "100%", alignItems: "flex-end" }}>
-            <TouchableOpacity style={styles.readBtn}
-              onPress={() => Navigation.navigate("RecipieDetail")}>
-              <TextRegular text={I18n.t('readmore')}
-                style={{ color: Color.white, fontSize: Sizes.medium, textTransform: "uppercase" }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+      <FlatList data={data}
+        horizontal={horizontal}
+        contentContainerStyle={{ flexGrow: 1, }}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => item.id}
+        renderItem={({ item, index }) => renderItem(item)}
+      />
     </View>
   );
 };
@@ -124,7 +127,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     shadowRadius: 20,
-    shadowColor: Color.bgGray
+    shadowColor: Color.bgGray,
+    borderTopStartRadius: 7,
+    borderBottomStartRadius: 7,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   imgBox: {
     height: 70, width: 100,

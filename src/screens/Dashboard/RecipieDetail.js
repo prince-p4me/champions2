@@ -20,8 +20,11 @@ import Sizes from '../../utility/Sizes';
 import FullButton from '../../components/FullButton';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { showToast } from '../../utility/Index';
+import HTML from "react-native-render-html";
 
-const RecipieDetail = props => {
+const RecipieDetail = ({ route, navigation }) => {
+  const { item } = route.params;
+
   const list = useSelector(state => state.getBanners);
   const isRtl = useSelector(state => state.isRtl);
   const dispatch = useDispatch();
@@ -83,17 +86,17 @@ const RecipieDetail = props => {
 
   return (
     <View style={styles.containerDashboard}>
-      <ImageBackground style={{ width: "100%", height: Constant.height / 3.5 }} source={receipiImg} />
+      <ImageBackground style={{ width: "100%", height: Constant.height / 3.5 }}
+        source={{ uri: Constant.IMAGE_URL + item.image }} />
       <View style={styles.container}>
-        <Header title={"Origin of Dum Biryani"} dashboard={false} back={true} help={true}
+        <Header title={item.title} dashboard={false} back={true} help={true}
           bgColor="rgba(128,128,128,.8)" />
         <ScrollView style={styles.roundSection} showsVerticalScrollIndicator={false}>
           <View style={styles.heading}>
-            <TextSemiBold text="Origin of DUm Biryani" style={{ fontSize: Sizes.medium }} />
+            <TextSemiBold text={item.title} style={{ fontSize: Sizes.medium }} />
           </View>
           <View style={{ padding: 10 }}>
-            <TextMedium text={content + "\n\n" + content} style={[{ fontSize: Sizes.medium },
-            isRtl && { textAlign: "left" }]} />
+            <HTML source={{ html: item?.description }} contentWidth={Constant.width} />
           </View>
           <View style={{ width: "100%", paddingHorizontal: "17%", marginVertical: 30 }}>
             <FullButton bgColor={Color.theme}

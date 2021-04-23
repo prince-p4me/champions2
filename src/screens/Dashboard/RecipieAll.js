@@ -18,10 +18,10 @@ const RecipieAll = props => {
   return (
     <View style={styles.containerDashboard}>
       <Header title={I18n.t("recipe")} dashboard={false} back={true} help={true} />
-      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingTop: 14 }} showsVerticalScrollIndicator={false}>
+      <View style={{ flex: 1, paddingTop: 14 }}>
         <RecipeLayout hideTitle={true} />
         <View style={{ height: 50 }}></View>
-      </ScrollView>
+      </View>
     </View>
   );
 };

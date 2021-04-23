@@ -112,7 +112,7 @@ export function uploadApi(body) {
 }
 
 export function updateProfileApi(body) {
-  console.log('----------Update Api Call ------------------');
+  console.log('----------updateProfileApi Call ------------------');
   return callApi(Constants.API_URL + 'user_profile_update.php', body, 'POST');
 }
 
@@ -128,6 +128,17 @@ export function getAddressList() {
 export function redeemOffer(body) {
   const state = store.getState();
   body.user_id = state.getUser.id;
-  console.log('----------scanQr Api Call ------------------');
+  console.log('----------redeemOffer Api Call ------------------');
   return callApi(Constants.API_URL + 'redeem_offer.php', body, 'POST');
+}
+
+export function getAppReviews(body) {
+  console.log('----------getAppReviews Api Call ------------------');
+  return callApi(Constants.API_URL + 'app_feedback_list.php', body, 'POST');
+}
+
+
+export function getRecipes(body) {
+  console.log('----------getRecipe Api Call ------------------');
+  return callApi(Constants.API_URL + 'recipe_list.php', body, 'GET');
 }
