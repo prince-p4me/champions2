@@ -31,6 +31,7 @@ import Profilemain from './Profilemain';
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
+import ReviewLayout from '../../components/ReviewLayout';
 
 class HomeScreen extends React.Component {
 
@@ -116,37 +117,6 @@ class HomeScreen extends React.Component {
     )
   }
 
-  renderWinners = () => {
-    const { isRtl } = this.props;
-    return (
-      <>
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
-          <TextBold
-            text={I18n.t('allwinner')}
-            style={{ fontSize: Sizes.semiLarge, marginStart: 10 }}
-          />
-          <TouchableOpacity onPress={() => Navigation.navigate('WinnerAll')}>
-            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-              <TextRegular text={I18n.t('Seeall')} />
-              <Icon size={30}
-                name={'keyboard-arrow-' + (isRtl ? 'left' : 'right')} />
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Winnerlayout />
-          <Winnerlayout />
-          <Winnerlayout />
-          <Winnerlayout />
-        </View>
-      </>
-    )
-  }
-
   render() {
     let { visible, list } = this.props;
     let { points } = this.state;
@@ -156,11 +126,12 @@ class HomeScreen extends React.Component {
         <Header title={'Home'} dashboard={true} />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
           {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
-          <Winnerlayout />
+          {/* <Winnerlayout /> */}
           <QRCodeContainer />
           <PointsContainer />
-          <OfferLayout />
-          <RecipeLayout horizontal={true} />
+          {/* <ReviewLayout /> */}
+          {/* <OfferLayout />
+          <RecipeLayout horizontal={true} /> */}
           <View style={{ height: 50 }}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>

@@ -13,6 +13,7 @@ const getHomepageData = () => {
   store.dispatch(Actions.getOffers());
   store.dispatch(Actions.getRecipes());
   store.dispatch(Actions.getWinners());
+  store.dispatch(Actions.getReviews());
 }
 
 function* getPoints({ type, payload }) {

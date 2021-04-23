@@ -134,7 +134,7 @@ export function redeemOffer(body) {
 
 export function getAppReviews(body) {
   console.log('----------getAppReviews Api Call ------------------');
-  return callApi(Constants.API_URL + 'app_feedback_list.php', body, 'POST');
+  return callApi(Constants.API_URL + 'app_feedback_list.php', body, 'GET');
 }
 
 
