@@ -139,6 +139,13 @@ export function getRecipes(payload) {
   };
 }
 
+export function getWinners(payload) {
+  return {
+    type: Types.GET_WINNERS,
+    payload,
+  };
+}
+
 export function redeemOffer(payload) {
   return {
     type: Types.REDEEM_OFFER,

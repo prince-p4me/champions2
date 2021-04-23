@@ -2,24 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   ScrollView, Image
-  , Button
+  , FlatList
 } from 'react-native';
 import Header from '../../components/Header';
 import { TextBold, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
 import styles from '../../utility/Style';
-import Imagess from '../../utility/Image';
 import { useSelector, useDispatch } from 'react-redux';
 import SliderImg from '../../components/SliderImg';
-import i18n from '../../services/i18n';
-import Sizes from "../../utility/Sizes"
-
-import PointsContainer from '../../components/PointsContainer';
-import QRCodeContainer from '../../components/QRCodeContainer';
-import Winnerlayout from '../../components/Winnerlayout';
-import RewardLayout from '../../components/RewardLayout';
-import FeedbackLayout from '../../components/FeedbackLayout';
-import OfferLayout from '../../components/OfferLayout';
-import RecipeLayout from '../../components/RecipeLayout';
 import Winnerlayoutfull from '../../components/Winnerlayoutfull';
 import * as Actions from '../../redux/action';
 
@@ -32,53 +21,32 @@ import Profilemain from './Profilemain';
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
+import I18n from '../../services/i18n';
 
-class OfferAll extends React.Component {
+const OfferAll = () => {
+  const isRtl = useSelector((state) => state.isRtl);
+  const align = isRtl ? "right" : "left";
+  const list = useSelector((state) => state.getBanners);
+  const data = useSelector((state) => state.getWinners);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      points: ""
-    }
-     
-}
+  return (
+    <View style={styles.containerDashboard}>
 
-   
+      <Header title={I18n.t("allwinner")} dashboard={false} back={true} />
 
-  render() {
-    let { visible, list } = this.props;
-    let { points } = this.state;
-    return (
-      <View style={styles.containerDashboard}>
+      {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
+      <FlatList data={data}
+        contentContainerStyle={{
+          flexGrow: 1, alignItems: "center",
+          flex: 1
+        }}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => item.id}
+        renderItem={({ item, index }) => <Winnerlayoutfull item={item} />}
+      />
+    </View>
+  );
 
-        <Header title={'All Winners'} dashboard={false}back={true} />
-
-        {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
-
-        <Winnerlayoutfull />
-          <Winnerlayoutfull />
-          <Winnerlayoutfull />
-
-          <Winnerlayoutfull />
-          <Winnerlayoutfull />
-
-        </View>
-    );
-  }
 };
 
-
-const mapStateToProps = (state) => ({
-  list: state.getBanners,
-  visible: state.isSuccess
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    scanQr: (data) => dispatch(Actions.scanQr(data)),
-    getBanners: () => dispatch(Actions.getBanners()),
-    getPoints: () => dispatch(Actions.getPoints()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OfferAll)
+export default OfferAll

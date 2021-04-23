@@ -12,6 +12,7 @@ const getHomepageData = () => {
   store.dispatch(Actions.getPoints());
   store.dispatch(Actions.getOffers());
   store.dispatch(Actions.getRecipes());
+  store.dispatch(Actions.getWinners());
 }
 
 function* getPoints({ type, payload }) {
@@ -341,6 +342,24 @@ function* getRecipes({ type, payload }) {
   }
 }
 
+function* getWinners({ type, payload }) {
+  try {
+    // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+
+    let response = yield call(Apiservice.getWinners, payload); //calling Api
+
+    console.log('response in saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    showResponse(response);
+    if (response && response.status) {
+      yield put({ type: Types.WINNERS, payload: response.data }); //hide loading
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -362,4 +381,5 @@ export default function* watcher() {
   yield takeLatest(Types.REDEEM_OFFER, redeemOffer);
   yield takeLatest(Types.GET_REVIEWS, getAppReviews);
   yield takeLatest(Types.GET_RECIPES, getRecipes);
+  yield takeLatest(Types.GET_WINNERS, getWinners);
 }

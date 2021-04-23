@@ -8,7 +8,7 @@ import Sizes from "../utility/Sizes"
 import I18n from '../services/i18n';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
 import Constant from '../utility/Constant';
 
 const OfferLayout = () => {

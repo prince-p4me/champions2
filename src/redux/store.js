@@ -10,7 +10,8 @@ import {
   getAddressList,
   getOffers,
   getRecipes,
-  getReviews
+  getReviews,
+  getWinners
 } from './reducer';
 import getListSaga from './saga';
 import { all, fork } from 'redux-saga/effects';
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   isSuccess,
   getOffers,
   getReviews,
-  getRecipes
+  getRecipes,
+  getWinners
 });
 
 //creating, applying sagas

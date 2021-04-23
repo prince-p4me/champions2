@@ -142,3 +142,8 @@ export function getRecipes(body) {
   console.log('----------getRecipe Api Call ------------------');
   return callApi(Constants.API_URL + 'recipe_list.php', body, 'GET');
 }
+
+export function getWinners(body) {
+  console.log('----------getWinners Api Call ------------------');
+  return callApi(Constants.API_URL + 'winner_list.php', body, 'GET');
+}

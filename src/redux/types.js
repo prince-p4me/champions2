@@ -28,3 +28,5 @@ export const REVIEWS = "REVIEWS";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const RECIPES = "RECIPES";
 export const GET_RECIPES = "GET_RECIPES";
+export const WINNERS = "WINNERS";
+export const GET_WINNERS = "GET_WINNERS";

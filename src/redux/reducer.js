@@ -116,3 +116,12 @@ export const getRecipes = (state = [], action) => {
       return state;
   }
 };
+
+export const getWinners = (state = [], action) => {
+  switch (action.type) {
+    case Types.WINNERS:
+      return action.payload;
+    default:
+      return state;
+  }
+};

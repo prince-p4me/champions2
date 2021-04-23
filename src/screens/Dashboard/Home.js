@@ -10,7 +10,7 @@ import { TextBold, TextRegular, TextSemiBold, TextThin } from '../../components/
 import styles from '../../utility/Style';
 import Imagess from '../../utility/Image';
 import SliderImg from '../../components/SliderImg';
-import i18n from '../../services/i18n';
+import I18n from '../../services/i18n';
 import Sizes from "../../utility/Sizes"
 
 import PointsContainer from '../../components/PointsContainer';
@@ -70,7 +70,7 @@ class HomeScreen extends React.Component {
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ flexDirection: 'column', flex: 1 }}>
             <TextBold
-              text={i18n.t('recipe')}
+              text={I18n.t('recipe')}
               style={{ fontSize: Sizes.large, marginLeft: 10 }}
             />
           </View>
@@ -79,7 +79,7 @@ class HomeScreen extends React.Component {
               Navigation.navigate('recipeall');
             }}>
             <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-              <TextRegular text={i18n.t('Seeall')} />
+              <TextRegular text={I18n.t('Seeall')} />
               <Icon
                 name='keyboard-arrow-right'
                 size={30}
@@ -97,12 +97,12 @@ class HomeScreen extends React.Component {
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ flexDirection: 'column', flex: 1 }}>
             <TextBold
-              text={i18n.t('reviews')}
+              text={I18n.t('reviews')}
               style={{ fontSize: Sizes.large, marginLeft: 10 }}
             />
           </View>
           <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-            <TextRegular text={i18n.t('Seeall')} />
+            <TextRegular text={I18n.t('Seeall')} />
             <Icon
               name='keyboard-arrow-right'
               size={30}
@@ -117,28 +117,24 @@ class HomeScreen extends React.Component {
   }
 
   renderWinners = () => {
+    const { isRtl } = this.props;
     return (
       <>
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ flexDirection: 'column', flex: 1 }}>
-            <TextBold
-              text={i18n.t('winner')}
-              style={{ fontSize: Sizes.large, marginLeft: 10 }}
-            />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              Navigation.navigate('WinnerAll');
-            }}>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <TextBold
+            text={I18n.t('allwinner')}
+            style={{ fontSize: Sizes.semiLarge, marginStart: 10 }}
+          />
+          <TouchableOpacity onPress={() => Navigation.navigate('WinnerAll')}>
             <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-
-              <TextRegular text={i18n.t('Seeall')} />
-              <Icon
-                name='keyboard-arrow-right'
-                size={30}
-                iconStyle={{}} />
+              <TextRegular text={I18n.t('Seeall')} />
+              <Icon size={30}
+                name={'keyboard-arrow-' + (isRtl ? 'left' : 'right')} />
             </View>
-
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: 'row' }}>
@@ -160,9 +156,9 @@ class HomeScreen extends React.Component {
         <Header title={'Home'} dashboard={true} />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
           {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
-
-          <PointsContainer />
+          <Winnerlayout />
           <QRCodeContainer />
+          <PointsContainer />
           <OfferLayout />
           <RecipeLayout horizontal={true} />
           <View style={{ height: 50 }}></View>

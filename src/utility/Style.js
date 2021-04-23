@@ -31,27 +31,18 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    // flexDirection: 'row',
     height: 200,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    // padding: 20,
-    // marginVertical: 8,
-    // marginHorizontal: 16,
     marginBottom: 10,
     borderBottomWidth: 1,
     borderColor: 'grey',
   },
-
   img: {
-    // flex: 1,
     height: '100%',
     width: Dimensions.get('window').width,
     resizeMode: 'stretch',
-    // width: 50,
-    // height: 50,
-    // marginRight: 20,
   },
   submit: {
     backgroundColor: Color.theme,
@@ -73,7 +64,6 @@ export default StyleSheet.create({
     height: 50,
     width: '100%',
     backgroundColor: Color.theme,
-    // justifyContent: 'center',
     alignItems: 'center',
     flexDirection: "row",
     paddingHorizontal: 15,
@@ -82,7 +72,6 @@ export default StyleSheet.create({
     width: 55,
     height: 50,
     position: 'absolute',
-    // backgroundColor: "yellow",
     color: '#fff',
     left: 0,
     justifyContent: 'center',
@@ -104,8 +93,6 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: Color.white,
-    // justifyContent: "flex-start",
-    // backgroundColor: "red",
   },
   containerDashboard: {
     flex: 1,
@@ -121,11 +108,9 @@ export default StyleSheet.create({
     width: 30,
     height: 45,
   },
-
   borderStyleHighLighted: {
     borderColor: '#eeeeee',
   },
-
   underlineStyleBase: {
     width: 60,
     height: 60,
@@ -135,7 +120,6 @@ export default StyleSheet.create({
     backgroundColor: '#eeeeee',
     color: '#3cb244',
   },
-
   underlineStyleHighLighted: {
     borderColor: '#03DAC6',
   },
@@ -151,7 +135,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // paddingStart: -100,
   },
   headerCol: {
     flexDirection: 'column',
@@ -164,19 +147,16 @@ export default StyleSheet.create({
     width: 45, height: 45,
     borderRadius: 20,
   },
-
   rightHeaderIcon: {
     width: 25,
     height: 25,
     resizeMode: "contain"
   },
   helpSpacing: { paddingStart: 15, paddingEnd: 15 },
-
   starIcon: {
     width: 20,
     height: 20,
   },
-
   pointContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -196,14 +176,11 @@ export default StyleSheet.create({
     backgroundColor: Color.white,
     height: 175,
     borderRadius: 7,
-
     borderColor: Color.darkBGgray,
     marginStart: 1,
     marginEnd: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // paddingStart: 20,
-    // paddingEnd: 20,
     paddingTop: 6,
     marginBottom: 15,
   },
@@ -214,12 +191,9 @@ export default StyleSheet.create({
     marginTop: 5,
     marginLeft: 5,
     marginRight: 2,
-
     borderColor: Color.darkBGgray,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // paddingStart: 20,
-    // paddingEnd: 20,
     paddingTop: 6,
     marginBottom: 15,
   },
@@ -227,22 +201,18 @@ export default StyleSheet.create({
     backgroundColor: Color.white,
     height: 125,
     borderRadius: 7,
-
     marginTop: 10,
     borderColor: Color.darkBGgray,
-
     marginEnd: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // paddingStart: 20,
-    // paddingEnd: 20,
     paddingTop: 6,
     marginBottom: 15,
   },
   winnercontainer: {
     backgroundColor: Color.white,
     height: 175,
-    width: 130,
+    width: Constant.width / 3.3,
     margin: 3,
     borderRadius: 7,
     paddingTop: 20,
@@ -268,16 +238,17 @@ export default StyleSheet.create({
     shadowColor: Color.bgGray
   },
   winnercontainerfull: {
+    width: Constant.width - 16,
     backgroundColor: Color.white,
     height: 100,
-
     margin: 3,
     borderRadius: 7,
     paddingTop: 20,
     flexDirection: 'row',
-    alignItems: 'center',
+    // alignItems: 'center',
     shadowRadius: 20,
-    shadowColor: Color.bgGray
+    shadowColor: Color.bgGray,
+    // justifyContent:"center"
   },
   pointTypeCol: {
     flex: 1,
@@ -300,14 +271,11 @@ export default StyleSheet.create({
   point_border_container: {
     height: 135,
     marginTop: -90,
-    // marginStart: 100,
-    // paddingStart: 100,
     borderRightWidth: 0.3,
     borderColor: Color.darkBGgray,
   },
   rewardmiddle: {
     flex: 1,
-
     flexDirection: 'column',
     marginBottom: 20,
     marginTop: 10,
@@ -348,8 +316,7 @@ export default StyleSheet.create({
   scrollViewContainerStyle: {
     alignContent: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
-    // height: 600,
+    alignItems: 'center'
   },
   containerSlider: {
     flex: 1,
@@ -358,7 +325,6 @@ export default StyleSheet.create({
     alignContent: 'center',
     backgroundColor: '#FFFFFF',
   },
-
   congratIcon: {
     height: 100,
     width: 100,
