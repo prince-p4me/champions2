@@ -11,25 +11,18 @@ import {
 } from 'react-native';
 import Header from '../../components/Header';
 import Colors from '../../utility/Color';
-import Loader from '../../components/Loader';
 import * as Actions from '../../redux/action';
 
 import Images from '../../utility/Image';
 import Constant from '../../utility/Constant';
-import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
-import i18n from '../../services/i18n';
-import FullButton from '../../components/FullButton';
 
 import { TextRegular, TextThin, TextMedium, TextSemiBold } from '../../components/TextView';
-import TextDevider from '../../components/TextDevider';
-import LinkButton from '../Auth/LinkButton';
 import Sizes from '../../utility/Sizes';
 import Color from '../../utility/Color';
-import ChangeLanguage from '../Auth/ChangeLanguage';
 import { useSelector, useDispatch } from 'react-redux';
 import HTML from "react-native-render-html";
-import SuccessModal from './SuccessModal';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const OfferDetail = ({ route, navigation }) => {
   const { offer } = route.params;
@@ -39,6 +32,7 @@ const OfferDetail = ({ route, navigation }) => {
   const isSuccess = useSelector((state) => state.isSuccess);
   const align = isRtl ? "right" : "left";
   const expired = new Date(offer.expiry_date) < new Date();
+  const noBalance = parseInt(offer.balance) >= parseInt(offer.points);
 
   const redeemOffer = () => {
     let obj = {
@@ -52,7 +46,7 @@ const OfferDetail = ({ route, navigation }) => {
     <View style={{ flex: 1 }}>
       {/* <SuccessModal visible={isSuccess} points={offer.points} /> */}
       <Header title={offer?.offer_name} dashboard={false} back={true} help={true} />
-      <View style={{ flex: 1, backgroundColor: Colors.backgroundColor, padding: 10 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: Colors.backgroundColor, padding: 10 }}>
         <View style={{ backgroundColor: Colors.white, paddingStart: 5 }}>
           <View style={styles.offercontainer} >
             <View style={styles.imgBox}>
@@ -85,14 +79,16 @@ const OfferDetail = ({ route, navigation }) => {
           <View style={styles.btnLine}>
             <TextThin
               text={"Ends on: " + offer.expiry_date} style={[styles.date, { textAlign: !isRtl ? "right" : "left", }]} />
-            <TouchableOpacity style={[styles.redeem, { backgroundColor: Color.theme, }]}
-              onPress={redeemOffer}>
+            <TouchableOpacity style={[styles.redeem, !noBalance && { backgroundColor: Color.text }]}
+              onPress={redeemOffer} disabled={!noBalance || expired}>
               <TextRegular text={I18n.t('redeemnow')}
                 style={{ color: Color.white, fontSize: Sizes.medium }} />
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+        <View style={{ height: 70 }}></View>
+      </ScrollView>
+      <SafeAreaView />
     </View>
   );
 };
@@ -144,6 +140,7 @@ const styles = StyleSheet.create({
     height: 30, width: 120,
     alignItems: 'center', justifyContent: 'center',
     borderRadius: 3,
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+    backgroundColor: Color.theme
   }
 })

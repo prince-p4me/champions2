@@ -333,6 +333,7 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: Color.white
   },
   qrIcon: {
     height: 140,

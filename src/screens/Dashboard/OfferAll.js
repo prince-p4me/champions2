@@ -12,7 +12,7 @@ import * as Navigation from '../../navigation/navigation';
 import OfferLayout from '../../components/OfferLayout';
 
 const OfferAll = props => {
-  const list = useSelector(state => state.getOffers);
+  const list = useSelector(state => state.getBanners);
 
   return (
     <View style={styles.containerDashboard}>

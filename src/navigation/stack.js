@@ -53,10 +53,7 @@ const StackNavigator = () => {
 
   console.log('rendered');
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       {user && user.id ? (
         <>
           <Stack.Screen name="Home" component={Home} />
@@ -80,9 +77,6 @@ const StackNavigator = () => {
         </>
       ) : (
         <>
-          {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
-          {/* <Stack.Screen name="Editprofile" component={EditProfile} />
-          <Stack.Screen name="Profilemain" component={Profilemain} /> */}
           <Stack.Screen name="Landing" component={LandingScreen} />
           <Stack.Screen name="SignIn" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
