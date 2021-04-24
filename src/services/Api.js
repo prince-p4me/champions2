@@ -1,13 +1,13 @@
 import Constants from '../utility/Constant';
-import { store } from '../redux/store';
-import { BackHandler } from 'react-native';
-import { showResponse } from '../utility/Index';
+import {store} from '../redux/store';
+import {BackHandler} from 'react-native';
+import {showResponse} from '../utility/Index';
 
 async function callApi(urlString, body, methodType) {
   console.log('-----------AXIOS  Api request is----------- ');
   console.log('url string ' + urlString);
   console.log('methodType ' + methodType);
-  console.log('body ' + JSON.stringify(body));
+  // console.log('body ' + JSON.stringify(body));
   let headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -119,8 +119,8 @@ export function updateProfileApi(body) {
 export function getAddressList() {
   const state = store.getState();
   let obj = {
-    "user_id": state.getUser.id
-  }
+    user_id: state.getUser.id,
+  };
   console.log('----------Address Api Call ------------------');
   return callApi(Constants.API_URL + 'user_address_list.php', obj, 'POST');
 }
@@ -136,7 +136,6 @@ export function getAppReviews(body) {
   console.log('----------getAppReviews Api Call ------------------');
   return callApi(Constants.API_URL + 'app_feedback_list.php', body, 'GET');
 }
-
 
 export function getRecipes(body) {
   console.log('----------getRecipe Api Call ------------------');

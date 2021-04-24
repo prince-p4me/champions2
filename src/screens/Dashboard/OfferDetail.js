@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -17,76 +17,131 @@ import Images from '../../utility/Image';
 import Constant from '../../utility/Constant';
 import I18n from '../../services/i18n';
 
-import { TextRegular, TextThin, TextMedium, TextSemiBold } from '../../components/TextView';
+import {
+  TextRegular,
+  TextThin,
+  TextMedium,
+  TextSemiBold,
+} from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
 import Color from '../../utility/Color';
-import { useSelector, useDispatch } from 'react-redux';
-import HTML from "react-native-render-html";
-import { ScrollView } from 'react-native-gesture-handler';
+import {useSelector, useDispatch} from 'react-redux';
+import HTML from 'react-native-render-html';
+import {ScrollView} from 'react-native-gesture-handler';
 
-const OfferDetail = ({ route, navigation }) => {
-  const { offer } = route.params;
+const OfferDetail = ({route, navigation}) => {
+  const {offer} = route.params;
   const dispatch = useDispatch();
-  console.log("offer", offer);
-  const isRtl = useSelector((state) => state.isRtl);
-  const isSuccess = useSelector((state) => state.isSuccess);
-  const align = isRtl ? "right" : "left";
+  console.log('offer', offer);
+  const isRtl = useSelector(state => state.isRtl);
+  const isSuccess = useSelector(state => state.isSuccess);
+  const align = isRtl ? 'right' : 'left';
   const expired = new Date(offer.expiry_date) < new Date();
   const noBalance = parseInt(offer.balance) >= parseInt(offer.points);
 
   const redeemOffer = () => {
     let obj = {
-      "offer_id": offer.id,
-      "points": offer.points
-    }
+      offer_id: offer.id,
+      points: offer.points,
+    };
     dispatch(Actions.redeemOffer(obj));
-  }
+  };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       {/* <SuccessModal visible={isSuccess} points={offer.points} /> */}
-      <Header title={offer?.offer_name} dashboard={false} back={true} help={true} />
-      <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: Colors.backgroundColor, padding: 10 }}>
-        <View style={{ backgroundColor: Colors.white, paddingStart: 5 }}>
-          <View style={styles.offercontainer} >
+      <Header
+        title={offer?.offer_name}
+        dashboard={false}
+        back={true}
+        help={true}
+      />
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          backgroundColor: Colors.backgroundColor,
+          padding: 10,
+        }}>
+        <View style={{backgroundColor: Colors.white, paddingStart: 5}}>
+          <View style={styles.offercontainer}>
             <View style={styles.imgBox}>
-              <Image source={Images.iphone} style={{ height: 70, width: 70 }}
+              <Image
+                source={Images.iphone}
+                style={{height: 70, width: 70}}
                 resizeMode="contain"></Image>
             </View>
             <View style={styles.secondSection}>
               <TextMedium
                 text={offer?.product_name}
-                style={{ textAlign: align, fontSize: Sizes.medium, color: Color.text }}
+                style={{
+                  textAlign: align,
+                  fontSize: Sizes.medium,
+                  color: Color.text,
+                }}
               />
               <TextSemiBold
                 text={offer?.offer_name}
-                style={{ textAlign: align, fontSize: Sizes.large, marginTop: 10, color: Color.text }}
+                style={{
+                  textAlign: align,
+                  fontSize: Sizes.large,
+                  marginTop: 10,
+                  color: Color.text,
+                }}
               />
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
                 <TextMedium
-                  text={"On " + offer.points + " Points"}
-                  style={{ textAlign: align, fontSize: Sizes.medium, marginTop: 5, color: Color.semiGold }}
+                  text={'On ' + offer.points + ' Points'}
+                  style={{
+                    textAlign: align,
+                    fontSize: Sizes.medium,
+                    marginTop: 5,
+                    color: Color.semiGold,
+                  }}
                 />
-                <Image source={Images.star} style={{ height: 15, width: 15, alignSelf: 'center', tintColor: Color.semiGold }}
+                <Image
+                  source={Images.star}
+                  style={{
+                    height: 15,
+                    width: 15,
+                    alignSelf: 'center',
+                    tintColor: Color.semiGold,
+                  }}
                   resizeMode="contain"></Image>
               </View>
             </View>
           </View>
-          <TextMedium text={"Description"}
-            style={{ textAlign: align, fontSize: Sizes.medium, color: Color.text }}
+          <TextMedium
+            text={'Description'}
+            style={{
+              textAlign: align,
+              fontSize: Sizes.medium,
+              color: Color.text,
+            }}
           />
-          <HTML source={{ html: offer?.description }} contentWidth={Constant.width} />
+          <HTML
+            source={{html: offer?.description}}
+            contentWidth={Constant.width}
+          />
           <View style={styles.btnLine}>
             <TextThin
-              text={"Ends on: " + offer.expiry_date} style={[styles.date, { textAlign: !isRtl ? "right" : "left", }]} />
-            <TouchableOpacity style={[styles.redeem, !noBalance && { backgroundColor: Color.text }]}
-              onPress={redeemOffer} disabled={!noBalance || expired}>
-              <TextRegular text={I18n.t('redeemnow')}
-                style={{ color: Color.white, fontSize: Sizes.medium }} />
+              text={'Ends on: ' + offer.expiry_date}
+              style={[styles.date, {textAlign: !isRtl ? 'right' : 'left'}]}
+            />
+            <TouchableOpacity
+              style={[
+                styles.redeem,
+                !noBalance && {backgroundColor: Color.text},
+              ]}
+              onPress={redeemOffer}
+              disabled={!noBalance || expired}>
+              <TextRegular
+                text={I18n.t('redeemnow')}
+                style={{color: Color.white, fontSize: Sizes.medium}}
+              />
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ height: 70 }}></View>
+        <View style={{height: 70}}></View>
       </ScrollView>
       <SafeAreaView />
     </View>
@@ -95,30 +150,31 @@ const OfferDetail = ({ route, navigation }) => {
 
 export default OfferDetail;
 
-
 const styles = StyleSheet.create({
   btnLine: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 25
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 25,
   },
   descText: {
     fontSize: Sizes.medium,
-    color: Color.text, marginTop: 10
+    color: Color.text,
+    marginTop: 10,
   },
   secondSection: {
-    flex: 1, height: "100%",
+    flex: 1,
+    height: '100%',
     paddingTop: 5,
   },
   title: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   date: {
     fontSize: Sizes.regular,
     color: Color.parrot,
-    marginEnd: 5
+    marginEnd: 5,
   },
   offercontainer: {
     backgroundColor: Color.white,
@@ -129,18 +185,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     shadowRadius: 20,
-    shadowColor: Color.bgGray
+    shadowColor: Color.bgGray,
   },
   imgBox: {
-    height: 70, width: 100,
-    justifyContent: "flex-end",
-    alignItems: "center"
+    height: 70,
+    width: 100,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   redeem: {
-    height: 30, width: 120,
-    alignItems: 'center', justifyContent: 'center',
+    height: 30,
+    width: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 3,
-    alignSelf: "flex-end",
-    backgroundColor: Color.theme
-  }
-})
+    alignSelf: 'flex-end',
+    backgroundColor: Color.theme,
+  },
+});
