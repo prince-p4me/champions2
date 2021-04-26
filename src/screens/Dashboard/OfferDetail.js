@@ -49,7 +49,7 @@ const OfferDetail = ({route, navigation}) => {
 
   return (
     <View style={{flex: 1}}>
-      {/* <SuccessModal visible={isSuccess} points={offer.points} /> */}
+      <SuccessModal visible={isSuccess} points={offer.points} />
       <Header
         title={offer?.offer_name}
         dashboard={false}
