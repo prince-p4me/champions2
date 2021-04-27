@@ -211,15 +211,23 @@ export default StyleSheet.create({
   },
   winnercontainer: {
     backgroundColor: Color.white,
-    height: 175,
+    height: 130,
     width: Constant.width / 3.3,
     margin: 3,
     borderRadius: 7,
     paddingTop: 20,
     flexDirection: 'column',
     alignItems: 'center',
-    shadowRadius: 20,
-    shadowColor: Color.bgGray
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    borderWidth: 1,
+    borderColor: Color.border,
+    elevation: 3,
   },
   pointwoncontainer: {
     backgroundColor: "#F1FFF2",
@@ -246,8 +254,16 @@ export default StyleSheet.create({
     paddingTop: 20,
     flexDirection: 'row',
     // alignItems: 'center',
-    shadowRadius: 20,
-    shadowColor: Color.bgGray,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    borderWidth: 1,
+    borderColor: Color.border,
+    elevation: 3
     // justifyContent:"center"
   },
   pointTypeCol: {

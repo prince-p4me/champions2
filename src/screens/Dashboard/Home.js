@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {View, ScrollView, Image, Button, SafeAreaView} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, Image, Button, SafeAreaView } from 'react-native';
 import Header from '../../components/Header';
 import {
   TextBold,
@@ -23,13 +23,13 @@ import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
 
 import SuccessModal from './SuccessModal';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import OtpScreen from '../Auth/Otp';
 import LandingScreen from '../Auth/Landing';
 import Profilemain from './Profilemain';
 // import { NavigationEvents } from 'react-navigation';
-import {Icon} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
@@ -48,12 +48,12 @@ class HomeScreen extends React.Component {
 
   checkProps = () => {
     if (this.props.route.params && this.props.route.params.data) {
-      let {data} = this.props.route.params;
+      let { data } = this.props.route.params;
       console.log('scan data', data);
       console.log('executing data');
       data = data.split(',');
       console.log('scan data array', data);
-      let obj = {qr_id: data[0], points: data[1]};
+      let obj = { qr_id: data[0], points: data[1] };
       this.setState(
         {
           points: obj.points,
@@ -67,79 +67,23 @@ class HomeScreen extends React.Component {
     }
   };
 
-  renderStaticData = () => {
-    return (
-      <>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <View style={{flexDirection: 'column', flex: 1}}>
-            <TextBold
-              text={I18n.t('recipe')}
-              style={{fontSize: Sizes.large, marginLeft: 10}}
-            />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              Navigation.navigate('recipeall');
-            }}>
-            <View style={{alignItems: 'center', flexDirection: 'row'}}>
-              <TextRegular text={I18n.t('Seeall')} />
-              <Icon name="keyboard-arrow-right" size={30} iconStyle={{}} />
-            </View>
-          </TouchableOpacity>
-        </View>
-        <ScrollView horizontal={true}>
-          <RecipeLayout />
-          <RecipeLayout />
-          <RecipeLayout />
-          <RecipeLayout />
-          <RecipeLayout />
-        </ScrollView>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <View style={{flexDirection: 'column', flex: 1}}>
-            <TextBold
-              text={I18n.t('reviews')}
-              style={{fontSize: Sizes.large, marginLeft: 10}}
-            />
-          </View>
-          <View style={{alignItems: 'center', flexDirection: 'row'}}>
-            <TextRegular text={I18n.t('Seeall')} />
-            <Icon name="keyboard-arrow-right" size={30} iconStyle={{}} />
-          </View>
-        </View>
-        <ScrollView horizontal={false}>
-          <FeedbackLayout />
-        </ScrollView>
-      </>
-    );
-  };
-
   render() {
-    let {visible, list} = this.props;
-    let {points} = this.state;
+    let { visible, list } = this.props;
+    let { points } = this.state;
     return (
       <View style={styles.containerDashboard}>
         <Header title={'Home'} dashboard={true} />
         <ScrollView
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
-          {/* <Winnerlayout /> */}
-          <QRCodeContainer />
+          <Winnerlayout />
           <PointsContainer />
-          {/* <ReviewLayout /> */}
+          <QRCodeContainer />
           <OfferLayout />
-          {/* <RecipeLayout horizontal={true} /> */}
-          <View style={{height: 50}}></View>
+          <RecipeLayout horizontal={true} />
+          <ReviewLayout />
+          <View style={{ height: 50 }}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
       </View>
