@@ -30,30 +30,13 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {showToast} from '../../utility/Index';
 import HTML from 'react-native-render-html';
 
-const RecipieDetail = ({route, navigation}) => {
-  // let item= {
-  //   created_at: '2021-03-31 01:28:43',
-  //   description:
-  //     '<p>Festivals are the occasions which serve to unite people from different cultures and backgrounds. Diwali is one of the most popular festivals in the country. Be it any corner of India, Diwali is celebrated with joy and enthusiasm.</p>\r\n\r\n<p>Sweets are the most important part of the festivals in India. We are divided by cultures but united by food and taste.</p>\r\n\r\n<p>This Diwali let&rsquo;s have a glance at the Traditional Diwali Desserts across India.</p>\r\n',
-  //   id: '20',
-  //   image: 'recipes/606432bb7e04a1617179323.png',
-  //   logo: 'recipes/606432bb7e5581617179323.png',
-  //   title: 'TRADITIONAL DIWALI DESSERTS ACROSS INDIA',
-  // };
-
-  const {item} = route.params;
-
-  const list = useSelector(state => state.getBanners);
-  const isRtl = useSelector(state => state.isRtl);
+const SendFeedback = ({item, navigation}) => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const user = useSelector(state => state.getUser);
   const [star, setStar] = useState(1);
+  const [isFocus, setFocus] = useState(false);
   console.log('user', user);
-
-  console.log({item: item});
-  const content =
-    'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.';
 
   const sentQuery = () => {
     if (!query) {
@@ -69,11 +52,12 @@ const RecipieDetail = ({route, navigation}) => {
     dispatch(Actions.sendRecipeReview(obj));
   };
 
-  const SendFeedback = () => {
-    return (
-      <View style={{flex: 1, padding: 16, paddingTop: 25, marginBottom: 70}}>
+  return (
+    <View
+      style={[{flex: 1}, isFocus ? {marginBottom: 260} : {marginBottom: 40}]}>
+      <View style={{flex: 1, padding: 16, paddingTop: 25}}>
         <TextBold
-          text={I18n.t('reviews')}
+          text={I18n.t('rate')}
           style={{
             fontSize: Sizes.medium,
             alignSelf: 'flex-start',
@@ -87,9 +71,9 @@ const RecipieDetail = ({route, navigation}) => {
               onPress={() => setStar(value)}
               activeOpacity={0.9}>
               <Icon
-                name="star"
+                name={star >= value ? 'star' : 'star-o'}
                 size={30}
-                color={star >= value ? Color.orange : Color.border}></Icon>
+                color={star >= value ? Colors.orange : Colors.text}></Icon>
             </TouchableOpacity>
           ))}
         </View>
@@ -109,7 +93,13 @@ const RecipieDetail = ({route, navigation}) => {
           maxLength={500}
           multiline={true}
           returnKeyType="done"
-          onSubmitEditing={sentQuery}></TextInput>
+          onSubmitEditing={sentQuery}
+          onFocus={() => {
+            setFocus(true);
+          }}
+          onBlur={() => {
+            setFocus(false);
+          }}></TextInput>
         <View
           style={{
             width: '100%',
@@ -127,7 +117,33 @@ const RecipieDetail = ({route, navigation}) => {
           btnStyle={{width: '80%', marginHorizontal: '10%', marginTop: 30}}
         />
       </View>
-    );
+    </View>
+  );
+};
+
+const RecipieDetail = ({route, navigation}) => {
+  const {item} = route.params;
+
+  const list = useSelector(state => state.getBanners);
+  const isRtl = useSelector(state => state.isRtl);
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState('');
+  const user = useSelector(state => state.getUser);
+  const [star, setStar] = useState(1);
+  console.log('user', user);
+  const content =
+    'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.';
+
+  const sentQuery = () => {
+    if (!query) {
+      showToast('Please describe your query . . .');
+      return;
+    }
+    let obj = {
+      mobile: user.mobile,
+      query,
+    };
+    dispatch(Actions.help(obj));
   };
 
   return (
@@ -169,14 +185,12 @@ const RecipieDetail = ({route, navigation}) => {
               onPress={() => Navigation.goBack()}
             />
           </View>
-          {<SendFeedback />}
+          {<SendFeedback item={item} />}
         </ScrollView>
       </View>
     </View>
   );
 };
-
-export default RecipieDetail;
 
 const styles = StyleSheet.create({
   input: {
@@ -217,7 +231,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
   },
-  containerDashboard: {flex: 1},
+  containerDashboard: {flex: 1, backgroundColor: Color.white},
   container: {
     height: Constant.height,
     width: Constant.width,
@@ -226,3 +240,4 @@ const styles = StyleSheet.create({
     left: 0,
   },
 });
+export default RecipieDetail;

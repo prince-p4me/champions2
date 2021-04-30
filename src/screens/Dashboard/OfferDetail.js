@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -25,13 +25,13 @@ import {
 } from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
 import Color from '../../utility/Color';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import HTML from 'react-native-render-html';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import SuccessModal from './SuccessModal';
 
-const OfferDetail = ({ route, navigation }) => {
-  const { offer } = route.params;
+const OfferDetail = ({route, navigation}) => {
+  const {offer} = route.params;
   const dispatch = useDispatch();
   console.log('offer', offer);
   const isRtl = useSelector(state => state.isRtl);
@@ -49,7 +49,7 @@ const OfferDetail = ({ route, navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <SuccessModal visible={isSuccess} points={offer.points} />
       <Header
         title={offer?.offer_name}
@@ -63,12 +63,12 @@ const OfferDetail = ({ route, navigation }) => {
           backgroundColor: Colors.backgroundColor,
           padding: 10,
         }}>
-        <View style={{ backgroundColor: Colors.white, paddingStart: 5 }}>
+        <View style={{backgroundColor: Colors.white, paddingStart: 5}}>
           <View style={styles.offercontainer}>
             <View style={styles.imgBox}>
               <Image
                 source={Images.iphone}
-                style={{ height: 70, width: 70 }}
+                style={{height: 70, width: 70}}
                 resizeMode="contain"></Image>
             </View>
             <View style={styles.secondSection}>
@@ -89,7 +89,7 @@ const OfferDetail = ({ route, navigation }) => {
                   color: Color.text,
                 }}
               />
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
                 <TextMedium
                   text={'On ' + offer.points + ' Points'}
                   style={{
@@ -120,36 +120,34 @@ const OfferDetail = ({ route, navigation }) => {
             }}
           />
           <HTML
-            source={{ html: offer?.description }}
+            source={{html: offer?.description}}
             contentWidth={Constant.width}
           />
           <View style={styles.btnLine}>
             <TextThin
               text={'Ends on: ' + offer.expiry_date}
-              style={[styles.date, { textAlign: !isRtl ? 'right' : 'left' }]}
+              style={[styles.date, {textAlign: !isRtl ? 'right' : 'left'}]}
             />
             <TouchableOpacity
               style={[
                 styles.redeem,
-                !noBalance && { backgroundColor: Color.text },
+                !noBalance && {backgroundColor: Color.text},
               ]}
               onPress={redeemOffer}
               disabled={!noBalance || expired}>
               <TextRegular
                 text={I18n.t('redeemnow')}
-                style={{ color: Color.white, fontSize: Sizes.medium }}
+                style={{color: Color.white, fontSize: Sizes.medium}}
               />
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ height: 70 }}></View>
+        <View style={{height: 70}}></View>
       </ScrollView>
       <SafeAreaView />
     </View>
   );
 };
-
-export default OfferDetail;
 
 const styles = StyleSheet.create({
   btnLine: {
@@ -204,3 +202,4 @@ const styles = StyleSheet.create({
     backgroundColor: Color.theme,
   },
 });
+export default OfferDetail;
