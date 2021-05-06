@@ -362,10 +362,7 @@ function* getRecipes({type, payload}) {
 
 function* getWinners({type, payload}) {
   try {
-    // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-
     let response = yield call(Apiservice.getWinners, payload); //calling Api
-
     console.log('response in saga', JSON.stringify(response));
     yield put({type: Types.SET_LOADING, payload: false}); //hide loading
     if (response && response.status) {
@@ -374,6 +371,22 @@ function* getWinners({type, payload}) {
   } catch (error) {
     console.log(error);
     yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+  }
+}
+
+function* getTransactionCategory({type, payload}) {
+  if (payload.user_id) {
+    try {
+      let response = yield call(Apiservice.getTransactionByCategory, payload); //calling Api
+      console.log('response in saga', JSON.stringify(response));
+      yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+      if (response && response.status) {
+        yield put({type: Types.TRANSACTION_CATEGORY, payload: response.data}); //hide loading
+      } else showResponse(response);
+    } catch (error) {
+      console.log(error);
+      yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+    }
   }
 }
 
@@ -400,4 +413,5 @@ export default function* watcher() {
   yield takeLatest(Types.GET_REVIEWS, getAppReviews);
   yield takeLatest(Types.GET_RECIPES, getRecipes);
   yield takeLatest(Types.GET_WINNERS, getWinners);
+  yield takeLatest(Types.TRANSACTION_CATEGORY, getTransactionCategory);
 }

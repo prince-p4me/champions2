@@ -10,89 +10,117 @@ import {
 } from 'react-native';
 import Colors from '../../utility/Color';
 import congrat from '../../assets/imgs/amazon.png';
-import Images from "../../utility/Image";
-import { TextMedium, TextSemiBold } from '../../components/TextView';
+import Images from '../../utility/Image';
+import {TextMedium, TextSemiBold} from '../../components/TextView';
 import i18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 import Sizes from '../../utility/Sizes';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Modal from 'react-native-modal';
-import Clipboard from "@react-native-community/clipboard";
-import Toast from "react-native-simple-toast";
+import Clipboard from '@react-native-community/clipboard';
+import Toast from 'react-native-simple-toast';
 import * as Actions from '../../redux/action';
+import Constant from '../../utility/Constant';
 
-const SuccessModal = (props) => {
-  const { visible, close, points } = props;
-  const isRtl = useSelector((state) => state.isRtl);
+const SuccessModal = props => {
+  const {visible, close, points, offerDetail} = props;
+  const isRtl = useSelector(state => state.isRtl);
   const dispatch = useDispatch();
 
+  console.log({offerDetail: offerDetail});
   const renderRefer = () => {
     return (
       <>
         <TextMedium
           text={i18n.t('earn_point')}
-          style={[styles.congrats, { color: Colors.black }]}
+          style={[styles.congratsEarn, {color: Colors.text}]}
         />
 
-        <TouchableOpacity style={styles.dashButton} onPress={async () => {
-          await Clipboard.getString("https://www.google.com/");
-          Toast.showWithGravity("Copied successfully . . .", Toast.LONG, Toast.BOTTOM);
-        }}>
-          <View style={{ flex: 1 }}>
+        <TouchableOpacity
+          style={styles.dashButton}
+          onPress={async () => {
+            await Clipboard.getString('https://10Xchampions/8768732/');
+            Toast.showWithGravity(
+              'Copied successfully . . .',
+              Toast.LONG,
+              Toast.BOTTOM,
+            );
+          }}>
+          <View style={{flex: 1}}>
             <TextMedium
-              text="https://www.google.com/"
-              style={[styles.congrats, { color: Colors.darkBGgray }]}
+              text="https://10Xchampions/8768732/"
+              style={[styles.congratsLink, {color: Colors.darkBGgray}]}
             />
           </View>
           <View style={styles.copySection}>
             <TextMedium
               text={i18n.t('copy')}
-              style={[styles.congrats, { color: 'blue' }]}
+              style={[styles.congratsLink, {color: 'blue'}]}
             />
           </View>
         </TouchableOpacity>
       </>
-    )
-  }
+    );
+  };
 
   return (
-    <Modal isVisible={visible} style={{ margin: 0 }}>
-      <SafeAreaView style={{ backgroundColor: Colors.parrot }} />
-      <View style={{ flex: 1, backgroundColor: Colors.bgColor }}>
+    <Modal isVisible={visible} style={{margin: 0}}>
+      <SafeAreaView style={{backgroundColor: Colors.parrot}} />
+      <View style={{flex: 1, backgroundColor: Colors.bgColor}}>
         <View style={styles.firstSection}>
-          <TouchableOpacity onPress={() => dispatch(Actions.setSuccessModal(false))}
-            style={[styles.closeBtn, isRtl ? { left: 20 } : { right: 20 }]} >
+          <TouchableOpacity
+            onPress={() => dispatch(Actions.setSuccessModal(false))}
+            style={[styles.closeBtn, isRtl ? {left: 20} : {right: 20}]}>
             <Image source={Images.close} style={styles.closeImage}></Image>
           </TouchableOpacity>
-          <ImageBackground source={Images.gift} resizeMode="contain"
-            style={{ width: "100%", height: 250, justifyContent: "flex-end" }}>
-            <View style={{ width: '100%', alignItems: 'center', position: "absolute", bottom: -70 }}>
+          <ImageBackground
+            source={
+              offerDetail && offerDetail.image
+                ? {uri: Constant.IMAGE_URL + offerDetail.image}
+                : Images.gift
+            }
+            resizeMode="contain"
+            style={{
+              width: '100%',
+              justifyContent: 'flex-end',
+              height: 150,
+              marginTop: 40,
+            }}>
+            <View
+              style={{
+                width: '100%',
+                alignItems: 'center',
+                position: 'absolute',
+                bottom: -70,
+              }}>
               <TextMedium text={i18n.t('congrat')} style={styles.congrats} />
               <TextMedium text={i18n.t('won_points')} style={styles.congrats} />
-              <View style={styles.congratsText}>
-                <TextSemiBold text={points} style={[styles.congrats, { fontSize: Sizes.double }]} />
-                <View style={{ width: 5 }}></View>
+              <View style={[styles.congratsText, styles.congratTxt]}>
+                <TextSemiBold
+                  text={points}
+                  style={[styles.congrats, {fontSize: Sizes.double}]}
+                />
+                <View style={{width: 5}}></View>
                 <Image source={Images.star} style={styles.starImage}></Image>
               </View>
             </View>
           </ImageBackground>
-          <View style={{ flex: 1, width: '60%', justifyContent: "center" }}>
+          <View style={{flex: 1, width: '80%', justifyContent: 'center'}}>
             <FullButton
               text={i18n.t('go_redeem')}
-              btnStyle={[styles.outlineBtn, { position: "absolute", bottom: 60 }]}
+              btnStyle={[styles.outlineBtn, {position: 'absolute', bottom: 60}]}
               textStyle={styles.outlineBtnText}
               onPress={() => {
                 console.log('going to redeem history');
                 // close();
-                dispatch(Actions.setSuccessModal(false))
+                dispatch(Actions.setSuccessModal(false));
               }}></FullButton>
           </View>
         </View>
         <View style={styles.secondSection}>
+          {renderRefer()}
 
-          {/* {renderRefer()} */}
-
-          <View style={{ width: '60%' }}>
+          <View style={{width: '60%'}}>
             <FullButton
               text={i18n.t('go_reward')}
               bgColor={Colors.theme}
@@ -100,7 +128,7 @@ const SuccessModal = (props) => {
               onPress={() => {
                 console.log('going to redeem history');
                 // close();
-                dispatch(Actions.setSuccessModal(false))
+                dispatch(Actions.setSuccessModal(false));
               }}></FullButton>
           </View>
         </View>
@@ -111,14 +139,16 @@ const SuccessModal = (props) => {
 
 const styles = StyleSheet.create({
   closeImage: {
-    width: 24, height: 24,
+    width: 24,
+    height: 24,
     tintColor: Colors.white,
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
   starImage: {
-    width: 20, height: 20,
+    width: 20,
+    height: 20,
     tintColor: Colors.semiGold,
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
   congratImage: {
     width: 100,
@@ -128,11 +158,11 @@ const styles = StyleSheet.create({
   closeBtn: {
     position: 'absolute',
     top: 20,
-    zIndex: 100
+    zIndex: 100,
   },
   firstSection: {
     backgroundColor: Colors.green,
-    flex: 7,
+    flex: 3,
     alignItems: 'center',
     // justifyContent: 'space-between',
     borderBottomRightRadius: 30,
@@ -166,12 +196,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    // marginTop: 0,
+    // marginBottom: -20,
   },
   congrats: {
     textAlign: 'center',
-    fontSize: Sizes.medium,
+    fontSize: Sizes.double,
     color: Colors.white,
+    marginTop: 0,
+  },
+  congratsLink: {
+    textAlign: 'center',
+    fontSize: Sizes.semiLarge,
+    color: Colors.white,
+  },
+  congratsEarn: {
+    textAlign: 'center',
+    fontSize: Sizes.semiLarge,
+    color: Colors.white,
+  },
+  congratTxt: {
+    // marginVertical: 0,
+    marginTop: 0,
   },
   outlineBtn: {
     borderColor: Colors.white,

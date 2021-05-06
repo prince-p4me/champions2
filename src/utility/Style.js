@@ -1,4 +1,4 @@
-import { View, StyleSheet, Dimensions } from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import Color from './Color';
 import Constant from './Constant';
 
@@ -65,7 +65,7 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: Color.theme,
     alignItems: 'center',
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 15,
   },
   drawerButton: {
@@ -83,7 +83,7 @@ export default StyleSheet.create({
     color: Color.white,
     letterSpacing: 1,
   },
-  safeArea: { backgroundColor: Color.theme, width: '100%' },
+  safeArea: {backgroundColor: Color.theme, width: '100%'},
   center: {
     width: '100%',
     flex: 1,
@@ -98,7 +98,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Color.bgGray,
   },
-  sideIcon: { width: 28, height: 15, tintColor: Color.white },
+  sideIcon: {width: 28, height: 15, tintColor: Color.white},
   noData: {
     flex: 1,
     justifyContent: 'center',
@@ -144,15 +144,16 @@ export default StyleSheet.create({
     paddingStart: 40,
   },
   profileIcon: {
-    width: 45, height: 45,
+    width: 45,
+    height: 45,
     borderRadius: 20,
   },
   rightHeaderIcon: {
     width: 25,
     height: 25,
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
-  helpSpacing: { paddingStart: 15, paddingEnd: 15 },
+  helpSpacing: {paddingStart: 15, paddingEnd: 15},
   starIcon: {
     width: 20,
     height: 20,
@@ -170,7 +171,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     marginStart: 10,
     marginBottom: 10,
-    width: 200
+    width: 200,
   },
   pointTypesContainer: {
     backgroundColor: Color.white,
@@ -218,7 +219,7 @@ export default StyleSheet.create({
     paddingTop: 20,
     flexDirection: 'column',
     alignItems: 'center',
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -230,20 +231,22 @@ export default StyleSheet.create({
     elevation: 3,
   },
   pointwoncontainer: {
-    backgroundColor: "#F1FFF2",
+    backgroundColor: '#F1FFF2',
     height: 175,
     width: 150,
     margin: 3,
     borderRadius: 15,
     shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
+    shadowOffset: {width: 1, height: 1},
     shadowOpacity: 100,
     shadowRadius: 1,
     paddingTop: 20,
     flexDirection: 'column',
     alignItems: 'center',
     shadowRadius: 20,
-    shadowColor: Color.bgGray
+    shadowColor: Color.bgGray,
+    marginHorizontal: 10,
+    marginVertical: 10,
   },
   winnercontainerfull: {
     width: Constant.width - 16,
@@ -254,7 +257,7 @@ export default StyleSheet.create({
     paddingTop: 20,
     flexDirection: 'row',
     // alignItems: 'center',
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -263,7 +266,7 @@ export default StyleSheet.create({
     shadowRadius: 3,
     borderWidth: 1,
     borderColor: Color.border,
-    elevation: 3
+    elevation: 3,
     // justifyContent:"center"
   },
   pointTypeCol: {
@@ -311,13 +314,13 @@ export default StyleSheet.create({
   winnerimage: {
     width: 80,
     height: 80,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   qrContainer: {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Color.white
+    backgroundColor: Color.white,
   },
   qrIcon: {
     height: 140,
@@ -332,7 +335,7 @@ export default StyleSheet.create({
   scrollViewContainerStyle: {
     alignContent: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   containerSlider: {
     flex: 1,
@@ -348,5 +351,46 @@ export default StyleSheet.create({
   starIconSuccess: {
     width: 40,
     height: 40,
+  },
+
+  menuContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    marginStart: 10,
+    marginBottom: 10,
+  },
+  menuIcon: {
+    width: 60,
+    height: 60,
+    marginHorizontal: 10,
+    marginVertical: 20,
+  },
+  menuTypeContainer: {
+    backgroundColor: Color.white,
+    height: 175,
+    borderRadius: 7,
+    // borderColor: Color.darkBGgray,
+    marginStart: 20,
+    marginEnd: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 6,
+    marginBottom: 15,
+    // borderTopColor: Color.bgGray,
+    // borderBottomColor: Color.bgGray,
+    borderTopWidth: 0.3,
+    borderBottomWidth: 0.3,
+    borderColor: Color.darkBGgray,
+    marginVertical: 20,
+  },
+  menuTypeColMiddle: {
+    flex: 1,
+
+    flexDirection: 'column',
+    marginBottom: 20,
+    marginTop: 10,
+    marginStart: 10,
+    alignItems: 'center',
   },
 });

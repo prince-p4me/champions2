@@ -151,3 +151,12 @@ export function sendRecipeReview(body) {
   console.log('----------Send RecipeReview Api Call ------------------');
   return callApi(Constants.API_URL + 'recipe_review_add.php', body, 'POST');
 }
+
+export function getTransactionByCategory(body) {
+  console.log('----------Get Transaction Category Api Call ------------------');
+  return callApi(
+    Constants.API_URL + 'transaction_by_category.php',
+    body,
+    'POST',
+  );
+}

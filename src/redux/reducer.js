@@ -125,3 +125,12 @@ export const getWinners = (state = [], action) => {
       return state;
   }
 };
+
+export const getTransactionByCategory = (state = [], action) => {
+  switch (action.type) {
+    case Types.TRANSACTION_CATEGORY:
+      return action.payload;
+    default:
+      return [];
+  }
+};

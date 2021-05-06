@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, ScrollView, Image, Button, SafeAreaView} from 'react-native';
+import {
+  View,
+  ScrollView,
+  Image,
+  Button,
+  SafeAreaView,
+  Alert,
+} from 'react-native';
 import Header from '../../components/Header';
 import {
   TextBold,
@@ -33,16 +40,54 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
+import Geolocation from '@react-native-community/geolocation';
+import {
+  request,
+  PERMISSIONS,
+  RESULTS,
+  requestLocationAccuracy,
+} from 'react-native-permissions';
+import MenuContainer from '../../components/MenuContainer';
+
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       points: '',
+      latitude: '',
+      longitude: '',
     };
     this.props.navigation.addListener('focus', () => {
       // do something
       console.log('rendered again and checking the props');
       this.checkProps();
+    });
+  }
+
+  async componentDidMount() {
+    const granted = await request(
+      Platform.select({
+        ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+      }),
+    );
+    if (granted) {
+      this.getLocationPermissions();
+    } else {
+      Alert.alert('Permission Not Granted.');
+    }
+  }
+
+  getLocationPermissions() {
+    Geolocation.getCurrentPosition(info => {
+      this.setState(
+        {
+          latitude: info.coords.latitude,
+          longitude: info.coords.longitude,
+        },
+        () => {
+          console.log({state: this.state});
+        },
+      );
     });
   }
 
@@ -70,8 +115,11 @@ class HomeScreen extends React.Component {
   render() {
     let {visible, list} = this.props;
     let {points} = this.state;
+    // const isSuccess = useSelector(state => state.isSuccess);
+
     return (
       <View style={styles.containerDashboard}>
+        {/* <SuccessModal visible={isSuccess} points={offer.points} /> */}
         <Header title={'Home'} dashboard={true} />
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
@@ -80,6 +128,8 @@ class HomeScreen extends React.Component {
           <Winnerlayout />
           <PointsContainer />
           <QRCodeContainer />
+
+          <MenuContainer />
           <OfferLayout />
           <RecipeLayout horizontal={true} />
           <ReviewLayout />

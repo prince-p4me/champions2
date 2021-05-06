@@ -160,4 +160,11 @@ export function redeemOffer(payload) {
   };
 }
 
+export function getTransactionCategory(payload) {
+  return {
+    type: Types.TRANSACTION_CATEGORY,
+    payload,
+  };
+}
+
 // add another actions further

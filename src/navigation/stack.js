@@ -27,8 +27,10 @@ import AddEditAddress from '../screens/Dashboard/AddEditAddress';
 import OfferDetail from '../screens/Dashboard/OfferDetail';
 import RecipieAll from '../screens/Dashboard/RecipieAll';
 import RecipieDetail from '../screens/Dashboard/RecipieDetail';
+import PointsDetail from '../screens/Dashboard/PointsDetail';
 // import SplashScreen from '../screens/Auth/Splash';
 import * as Actions from '../redux/action';
+// import MyRewards from '../screens/Dashboard/MyRewards';
 
 const Stack = createStackNavigator();
 
@@ -57,6 +59,7 @@ const StackNavigator = () => {
       {user && user.id ? (
         <>
           {/* <Stack.Screen name="RecipieDetail" component={RecipieDetail} /> */}
+          {/* <Stack.Screen name="PointsDetail" component={PointsDetail} /> */}
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Scan" component={ScanQrCode} />
           <Stack.Screen name="OfferAll" component={OfferAll} />
@@ -75,6 +78,8 @@ const StackNavigator = () => {
           <Stack.Screen name="AddEditAddress" component={AddEditAddress} />
           <Stack.Screen name="RecipieAll" component={RecipieAll} />
           <Stack.Screen name="RecipieDetail" component={RecipieDetail} />
+          <Stack.Screen name="PointsDetail" component={PointsDetail} />
+          <Stack.Screen name="MyReward" component={MyReward} />
         </>
       ) : (
         <>

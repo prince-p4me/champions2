@@ -50,7 +50,13 @@ const OfferDetail = ({route, navigation}) => {
 
   return (
     <View style={{flex: 1}}>
-      <SuccessModal visible={isSuccess} points={offer.points} />
+      <SuccessModal
+        visible={isSuccess}
+        points={offer.points}
+        offerDetail={offer}
+      />
+
+      {/* <SuccessModal visible={true} points={500} offerDetail={offer} /> */}
       <Header
         title={offer?.offer_name}
         dashboard={false}
@@ -67,7 +73,7 @@ const OfferDetail = ({route, navigation}) => {
           <View style={styles.offercontainer}>
             <View style={styles.imgBox}>
               <Image
-                source={Images.iphone}
+                source={{uri: Constant.IMAGE_URL + offer.image}}
                 style={{height: 70, width: 70}}
                 resizeMode="contain"></Image>
             </View>
@@ -131,10 +137,12 @@ const OfferDetail = ({route, navigation}) => {
             <TouchableOpacity
               style={[
                 styles.redeem,
-                !noBalance && {backgroundColor: Color.text},
+                // !noBalance && {backgroundColor: Color.text},
               ]}
               onPress={redeemOffer}
-              disabled={!noBalance || expired}>
+              // disabled={!noBalance || expired}
+              // disabled={expired}
+            >
               <TextRegular
                 text={I18n.t('redeemnow')}
                 style={{color: Color.white, fontSize: Sizes.medium}}

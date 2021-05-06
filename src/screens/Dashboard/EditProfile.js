@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -19,16 +19,16 @@ import Images from '../../utility/Image';
 import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import BottomTile from '../../components/BottomTile';
 import Color from '../../utility/Color';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import TextInput from '../../components/TextInput';
 import ProfilePicModal from '../../components/ProfilePicModal';
 
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-import { showToast } from '../../utility/Index';
+import {showToast} from '../../utility/Index';
 import DatePicker from 'react-native-datepicker';
 
 const EditProfile = () => {
@@ -93,7 +93,7 @@ const EditProfile = () => {
       });
     } else if (imageType == 'gallery') {
       launchImageLibrary(option, response => {
-        console.log({ response: response });
+        console.log({response: response});
         if (response.didCancel) {
           showToast('Please select your profile picture');
           return;
@@ -130,40 +130,46 @@ const EditProfile = () => {
     };
 
     dispatch(Actions.updateProfile(userInfo));
-  }
+  };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Header back={true}
+    <View style={{flex: 1}}>
+      <Header
+        back={true}
         title={I18n.t('editdetails')}
         dashboard={false}
         help={true}
       />
-      <ScrollView contentContainerStyle={[
-        styles.container,
-        { padding: 14, backgroundColor: Colors.white },
-      ]}>
-        <TextInput value={name}
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          {padding: 14, backgroundColor: Colors.white},
+        ]}>
+        <TextInput
+          value={name}
           lable="Full Name"
           icon="user-o"
           placeholder="Full name of user"
           onChangeText={full_name => setName(full_name)}
         />
-        <TextInput value={mobile}
+        <TextInput
+          value={mobile}
           lable="Mobile Number"
           icon="mobile-phone"
           placeholder="+91-**********"
           keyboardType="phone-pad"
           onChangeText={mobile => setMobile(mobile)}
         />
-        <TextInput value={email}
+        <TextInput
+          value={email}
           lable="Email"
           icon="envelope"
           placeholder="abc@your-domain.com"
           keyboardType="email-address"
           onChangeText={email => setEmail(email)}
         />
-        <TextInput value={dob}
+        <TextInput
+          value={dob}
           lable="Date of Birth"
           icon="calendar-o"
           placeholder="03-JAN-1994"
@@ -172,7 +178,8 @@ const EditProfile = () => {
             datePickerRef.current.onPressDate();
           }}
         />
-        <TextInput value={aadhar}
+        <TextInput
+          value={aadhar}
           lable="Aadhar Card ID Number"
           icon="dashboard"
           iconColor="rgb(203,86,91)"
@@ -180,7 +187,8 @@ const EditProfile = () => {
           keyboardType="email-address"
           onChangeText={aadhar => setAadhar(aadhar)}
         />
-        <TextInput value={responseImg && responseImg.fileName}
+        <TextInput
+          value={responseImg && responseImg.fileName}
           lable="Upload Aadhar ID Photo"
           icon="address-card-o"
           placeholder="aadhar_photo.png"
@@ -192,7 +200,8 @@ const EditProfile = () => {
         />
       </ScrollView>
 
-      <ProfilePicModal visible={profilePicVisible}
+      <ProfilePicModal
+        visible={profilePicVisible}
         onPress={imageType => {
           console.log(imageType);
           if (imageType == 'camera' || imageType == 'gallery') {
@@ -203,8 +212,9 @@ const EditProfile = () => {
         }}
       />
 
-      <DatePicker date={dob}
-        style={{ width: 0, height: 0, opacity: 0 }}
+      <DatePicker
+        date={dob}
+        style={{width: 0, height: 0, opacity: 0}}
         ref={datePickerRef}
         mode="date"
         placeholder="select date"
@@ -218,11 +228,8 @@ const EditProfile = () => {
         }}
       />
 
-      <BottomTile
-        title={I18n.t('uploadprofile')}
-        onPress={updateProfile}
-      />
-      <SafeAreaView style={{ backgroundColor: Colors.parrot }}></SafeAreaView>
+      <BottomTile title={I18n.t('uploadprofile')} onPress={updateProfile} />
+      <SafeAreaView style={{backgroundColor: Colors.parrot}}></SafeAreaView>
     </View>
   );
 };

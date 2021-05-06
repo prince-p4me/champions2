@@ -79,11 +79,11 @@
     "editdetails": "Edit Details",
     "uploadprofile": "Update Profile Details",
     "congrat": "Congratulations!",
-    "won_points": "you won points on scan of \n Rice Packet",
+    "won_points": "You have won",
     "Redeem_POINT": "REDEEM POINTS FOR EXCITING OFFERS",
     "earn_point": "Earn 100 Points everytimes by reffering \n your friends",
     "go_reward": "Go to My Rewards Points",
-    "go_redeem": "Go to My Redeem History",
+    "go_redeem": "REDEEM POINTS FOR EXCITING OFFER",
     "copy": "Copy",
     "redeemnow": "Redeem Now",
     "resend": "Resend OTP in ",
@@ -95,5 +95,11 @@
     "camera": "Camera",
     "full_name": "Full Name",
     "hi": "Hi",
-    "rate": "Rate"
+    "rate": "Rate",
+    "earned_won": "Earned/Won",
+    "my_points": "My Points",
+    "transactions": "Transactions",
+    "my_rewards": "My Reward",
+    "my_dashboard": "My Dashboard",
+    "refer_friend": "Refer a friend"
 }

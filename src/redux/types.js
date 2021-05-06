@@ -31,3 +31,4 @@ export const GET_RECIPES = 'GET_RECIPES';
 export const WINNERS = 'WINNERS';
 export const GET_WINNERS = 'GET_WINNERS';
 export const SEND_FEEDBACK = 'SEND_FEEDBACK';
+export const TRANSACTION_CATEGORY = 'TRANSACTION_CATEGORY';
