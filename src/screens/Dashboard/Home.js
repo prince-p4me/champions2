@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -30,13 +30,13 @@ import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
 
 import SuccessModal from './SuccessModal';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import OtpScreen from '../Auth/Otp';
 import LandingScreen from '../Auth/Landing';
 import Profilemain from './Profilemain';
 // import { NavigationEvents } from 'react-navigation';
-import {Icon} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
@@ -73,7 +73,7 @@ class HomeScreen extends React.Component {
     if (granted) {
       this.getLocationPermissions();
     } else {
-      Alert.alert('Permission Not Granted.');
+      Alert.alert("Alert !", 'Permission Not Granted.');
     }
   }
 
@@ -85,7 +85,7 @@ class HomeScreen extends React.Component {
           longitude: info.coords.longitude,
         },
         () => {
-          console.log({state: this.state});
+          console.log({ state: this.state });
         },
       );
     });
@@ -93,12 +93,12 @@ class HomeScreen extends React.Component {
 
   checkProps = () => {
     if (this.props.route.params && this.props.route.params.data) {
-      let {data} = this.props.route.params;
+      let { data } = this.props.route.params;
       console.log('scan data', data);
       console.log('executing data');
       data = data.split(',');
       console.log('scan data array', data);
-      let obj = {qr_id: data[0], points: data[1]};
+      let obj = { qr_id: data[0], points: data[1] };
       this.setState(
         {
           points: obj.points,
@@ -113,8 +113,8 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let {visible, list} = this.props;
-    let {points} = this.state;
+    let { visible, list } = this.props;
+    let { points } = this.state;
     // const isSuccess = useSelector(state => state.isSuccess);
 
     return (
@@ -122,7 +122,7 @@ class HomeScreen extends React.Component {
         {/* <SuccessModal visible={isSuccess} points={offer.points} /> */}
         <Header title={'Home'} dashboard={true} />
         <ScrollView
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
@@ -133,7 +133,7 @@ class HomeScreen extends React.Component {
           <OfferLayout />
           <RecipeLayout horizontal={true} />
           <ReviewLayout />
-          <View style={{height: 50}}></View>
+          <View style={{ height: 50 }}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
       </View>

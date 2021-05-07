@@ -70,8 +70,11 @@ const Winnerlayout = () => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
-          flexGrow: 1, alignItems: "center",
-          justifyContent: "center"
+          // flexGrow: 1,
+          // alignItems: "flex-start",
+          justifyContent: "center",
+          paddingHorizontal: 7
+          // backgroundColor: "red"
         }}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item.id}

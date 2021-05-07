@@ -1,4 +1,4 @@
-import {View, StyleSheet, Dimensions} from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import Color from './Color';
 import Constant from './Constant';
 
@@ -83,7 +83,7 @@ export default StyleSheet.create({
     color: Color.white,
     letterSpacing: 1,
   },
-  safeArea: {backgroundColor: Color.theme, width: '100%'},
+  safeArea: { backgroundColor: Color.theme, width: '100%' },
   center: {
     width: '100%',
     flex: 1,
@@ -98,7 +98,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Color.bgGray,
   },
-  sideIcon: {width: 28, height: 15, tintColor: Color.white},
+  sideIcon: { width: 28, height: 15, tintColor: Color.white },
   noData: {
     flex: 1,
     justifyContent: 'center',
@@ -153,7 +153,7 @@ export default StyleSheet.create({
     height: 25,
     resizeMode: 'contain',
   },
-  helpSpacing: {paddingStart: 15, paddingEnd: 15},
+  helpSpacing: { paddingStart: 15, paddingEnd: 15 },
   starIcon: {
     width: 20,
     height: 20,
@@ -237,7 +237,7 @@ export default StyleSheet.create({
     margin: 3,
     borderRadius: 15,
     shadowColor: '#000',
-    shadowOffset: {width: 1, height: 1},
+    shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 100,
     shadowRadius: 1,
     paddingTop: 20,
@@ -371,16 +371,16 @@ export default StyleSheet.create({
     height: 175,
     borderRadius: 7,
     // borderColor: Color.darkBGgray,
-    marginStart: 20,
-    marginEnd: 20,
+    // marginStart: 20,
+    // marginEnd: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: 6,
     marginBottom: 15,
     // borderTopColor: Color.bgGray,
     // borderBottomColor: Color.bgGray,
-    borderTopWidth: 0.3,
-    borderBottomWidth: 0.3,
+    // borderTopWidth: 0.3,
+    // borderBottomWidth: 0.3,
     borderColor: Color.darkBGgray,
     marginVertical: 20,
   },
