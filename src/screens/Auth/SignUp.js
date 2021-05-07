@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  Alert,
+  Platform,
 } from 'react-native';
 import Header from '../../components/Header';
 import Colors from '../../utility/Color';
@@ -30,6 +32,9 @@ import ChangeLanguage from './ChangeLanguage';
 import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Toast from 'react-native-simple-toast';
+
+import {request, PERMISSIONS} from 'react-native-permissions';
+import SocialLogin from '../../components/SocialLogin';
 
 const SignupScreen = () => {
   const [mobile, setMobile] = useState('');
@@ -131,6 +136,8 @@ const SignupScreen = () => {
           textColor={Colors.white}
           bgColor={Colors.theme}
         />
+
+        {/* <SocialLogin /> */}
       </KeyboardAvoidingView>
 
       {/* <TextDevider text={I18n.t('signupwith')}></TextDevider> */}

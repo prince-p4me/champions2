@@ -22,6 +22,8 @@ import Toast from 'react-native-simple-toast';
 import * as Actions from '../../redux/action';
 import Constant from '../../utility/Constant';
 
+import * as Navigation from '../../navigation/navigation';
+
 const SuccessModal = props => {
   const {visible, close, points, offerDetail} = props;
   const isRtl = useSelector(state => state.isRtl);
@@ -129,6 +131,7 @@ const SuccessModal = props => {
                 console.log('going to redeem history');
                 // close();
                 dispatch(Actions.setSuccessModal(false));
+                Navigation.navigate('MyReward');
               }}></FullButton>
           </View>
         </View>

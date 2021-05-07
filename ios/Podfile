@@ -18,6 +18,8 @@ target 'champions' do
     :hermes_enabled => false
   )
 
+  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-google-signin/google-signin'
+
   target 'championsTests' do
     inherit! :complete
     # Pods for testing

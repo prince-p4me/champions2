@@ -4,13 +4,14 @@ export default Colors = {
   black: 'black',
   text: '#3d3d3d',
   bgColor: '#f8f8f8',
-  lightGreen: "rgb(244,255,243)",
-  parrot: "rgb(96,176,83)",
+  lightGreen: 'rgb(244,255,243)',
+  parrot: 'rgb(96,176,83)',
   bgGray: '#f5f5f5',
   darkBGgray: '#6e6e6e',
   semiGold: '#c2ad7f',
   orange: 'orange',
   green: '#3cb244',
   lightgrey: '#6AB8B8B8',
-  border: "rgb(182,181,181)"
+  border: 'rgb(182,181,181)',
+  blue: 'blue',
 };

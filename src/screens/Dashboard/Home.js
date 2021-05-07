@@ -40,22 +40,20 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
-import Geolocation from '@react-native-community/geolocation';
-import {
-  request,
-  PERMISSIONS,
-  RESULTS,
-  requestLocationAccuracy,
-} from 'react-native-permissions';
+import {request, PERMISSIONS} from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
+import {useSelector, useDispatch} from 'react-redux';
+import NotificationSounds, {
+  playSampleSound,
+} from 'react-native-notification-sounds';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       points: '',
-      latitude: '',
-      longitude: '',
+      isSuccess: false,
+      soundsList: [],
     };
     this.props.navigation.addListener('focus', () => {
       // do something
@@ -64,32 +62,33 @@ class HomeScreen extends React.Component {
     });
   }
 
-  async componentDidMount() {
-    const granted = await request(
-      Platform.select({
-        ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
-      }),
-    );
-    if (granted) {
-      this.getLocationPermissions();
-    } else {
-      Alert.alert('Permission Not Granted.');
-    }
-  }
-
-  getLocationPermissions() {
-    Geolocation.getCurrentPosition(info => {
-      this.setState(
+  componentDidMount() {
+    let self = this;
+    NotificationSounds.getNotifications('notification').then(soundsList => {
+      self.setState(
         {
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
+          soundsList: soundsList,
         },
         () => {
-          console.log({state: this.state});
+          // console.log({state733333333090000: self.state.soundsList[1]});
+          // playSampleSound(self.state.soundsList[1]);
         },
       );
     });
   }
+
+  // async componentDidMount() {
+  //   const granted = await request(
+  //     Platform.select({
+  //       ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+  //     }),
+  //   );
+  //   if (granted) {
+  //     this.getLocationPermissions();
+  //   } else {
+  //     Alert.alert('Permission Not Granted.');
+  //   }
+  // }
 
   checkProps = () => {
     if (this.props.route.params && this.props.route.params.data) {
@@ -99,12 +98,20 @@ class HomeScreen extends React.Component {
       data = data.split(',');
       console.log('scan data array', data);
       let obj = {qr_id: data[0], points: data[1]};
+
+      // let successType = false;
+      // if (data.length) {
+      //   successType = true;
+      // }
       this.setState(
         {
           points: obj.points,
+          // isSuccess: successType,
         },
         () => {
           this.props.scanQr(obj);
+          // playSampleSound(this.state.soundsList[1]);
+          // playSampleSound(this.state.soundsList[1]);
         },
       );
     } else {
@@ -113,13 +120,19 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let {visible, list} = this.props;
+    let {visible, list, isSuccess} = this.props;
     let {points} = this.state;
-    // const isSuccess = useSelector(state => state.isSuccess);
 
+    if (isSuccess) {
+      if (this.state.soundsList && this.state.soundsList.length) {
+        setTimeout(() => {
+          playSampleSound(this.state.soundsList[1]);
+        }, 3000);
+      }
+    }
     return (
       <View style={styles.containerDashboard}>
-        {/* <SuccessModal visible={isSuccess} points={offer.points} /> */}
+        <SuccessModal visible={isSuccess} points={points} />
         <Header title={'Home'} dashboard={true} />
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
@@ -145,6 +158,7 @@ const mapStateToProps = state => ({
   list: state.getBanners,
   visible: state.isSuccess,
   isRtl: state.isRtl,
+  isSuccess: state.isSuccess,
 });
 
 const mapDispatchToProps = dispatch => {
