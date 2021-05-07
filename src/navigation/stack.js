@@ -84,7 +84,7 @@ const StackNavigator = () => {
         </>
       ) : (
         <>
-          <Stack.Screen name="Landing" component={TutorialScreen} />
+          <Stack.Screen name="Landing" component={LandingScreen} />
           <Stack.Screen name="SignIn" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Otp" component={OtpScreen} />
