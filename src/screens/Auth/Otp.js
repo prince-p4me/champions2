@@ -90,12 +90,16 @@ const OtpScreen = props => {
         <FullButton
           onPress={() => {
             // Navigation.navigate('SignUp');
-            const obj = {
+            let obj = {
               mobile: isLogin ? mobile : mobile.mobile,
               name: isLogin ? name : mobile.name,
               otp: code,
               state: latitude + ',' + longitude,
+              loginType: 0,
             };
+            if (isLogin) {
+              obj.loginType = 1;
+            }
             dispatch(Actions.verifyOtp(obj));
           }}
           text={i18n.t(isLogin ? 'login' : 'signup2')}

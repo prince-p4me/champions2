@@ -16,6 +16,10 @@ const getHomepageData = () => {
   store.dispatch(Actions.getReviews());
 };
 
+const getAddress = () => {
+  store.dispatch(Actions.getAddressList());
+};
+
 function* getPoints({type, payload}) {
   try {
     // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
@@ -37,8 +41,19 @@ function* verifyOtp({type, payload}) {
     console.log('response in saga', JSON.stringify(response));
     showResponse(response);
     yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+
+    // Navigation.navigate('Tutorial', {
+    //   userInfo: response,
+    // });
+
     if (response && response.status) {
-      yield put({type: Types.USER, payload: response}); //hide loading
+      if (payload.loginType == 1) {
+        yield put({type: Types.USER, payload: response});
+      } else {
+        Navigation.navigate('Tutorial', {
+          userInfo: response,
+        });
+      }
     }
   } catch (error) {
     console.log(error);
@@ -283,6 +298,8 @@ function* getAddressList({type, payload}) {
     showResponse(response);
     if (response && response.status) {
       yield put({type: Types.ADDRESS_LIST, payload: response.data});
+    } else {
+      yield put({type: Types.ADDRESS_LIST, payload: []});
     }
   } catch (error) {
     yield put({type: Types.SET_LOADING, payload: false}); //hide loading
@@ -317,7 +334,8 @@ function* redeemOffer({type, payload}) {
     showResponse(response);
 
     if (response && response.status) {
-      Navigation.goBack();
+      // Navigation.goBack();
+      getHomepageData();
       yield put({type: Types.IS_SUCCESS, payload: true}); //hide loading
     }
   } catch (error) {
@@ -390,6 +408,44 @@ function* getTransactionCategory({type, payload}) {
   }
 }
 
+function* AddAdress({type, payload}) {
+  try {
+    yield put({type: Types.SET_LOADING, payload: true}); //hide loading
+
+    let response;
+    if (payload.address_id && payload.address_id != '') {
+      response = yield call(Apiservice.UpdateAddress, payload);
+    } else {
+      response = yield call(Apiservice.AddAdress, payload);
+      response = yield call(Apiservice.UpdateAddress, payload); //calling Api
+    }
+    console.log('response in saga', JSON.stringify(response));
+    yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+    if (response && response.status) {
+      getAddress();
+      Navigation.goBack();
+    } else showResponse(response);
+  } catch (error) {
+    console.log(error);
+    yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+  }
+}
+
+function* DeleteAddress({type, payload}) {
+  try {
+    yield put({type: Types.SET_LOADING, payload: true}); //hide loading
+    let response = yield call(Apiservice.DeleteAddress, payload); //calling Api
+    console.log('response in saga', JSON.stringify(response));
+    yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+    if (response && response.status) {
+      getAddress();
+    } else showResponse(response);
+  } catch (error) {
+    console.log(error);
+    yield put({type: Types.SET_LOADING, payload: false}); //hide loading
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -414,4 +470,6 @@ export default function* watcher() {
   yield takeLatest(Types.GET_RECIPES, getRecipes);
   yield takeLatest(Types.GET_WINNERS, getWinners);
   yield takeLatest(Types.TRANSACTION_CATEGORY, getTransactionCategory);
+  yield takeLatest(Types.ADD_ADDRESS, AddAdress);
+  yield takeLatest(Types.DELETE_ADDRESS, DeleteAddress);
 }

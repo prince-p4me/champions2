@@ -13,6 +13,8 @@ import {
   getReviews,
   getWinners,
   getTransactionByCategory,
+  getOfferDetail,
+  getStates,
 } from './reducer';
 import getListSaga from './saga';
 import {all, fork} from 'redux-saga/effects';
@@ -35,6 +37,8 @@ const rootReducer = combineReducers({
   getRecipes,
   getWinners,
   getTransactionByCategory,
+  getOfferDetail,
+  getStates,
 });
 
 //creating, applying sagas

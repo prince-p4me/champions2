@@ -42,7 +42,12 @@ const OfferLayout = () => {
             <TouchableOpacity
               style={styles.offercontainer}
               key={index}
-              onPress={() => Navigation.navigate('OfferDetail', {offer: item})}>
+              onPress={() => {
+                console.log({item10377777:item});
+
+                Navigation.navigate('OfferDetail', {offer: item})
+              
+              }}>
               <View style={styles.imgBox}>
                 <Image
                   source={{uri: Constant.IMAGE_URL + item.image}}
@@ -99,7 +104,11 @@ const OfferLayout = () => {
                       // !noBalance && {backgroundColor: Color.text},
                     ]}
                     onPress={() =>
-                      Navigation.navigate('OfferDetail', {offer: item})
+                      {
+                        console.log({item103:item});
+                        Navigation.navigate('OfferDetail', {offer: item})
+                      }
+                      
                     }>
                     <TextRegular
                       text={I18n.t('redeemnow')}

@@ -25,6 +25,8 @@ export default Images = {
   privacypolicy: require("../assets/profileimg/Privacy&Policy.png"),
   edit: require("../assets/profileimg/edit.png"),
   contactus: require("../assets/profileimg/contactus.png"),
+  congrat: require("../assets/imgs/congrat.png"),
+  congrats2: require("../assets/imgs/congrats2.png"),
   logout: require("../assets/profileimg/Log-out.png"),
   dust: require("../assets/imgs/sparkling magical dust particles.png"),
 }

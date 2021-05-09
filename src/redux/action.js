@@ -167,4 +167,32 @@ export function getTransactionCategory(payload) {
   };
 }
 
+export function updateUser(payload) {
+  return {
+    type: Types.USER,
+    payload,
+  };
+}
+
+export function offerDetail(payload) {
+  return {
+    type: Types.OFFER_DETAIL,
+    payload,
+  };
+}
+
+export function AddAdress(payload) {
+  return {
+    type: Types.ADD_ADDRESS,
+    payload,
+  };
+}
+
+export function DeleteAddress(payload) {
+  return {
+    type: Types.DELETE_ADDRESS,
+    payload,
+  };
+}
+
 // add another actions further

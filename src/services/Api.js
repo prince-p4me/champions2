@@ -160,3 +160,18 @@ export function getTransactionByCategory(body) {
     'POST',
   );
 }
+
+export function AddAdress(body) {
+  console.log('----------Add Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_address_add.php', body, 'POST');
+}
+
+export function UpdateAddress(body) {
+  console.log('----------Update Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_address_update.php', body, 'POST');
+}
+
+export function DeleteAddress(body) {
+  console.log('----------Delete Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_address_delete.php', body, 'POST');
+}

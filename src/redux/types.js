@@ -32,3 +32,7 @@ export const WINNERS = 'WINNERS';
 export const GET_WINNERS = 'GET_WINNERS';
 export const SEND_FEEDBACK = 'SEND_FEEDBACK';
 export const TRANSACTION_CATEGORY = 'TRANSACTION_CATEGORY';
+export const OFFER_DETAIL = 'OFFER_DETAIL';
+export const STATE_LIST = 'STATE_LIST';
+export const ADD_ADDRESS = 'ADD_ADDRESS';
+export const DELETE_ADDRESS = 'DELETE_ADDRESS';

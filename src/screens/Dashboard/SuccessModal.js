@@ -28,8 +28,12 @@ const SuccessModal = props => {
   const {visible, close, points, offerDetail} = props;
   const isRtl = useSelector(state => state.isRtl);
   const dispatch = useDispatch();
+  const data = useSelector(state => state.getPoints);
+  // const offerDetail = useSelector(state => state.getOfferDetail);
 
-  console.log({offerDetail: offerDetail});
+  console.log({props333331: props});
+
+  console.log({offerDetail352222222: offerDetail});
   const renderRefer = () => {
     return (
       <>
@@ -71,7 +75,11 @@ const SuccessModal = props => {
       <View style={{flex: 1, backgroundColor: Colors.bgColor}}>
         <View style={styles.firstSection}>
           <TouchableOpacity
-            onPress={() => dispatch(Actions.setSuccessModal(false))}
+            onPress={() => {
+              dispatch(Actions.setSuccessModal(false));
+              dispatch(Actions.offerDetail(null));
+              Navigation.navigate('Home');
+            }}
             style={[styles.closeBtn, isRtl ? {left: 20} : {right: 20}]}>
             <Image source={Images.close} style={styles.closeImage}></Image>
           </TouchableOpacity>
@@ -85,15 +93,16 @@ const SuccessModal = props => {
             style={{
               width: '100%',
               justifyContent: 'flex-end',
-              height: 150,
-              marginTop: 40,
+              height: 120,
+              marginTop: 50,
+              marginBottom: 20,
             }}>
             <View
               style={{
                 width: '100%',
                 alignItems: 'center',
                 position: 'absolute',
-                bottom: -70,
+                bottom: -85,
               }}>
               <TextMedium text={i18n.t('congrat')} style={styles.congrats} />
               <TextMedium text={i18n.t('won_points')} style={styles.congrats} />
@@ -115,7 +124,7 @@ const SuccessModal = props => {
               onPress={() => {
                 console.log('going to redeem history');
                 // close();
-                dispatch(Actions.setSuccessModal(false));
+                // dispatch(Actions.setSuccessModal(false));
               }}></FullButton>
           </View>
         </View>
@@ -130,8 +139,9 @@ const SuccessModal = props => {
               onPress={() => {
                 console.log('going to redeem history');
                 // close();
+                dispatch(Actions.offerDetail(null));
                 dispatch(Actions.setSuccessModal(false));
-                Navigation.navigate('MyReward');
+                Navigation.navigate('MyReward', {data});
               }}></FullButton>
           </View>
         </View>
@@ -186,7 +196,7 @@ const styles = StyleSheet.create({
   },
   dashButton: {
     flexDirection: 'row',
-    width: '80%',
+    width: '90%',
     height: 45,
     borderWidth: 1,
     borderStyle: 'dashed',
@@ -194,13 +204,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.darkBGgray,
     overflow: 'hidden',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   congratsText: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 0,
+    // paddingBottom: 20,
     // marginBottom: -20,
+    // marginVertical: 10,
   },
   congrats: {
     textAlign: 'center',

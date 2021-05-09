@@ -140,7 +140,7 @@ const Profilemain = props => {
     return (
       <>
         <TouchableOpacity
-          disabled={true}
+          disabled={false}
           style={styles.closeImage}
           onPress={() => Navigation.navigate('Address')}>
           <Image
@@ -178,7 +178,7 @@ const Profilemain = props => {
         </TouchableOpacity>
         <View style={styles.line} />
         <TouchableOpacity
-          disabled={true}
+          disabled={false}
           style={styles.closeImage}
           onPress={() => Navigation.navigate('Editprofile')}>
           <Image
@@ -222,9 +222,7 @@ const Profilemain = props => {
           onPress={item => {
             if (item && item.code) {
               dispatch(Actions.setLanguage(item.code));
-              // dispatch(Actions.setRtl(true));
               dispatch(Actions.setRtl(item.code == 'ur'));
-
               I18n.locale = item.code;
               setTimeout(() => {
                 RNRestart.Restart();
@@ -357,7 +355,7 @@ const Profilemain = props => {
         </View>
 
         <TouchableOpacity
-          disabled={true}
+          disabled={false}
           style={{
             width: 80,
             justifyContent: 'center',

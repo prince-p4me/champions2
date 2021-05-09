@@ -47,6 +47,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import NotificationSounds, {
   playSampleSound,
 } from 'react-native-notification-sounds';
+
+import RNLocalNotifications from 'react-native-local-notifications';
+
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -63,18 +66,24 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
-    NotificationSounds.getNotifications('notification').then(soundsList => {
-      self.setState(
-        {
-          soundsList: soundsList,
-        },
-        () => {
-          // console.log({state733333333090000: self.state.soundsList[1]});
-          // playSampleSound(self.state.soundsList[1]);
-        },
-      );
-    });
+    RNLocalNotifications.createNotification(
+      1,
+      'Notification',
+      'notification',
+      'default',
+    );
+    // let self = this;
+    // NotificationSounds.getNotifications('notification').then(soundsList => {
+    //   self.setState(
+    //     {
+    //       soundsList: soundsList,
+    //     },
+    //     () => {
+    //       // console.log({state733333333090000: self.state.soundsList[1]});
+    //       // playSampleSound(self.state.soundsList[1]);
+    //     },
+    //   );
+    // });
   }
 
   // async componentDidMount() {
@@ -124,11 +133,18 @@ class HomeScreen extends React.Component {
     let {points} = this.state;
 
     if (isSuccess) {
-      if (this.state.soundsList && this.state.soundsList.length) {
-        setTimeout(() => {
-          playSampleSound(this.state.soundsList[1]);
-        }, 3000);
-      }
+      // if (this.state.soundsList && this.state.soundsList.length) {
+      setTimeout(() => {
+        // playSampleSound(this.state.soundsList[1]);
+
+        RNLocalNotifications.createNotification(
+          1,
+          'Notification',
+          'notification',
+          'default',
+        );
+      }, 3000);
+      // }
     }
     return (
       <View style={styles.containerDashboard}>
