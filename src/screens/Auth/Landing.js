@@ -46,7 +46,7 @@ const LandingScreen = props => {
           <FullButton
             onPress={() => Navigation.navigate('SignIn')}
             text={I18n.t('login')}></FullButton>
-
+          
           <FullButton
             onPress={() => Navigation.navigate('SignUp')}
             text={I18n.t('signup')}

@@ -101,5 +101,7 @@
     "transactions": "Transactions",
     "my_rewards": "My Reward",
     "my_dashboard": "My Dashboard",
-    "refer_friend": "Refer a friend"
+    "refer_friend": "Refer a friend",
+    "sele_state": "Select State",
+    "saveAddress": "Save Address"
 }

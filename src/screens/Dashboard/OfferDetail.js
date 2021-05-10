@@ -30,23 +30,62 @@ import HTML from 'react-native-render-html';
 import {ScrollView} from 'react-native-gesture-handler';
 import SuccessModal from './SuccessModal';
 
+import NotificationSounds, {
+  playSampleSound,
+} from 'react-native-notification-sounds';
+
+import RNLocalNotifications from 'react-native-local-notifications';
+
 const OfferDetail = ({route, navigation}) => {
   const {offer} = route.params;
+  const {offerDetail3} = route.params;
+
   const dispatch = useDispatch();
   console.log('offer', offer);
+
+  console.log('offer detail');
+
+  console.log({offer: offer});
+
   const isRtl = useSelector(state => state.isRtl);
   const isSuccess = useSelector(state => state.isSuccess);
   const align = isRtl ? 'right' : 'left';
   const expired = new Date(offer.expiry_date) < new Date();
   const noBalance = parseInt(offer.balance) >= parseInt(offer.points);
 
+  const [soundsList, setSoundsList] = useState(null);
+
   const redeemOffer = () => {
     let obj = {
       offer_id: offer.id,
       points: offer.points,
     };
+
     dispatch(Actions.redeemOffer(obj));
+    // dispatch(Actions.setSuccessModal(true));
+    setTimeout(() => {
+      dispatch(Actions.offerDetail(offer));
+    }, 400);
+    // setSuccess(true);
+
+    if (isSuccess) {
+      setTimeout(() => {
+        // playSampleSound(soundsList[1]);
+        RNLocalNotifications.createNotification(
+          1,
+          'Notification',
+          'notification',
+          'default',
+        );
+      }, 2500);
+    }
   };
+
+  useEffect(() => {
+    NotificationSounds.getNotifications('notification').then(soundsList => {
+      setSoundsList(soundsList);
+    });
+  }, []);
 
   return (
     <View style={{flex: 1}}>
@@ -54,6 +93,7 @@ const OfferDetail = ({route, navigation}) => {
         visible={isSuccess}
         points={offer.points}
         offerDetail={offer}
+        offerDetail2={offerDetail3}
       />
 
       {/* <SuccessModal visible={true} points={500} offerDetail={offer} /> */}
