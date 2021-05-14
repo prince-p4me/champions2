@@ -3,6 +3,16 @@ import Color from './Color';
 import Constant from './Constant';
 
 export default StyleSheet.create({
+  cardView: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   dialCode: {
     width: 50,
     height: 45,
@@ -231,22 +241,24 @@ export default StyleSheet.create({
     elevation: 3,
   },
   pointwoncontainer: {
-    backgroundColor: '#F1FFF2',
+    backgroundColor: Color.white,
     height: 175,
     width: 150,
-    margin: 3,
-    borderRadius: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 100,
-    shadowRadius: 1,
+    margin: 12,
+    borderWidth: 1,
+    borderColor: Color.border,
+    // borderRadius: 15,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 1, height: 1 },
+    // shadowOpacity: 100,
+    // shadowRadius: 1,
     paddingTop: 20,
     flexDirection: 'column',
     alignItems: 'center',
-    shadowRadius: 20,
-    shadowColor: Color.bgGray,
-    marginHorizontal: 10,
-    marginVertical: 10,
+    // shadowRadius: 20,
+    // shadowColor: Color.bgGray,
+    // marginHorizontal: 10,
+    // marginVertical: 10,
   },
   winnercontainerfull: {
     width: Constant.width - 16,

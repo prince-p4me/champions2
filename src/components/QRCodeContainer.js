@@ -10,9 +10,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
 import Sizes from "../utility/Sizes";
 
-const QRCodeContainer = () => {
+const QRCodeContainer = props => {
+  const { bgColor } = props;
   return (
-    <View style={styles.qrContainer}>
+    <View style={[styles.qrContainer, bgColor && { backgroundColor: bgColor }]}>
       <TouchableOpacity
         onPress={() => {
           Navigation.navigate('Scan');
@@ -22,11 +23,11 @@ const QRCodeContainer = () => {
 
       <TextBold
         text={i18n.t('scanfor')}
-        style={{ textAlign: 'center', fontSize: Sizes.large,marginTop:10 }}
+        style={{ textAlign: 'center', fontSize: Sizes.large, marginTop: 10 }}
       />
       <TextThin
         text={i18n.t('wonmorepoints')}
-        style={{ textAlign: 'center', fontSize: Sizes.large,marginTop:10 }}
+        style={{ textAlign: 'center', fontSize: Sizes.large, marginTop: 10 }}
       />
     </View>
   );

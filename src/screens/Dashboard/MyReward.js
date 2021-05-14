@@ -1,44 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import {View, ScrollView, Image, FlatList} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 import Header from '../../components/Header';
 import {
-  TextBold,
   TextRegular,
-  TextSemiBold,
-  TextThin,
 } from '../../components/TextView';
-import styles from '../../utility/Style';
-import Imagess from '../../utility/Image';
-import {useSelector, useDispatch} from 'react-redux';
-import SliderImg from '../../components/SliderImg';
+import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../../services/i18n';
-import Sizes from '../../utility/Sizes';
 
-import PointsContainer from '../../components/PointsContainer';
 import RewardPointlayout from '../../components/RewardPointlayout';
 import PointsWonLayout from '../../components/PointsWonLayout';
 import QRCodeContainer from '../../components/QRCodeContainer';
-import Winnerlayout from '../../components/Winnerlayout';
-import RewardLayout from '../../components/RewardLayout';
-import FeedbackLayout from '../../components/FeedbackLayout';
-import OfferLayout from '../../components/OfferLayout';
-import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
 
-import SuccessModal from './SuccessModal';
-import {connect} from 'react-redux';
-import OtpScreen from '../Auth/Otp';
-import LandingScreen from '../Auth/Landing';
-import Profilemain from './Profilemain';
 // import { NavigationEvents } from 'react-navigation';
-import {Icon} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import * as Navigation from '../../navigation/navigation';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Color from '../../utility/Color';
+import Constant from '../../utility/Constant';
 
 // class MyReward extends React.Component {
-const MyReward = ({route, navigation, props}) => {
-  const {data} = route.params;
+const MyReward = ({ route, navigation, props }) => {
+  const { data } = route.params;
   // render() {
   const [transactionType, setTransactionType] = useState('QR Scan');
   const transactionList = useSelector(state => state.getTransactionByCategory);
@@ -59,84 +40,49 @@ const MyReward = ({route, navigation, props}) => {
     };
     dispatch(Actions.getTransactionCategory(obj));
   }, []);
-  console.log({ListTransaction: transactionList});
+
+  console.log({ ListTransaction: transactionList });
   return (
-    <View style={[styles.containerDashboard, {backgroundColor: '#F1FFF2'}]}>
+    <View style={{ flex: 1, backgroundColor: Color.lightGreen }}>
       <Header title={'My Reward'} dashboard={false} back={true} />
       <RewardPointlayout />
 
-      <QRCodeContainer />
-      <ScrollView>
-        <View style={{backgroundColor: '#fff', flex: 1, margin: 10}}>
-          <View
-            style={{
-              backgroundColor: '#fff',
-              flexDirection: 'row',
-              height: 60,
-              alignItems: 'center',
-            }}>
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <TouchableOpacity
-                onPress={() => {
-                  setTransactionType('QR Scan');
-                  getTransaction('QR Scan');
-                }}>
-                <TextRegular
-                  text={i18n.t('EarnedWon')}
-                  style={{textAlign: 'center'}}
-                />
+      <QRCodeContainer bgColor={Color.lightGreen} />
+      <View style={styles.buttons}>
+        <TouchableOpacity
+          style={[styles.button, transactionType == 'QR Scan' && {
+            borderColor: Color.parrot
+          }]}
+          onPress={() => {
+            setTransactionType('QR Scan');
+            getTransaction('QR Scan');
+          }}>
+          <TextRegular
+            text={i18n.t('EarnedWon')}
+            style={{ textAlign: 'center' }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, transactionType == 'Redeemed' && {
+          borderColor: Color.parrot
+        }]}
+          onPress={() => {
+            setTransactionType('Redeemed');
+            getTransaction('Redeemed');
+          }}>
+          <TextRegular
+            text={i18n.t('redeem')}
+            style={{ textAlign: 'center' }}
+          />
+        </TouchableOpacity>
+      </View>
 
-                {transactionType == 'QR Scan' && (
-                  <View
-                    style={{
-                      height: 3,
-                      backgroundColor: '#135338',
-                      width: 100,
-                      marginTop: 10,
-                    }}></View>
-                )}
-              </TouchableOpacity>
-            </View>
-
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <TouchableOpacity
-                onPress={() => {
-                  setTransactionType('Redeemed');
-                  getTransaction('Redeemed');
-                }}>
-                <TextRegular
-                  text={i18n.t('redeem')}
-                  style={{textAlign: 'center'}}
-                />
-                {transactionType == 'Redeemed' && (
-                  <View
-                    style={{
-                      height: 3,
-                      backgroundColor: '#135338',
-                      width: 100,
-                      marginTop: 10,
-                    }}></View>
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View
-            style={{
-              height: 0.3,
-              backgroundColor: '#6AB8B8B8',
-              width: '100%',
-              opacity: 50,
-            }}></View>
-
-          <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-            {/* <PointsWonLayout />
+      <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+        {/* <PointsWonLayout />
             <PointsWonLayout /> */}
 
-            <PointsWonLayout />
-            {/* <PointsWonLayout /> */}
-          </View>
-        </View>
-      </ScrollView>
+        <PointsWonLayout />
+        {/* <PointsWonLayout /> */}
+      </View>
     </View>
   );
   // }
@@ -144,3 +90,20 @@ const MyReward = ({route, navigation, props}) => {
 
 // export default connect(mapStateToProps, mapDispatchToProps)(MyReward);
 export default MyReward;
+
+const styles = StyleSheet.create({
+  buttons: {
+    margin: 10,
+    width: Constant.width - 20,
+    backgroundColor: Color.white,
+    flexDirection: 'row',
+    height: 60,
+  },
+  button: {
+    width: (Constant.width - 20) / 2,
+    flex: 1, justifyContent: "center",
+    alignItems: "center",
+    borderBottomWidth: 5,
+    borderColor: Color.white
+  }
+})
