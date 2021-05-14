@@ -6076,11 +6076,6 @@ react-native-loading-spinner-overlay@^2.0.0:
   dependencies:
     prop-types "^15.6.2"
 
-react-native-local-notifications@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-local-notifications/-/react-native-local-notifications-2.0.0.tgz#13a41453102449cdbf56d855e7521867c34b4df1"
-  integrity sha512-rTKuohXC9ht03ySVooLuQ0FwzqHtrW9nG3BlIa0t+ZuJR7+VfLHdcfPzNHak8SuNITkKN2ta9JKHgbBnarkCoA==
-
 react-native-localize@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-2.0.3.tgz#fa91ecb01fa5e4495ab952a673c1562ec456d216"

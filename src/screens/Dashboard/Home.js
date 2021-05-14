@@ -48,8 +48,6 @@ import NotificationSounds, {
   playSampleSound,
 } from 'react-native-notification-sounds';
 
-import RNLocalNotifications from 'react-native-local-notifications';
-
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -63,20 +61,6 @@ class HomeScreen extends React.Component {
       console.log('rendered again and checking the props');
       this.checkProps();
     });
-  }
-
-  componentDidMount() {
-    RNLocalNotifications.createNotification(
-      1,
-      'Notification',
-      'notification',
-      'default',
-    );
-    if (granted) {
-      this.getLocationPermissions();
-    } else {
-      Alert.alert("Alert !", 'Permission Not Granted.');
-    }
   }
 
   getLocationPermissions() {

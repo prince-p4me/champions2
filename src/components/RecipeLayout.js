@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   img: {
     width: 130,
     height: 120,
-    borderTopLeftRadius: 20,
-    borderBottomLeftRadius: 20,
+    borderTopStartRadius: 7,
+    borderBottomStartRadius: 7,
   },
   secondSection: {
     flexDirection: "column",

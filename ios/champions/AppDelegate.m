@@ -29,9 +29,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
-    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
-  }
   // #ifdef FB_SONARKIT_ENABLED
   //   InitializeFlipper(application);
   // #endif
@@ -54,16 +51,6 @@
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];
   return YES;
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0]; //Allways reset number of notifications shown at the icon
-  for (UILocalNotification * notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) { //Also remove all shown notifications
-    if ([notification.fireDate compare:[NSDate date]] == NSOrderedAscending) {
-      [[UIApplication sharedApplication] cancelLocalNotification:notification];
-    }
-  }
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

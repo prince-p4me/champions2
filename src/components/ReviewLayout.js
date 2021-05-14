@@ -17,11 +17,12 @@ const ReviewLayout = () => {
   const data = useSelector((state) => state.getReviews);
 
   const renderItem = item => {
+    console.log("item id ", item.id);
     return (
       <View style={styles.reviewBox}>
         <View style={styles.imgBox}>
           <Image source={item.profile_photo ? { uri: Constant.IMAGE_URL + item.profile_photo } : Images.avatar}
-            style={{ width: 80, height: 100, resizeMode: "contain" }} />
+            style={{ width: 80, height: 100, resizeMode: "stretch" }} />
         </View>
         <View style={{ flex: 1, padding: 10, alignItems: "flex-start" }}>
           <TextSemiBold text={item.name ? item.name : "N/A"} style={{ fontSize: Sizes.medium, marginBottom: 5 }} />
@@ -60,7 +61,7 @@ const ReviewLayout = () => {
           paddingEnd: 10
         }}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => item.id}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => renderItem(item)}
       />
     </View>
