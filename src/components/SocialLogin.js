@@ -5,10 +5,11 @@ import {
   ImageBackground,
   Image,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 
 // import globalStyles from '../../utility/Style';
-// import Images from '../../utility/Image';
+import Images from '../utility/Image';
 import Constant from '../utility/Constant';
 // import * as Navigation from '../../navigation/navigation';
 import Color from '../utility/Color';
@@ -57,7 +58,7 @@ async function signIn() {
 }
 
 function fbLogin() {
-  LoginManager.logInWithPermissions(['public_profile']).then(
+  LoginManager.logInWithPermissions(['public_profile', 'email']).then(
     function (result) {
       if (result.isCancelled) {
         console.log('Login cancelled');
@@ -106,13 +107,25 @@ const SocialLogin = props => {
         bgColor={Color.semiGold}
         text={'Google SignIn'}></FullButton> */}
 
-      <FullButton
+      {/* <FullButton
         onPress={() => {
           fbLogin();
         }}
         text={'Facebook Login'}
         textColor={Color.white}
-        bgColor={Color.blue}></FullButton>
+        bgColor={Color.blue}></FullButton> */}
+      <TouchableOpacity
+        onPress={() => {
+          fbLogin();
+        }}>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={Images.fb}
+            style={{width: '100%'}}
+            resizeMode="contain"></Image>
+          {/* </TouchableOpacity> */}
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
