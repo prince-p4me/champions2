@@ -48,8 +48,6 @@ import NotificationSounds, {
   playSampleSound,
 } from 'react-native-notification-sounds';
 
-// import RNLocalNotifications from 'react-native-local-notifications';
-
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -64,8 +62,6 @@ class HomeScreen extends React.Component {
       this.checkProps();
     });
   }
-
-  componentDidMount() {}
 
   getLocationPermissions() {
     Geolocation.getCurrentPosition(info => {
@@ -135,9 +131,9 @@ class HomeScreen extends React.Component {
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
-          {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
-          <Winnerlayout />
-          <PointsContainer />
+          {/* {list && list.length ? <SliderImg slideImgs={list} /> : <View />} */}
+          {/* <Winnerlayout /> */}
+          {/* <PointsContainer /> */}
           <QRCodeContainer />
 
           <MenuContainer />

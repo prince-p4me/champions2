@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   TextInput,
@@ -8,7 +8,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import Header from '../../components/Header';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SliderImg from '../../components/SliderImg';
 import * as Actions from '../../redux/action';
 import * as Navigation from '../../navigation/navigation';
@@ -27,10 +27,10 @@ import {
 import Sizes from '../../utility/Sizes';
 import FullButton from '../../components/FullButton';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-import {showToast} from '../../utility/Index';
+import { showToast } from '../../utility/Index';
 import HTML from 'react-native-render-html';
 
-const SendFeedback = ({item, navigation}) => {
+const SendFeedback = ({ item, navigation }) => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const user = useSelector(state => state.getUser);
@@ -53,9 +53,8 @@ const SendFeedback = ({item, navigation}) => {
   };
 
   return (
-    <View
-      style={[{flex: 1}, isFocus ? {marginBottom: 260} : {marginBottom: 40}]}>
-      <View style={{flex: 1, padding: 16, paddingTop: 25}}>
+    <View style={[{ flex: 1 }, isFocus ? { marginBottom: 260 } : { marginBottom: 40 }]}>
+      <View style={{ flex: 1, padding: 16, paddingTop: 25 }}>
         <TextBold
           text={I18n.t('rate')}
           style={{
@@ -63,11 +62,11 @@ const SendFeedback = ({item, navigation}) => {
             alignSelf: 'flex-start',
             marginTop: 20,
           }}></TextBold>
-        <View style={{flexDirection: 'row', marginVertical: 15}}>
+        <View style={{ flexDirection: 'row', marginVertical: 15 }}>
           {[1, 2, 3, 4, 5].map((value, index) => (
             <TouchableOpacity
               key={index}
-              style={{marginStart: index != 0 ? 10 : 0}}
+              style={{ marginStart: index != 0 ? 10 : 0 }}
               onPress={() => setStar(value)}
               activeOpacity={0.9}>
               <Icon
@@ -114,15 +113,15 @@ const SendFeedback = ({item, navigation}) => {
           text={I18n.t('sendnow')}
           textColor={Colors.white}
           onPress={sentQuery}
-          btnStyle={{width: '80%', marginHorizontal: '10%', marginTop: 30}}
+          btnStyle={{ width: '80%', marginHorizontal: '10%', marginTop: 30 }}
         />
       </View>
     </View>
   );
 };
 
-const RecipieDetail = ({route, navigation}) => {
-  const {item} = route.params;
+const RecipieDetail = ({ route, navigation }) => {
+  const { item } = route.params;
 
   const list = useSelector(state => state.getBanners);
   const isRtl = useSelector(state => state.isRtl);
@@ -149,8 +148,8 @@ const RecipieDetail = ({route, navigation}) => {
   return (
     <View style={styles.containerDashboard}>
       <ImageBackground
-        style={{width: '100%', height: Constant.height / 3.5}}
-        source={{uri: Constant.IMAGE_URL + item.image}}
+        style={{ width: '100%', height: Constant.height / 2.7 }}
+        source={{ uri: Constant.IMAGE_URL + item.image }}
       />
       <View style={styles.container}>
         <Header
@@ -164,11 +163,11 @@ const RecipieDetail = ({route, navigation}) => {
           style={styles.roundSection}
           showsVerticalScrollIndicator={false}>
           <View style={styles.heading}>
-            <TextSemiBold text={item.title} style={{fontSize: Sizes.medium}} />
+            <TextSemiBold text={item.title} style={{ fontSize: Sizes.medium }} />
           </View>
-          <View style={{padding: 10}}>
+          <View style={{ padding: 10 }}>
             <HTML
-              source={{html: item?.description}}
+              source={{ html: item?.description }}
               contentWidth={Constant.width}
             />
           </View>
@@ -227,11 +226,11 @@ const styles = StyleSheet.create({
   roundSection: {
     flex: 1,
     backgroundColor: Color.white,
-    marginTop: Constant.height / 3.5 - 120,
+    marginTop: Constant.height / 3 - 100,
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
   },
-  containerDashboard: {flex: 1, backgroundColor: Color.white},
+  containerDashboard: { flex: 1, backgroundColor: Color.white },
   container: {
     height: Constant.height,
     width: Constant.width,
