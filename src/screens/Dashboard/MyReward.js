@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet} from 'react-native';
 import Header from '../../components/Header';
-import {
-  TextRegular,
-} from '../../components/TextView';
-import { useSelector, useDispatch } from 'react-redux';
+import {TextRegular} from '../../components/TextView';
+import {useSelector, useDispatch} from 'react-redux';
 import i18n from '../../services/i18n';
 
 import RewardPointlayout from '../../components/RewardPointlayout';
@@ -13,13 +11,13 @@ import QRCodeContainer from '../../components/QRCodeContainer';
 import * as Actions from '../../redux/action';
 
 // import { NavigationEvents } from 'react-navigation';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Color from '../../utility/Color';
 import Constant from '../../utility/Constant';
 
 // class MyReward extends React.Component {
-const MyReward = ({ route, navigation, props }) => {
-  const { data } = route.params;
+const MyReward = ({route, navigation, props}) => {
+  const {data} = route.params;
   // render() {
   const [transactionType, setTransactionType] = useState('QR Scan');
   const transactionList = useSelector(state => state.getTransactionByCategory);
@@ -41,42 +39,46 @@ const MyReward = ({ route, navigation, props }) => {
     dispatch(Actions.getTransactionCategory(obj));
   }, []);
 
-  console.log({ ListTransaction: transactionList });
+  console.log({ListTransaction: transactionList});
   return (
-    <View style={{ flex: 1, backgroundColor: Color.lightGreen }}>
+    <View style={{flex: 1, backgroundColor: Color.lightGreen}}>
       <Header title={'My Reward'} dashboard={false} back={true} />
       <RewardPointlayout />
 
       <QRCodeContainer bgColor={Color.lightGreen} />
       <View style={styles.buttons}>
         <TouchableOpacity
-          style={[styles.button, transactionType == 'QR Scan' && {
-            borderColor: Color.parrot
-          }]}
+          style={[
+            styles.button,
+            transactionType == 'QR Scan' && {
+              borderColor: Color.parrot,
+            },
+          ]}
           onPress={() => {
             setTransactionType('QR Scan');
             getTransaction('QR Scan');
           }}>
           <TextRegular
             text={i18n.t('EarnedWon')}
-            style={{ textAlign: 'center' }}
+            style={{textAlign: 'center'}}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, transactionType == 'Redeemed' && {
-          borderColor: Color.parrot
-        }]}
+        <TouchableOpacity
+          style={[
+            styles.button,
+            transactionType == 'Redeemed' && {
+              borderColor: Color.parrot,
+            },
+          ]}
           onPress={() => {
             setTransactionType('Redeemed');
             getTransaction('Redeemed');
           }}>
-          <TextRegular
-            text={i18n.t('redeem')}
-            style={{ textAlign: 'center' }}
-          />
+          <TextRegular text={i18n.t('redeem')} style={{textAlign: 'center'}} />
         </TouchableOpacity>
       </View>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
         {/* <PointsWonLayout />
             <PointsWonLayout /> */}
 
@@ -101,9 +103,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: (Constant.width - 20) / 2,
-    flex: 1, justifyContent: "center",
-    alignItems: "center",
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderBottomWidth: 5,
-    borderColor: Color.white
-  }
-})
+    borderColor: Color.white,
+  },
+});

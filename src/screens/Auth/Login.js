@@ -32,8 +32,8 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
 
 const LoginScreen = () => {
-  const [mobile, setMobile] = useState('8802854433');
-  // const [mobile, setMobile] = useState('');
+  // const [mobile, setMobile] = useState('8802854433');
+  const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
   const isRtl = useSelector(state => state.isRtl);
@@ -118,8 +118,8 @@ const LoginScreen = () => {
         />
       </KeyboardAvoidingView>
 
-      <TextDevider text={I18n.t('loginwith')}></TextDevider>
-      <SocialLogin />
+      {/* <TextDevider text={I18n.t('loginwith')}></TextDevider> */}
+      {/* <SocialLogin /> */}
       <View
         style={{
           flex: 5,

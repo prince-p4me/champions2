@@ -140,8 +140,8 @@ const SignupScreen = () => {
         {/* <SocialLogin /> */}
       </KeyboardAvoidingView>
 
-      <TextDevider text={I18n.t('signupwith')}></TextDevider>
-      <SocialLogin />
+      {/* <TextDevider text={I18n.t('signupwith')}></TextDevider> */}
+      {/* <SocialLogin /> */}
       <View
         style={{
           flex: 3,
