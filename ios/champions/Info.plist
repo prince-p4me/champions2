@@ -73,6 +73,26 @@
 			</dict>
 		</dict>
 	</dict>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb950110338385665</string>
+      </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>950110338385665</string>
+  <key>FacebookDisplayName</key>
+  <string>New Horizons</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
 	<key>NSCameraUsageDescription</key>
 	<string>Please Give access to your camera for scanning that QR code through it and some reward 10X Champions points are received.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   img: {
     width: 130,
     height: 120,
-    borderTopStartRadius: 7,
-    borderBottomStartRadius: 7,
+    // borderTopStartRadius: 7,
+    // borderBottomStartRadius: 7,
   },
   secondSection: {
     flexDirection: "column",
@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
   imgBox: {
     height: 70, width: 100,
     justifyContent: "flex-end",
-    alignItems: "center"
+    alignItems: "center",
+    overflow: "hidden"
   },
   redeem: {
     height: 30, width: 120,

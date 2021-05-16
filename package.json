@@ -28,6 +28,7 @@
     "react-native-cardview": "2.0.5",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.3.2",
+    "react-native-fbsdk-next": "^4.2.0",
     "react-native-fix-image": "^2.1.0",
     "react-native-flatlist-slider": "^1.0.5",
     "react-native-gesture-handler": "^1.10.3",

@@ -6031,6 +6031,11 @@ react-native-elements@^3.3.2:
     react-native-ratings "^7.3.0"
     react-native-size-matters "^0.3.1"
 
+react-native-fbsdk-next@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk-next/-/react-native-fbsdk-next-4.2.0.tgz#5b2b97169d5101333b11db09a5c06a1c6a7136b8"
+  integrity sha512-4rzdrpWvO+ajJMLsbr8bhbFI2UfFMBVEdjpG3muevTHenBcv4J+NtOtvUNVz50afljX8V/dNvpE8mRAO3N7JCg==
+
 react-native-fix-image@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-native-fix-image/-/react-native-fix-image-2.1.0.tgz#a4677b91529be926544775faf736df6af8c4743c"

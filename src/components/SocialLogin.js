@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -24,7 +24,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import {LoginManager, Profile, AccessToken} from 'react-native-fbsdk-next';
+import { LoginManager, Profile, AccessToken } from 'react-native-fbsdk-next';
 
 // GoogleSignin.configure({
 //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -43,7 +43,7 @@ async function signIn() {
   try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
-    console.log({userInfo: userInfo});
+    console.log({ userInfo: userInfo });
   } catch (error) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       // user cancelled the login flow
@@ -65,14 +65,14 @@ function fbLogin() {
       } else {
         console.log(
           'Login success with permissions: ' +
-            result.grantedPermissions.toString(),
+          result.grantedPermissions.toString(),
         );
 
         const result2 = AccessToken.getCurrentAccessToken().then(function (
           token,
         ) {
           if (token) {
-            console.log({token: token});
+            console.log({ token: token });
           }
         });
         console.log(result2?.accessToken);
@@ -81,12 +81,12 @@ function fbLogin() {
           currentProfile,
         ) {
           if (currentProfile) {
-            console.log({currentProfile: currentProfile});
+            console.log({ currentProfile: currentProfile });
             console.log(
               'The current logged user is: ' +
-                currentProfile.name +
-                '. His profile id is: ' +
-                currentProfile.userID,
+              currentProfile.name +
+              '. His profile id is: ' +
+              currentProfile.userID,
             );
           }
         });
@@ -118,10 +118,10 @@ const SocialLogin = props => {
         onPress={() => {
           fbLogin();
         }}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <Image
             source={Images.fb}
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             resizeMode="contain"></Image>
           {/* </TouchableOpacity> */}
         </View>
