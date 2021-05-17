@@ -33,6 +33,7 @@
 		A32CCB9D2624B95800CD793A /* Metropolis-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C094994E408424190B47308 /* Metropolis-ThinItalic.otf */; };
 		A32CCBEA2624BA7600CD793A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A32CCBE92624BA7600CD793A /* splash.png */; };
 		A32CCDEF2624DAF300CD793A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A32CCDEE2624DAF300CD793A /* GoogleService-Info.plist */; };
+		A39D15412652D9A400374FA2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39D15402652D9A400374FA2 /* File.swift */; };
 		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		9D61F5DA03E44FAD995B590C /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		A32CCBE92624BA7600CD793A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		A32CCDEE2624DAF300CD793A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A39D15402652D9A400374FA2 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = champions/File.swift; sourceTree = "<group>"; };
 		A6FC25376330443A9B761C13 /* Metropolis-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Metropolis-Bold.otf"; path = "../src/assets/fonts/Metropolis-Bold.otf"; sourceTree = "<group>"; };
 		AD29C6AF0F1A4E43B30AD1D6 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		B1020CD7857E4BAB90661E09 /* Metropolis-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Metropolis-BlackItalic.otf"; path = "../src/assets/fonts/Metropolis-BlackItalic.otf"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A39D15402652D9A400374FA2 /* File.swift */,
 				13B07FAE1A68108700A75B9A /* champions */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* championsTests */,
@@ -495,6 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				A39D15412652D9A400374FA2 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +518,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E6230693E51576A245CC103 /* Pods-champions-championsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -541,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7DCE899D8AF85301FAE3EADB /* Pods-champions-championsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = championsTests/Info.plist;
@@ -648,7 +654,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -713,7 +719,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
