@@ -25,7 +25,8 @@ import Icon1 from 'react-native-vector-icons/dist/MaterialIcons';
 
 import * as Navigation from '../navigation/navigation';
 import Color from '../utility/Color';
-import { TextMedium } from './TextView';
+import { TextMedium, TextThin } from './TextView';
+import Sizes from '../utility/Sizes';
 
 const Header = props => {
   const { title, transparent, bgColor, back, dashboard, help } = props;
@@ -116,25 +117,19 @@ const Header = props => {
               </TouchableOpacity>
             </View>
             <View style={styles.headerRightRow}>
-              <TouchableOpacity
-                style={{ paddingStart: 15 }}
-                onPress={() => Navigation.navigate('Help')}>
-                <Image source={alarm} style={{
-                  tintColor: Color.white,
-                  height: 28, width: 28,
-                  resizeMode: "contain"
-                }} />
+              <TouchableOpacity style={styles.notification}
+                onPress={() => Navigation.navigate('Notification')}>
+                <Image source={alarm} style={styles.notifImg} />
+                <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
+                  <TextThin text={2} style={{ fontSize: Sizes.small, color: Color.theme }} />
+                </View>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.helpSpacing}
+              <TouchableOpacity style={styles.helpSpacing}
                 onPress={() => Navigation.navigate('Help')}>
                 <Image source={Help} style={styles.rightHeaderIcon} />
               </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch(Actions.logOut());
-                }}>
+              <TouchableOpacity onPress={() => dispatch(Actions.logOut())}>
                 <Image source={Logout} style={styles.rightHeaderIcon}></Image>
               </TouchableOpacity>
             </View>
