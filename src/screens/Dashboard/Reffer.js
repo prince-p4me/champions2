@@ -47,12 +47,12 @@ const Reffer = () => {
       <Header title={I18n.t("refer2")} dashboard={false} back={true} help={true} />
       <View style={styles.container}>
         <View style={styles.box1}>
-          <TextBold text={I18n.t("earn") + " 1000"} style={{ fontSize: Sizes.extraDouble2x }} />
+          <TextBold text={I18n.t("earn") + " 1000"} style={{ fontSize: Sizes.extraDouble2x, textAlign: align }} />
           <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
             <TextBold text={I18n.t("points")} style={{ fontSize: Sizes.extraDouble2x }} />
             <Image source={Images.star3} style={{ width: 35, height: 35, tintColor: Color.semiGold }} />
           </View>
-          <TextThin text={I18n.t("referearnlongtext")} style={{ fontSize: Sizes.semiLarge }} />
+          <TextThin text={I18n.t("referearnlongtext")} style={{ fontSize: Sizes.semiLarge, textAlign: align }} />
           <FullButton bgColor={Color.theme}
             text={I18n.t("invite")}
             textColor={Color.white}
@@ -75,7 +75,8 @@ export default Reffer;
 const styles = StyleSheet.create({
   box1: {
     flex: 5.2, paddingHorizontal: 18,
-    paddingVertical: 30
+    paddingVertical: 30,
+    alignItems: "flex-start"
   },
   container: {
     flex: 1, backgroundColor: Color.lightGreen,

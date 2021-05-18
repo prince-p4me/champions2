@@ -61,7 +61,7 @@ const MyReward = ({ route, navigation, props }) => {
           <View style={{ width: 100, height: "100%" }}>
             <Image source={Images.transaction} style={{ resizeMode: "cover", height: "100%", width: "100%" }} />
           </View>
-          <View style={{ flex: 1, padding: 5, paddingStart: 10 }}>
+          <View style={{ flex: 1, padding: 5, paddingStart: 10, alignItems: "flex-start" }}>
             <View style={{ width: "100%", alignItems: "flex-end" }}>
               <TextLite text={"27 Feb 2020"} style={{ fontSize: Sizes.regular }} />
             </View>
