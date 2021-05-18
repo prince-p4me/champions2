@@ -33,7 +33,8 @@
 		A32CCB9D2624B95800CD793A /* Metropolis-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C094994E408424190B47308 /* Metropolis-ThinItalic.otf */; };
 		A32CCBEA2624BA7600CD793A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A32CCBE92624BA7600CD793A /* splash.png */; };
 		A32CCDEF2624DAF300CD793A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A32CCDEE2624DAF300CD793A /* GoogleService-Info.plist */; };
-		A39D15412652D9A400374FA2 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		A372B8DE2653D18900A77EA3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372B8DD2653D18900A77EA3 /* File.swift */; };
+		A39D15412652D9A400374FA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -86,8 +87,8 @@
 		9D61F5DA03E44FAD995B590C /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		A32CCBE92624BA7600CD793A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		A32CCDEE2624DAF300CD793A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A372B8DD2653D18900A77EA3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A3D9F0252651B3A30059598B /* champions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "champions-Bridging-Header.h"; sourceTree = "<group>"; };
-		A3D9F0262651B3A30059598B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A6FC25376330443A9B761C13 /* Metropolis-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Metropolis-Bold.otf"; path = "../src/assets/fonts/Metropolis-Bold.otf"; sourceTree = "<group>"; };
 		AD29C6AF0F1A4E43B30AD1D6 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		B1020CD7857E4BAB90661E09 /* Metropolis-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Metropolis-BlackItalic.otf"; path = "../src/assets/fonts/Metropolis-BlackItalic.otf"; sourceTree = "<group>"; };
@@ -151,7 +152,7 @@
 				A32CCDEE2624DAF300CD793A /* GoogleService-Info.plist */,
 				A32CCBE92624BA7600CD793A /* splash.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				A3D9F0262651B3A30059598B /* File.swift */,
+				A372B8DD2653D18900A77EA3 /* File.swift */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				A3D9F0252651B3A30059598B /* champions-Bridging-Header.h */,
@@ -500,7 +501,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				A39D15412652D9A400374FA2 /* BuildFile in Sources */,
+				A372B8DE2653D18900A77EA3 /* File.swift in Sources */,
+				A39D15412652D9A400374FA2 /* (null) in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
