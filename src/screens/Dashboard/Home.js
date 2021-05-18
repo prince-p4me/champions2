@@ -132,10 +132,10 @@ class HomeScreen extends React.Component {
           contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
-          {/* <Winnerlayout /> */}
+          <Winnerlayout />
           <View style={{ height: 20 }} />
-          {/* <QRCodeContainer /> */}
-          {/* <PointsContainer /> */}
+          <QRCodeContainer />
+          <PointsContainer />
           <MenuContainer />
           <OfferLayout home={true} />
           <RecipeLayout horizontal={true} />

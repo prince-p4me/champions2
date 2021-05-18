@@ -143,7 +143,6 @@ const MyDashboard = () => {
         <FlatList
           columnWrapperStyle={{
             flexGrow: 1,
-            // width: "100%",
             justifyContent: "center",
           }}
           data={transactionList}
