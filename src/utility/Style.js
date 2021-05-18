@@ -185,7 +185,7 @@ export default StyleSheet.create({
   },
   pointTypesContainer: {
     backgroundColor: Color.white,
-    height: 175,
+    height: 160,
     borderRadius: 7,
     borderColor: Color.darkBGgray,
     marginStart: 1,
@@ -197,7 +197,7 @@ export default StyleSheet.create({
   },
   pointTypesContainerreward: {
     backgroundColor: Color.theme,
-    height: 175,
+    height: 160,
     borderRadius: 10,
     marginTop: 5,
     marginLeft: 5,

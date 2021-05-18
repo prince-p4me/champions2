@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { I18nManager } from 'react-native';
 import Home from '../screens/Dashboard/Home';
+import Reffer from '../screens/Dashboard/Reffer';
 import LoginScreen from '../screens/Auth/Login';
 import OtpScreen from '../screens/Auth/Otp';
 import SignUpScreen from '../screens/Auth/SignUp';
@@ -15,6 +16,7 @@ import OfferAll from '../screens/Dashboard/OfferAll';
 import WinnerAll from '../screens/Dashboard/WinnerAll';
 import EditProfile from '../screens/Dashboard/EditProfile';
 import MyReward from '../screens/Dashboard/MyReward';
+import MyDashboard from '../screens/Dashboard/MyDashboard';
 import Help from '../screens/Dashboard/Help';
 import ContactUs from '../screens/Dashboard/ContactUs';
 import SendQuery from '../screens/Dashboard/SendQuery';
@@ -60,7 +62,6 @@ const StackNavigator = () => {
       {user && user.id ? (
         <>
           {/* <Stack.Screen name="RecipieDetail" component={RecipieDetail} /> */}
-          {/* <Stack.Screen name="PointsDetail" component={PointsDetail} /> */}
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Scan" component={ScanQrCode} />
           <Stack.Screen name="OfferAll" component={OfferAll} />
@@ -81,6 +82,8 @@ const StackNavigator = () => {
           <Stack.Screen name="RecipieDetail" component={RecipieDetail} />
           <Stack.Screen name="PointsDetail" component={PointsDetail} />
           <Stack.Screen name="MyReward" component={MyReward} />
+          <Stack.Screen name="MyDashboard" component={MyDashboard} />
+          <Stack.Screen name="Reffer" component={Reffer} />
         </>
       ) : (
         <>

@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {View, Image, FlatList, Dimensions} from 'react-native';
-import {TextBold, TextRegular, TextSemiBold, TextThin} from './TextView';
+import React, { Component } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { View, Image, FlatList, Dimensions } from 'react-native';
+import { TextBold, TextRegular, TextSemiBold, TextThin } from './TextView';
 import i18n from '../services/i18n';
 import Color from '../utility/Color';
 
@@ -13,7 +13,7 @@ import Balance from '../assets/imgs/Balance.png';
 import Sizes from '../utility/Sizes';
 import styles from '../utility/Style';
 import About from '../assets/imgs/user.jpeg';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const PointWonLayout = item => {
   const align = isRtl ? 'right' : 'left';
@@ -30,38 +30,43 @@ const PointWonLayout = item => {
           alignSelf: 'center',
           tintColor: Color.darkBGgray,
         }}></Image>
-      <TextRegular
-        text={pointInfo.product_name != '' ? 'Redeemed' : 'Points Won'}
-        style={{textAlign: align, fontSize: Sizes.semiLarge, marginTop: 10}}
-      />
-      <View style={{flexDirection: 'row', marginTop: 5, alignItems: 'center'}}>
-        {pointInfo.product_name == '' && (
-          <Image
-            source={Images.star}
-            style={{
-              height: 13,
-              width: 13,
-              alignSelf: 'center',
-              marginTop: 3,
-              marginRight: 5,
-              tintColor: Color.darkBGgray,
-            }}
-            resizeMode="contain"></Image>
-        )}
-
+      {pointInfo.product_name ?
+        <View style={{ width: "100%", paddingTop: 10, paddingHorizontal: 3 }}>
+          <TextRegular
+            text={'Redeemed ' + pointInfo.points}
+            style={{ textAlign: "center", fontSize: Sizes.semiLarge }}
+          />
+          <TextRegular text={"for " + pointInfo.product_name}
+            style={{ textAlign: "center", fontSize: Sizes.regular, marginTop: 3 }}
+            numberOfLines={2} />
+        </View> :
+        <TextRegular
+          text={'Points Won'}
+          style={{ textAlign: "center", fontSize: Sizes.semiLarge, marginTop: 10 }}
+        />}
+      {!pointInfo.product_name && <View style={{ flexDirection: 'row', marginTop: 5, alignItems: 'center' }}>
+        <Image
+          source={Images.star}
+          style={{
+            height: 13,
+            width: 13,
+            alignSelf: 'center',
+            marginTop: 3,
+            marginRight: 5,
+            tintColor: Color.darkBGgray,
+          }}
+          resizeMode="contain"></Image>
         <TextRegular
           text={pointInfo.points}
-          style={{textAlign: align, fontSize: Sizes.regular, marginTop: 5}}
+          style={{ textAlign: align, fontSize: Sizes.regular, marginTop: 5 }}
         />
       </View>
-
+      }
       <TextThin
         numberOfLines={3}
-        text={
-          pointInfo.product_name != '' ? pointInfo.product_name : pointInfo.date
-        }
+        text={pointInfo.date}
         style={{
-          textAlign: align,
+          textAlign: "center",
           fontSize: Sizes.regular,
           marginTop: 20,
         }}
@@ -69,15 +74,15 @@ const PointWonLayout = item => {
     </View>
   );
 };
-const PointsWonLayout = ({route}) => {
+const PointsWonLayout = ({ route }) => {
   const transactionList = useSelector(state => state.getTransactionByCategory);
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
   const data = useSelector(state => state.getPoints);
-  let {height} = Dimensions.get('window');
+  let { height } = Dimensions.get('window');
 
   return (
-    <View style={{height: height / 3 + 10}}>
+    <View style={{ height: height / 3 + 10 }}>
       <FlatList
         columnWrapperStyle={{
           justifyContent: 'space-between',
@@ -86,7 +91,7 @@ const PointsWonLayout = ({route}) => {
         }}
         data={transactionList}
         numColumns={2}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           return <PointWonLayout item={item} />;
         }}
       />

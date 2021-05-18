@@ -27,9 +27,7 @@ const MenuContainer = () => {
     <View style={[styles.menuTypeContainer]}>
       <View style={styles.pointTypeCol}>
         <TouchableOpacity
-          onPress={() => {
-            Navigation.navigate('MyReward', { data });
-          }}>
+          onPress={() => Navigation.navigate('MyReward', { data })}>
           <Image source={Rewards} style={styles.menuIcon}></Image>
           <TextThin
             text={i18n.t('my_rewards')}
@@ -37,20 +35,23 @@ const MenuContainer = () => {
           />
         </TouchableOpacity>
       </View>
-      <View style={styles.menuTypeColMiddle}>
+      <TouchableOpacity style={styles.menuTypeColMiddle}
+        onPress={() => Navigation.navigate("MyDashboard")}>
         <Image source={dashboard} style={styles.menuIcon}></Image>
-
         <TextThin
           text={i18n.t('my_dashboard')}
           style={{ textAlign: align, fontSize: Sizes.semiLarge }}
         />
-      </View>
+      </TouchableOpacity>
       <View style={styles.pointTypeCol}>
-        <Image source={Refer} style={styles.menuIcon}></Image>
-        <TextThin
-          text={i18n.t('refer_friend')}
-          style={{ textAlign: align, fontSize: Sizes.semiLarge }}
-        />
+        <TouchableOpacity style={{ flex: 1, alignItems: "center" }}
+          onPress={() => Navigation.navigate("Reffer")}>
+          <Image source={Refer} style={styles.menuIcon}></Image>
+          <TextThin
+            text={i18n.t('refer_friend')}
+            style={{ textAlign: align, fontSize: Sizes.semiLarge }}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
