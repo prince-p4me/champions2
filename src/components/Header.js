@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Text,
   Image,
-  BackHandler,
+  ImageBackground,
 } from 'react-native';
 import styles from '../utility/Style';
 import Constants from '../utility/Constant';
@@ -101,19 +101,15 @@ const Header = props => {
         <View style={styles.headerDashboard}>
           <View style={styles.headerContainer}>
             <View style={styles.headerCol}>
-              <TouchableOpacity
-                onPress={() => {
-                  Navigation.navigate('Profilemain');
-                }}>
-                <Image
-                  source={
-                    user.profile_photo
-                      ? { uri: Constants.IMAGE_URL + user.profile_photo }
-                      : About
-                  }
-                  style={styles.profileIcon}></Image>
-
-                {/* <TextMedium text={user.profile_photo} /> */}
+              <TouchableOpacity style={[styles.profileIcon, {
+                borderWidth: 1, borderRadius: 25,
+                overflow: "hidden", borderColor: Color.border
+              }]} onPress={() => Navigation.navigate('Profilemain')}>
+                <ImageBackground style={{ width: "100%", height: "100%" }}
+                  source={About}>
+                  <Image source={{ uri: Constants.IMAGE_URL + user.profile_photo }}
+                    style={styles.profileIcon}></Image>
+                </ImageBackground>
               </TouchableOpacity>
             </View>
             <View style={styles.headerRightRow}>
