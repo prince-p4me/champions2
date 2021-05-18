@@ -32,10 +32,9 @@ const Header = props => {
   const { title, transparent, bgColor, back, dashboard, help } = props;
   const isRtl = useSelector(state => state.isRtl);
   const user = useSelector(state => state.getUser);
-
+  const data = useSelector(state => state.getNotification);
   const dispatch = useDispatch();
-  console.log('back', back);
-  console.log({ user: user });
+
   return (
     <View style={{ width: '100%' }}>
       <SafeAreaView
@@ -116,9 +115,9 @@ const Header = props => {
               <TouchableOpacity style={styles.notification}
                 onPress={() => Navigation.navigate('Notification')}>
                 <Image source={alarm} style={styles.notifImg} />
-                <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
-                  <TextThin text={2} style={{ fontSize: Sizes.small, color: Color.theme }} />
-                </View>
+                {(data[0]?.today && data[0]?.data.length) && <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
+                  <TextThin text={data[0]?.data.length} style={{ fontSize: Sizes.small, color: Color.theme }} />
+                </View>}
               </TouchableOpacity>
               <TouchableOpacity style={styles.helpSpacing}
                 onPress={() => Navigation.navigate('Help')}>

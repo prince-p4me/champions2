@@ -48,33 +48,32 @@ const Winnerlayout = () => {
 
   return (
     <>
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <TextBold
-          text={I18n.t('allwinner')}
-          style={{ fontSize: Sizes.semiLarge, marginStart: 10 }}
-        />
-        <TouchableOpacity onPress={() => navigate('WinnerAll')}>
-          <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-            <TextRegular text={I18n.t('Seeall')} />
-            <Icon
-              name={'keyboard-arrow-' + (isRtl ? 'left' : 'right')}
-              size={30} />
-          </View>
-        </TouchableOpacity>
-      </View>
+      {(data && data.length) ?
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <TextBold
+            text={I18n.t('allwinner')}
+            style={{ fontSize: Sizes.semiLarge, marginStart: 10 }}
+          />
+          <TouchableOpacity onPress={() => navigate('WinnerAll')}>
+            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+              <TextRegular text={I18n.t('Seeall')} />
+              <Icon
+                name={'keyboard-arrow-' + (isRtl ? 'left' : 'right')}
+                size={30} />
+            </View>
+          </TouchableOpacity>
+        </View> : null
+      }
       <FlatList data={data}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
-          // flexGrow: 1,
-          // alignItems: "flex-start",
           justifyContent: "center",
           paddingHorizontal: 7
-          // backgroundColor: "red"
         }}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item.id}

@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, FlatList } from 'react-native';
 import Header from '../../components/Header';
-import { TextBold, TextLite, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
+import { TextBold, TextLite, TextSemiBold, TextThin } from '../../components/TextView';
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../../services/i18n';
 
 import RewardPointlayout from '../../components/RewardPointlayout';
-import PointsWonLayout from '../../components/PointsWonLayout';
-import QRCodeContainer from '../../components/QRCodeContainer';
 import * as Actions from '../../redux/action';
 
 // import { NavigationEvents } from 'react-navigation';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Color from '../../utility/Color';
 import Constant from '../../utility/Constant';
 import I18n from '../../services/i18n';
@@ -19,9 +16,8 @@ import Sizes from '../../utility/Sizes';
 import Images from '../../utility/Image';
 import star from '../../assets/imgs/star.png';
 
-// class MyReward extends React.Component {
-const MyReward = ({ route, navigation, props }) => {
-  const transactionList = useSelector(state => state.getTransactionByCategory);
+const MyDashboard = ({ route, navigation, props }) => {
+  const data = useSelector(state => state.getTransaction);
   const user = useSelector(state => state.getUser);
   const dispatch = useDispatch();
   const isRtl = useSelector(state => state.isRtl);
@@ -32,51 +28,72 @@ const MyReward = ({ route, navigation, props }) => {
       user_id: user.id,
       type: type,
     };
-    dispatch(Actions.getTransactionCategory(obj));
+    dispatch(Actions.getTransaction(obj));
   }
-  useEffect(() => {
 
+  useEffect(() => {
+    getTransaction();
   }, []);
 
-  console.log({ ListTransaction: transactionList });
+  const renderItem = item => {
+    let date = item.created_at.split(" ");
+    let time = date[1]?.split(":");
+    time = time[0] + ":" + time[1] + " " + date[2];
+
+    return (
+      <View style={styles.tncBox}>
+        <View style={{ width: 100, height: "100%" }}>
+          <Image source={Images.transaction} style={{ resizeMode: "cover", height: "100%", width: "100%" }} />
+        </View>
+        <View style={{ flex: 1, padding: 5, paddingStart: 10, alignItems: "flex-start" }}>
+          <View style={{ width: "100%", alignItems: "flex-end" }}>
+            <TextLite text={date[0]} style={{ fontSize: Sizes.regular }} />
+          </View>
+          <View style={{ width: "100%", flexDirection: "row", justifyContent: "space-between" }}>
+            <TextSemiBold text={item.point_source} style={{ fontSize: Sizes.semiLarge, color: Color.parrot }} />
+            <TextThin text={time} style={{ fontSize: Sizes.regular }} />
+          </View>
+          <View style={{ width: "100%", flexDirection: "row", marginBottom: 17 }}>
+            <TextSemiBold text="+" style={{ fontSize: Sizes.large, color: Color.parrot }} />
+            <TextSemiBold text={item.point_earned + " " + I18n.t("points")} style={{ fontSize: Sizes.semiLarge, color: Color.semiGold }} />
+            <Image source={Images.star3} style={{ tintColor: Color.semiGold, width: 15, height: 15 }} />
+          </View>
+          {/* <TextLite text={"Scan of rice packet"} style={{ fontSize: Sizes.regular }} /> */}
+        </View>
+      </View>
+    )
+  }
+
+  // console.log({ ListTransaction: data });
   return (
     <View style={{ flex: 1 }}>
       <Header title={I18n.t("my_dashboard")} dashboard={false} back={true} help={true} />
       <View style={styles.container}>
-        <View style={[styles.pointContainer]}>
-          <TextBold
-            text={i18n.t('my_points')}
-            style={{ textAlign: align, fontSize: Sizes.semiLarge }}
-          />
-          <Image source={star} style={styles.starIcon}></Image>
-        </View>
-        <RewardPointlayout bgColor={Color.parrot} />
-        <View style={[styles.pointContainer]}>
-          <TextBold
-            text={i18n.t('transactions')}
-            style={{ textAlign: align, fontSize: Sizes.semiLarge }}
-          />
-        </View>
-        <View style={styles.tncBox}>
-          <View style={{ width: 100, height: "100%" }}>
-            <Image source={Images.transaction} style={{ resizeMode: "cover", height: "100%", width: "100%" }} />
-          </View>
-          <View style={{ flex: 1, padding: 5, paddingStart: 10, alignItems: "flex-start" }}>
-            <View style={{ width: "100%", alignItems: "flex-end" }}>
-              <TextLite text={"27 Feb 2020"} style={{ fontSize: Sizes.regular }} />
+        <FlatList data={data}
+          contentContainerStyle={{ flexGrow: 1, }}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => item.id}
+          renderItem={({ item, index }) => renderItem(item)}
+          ListFooterComponent={(<View style={{ height: 50 }}></View>)}
+          ListHeaderComponent={(
+            <View style={{ width: "100%" }}>
+              <View style={[styles.pointContainer]}>
+                <TextBold
+                  text={i18n.t('my_points')}
+                  style={{ textAlign: align, fontSize: Sizes.semiLarge }}
+                />
+                <Image source={star} style={styles.starIcon}></Image>
+              </View>
+              <RewardPointlayout bgColor={Color.parrot} />
+              <View style={[styles.pointContainer]}>
+                <TextBold
+                  text={i18n.t('transactions')}
+                  style={{ textAlign: align, fontSize: Sizes.semiLarge }}
+                />
+              </View>
             </View>
-            <View style={{ width: "100%", flexDirection: "row", justifyContent: "space-between" }}>
-              <TextSemiBold text={I18n.t("won")} style={{ fontSize: Sizes.semiLarge, color: Color.parrot }} />
-              <TextThin text={"12:00 PM"} style={{ fontSize: Sizes.regular }} />
-            </View>
-            <View style={{ width: "100%", flexDirection: "row", marginBottom: 17 }}>
-              <TextSemiBold text="+" style={{ fontSize: Sizes.large, color: Color.parrot }} />
-              <TextSemiBold text={" 10000 " + I18n.t("points")} style={{ fontSize: Sizes.semiLarge, color: Color.semiGold }} />
-              <Image source={Images.star3} style={{ tintColor: Color.semiGold, width: 15, height: 15 }} />
-            </View>
-            <TextLite text={"Scan of rice packet"} style={{ fontSize: Sizes.regular }} />
-          </View>
-        </View>
+          )}
+        />
       </View>
     </View >
   );
@@ -84,7 +101,7 @@ const MyReward = ({ route, navigation, props }) => {
 };
 
 // export default connect(mapStateToProps, mapDispatchToProps)(MyReward);
-export default MyReward;
+export default MyDashboard;
 
 const styles = StyleSheet.create({
   container: {
@@ -92,11 +109,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   tncBox: {
-    width: "100%", height: 100,
+    width: "100%", height: 80,
     flexDirection: "row",
     backgroundColor: Color.white,
     borderRadius: 5,
-    overflow: "hidden"
+    overflow: "hidden",
+    marginBottom: 15
   },
   starIcon: {
     width: 18,

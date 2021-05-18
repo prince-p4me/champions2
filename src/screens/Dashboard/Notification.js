@@ -1,54 +1,85 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Share, Image } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity, Image, SectionList } from 'react-native';
 import Header from '../../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextBold, TextLite, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
-import i18n from '../../services/i18n';
-
+import moment from "moment"
 import * as Actions from '../../redux/action';
 
 // import { NavigationEvents } from 'react-navigation';
 import Color from '../../utility/Color';
 import I18n from '../../services/i18n';
-import style from '../../utility/Style';
 import Sizes from '../../utility/Sizes';
 import Images from '../../utility/Image';
-import star from '../../assets/imgs/star.png';
-import FullButton from '../../components/FullButton';
-import Style from '../../utility/Style';
+import { navigate } from '../../navigation/navigation';
 
 const Notification = () => {
-  const user = useSelector(state => state.getUser);
+  const data = useSelector(state => state.getNotification);
   const dispatch = useDispatch();
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
-  function getTransaction(type) {
-    let obj = {
-      user_id: user.id,
-      type: type,
-    };
-    dispatch(Actions.getTransactionCategory(obj));
-  }
+
   useEffect(() => {
-    getTransaction('QR Scan');
+    dispatch(Actions.getNotification());
   }, []);
+
+  const renderItem = item => {
+    return (
+      <TouchableOpacity style={styles.notif}
+        onPress={() => navigate("MyReward")}>
+        <View style={styles.imgBox}>
+          <Image source={Images.notif} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
+        </View>
+        <View style={{ flex: 1, height: "100%", padding: 8, justifyContent: "center" }}>
+          <TextRegular text={item.description} style={{ fontSize: Sizes.regular }}
+            numberOfLines={3} />
+          <TextThin text={item.type} style={{ fontSize: Sizes.regular, marginTop: 3 }} />
+          <View style={{ width: "100%", alignItems: "flex-end" }}>
+            <TextThin text={item.created_at.split(" ")[0]} style={{ fontSize: Sizes.small, marginBottom: -20 }} />
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
 
   return (
     <View style={{ flex: 1 }}>
       <Header title={I18n.t("notification")} dashboard={false} back={true} help={true} />
       <View style={styles.container}>
-        <View style={[Style.cardView, styles.notif]}>
-          <View style={styles.imgBox}>
-            <Image source={Images.notif} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
-          </View>
-          <View style={{ flex: 1, height: "100%", padding: 8, justifyContent: "center" }}>
-            <TextRegular text={"Congratulations!! 500 points credited."} style={{ fontSize: Sizes.regular }} />
-            <TextThin text={I18n.t("clicknotif")} style={{ fontSize: Sizes.regular, marginTop: 3 }} />
-            <View style={{ width: "100%", alignItems: "flex-end" }}>
-              <TextThin text={"03-JAN-2021"} style={{ fontSize: Sizes.small, marginBottom: -20 }} />
+        <SectionList contentContainerStyle={{
+          flexGrow: 1
+        }}
+          sections={data}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, index }) => renderItem(item)}
+          renderSectionHeader={({ section: { title } }) => (
+            <View style={{ width: "100%", alignItems: "flex-start", paddingVertical: 12 }}>
+              <TextRegular text={title} style={{ fontSize: Sizes.regular }} />
             </View>
-          </View>
-        </View>
+          )}
+          keyExtractor={(item, index) => item + index}
+          ListFooterComponent={(<View style={{ height: 50 }}></View>)}
+          ListEmptyComponent={(<View style={{
+            flex: 1, justifyContent: "center",
+            alignItems: "center"
+          }}>
+            <TextRegular text="No data found" />
+          </View>)} />
+        {/* <FlatList data={data}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            flexGrow: 1
+          }}
+          keyExtractor={(item, index) => item.id}
+          renderItem={({ item, index }) => renderItem(item)}
+          ListFooterComponent={(<View style={{ height: 50 }}></View>)}
+          ListEmptyComponent={(<View style={{
+            flex: 1, justifyContent: "center",
+            alignItems: "center"
+          }}>
+            <TextRegular text="No data found" />
+          </View>)}
+        /> */}
       </View>
     </View >
   );
@@ -76,6 +107,10 @@ const styles = StyleSheet.create({
     backgroundColor: Color.white,
     paddingHorizontal: 8,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: Color.border,
+    borderRadius: 8
   }
 });
