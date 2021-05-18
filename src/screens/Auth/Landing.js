@@ -68,7 +68,6 @@ const LandingScreen = props => {
           {/* <SocialLogin /> */}
         </View>
       </View>
-      <SocialLogin />
       <Image
         source={Images.saina}
         style={{flex: 5}}
