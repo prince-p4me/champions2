@@ -20,6 +20,33 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb316911893389345</string> <!-- Add fb[APP_ID] -->
+				<string>com.googleusercontent.apps.407190131380-uj4qa5ptfcdj68cftohb0d3jb4cqi17s</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>316911893389345</string> <!-- Change to your APP Id -->
+	<key>FacebookDisplayName</key>
+
+	<string>10X Champions</string>
+
+	<!-- <array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.407190131380-uj4qa5ptfcdj68cftohb0d3jb4cqi17s</string>
+			</array>
+		</dict>
+	</array> -->
+
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Item 0</key>

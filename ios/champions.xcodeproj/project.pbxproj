@@ -33,7 +33,7 @@
 		A32CCB9D2624B95800CD793A /* Metropolis-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C094994E408424190B47308 /* Metropolis-ThinItalic.otf */; };
 		A32CCBEA2624BA7600CD793A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A32CCBE92624BA7600CD793A /* splash.png */; };
 		A32CCDEF2624DAF300CD793A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A32CCDEE2624DAF300CD793A /* GoogleService-Info.plist */; };
-		A3D9F0272651B3A30059598B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D9F0262651B3A30059598B /* File.swift */; };
+		A39D15412652D9A400374FA2 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -500,7 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				A3D9F0272651B3A30059598B /* File.swift in Sources */,
+				A39D15412652D9A400374FA2 /* BuildFile in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
