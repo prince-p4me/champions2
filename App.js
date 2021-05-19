@@ -17,6 +17,9 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 
+import messaging from '@react-native-firebase/messaging';
+// import * as firebase from 'firebase';
+
 const App = () => {
   LogBox.ignoreAllLogs(true);
 
@@ -35,6 +38,19 @@ const App = () => {
       googleServicePlistPath: '', // [iOS] optional, if you renamed your GoogleService-Info file, new name here, e.g. GoogleService-Info-Staging
     });
 
+    async function requestUserPermission() {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+      if (enabled) {
+        console.log('Authorization status:', authStatus);
+      }
+    }
+
+    requestUserPermission();
+
     async function PermissionRequest() {
       const granted = await request(
         Platform.select({
@@ -48,8 +64,20 @@ const App = () => {
       }
     }
     PermissionRequest();
+
+    // const unsubscribe = messaging().onMessage(async remoteMessage => {
+    //   Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    // });
+
+    // messaging().setBackgroundMessageHandler(async remoteMessage => {
+    //   console.log('Message handled in the background!', remoteMessage);
+    // });
+
+    // return unsubscribe;
+
     return () => {
       isReadyRef.current = false;
+      // unsubscribe;
     };
   }, []);
 

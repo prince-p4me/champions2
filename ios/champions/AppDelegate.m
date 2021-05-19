@@ -7,6 +7,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
+
 // #ifdef FB_SONARKIT_ENABLED
 // #import <FlipperKit/FlipperClient.h>
 // #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -55,9 +56,12 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];
+    // [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+  
   return YES;
 }
 
+ 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
 #if DEBUG
