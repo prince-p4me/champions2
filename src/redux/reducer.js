@@ -144,26 +144,44 @@ export const getOfferDetail = (state = [], action) => {
   }
 };
 
+export const getNotification = (state = [], action) => {
+  switch (action.type) {
+    case Types.NOTIFICATIONS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const getTransaction = (state = [], action) => {
+  switch (action.type) {
+    case Types.TRANSACTIONS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const getStates = (state = [], action) => {
   let statelist = [
-    {id: 1, name: 'Andhra Pradesh'},
-    {id: 2, name: 'Arunachal Pradesh'},
-    {id: 3, name: 'Assam'},
-    {id: 4, name: 'Bihar'},
-    {id: 5, name: 'Chattisgarh'},
-    {id: 6, name: 'Goa'},
-    {id: 7, name: 'Gujrat'},
-    {id: 8, name: 'Haryana'},
-    {id: 9, name: 'Himachal Pradesh'},
-    {id: 10, name: 'Jammu and Kashmir'},
-    {id: 11, name: 'JharKand'},
-    {id: 12, name: 'Karnatka'},
-    {id: 13, name: 'Kerla'},
-    {id: 14, name: 'Madhya Pradesh'},
-    {id: 15, name: 'Maharashtra'},
-    {id: 16, name: 'Manipur'},
-    {id: 17, name: 'Mizoram'},
-    {id: 18, name: 'Nagaland'},
+    { id: 1, name: 'Andhra Pradesh' },
+    { id: 2, name: 'Arunachal Pradesh' },
+    { id: 3, name: 'Assam' },
+    { id: 4, name: 'Bihar' },
+    { id: 5, name: 'Chattisgarh' },
+    { id: 6, name: 'Goa' },
+    { id: 7, name: 'Gujrat' },
+    { id: 8, name: 'Haryana' },
+    { id: 9, name: 'Himachal Pradesh' },
+    { id: 10, name: 'Jammu and Kashmir' },
+    { id: 11, name: 'JharKand' },
+    { id: 12, name: 'Karnatka' },
+    { id: 13, name: 'Kerla' },
+    { id: 14, name: 'Madhya Pradesh' },
+    { id: 15, name: 'Maharashtra' },
+    { id: 16, name: 'Manipur' },
+    { id: 17, name: 'Mizoram' },
+    { id: 18, name: 'Nagaland' },
   ];
   switch (action.type) {
     case Types.STATE_LIST:

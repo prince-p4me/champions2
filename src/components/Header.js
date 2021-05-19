@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Text,
   Image,
-  BackHandler,
+  ImageBackground,
 } from 'react-native';
 import styles from '../utility/Style';
 import Constants from '../utility/Constant';
@@ -25,16 +25,16 @@ import Icon1 from 'react-native-vector-icons/dist/MaterialIcons';
 
 import * as Navigation from '../navigation/navigation';
 import Color from '../utility/Color';
-import { TextMedium } from './TextView';
+import { TextMedium, TextThin } from './TextView';
+import Sizes from '../utility/Sizes';
 
 const Header = props => {
   const { title, transparent, bgColor, back, dashboard, help } = props;
   const isRtl = useSelector(state => state.isRtl);
   const user = useSelector(state => state.getUser);
-
+  const data = useSelector(state => state.getNotification);
   const dispatch = useDispatch();
-  console.log('back', back);
-  console.log({ user: user });
+
   return (
     <View style={{ width: '100%' }}>
       <SafeAreaView
@@ -100,41 +100,31 @@ const Header = props => {
         <View style={styles.headerDashboard}>
           <View style={styles.headerContainer}>
             <View style={styles.headerCol}>
-              <TouchableOpacity
-                onPress={() => {
-                  Navigation.navigate('Profilemain');
-                }}>
-                <Image
-                  source={
-                    user.profile_photo
-                      ? { uri: Constants.IMAGE_URL + user.profile_photo }
-                      : About
-                  }
-                  style={styles.profileIcon}></Image>
-
-                {/* <TextMedium text={user.profile_photo} /> */}
+              <TouchableOpacity style={[styles.profileIcon, {
+                borderWidth: 1, borderRadius: 25,
+                overflow: "hidden", borderColor: Color.border
+              }]} onPress={() => Navigation.navigate('Profilemain')}>
+                <ImageBackground style={{ width: "100%", height: "100%" }}
+                  source={About}>
+                  <Image source={{ uri: Constants.IMAGE_URL + user.profile_photo }}
+                    style={styles.profileIcon}></Image>
+                </ImageBackground>
               </TouchableOpacity>
             </View>
             <View style={styles.headerRightRow}>
-              <TouchableOpacity
-                style={{ paddingStart: 15 }}
-                onPress={() => Navigation.navigate('Help')}>
-                <Image source={alarm} style={{
-                  tintColor: Color.white,
-                  height: 28, width: 28,
-                  resizeMode: "contain"
-                }} />
+              <TouchableOpacity style={styles.notification}
+                onPress={() => Navigation.navigate('Notification')}>
+                <Image source={alarm} style={styles.notifImg} />
+                {(data[0]?.today && data[0]?.data.length) && <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
+                  <TextThin text={data[0]?.data.length} style={{ fontSize: Sizes.small, color: Color.theme }} />
+                </View>}
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.helpSpacing}
+              <TouchableOpacity style={styles.helpSpacing}
                 onPress={() => Navigation.navigate('Help')}>
                 <Image source={Help} style={styles.rightHeaderIcon} />
               </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch(Actions.logOut());
-                }}>
+              <TouchableOpacity onPress={() => dispatch(Actions.logOut())}>
                 <Image source={Logout} style={styles.rightHeaderIcon}></Image>
               </TouchableOpacity>
             </View>

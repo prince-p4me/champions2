@@ -85,15 +85,17 @@ const PointsWonLayout = ({ route }) => {
     <View style={{ height: height / 3 + 10 }}>
       <FlatList
         columnWrapperStyle={{
+          flexGrow: 1,
           justifyContent: 'space-between',
-          // marginBottom: 100,
-          // paddingBottom: 100,
         }}
         data={transactionList}
         numColumns={2}
         renderItem={({ item }) => {
           return <PointWonLayout item={item} />;
         }}
+        // scrollEnabled={false}
+        ListFooterComponent={(<View style={{ height: 50 }}></View>)}
+
       />
     </View>
   );

@@ -3,6 +3,22 @@ import Color from './Color';
 import Constant from './Constant';
 
 export default StyleSheet.create({
+  notification: {
+    paddingStart: 15, height: "100%",
+    justifyContent: "center",
+  },
+  notifImg: {
+    tintColor: Color.white,
+    height: 28, width: 28,
+    resizeMode: "contain"
+  },
+  badge: {
+    backgroundColor: "yellow",
+    position: "absolute",
+    padding: 3, borderRadius: 10,
+    paddingHorizontal: 5,
+    top: 5
+  },
   cardView: {
     shadowColor: "#000",
     shadowOffset: {
@@ -152,6 +168,8 @@ export default StyleSheet.create({
   headerRightRow: {
     flexDirection: 'row',
     paddingStart: 40,
+    height: "100%",
+    alignItems: "center"
   },
   profileIcon: {
     width: 45,

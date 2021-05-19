@@ -1,7 +1,7 @@
 import Constants from '../utility/Constant';
-import {store} from '../redux/store';
-import {BackHandler} from 'react-native';
-import {showResponse} from '../utility/Index';
+import { store } from '../redux/store';
+import { BackHandler } from 'react-native';
+import { showResponse } from '../utility/Index';
 
 async function callApi(urlString, body, methodType) {
   console.log('-----------AXIOS  Api request is----------- ');
@@ -161,17 +161,29 @@ export function getTransactionByCategory(body) {
   );
 }
 
-export function AddAdress(body) {
+export function addAdress(body) {
   console.log('----------Add Api Call ------------------');
   return callApi(Constants.API_URL + 'user_address_add.php', body, 'POST');
 }
 
-export function UpdateAddress(body) {
+export function updateAddress(body) {
   console.log('----------Update Api Call ------------------');
   return callApi(Constants.API_URL + 'user_address_update.php', body, 'POST');
 }
 
-export function DeleteAddress(body) {
+export function deleteAddress(body) {
   console.log('----------Delete Api Call ------------------');
   return callApi(Constants.API_URL + 'user_address_delete.php', body, 'POST');
+}
+
+export function getNotification() {
+  const state = store.getState();
+  console.log('----------getNotification Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_notification.php', { user_id: state.getUser.id }, 'POST');
+}
+
+export function getTransaction() {
+  const state = store.getState();
+  console.log('----------getTransaction Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_transaction_list.php', { user_id: state.getUser.id }, 'POST');
 }

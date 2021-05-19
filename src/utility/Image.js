@@ -8,6 +8,7 @@ export default Images = {
   star2: require('../assets/imgs/star2.png'),
   star3: require('../assets/imgs/pointed-star.png'),
   transaction: require('../assets/imgs/transaction.png'),
+  notif: require('../assets/imgs/notif.png'),
   close: require('../assets/imgs/close.png'),
   dish: require('../assets/imgs/phirnidish.jpg'),
   reward: require('../assets/imgs/my-rewards.png'),

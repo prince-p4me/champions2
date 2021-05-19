@@ -195,4 +195,18 @@ export function DeleteAddress(payload) {
   };
 }
 
+export function getNotification(payload) {
+  return {
+    type: Types.GET_NOTIFICATIONS,
+    payload,
+  };
+}
+
+export function getTransaction(payload) {
+  return {
+    type: Types.GET_TRANSACTIONS,
+    payload,
+  };
+}
+
 // add another actions further

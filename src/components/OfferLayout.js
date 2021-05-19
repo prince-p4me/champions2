@@ -11,11 +11,16 @@ import * as Navigation from '../navigation/navigation';
 import { Icon } from 'react-native-elements';
 import Constant from '../utility/Constant';
 
-const OfferLayout = () => {
+const OfferLayout = props => {
+  const { home } = props;
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
   const list = useSelector(state => state.getOffers);
-  const data = list.filter((obj) => parseInt(obj.redeemed) < 1);
+  let data = list.filter((obj) => parseInt(obj.redeemed) < 1);
+  if (home) {
+    data = data.slice(0, 4);
+  }
+
   if (data && data.length) {
     console.log("offers found", data);
     return (
