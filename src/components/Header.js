@@ -120,8 +120,8 @@ const Header = props => {
                 </View>}
               </TouchableOpacity>
               <TouchableOpacity style={styles.helpSpacing}
-                onPress={() => Navigation.navigate('Help')}>
-                <Image source={Help} style={styles.rightHeaderIcon} />
+                onPress={() => Navigation.navigate('Help', { auth: false })}>
+                <Image source={Help} style={[styles.rightHeaderIcon, { tintColor: Color.white }]} />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => dispatch(Actions.logOut())}>
