@@ -63,7 +63,7 @@ const LoginScreen = () => {
       <KeyboardAvoidingView
         behavior="position"
         style={{
-          flex: 6,
+          flex: 5,
           alignItems: 'center',
           paddingTop: 20,
           paddingHorizontal: 16,
@@ -106,8 +106,7 @@ const LoginScreen = () => {
             maxLength={10}
             onSubmitEditing={doLogin}></TextInput>
         </View>
-        <FullButton
-          btnStyle={{ width: Constant.width - 64, marginTop: 50 }}
+        <FullButton btnStyle={{ width: Constant.width - 64, marginTop: 50 }}
           onPress={doLogin}
           text={I18n.t('Sendotp')}
           textColor={Colors.white}
@@ -117,28 +116,21 @@ const LoginScreen = () => {
 
       <TextDevider text={I18n.t('loginwith')}></TextDevider>
 
-      <SocialLogin typeScreen={'login'} />
-
-      <View
-        style={{
-          flex: 5,
-          width: '100%',
-          justifyContent: 'flex-end',
-        }}>
+      <View style={{ flex: 5 }}>
+        <SocialLogin typeScreen={'login'} />
         <LinkButton
           text={I18n.t('doyouhaveac')}
           btnText={I18n.t('signup2')}
           onPress={() => Navigation.navigate('SignUp')}
         />
         <View style={{ height: 40 }}></View>
-        <View
-          style={{
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 20,
-          }}>
+        <View style={{
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: 20,
+        }}>
           <TextSemiBold
             text={I18n.t('chooselanguage')}
             style={{ marginEnd: 7 }}

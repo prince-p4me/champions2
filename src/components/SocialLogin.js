@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 
 import Images from '../utility/Image';
 import Constant from '../utility/Constant';
+import styles from '../utility/Style';
 import Color from '../utility/Color';
 import FullButton from '../components/FullButton';
 
@@ -17,28 +18,28 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import {LoginManager, Profile, AccessToken} from 'react-native-fbsdk-next';
+import { LoginManager, Profile, AccessToken } from 'react-native-fbsdk-next';
 
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import * as Actions from '../redux/action';
 
 const SocialLogin = props => {
-  // const {typeScreen} = props;
-
-  let typeScreen = 'signup';
+  const { typeScreen } = props;
+  console.log("typeScreen", typeScreen);
+  // let typeScreen = 'signup';
   const dispatch = useDispatch();
 
   async function signIn(loginType) {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log({userInfo: userInfo});
+      console.log({ userInfo: userInfo });
 
       logginUser(userInfo, 'google', loginType);
     } catch (error) {
       console.log('error');
-      console.log({error: error});
+      console.log({ error: error });
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -59,19 +60,19 @@ const SocialLogin = props => {
         } else {
           console.log(
             'Login success with permissions: ' +
-              result.grantedPermissions.toString(),
+            result.grantedPermissions.toString(),
           );
 
           const currentProfile = Profile.getCurrentProfile().then(function (
             currentProfile,
           ) {
             if (currentProfile) {
-              console.log({currentProfile: currentProfile});
+              console.log({ currentProfile: currentProfile });
               console.log(
                 'The current logged user is: ' +
-                  currentProfile.name +
-                  '. His profile id is: ' +
-                  currentProfile.userID,
+                currentProfile.name +
+                '. His profile id is: ' +
+                currentProfile.userID,
               );
               // logginUser(currentProfile);
               logginUser(currentProfile, 'facebook', loginType);
@@ -108,57 +109,39 @@ const SocialLogin = props => {
       };
     }
 
-    console.log({userInfoModify: userInfoModify});
+    console.log({ userInfoModify: userInfoModify });
     if (typeScreen == 'login') {
-      dispatch(Actions.doLogin({userInfoModify}));
+      dispatch(Actions.doLogin({ userInfoModify }));
     } else {
-      dispatch(Actions.signUp({userInfoModify}));
+      dispatch(Actions.signUp({ userInfoModify }));
     }
   }
 
   return (
-    <View style={styles.firstSection}>
-      <TouchableOpacity
-        onPress={() => {
-          signIn();
-        }}>
-        <View style={{flexDirection: 'row'}}>
-          <Image
-            source={Images.google}
-            style={{width: '100%'}}
-            resizeMode="contain"></Image>
-        </View>
+    <View style={{
+      flex: 6, width: "100%",
+      paddingHorizontal: 28,
+      alignItems: "center",
+      justifyContent: "space-around",
+    }}>
+      <TouchableOpacity style={[styles.cardView, {
+        height: 45,
+        width: Constant.width - 56
+      }]} onPress={() => signIn()}>
+        <Image source={Images.google}
+          style={{ width: '100%', height: "100%", resizeMode: "cover" }}
+          resizeMode="contain"></Image>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => {
-          fbLogin();
-        }}>
-        <View style={{flexDirection: 'row'}}>
-          <Image
-            source={Images.fb}
-            style={{width: '100%'}}
-            resizeMode="contain"></Image>
-        </View>
+      <TouchableOpacity style={[styles.cardView, {
+        height: 45,
+        width: Constant.width - 56
+      }]} onPress={() => fbLogin()}>
+        <Image source={Images.fb}
+          style={{ width: '100%', height: "100%", resizeMode: "cover" }}
+          resizeMode="contain"></Image>
       </TouchableOpacity>
     </View>
   );
 };
 export default SocialLogin;
-
-const styles = StyleSheet.create({
-  firstSection: {
-    width: Constant.width,
-    flex: 5,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: '18%',
-  },
-  btnContainer: {
-    height: '50%',
-    width: '100%',
-    paddingVertical: '5%',
-    // backgroundColor: "red",
-    justifyContent: 'space-around',
-  },
-});

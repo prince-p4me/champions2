@@ -63,20 +63,6 @@ class HomeScreen extends React.Component {
     });
   }
 
-  getLocationPermissions() {
-    Geolocation.getCurrentPosition(info => {
-      this.setState(
-        {
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
-        },
-        () => {
-          console.log({ state: this.state });
-        },
-      );
-    });
-  }
-
   checkProps = () => {
     if (this.props.route.params && this.props.route.params.data) {
       let { data } = this.props.route.params;
