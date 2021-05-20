@@ -44,12 +44,12 @@ const LoginScreen = () => {
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
   useEffect(() => {
-    GoogleSignin.configure({
-      scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
-      webClientId:
-        '407190131380-uj4qa5ptfcdj68cftohb0d3jb4cqi17s.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-      offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-    });
+    // GoogleSignin.configure({
+    //   scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
+    //   webClientId:
+    //     '190017235730-gi6fvvnrdotf203a29vvd70e43g0h5rv.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    //   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    // });
     setTimeout(() => {
       I18n.locale = language;
       forceUpdate();

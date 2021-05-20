@@ -37,6 +37,8 @@ const SocialLogin = props => {
 
       logginUser(userInfo, 'google', loginType);
     } catch (error) {
+      console.log('error');
+      console.log({error: error});
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {

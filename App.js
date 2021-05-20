@@ -18,16 +18,51 @@ import {
 } from '@react-native-google-signin/google-signin';
 
 import messaging from '@react-native-firebase/messaging';
-// import * as firebase from 'firebase';
+import firebase from '@react-native-firebase/app';
 
+// import * as firebase from 'firebase';
+// import firebase from 'react-native-firebase';
+const firebaseConfig = {
+  apiKey: 'AIzaSyCw0q516IzpNPo-A8zFy714rCxh06DIlc8',
+  authDomain: '190017235730.firebaseapp.com',
+  databaseURL: 'https://190017235730.firebaseio.com',
+  projectId: '190017235730',
+  storageBucket: '190017235730.appspot.com',
+  messagingSenderId: '190017235730',
+  appId: '1:190017235730:ios:546987123daf418684e1cb',
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 const App = () => {
   LogBox.ignoreAllLogs(true);
 
   useEffect(() => {
+    // messaging().onTokenRefresh(fcmToken => {
+    //   console.log('token==' + fcmToken);
+    //   // Process your token as required
+    // });
+
+    // async function requestUserPermission() {
+    //   console.log('receiverrr');
+    //   const fcmToken = await messaging().getToken();
+
+    //   console.log('token==' + fcmToken);
+    //   if (fcmToken) {
+    //     console.log('reciverddd');
+    //     // user has a device token
+    //   } else {
+    //     console.log('not receiverd');
+    //     // user doesn't have a device token yet
+    //   }
+    // }
+    // requestUserPermission();
+
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
       webClientId:
-        '407190131380-61d4qmgln4u3e91dfe4pa7jc7mnbic4q.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+        '190017235730-gi6fvvnrdotf203a29vvd70e43g0h5rv.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
       hostedDomain: '', // specifies a hosted domain restriction
       loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
@@ -44,6 +79,7 @@ const App = () => {
         authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
+      const token = await messaging().getToken();
       if (enabled) {
         console.log('Authorization status:', authStatus);
       }
