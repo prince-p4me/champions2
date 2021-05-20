@@ -11,9 +11,6 @@ import Loader from './src/components/Loader';
 import { LogBox, StatusBar, Platform } from 'react-native';
 import Color from './src/utility/Color';
 
-// import * as firebase from 'firebase';
-// import firebase from 'react-native-firebase';
-
 const App = () => {
   LogBox.ignoreAllLogs(true);
 

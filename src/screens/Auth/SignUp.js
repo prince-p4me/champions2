@@ -24,7 +24,7 @@ import I18n from '../../services/i18n';
 import i18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 
-import { TextRegular, TextBold, TextSemiBold } from '../../components/TextView';
+import { TextRegular, TextBold, TextSemiBold, TextLite } from '../../components/TextView';
 import TextDevider from '../../components/TextDevider';
 import LinkButton from './LinkButton';
 import Sizes from '../../utility/Sizes';
@@ -127,9 +127,8 @@ const SignupScreen = () => {
             onChangeText={mobile => setMobile(mobile)}
             maxLength={10}></TextInput>
         </View>
-        <FullButton
+        <FullButton onPress={signUp}
           btnStyle={{ width: Constant.width - 64, marginTop: 50 }}
-          onPress={signUp}
           text={i18n.t('Sendotp')}
           textColor={Colors.white}
           bgColor={Colors.theme}
@@ -140,18 +139,29 @@ const SignupScreen = () => {
 
       <TextDevider text={I18n.t('signupwith')}></TextDevider>
       <SocialLogin typeScreen={'signup'} />
-      <View
-        style={{
-          flex: 3,
-          // backgroundColor: "red",
-          width: '100%',
-          justifyContent: 'flex-end',
-        }}>
-        <LinkButton
-          text={I18n.t('alreay')}
-          btnText={I18n.t('login')}
-          onPress={() => Navigation.goBack()}
-        />
+      <View style={{
+        flex: 3,
+        // backgroundColor: "red",
+        width: '100%',
+        justifyContent: 'flex-end',
+      }}>
+
+        <View style={{ height: 60, justifyContent: "space-between" }}>
+          <LinkButton
+            text={I18n.t('alreay')}
+            btnText={I18n.t('login')}
+            onPress={() => Navigation.goBack()}
+          />
+          <TouchableOpacity style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}
+            onPress={() => Navigation.navigate("Help", { auth: true })}>
+            <Image source={Images.help} style={{
+              width: 25, height: 25,
+              resizeMode: "contain",
+              tintColor: "blue"
+            }} />
+            <TextLite text="Help" style={{ fontSize: Sizes.regular, marginStart: 7 }} />
+          </TouchableOpacity>
+        </View>
         <View style={{ height: 40 }}></View>
         <View
           style={{

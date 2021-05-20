@@ -19,7 +19,7 @@ import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 
-import { TextRegular, TextBold, TextSemiBold } from '../../components/TextView';
+import { TextRegular, TextBold, TextSemiBold, TextLite } from '../../components/TextView';
 import TextDevider from '../../components/TextDevider';
 import LinkButton from './LinkButton';
 import Sizes from '../../utility/Sizes';
@@ -118,11 +118,22 @@ const LoginScreen = () => {
 
       <View style={{ flex: 5 }}>
         <SocialLogin typeScreen={'login'} />
-        <LinkButton
-          text={I18n.t('doyouhaveac')}
-          btnText={I18n.t('signup2')}
-          onPress={() => Navigation.navigate('SignUp')}
-        />
+        <View style={{ height: 60, justifyContent: "space-between" }}>
+          <LinkButton
+            text={I18n.t('doyouhaveac')}
+            btnText={I18n.t('signup2')}
+            onPress={() => Navigation.navigate('SignUp')}
+          />
+          <TouchableOpacity style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}
+            onPress={() => Navigation.navigate("Help", { auth: true })}>
+            <Image source={Images.help} style={{
+              width: 25, height: 25,
+              resizeMode: "contain",
+              tintColor: "blue"
+            }} />
+            <TextLite text="Help" style={{ fontSize: Sizes.regular, marginStart: 7 }} />
+          </TouchableOpacity>
+        </View>
         <View style={{ height: 40 }}></View>
         <View style={{
           width: '100%',
