@@ -44,21 +44,6 @@ const App = () => {
     //   // Process your token as required
     // });
 
-    // async function requestUserPermission() {
-    //   console.log('receiverrr');
-    //   const fcmToken = await messaging().getToken();
-
-    //   console.log('token==' + fcmToken);
-    //   if (fcmToken) {
-    //     console.log('reciverddd');
-    //     // user has a device token
-    //   } else {
-    //     console.log('not receiverd');
-    //     // user doesn't have a device token yet
-    //   }
-    // }
-    // requestUserPermission();
-
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
       webClientId:
@@ -80,6 +65,8 @@ const App = () => {
         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
       const token = await messaging().getToken();
+
+      console.log(token);
       if (enabled) {
         console.log('Authorization status:', authStatus);
       }
@@ -100,16 +87,6 @@ const App = () => {
       }
     }
     PermissionRequest();
-
-    // const unsubscribe = messaging().onMessage(async remoteMessage => {
-    //   Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    // });
-
-    // messaging().setBackgroundMessageHandler(async remoteMessage => {
-    //   console.log('Message handled in the background!', remoteMessage);
-    // });
-
-    // return unsubscribe;
 
     return () => {
       isReadyRef.current = false;

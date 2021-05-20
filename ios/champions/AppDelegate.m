@@ -8,6 +8,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Firebase.h>
 
+#import "RNFBMessagingModule.h"
 
 // #ifdef FB_SONARKIT_ENABLED
 // #import <FlipperKit/FlipperClient.h>
@@ -45,10 +46,15 @@
                              didFinishLaunchingWithOptions:launchOptions];
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+    NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];
+
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"champions"
                                             initialProperties:nil];
 
+
+// Find the `RCTRootView` instance and update the `initialProperties` with your `appProperties` instance
+ 
   if (@available(iOS 13.0, *)) {
       rootView.backgroundColor = [UIColor systemBackgroundColor];
   } else {
