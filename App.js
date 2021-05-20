@@ -1,16 +1,16 @@
-import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './src/navigation/stack';
-import {navigationRef, isReadyRef} from './src/navigation/navigation';
-import {Provider} from 'react-redux';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {persistor, store} from './src/redux/store';
-import {PersistGate} from 'redux-persist/integration/react';
+import { navigationRef, isReadyRef } from './src/navigation/navigation';
+import { Provider } from 'react-redux';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { persistor, store } from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import Loader from './src/components/Loader';
-import {LogBox, StatusBar, Platform} from 'react-native';
+import { LogBox, StatusBar, Platform } from 'react-native';
 import Color from './src/utility/Color';
-import {request, PERMISSIONS} from 'react-native-permissions';
+import { request, PERMISSIONS } from 'react-native-permissions';
 
 import {
   GoogleSignin,
@@ -75,19 +75,19 @@ const App = () => {
 
     async function requestUserPermission() {
       const authStatus = await messaging().requestPermission();
-      const enabled =
-        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+      console.log('Authorization status:', authStatus);
+      const enabled = (authStatus === messaging.AuthorizationStatus.AUTHORIZED) ||
+        (authStatus === messaging.AuthorizationStatus.PROVISIONAL);
 
-      const token = await messaging().getToken();
       if (enabled) {
-        console.log('Authorization status:', authStatus);
+        const token = await messaging().getToken();
+        console.log("token", token);
       }
     }
 
     requestUserPermission();
 
-    async function PermissionRequest() {
+    async function requestLocationPermission() {
       const granted = await request(
         Platform.select({
           ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
@@ -96,10 +96,10 @@ const App = () => {
       if (granted) {
         console.log('Permission granted');
       } else {
-        Alert.alert('Permission Not Granted.');
+        Alert.alert("ALert!", 'Permission Not Granted.');
       }
     }
-    PermissionRequest();
+    requestLocationPermission();
 
     // const unsubscribe = messaging().onMessage(async remoteMessage => {
     //   Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
