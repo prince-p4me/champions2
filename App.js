@@ -13,29 +13,6 @@ import Color from './src/utility/Color';
 import {request, PERMISSIONS} from 'react-native-permissions';
 import {Settings} from 'react-native-fbsdk-next';
 
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
-
-import messaging from '@react-native-firebase/messaging';
-import firebase from '@react-native-firebase/app';
-
-// import * as firebase from 'firebase';
-// import firebase from 'react-native-firebase';
-const firebaseConfig = {
-  apiKey: 'AIzaSyCw0q516IzpNPo-A8zFy714rCxh06DIlc8',
-  authDomain: '190017235730.firebaseapp.com',
-  databaseURL: 'https://190017235730.firebaseio.com',
-  projectId: '190017235730',
-  storageBucket: '190017235730.appspot.com',
-  messagingSenderId: '190017235730',
-  appId: '1:190017235730:ios:546987123daf418684e1cb',
-};
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
 const App = () => {
   LogBox.ignoreAllLogs(true);
 

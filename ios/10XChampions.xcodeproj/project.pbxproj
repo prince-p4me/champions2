@@ -34,8 +34,13 @@
 		A32CCBEA2624BA7600CD793A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A32CCBE92624BA7600CD793A /* splash.png */; };
 		A372B8DE2653D18900A77EA3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372B8DD2653D18900A77EA3 /* File.swift */; };
 		A391C7FD26554FDF009D3CA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */; };
+<<<<<<< HEAD:ios/10XChampions.xcodeproj/project.pbxproj
 		A39D15412652D9A400374FA2 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		FCD1C9BCC660A86A456F9D7A /* libPods-10XChampions-10XChampionsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-10XChampions-10XChampionsTests.a */; };
+=======
+		A39D15412652D9A400374FA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
+>>>>>>> 04ba331e0ed5b942221b8210e5d0140db23e4bc0:ios/champions.xcodeproj/project.pbxproj
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -516,7 +521,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				A372B8DE2653D18900A77EA3 /* File.swift in Sources */,
-				A39D15412652D9A400374FA2 /* BuildFile in Sources */,
+				A39D15412652D9A400374FA2 /* (null) in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,6 +596,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = 5KS6763CM4;
 				ENABLE_BITCODE = NO;
@@ -605,9 +611,16 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<< HEAD:ios/10XChampions.xcodeproj/project.pbxproj
 				PRODUCT_BUNDLE_IDENTIFIER = com.eminence.10XChampions;
 				PRODUCT_NAME = 10XChampions;
 				SWIFT_OBJC_BRIDGING_HEADER = "10XChampions-Bridging-Header.h";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.eminence.champions;
+				PRODUCT_NAME = champions;
+				PROVISIONING_PROFILE_SPECIFIER = 10x20May;
+				SWIFT_OBJC_BRIDGING_HEADER = "champions-Bridging-Header.h";
+>>>>>>> 04ba331e0ed5b942221b8210e5d0140db23e4bc0:ios/champions.xcodeproj/project.pbxproj
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -620,6 +633,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = 5KS6763CM4;
 				INFOPLIST_FILE = 10XChampions/Info.plist;
@@ -633,9 +647,16 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<< HEAD:ios/10XChampions.xcodeproj/project.pbxproj
 				PRODUCT_BUNDLE_IDENTIFIER = com.eminence.10XChampions;
 				PRODUCT_NAME = 10XChampions;
 				SWIFT_OBJC_BRIDGING_HEADER = "10XChampions-Bridging-Header.h";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.eminence.champions;
+				PRODUCT_NAME = champions;
+				PROVISIONING_PROFILE_SPECIFIER = 10x20May;
+				SWIFT_OBJC_BRIDGING_HEADER = "champions-Bridging-Header.h";
+>>>>>>> 04ba331e0ed5b942221b8210e5d0140db23e4bc0:ios/champions.xcodeproj/project.pbxproj
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -674,7 +695,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -739,7 +760,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -86,7 +86,7 @@ const Header = props => {
                 { position: 'relative', alignItems: 'flex-end' },
               ]}
               activeOpacity={0.7}
-              onPress={() => Navigation.navigate('Help')}>
+              onPress={() => Navigation.navigate('Help', { auth: false })}>
               <Icon
                 name="help-circle-outline"
                 size={30}
@@ -120,8 +120,8 @@ const Header = props => {
                 </View>}
               </TouchableOpacity>
               <TouchableOpacity style={styles.helpSpacing}
-                onPress={() => Navigation.navigate('Help')}>
-                <Image source={Help} style={styles.rightHeaderIcon} />
+                onPress={() => Navigation.navigate('Help', { auth: false })}>
+                <Image source={Help} style={[styles.rightHeaderIcon, { tintColor: Color.white }]} />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => dispatch(Actions.logOut())}>

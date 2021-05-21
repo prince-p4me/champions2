@@ -4,6 +4,7 @@ export default Images = {
   splash: require('../assets/imgs/splash.png'),
   saina: require('../assets/imgs/saina.png'),
   back: require('../assets/imgs/arrow.png'),
+  help: require('../assets/imgs/help.png'),
   star: require('../assets/imgs/star.png'),
   star2: require('../assets/imgs/star2.png'),
   star3: require('../assets/imgs/pointed-star.png'),

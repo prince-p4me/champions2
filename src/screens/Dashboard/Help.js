@@ -20,19 +20,25 @@ import Sizes from '../../utility/Sizes';
 import { showToast } from '../../utility/Index';
 
 
-const Help = (props) => {
+const Help = props => {
     const dispatch = useDispatch();
+    const { auth: isAuth } = props.route.params;
     const [query, setQuery] = useState("");
+    const [mobile, setMobile] = useState("");
     const user = useSelector(state => state.getUser)
-    console.log("user", user);
+    console.log("isAuth", isAuth);
 
     const sentQuery = () => {
+        if (isAuth && (!mobile || mobile.length != 10)) {
+            showToast(I18n.t("enter_mobile") + " . . .");
+            return;
+        }
         if (!query) {
             showToast("Please describe your query . . .");
             return;
         }
         let obj = {
-            mobile: user.mobile,
+            mobile: isAuth ? mobile : user.mobile,
             query,
         }
         dispatch(Actions.help(obj));
@@ -42,6 +48,16 @@ const Help = (props) => {
         <View style={{ flex: 1, backgroundColor: Colors.lightGreen }}>
             <Header title={I18n.t("help")} dashboard={false} back={true} />
             <View style={{ flex: 1, padding: 16, paddingTop: 25 }}>
+                {isAuth && <View style={{ width: "100%" }}>
+                    <TextBold text={I18n.t("mobile")} style={{ fontSize: Sizes.medium, alignSelf: "flex-start" }}></TextBold>
+                    <TextInput style={[styles.input, { height: 40, width: "100%", marginBottom: 20 }]}
+                        value={mobile}
+                        maxLength={10}
+                        placeholder={I18n.t("enter_mobile")}
+                        onChangeText={mobile => setMobile(mobile)}
+                        returnKeyType="next"
+                        onSubmitEditing={setMobile}></TextInput>
+                </View>}
                 <TextBold text={I18n.t("yourquery")} style={{ fontSize: Sizes.medium, alignSelf: "flex-start" }}></TextBold>
                 <TextInput style={styles.input}
                     placeholder={I18n.t("describequery")}

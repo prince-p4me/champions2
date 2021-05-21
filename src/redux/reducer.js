@@ -162,6 +162,15 @@ export const getTransaction = (state = [], action) => {
   }
 };
 
+export const getFcmToken = (state = null, action) => {
+  switch (action.type) {
+    case Types.FCM_TOKEN:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const getStates = (state = [], action) => {
   let statelist = [
     { id: 1, name: 'Andhra Pradesh' },

@@ -209,4 +209,11 @@ export function getTransaction(payload) {
   };
 }
 
+export function setFcmToken(payload) {
+  return {
+    type: Types.FCM_TOKEN,
+    payload,
+  };
+}
+
 // add another actions further

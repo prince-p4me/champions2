@@ -3,17 +3,14 @@ import {
   View,
   SafeAreaView,
   KeyboardAvoidingView,
-  I18nManager,
   Image,
   TextInput,
   Keyboard,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../components/Header';
 import Colors from '../../utility/Color';
 import styles from '../../utility/Style';
 import {useSelector, useDispatch} from 'react-redux';
-import Loader from '../../components/Loader';
 import * as Actions from '../../redux/action';
 
 import Images from '../../utility/Image';
@@ -22,7 +19,12 @@ import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 
-import {TextRegular, TextBold, TextSemiBold} from '../../components/TextView';
+import {
+  TextRegular,
+  TextBold,
+  TextSemiBold,
+  TextLite,
+} from '../../components/TextView';
 import TextDevider from '../../components/TextDevider';
 import LinkButton from './LinkButton';
 import Sizes from '../../utility/Sizes';
@@ -30,10 +32,6 @@ import ChangeLanguage from './ChangeLanguage';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
 
 const LoginScreen = () => {
   const [mobile, setMobile] = useState('8802854433');
@@ -44,12 +42,6 @@ const LoginScreen = () => {
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
   useEffect(() => {
-    // GoogleSignin.configure({
-    //   scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
-    //   webClientId:
-    //     '190017235730-gi6fvvnrdotf203a29vvd70e43g0h5rv.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-    //   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-    // });
     setTimeout(() => {
       I18n.locale = language;
       forceUpdate();
@@ -76,7 +68,7 @@ const LoginScreen = () => {
       <KeyboardAvoidingView
         behavior="position"
         style={{
-          flex: 6,
+          flex: 5,
           alignItems: 'center',
           paddingTop: 20,
           paddingHorizontal: 16,
@@ -130,19 +122,38 @@ const LoginScreen = () => {
 
       <TextDevider text={I18n.t('loginwith')}></TextDevider>
 
-      {/* <SocialLogin typeScreen={'login'} /> */}
+      <SocialLogin typeScreen={'login'} />
 
-      <View
-        style={{
-          flex: 5,
-          width: '100%',
-          justifyContent: 'flex-end',
-        }}>
-        <LinkButton
-          text={I18n.t('doyouhaveac')}
-          btnText={I18n.t('signup2')}
-          onPress={() => Navigation.navigate('SignUp')}
-        />
+      <View style={{flex: 5}}>
+        <SocialLogin typeScreen={'login'} />
+        <View style={{height: 60, justifyContent: 'space-between'}}>
+          <LinkButton
+            text={I18n.t('doyouhaveac')}
+            btnText={I18n.t('signup2')}
+            onPress={() => Navigation.navigate('SignUp')}
+          />
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => Navigation.navigate('Help', {auth: true})}>
+            <Image
+              source={Images.help}
+              style={{
+                width: 25,
+                height: 25,
+                resizeMode: 'contain',
+                tintColor: 'blue',
+              }}
+            />
+            <TextLite
+              text="Help"
+              style={{fontSize: Sizes.regular, marginStart: 7}}
+            />
+          </TouchableOpacity>
+        </View>
         <View style={{height: 40}}></View>
         <View
           style={{
