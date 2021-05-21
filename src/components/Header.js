@@ -86,7 +86,7 @@ const Header = props => {
                 { position: 'relative', alignItems: 'flex-end' },
               ]}
               activeOpacity={0.7}
-              onPress={() => Navigation.navigate('Help')}>
+              onPress={() => Navigation.navigate('Help', { auth: false })}>
               <Icon
                 name="help-circle-outline"
                 size={30}
