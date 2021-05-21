@@ -122,8 +122,6 @@ const LoginScreen = () => {
 
       <TextDevider text={I18n.t('loginwith')}></TextDevider>
 
-      <SocialLogin typeScreen={'login'} />
-
       <View style={{flex: 5}}>
         <SocialLogin typeScreen={'login'} />
         <View style={{height: 60, justifyContent: 'space-between'}}>
