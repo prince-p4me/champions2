@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -30,20 +30,20 @@ import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
 
 import SuccessModal from './SuccessModal';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import OtpScreen from '../Auth/Otp';
 import LandingScreen from '../Auth/Landing';
 import Profilemain from './Profilemain';
 // import { NavigationEvents } from 'react-navigation';
-import { Icon } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Icon} from 'react-native-elements';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
-import { request, PERMISSIONS } from 'react-native-permissions';
+import {request, PERMISSIONS} from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import NotificationSounds, {
   playSampleSound,
 } from 'react-native-notification-sounds';
@@ -63,6 +63,13 @@ class HomeScreen extends React.Component {
     });
   }
 
+  componentDidMount() {
+    // messaging().getInitialNotification(async remoteMessage => {
+    //   alert('Kill app');
+    //   console.log({remote10233222: remoteMessage?.data});
+    //   // alert(JSON.stringify(remoteMessage?.data));
+    // });
+  }
   getLocationPermissions() {
     Geolocation.getCurrentPosition(info => {
       this.setState(
@@ -71,7 +78,7 @@ class HomeScreen extends React.Component {
           longitude: info.coords.longitude,
         },
         () => {
-          console.log({ state: this.state });
+          console.log({state: this.state});
         },
       );
     });
@@ -79,12 +86,12 @@ class HomeScreen extends React.Component {
 
   checkProps = () => {
     if (this.props.route.params && this.props.route.params.data) {
-      let { data } = this.props.route.params;
+      let {data} = this.props.route.params;
       console.log('scan data', data);
       console.log('executing data');
       data = data.split(',');
       console.log('scan data array', data);
-      let obj = { qr_id: data[0], points: data[1] };
+      let obj = {qr_id: data[0], points: data[1]};
 
       // let successType = false;
       // if (data.length) {
@@ -107,20 +114,19 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let { visible, list, isSuccess } = this.props;
-    let { points } = this.state;
+    let {visible, list, isSuccess} = this.props;
+    let {points} = this.state;
 
     if (isSuccess) {
       // if (this.state.soundsList && this.state.soundsList.length) {
       setTimeout(() => {
         // playSampleSound(this.state.soundsList[1]);
-
-        RNLocalNotifications.createNotification(
-          1,
-          'Notification',
-          'notification',
-          'default',
-        );
+        // RNLocalNotifications.createNotification(
+        //   1,
+        //   'Notification',
+        //   'notification',
+        //   'default',
+        // );
       }, 3000);
       // }
     }
@@ -129,18 +135,18 @@ class HomeScreen extends React.Component {
         <SuccessModal visible={isSuccess} points={points} />
         <Header title={'Home'} dashboard={true} />
         <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
-          <View style={{ height: 20 }} />
+          <View style={{height: 20}} />
           <QRCodeContainer />
           <PointsContainer />
           <MenuContainer />
           <OfferLayout home={true} />
           <RecipeLayout horizontal={true} />
           <ReviewLayout />
-          <View style={{ height: 50 }}></View>
+          <View style={{height: 50}}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
       </View>

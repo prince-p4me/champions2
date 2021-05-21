@@ -92,20 +92,21 @@ const App = () => {
     }
     PermissionRequest();
 
-    messaging().onNotificationOpenedApp(remoteMessage => {
+    messaging().onNotificationOpenedApp(async remoteMessage => {
       console.log({remote10233: remoteMessage?.data});
       // alert(JSON.stringify(remoteMessage?.data));
       alert('background');
     });
 
     // It will trigger when app was in quit mode
-    messaging().getInitialNotification(remoteMessage => {
+    messaging().getInitialNotification(async remoteMessage => {
+      alert('Kill app');
       console.log({remote10233222: remoteMessage?.data});
       // alert(JSON.stringify(remoteMessage?.data));
     });
 
     // If App is in foreground mode
-    messaging().onMessage(remoteMessage => {
+    messaging().onMessage(async remoteMessage => {
       console.log({remote10233: remoteMessage?.data});
       // alert(JSON.stringify(remoteMessage?.data));
       alert('Foreground');
