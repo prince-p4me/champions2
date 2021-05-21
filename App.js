@@ -11,6 +11,7 @@ import Loader from './src/components/Loader';
 import {LogBox, StatusBar, Platform} from 'react-native';
 import Color from './src/utility/Color';
 import {request, PERMISSIONS} from 'react-native-permissions';
+import {Settings} from 'react-native-fbsdk-next';
 
 import {
   GoogleSignin,
@@ -39,6 +40,8 @@ const App = () => {
   LogBox.ignoreAllLogs(true);
 
   useEffect(() => {
+    Settings.initializeSDK();
+
     // messaging().onTokenRefresh(fcmToken => {
     //   console.log('token==' + fcmToken);
     //   // Process your token as required
@@ -65,7 +68,8 @@ const App = () => {
         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
       const token = await messaging().getToken();
-
+      console.log('token==' + token);
+      // alert(token);
       console.log(token);
       if (enabled) {
         console.log('Authorization status:', authStatus);
@@ -87,6 +91,25 @@ const App = () => {
       }
     }
     PermissionRequest();
+
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      console.log({remote10233: remoteMessage?.data});
+      // alert(JSON.stringify(remoteMessage?.data));
+      alert('background');
+    });
+
+    // It will trigger when app was in quit mode
+    messaging().getInitialNotification(remoteMessage => {
+      console.log({remote10233222: remoteMessage?.data});
+      // alert(JSON.stringify(remoteMessage?.data));
+    });
+
+    // If App is in foreground mode
+    messaging().onMessage(remoteMessage => {
+      console.log({remote10233: remoteMessage?.data});
+      // alert(JSON.stringify(remoteMessage?.data));
+      alert('Foreground');
+    });
 
     return () => {
       isReadyRef.current = false;

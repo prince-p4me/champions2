@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'champions' do
+target '10XChampions' do
   config = use_native_modules!
 
   permissions_path = '../node_modules/react-native-permissions/ios'
@@ -20,7 +20,7 @@ target 'champions' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/@react-native-google-signin/google-signin'
 
-  target 'championsTests' do
+  target '10XChampionsTests' do
     inherit! :complete
     # Pods for testing
   end

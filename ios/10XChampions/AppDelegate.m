@@ -49,7 +49,7 @@
     NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"champions"
+                                                   moduleName:@"10XChampions"
                                             initialProperties:nil];
 
 

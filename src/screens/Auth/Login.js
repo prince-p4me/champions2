@@ -130,7 +130,7 @@ const LoginScreen = () => {
 
       <TextDevider text={I18n.t('loginwith')}></TextDevider>
 
-      <SocialLogin typeScreen={'login'} />
+      {/* <SocialLogin typeScreen={'login'} /> */}
 
       <View
         style={{
