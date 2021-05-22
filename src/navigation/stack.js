@@ -8,7 +8,6 @@ import OtpScreen from '../screens/Auth/Otp';
 import SignUpScreen from '../screens/Auth/SignUp';
 import LandingScreen from '../screens/Auth/Landing';
 import {useSelector, useDispatch} from 'react-redux';
-import * as Navigation from '../navigation/navigation';
 import SplashScreen from 'react-native-splash-screen';
 import ScanQrCode from '../screens/Dashboard/ScanQrCode';
 import SuccessModal from '../screens/Dashboard/SuccessModal';
