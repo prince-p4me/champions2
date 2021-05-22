@@ -311,8 +311,6 @@ PODS:
     - React
   - react-native-image-picker (3.6.0):
     - React-Core
-  - react-native-notification-sounds (0.5.3):
-    - React
   - react-native-restart (0.0.22):
     - React-Core
   - react-native-safe-area-context (3.2.0):
@@ -389,8 +387,6 @@ PODS:
   - RNCAsyncStorage (1.15.4):
     - React-Core
   - RNCClipboard (1.5.1):
-    - React-Core
-  - RNCPushNotificationIOS (1.8.0):
     - React-Core
   - RNFBApp (12.0.0):
     - Firebase/CoreOnly (= 8.0.0)
@@ -473,7 +469,6 @@ DEPENDENCIES:
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - react-native-notification-sounds (from `../node_modules/react-native-notification-sounds`)
   - react-native-restart (from `../node_modules/react-native-restart`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
@@ -492,7 +487,6 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCClipboard (from `../node_modules/@react-native-community/clipboard`)"
-  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -568,8 +562,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
-  react-native-notification-sounds:
-    :path: "../node_modules/react-native-notification-sounds"
   react-native-restart:
     :path: "../node_modules/react-native-restart"
   react-native-safe-area-context:
@@ -606,8 +598,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCClipboard:
     :path: "../node_modules/@react-native-community/clipboard"
-  RNCPushNotificationIOS:
-    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBMessaging:
@@ -671,7 +661,6 @@ SPEC CHECKSUMS:
   react-native-fbsdk-next: 641adea0e1fbc0aa384ad059aa98c8b649b34f21
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-image-picker: 5bb3325530fd4dc3053a77a73d4f65b6649de820
-  react-native-notification-sounds: ca3b60a37bd15dc8761393d04b1b7fd384a6cbf4
   react-native-restart: 733a51ad137f15b0f8dc34c4082e55af7da00979
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f
@@ -690,7 +679,6 @@ SPEC CHECKSUMS:
   ReactCommon: cfe2b7fd20e0dbd2d1185cd7d8f99633fbc5ff05
   RNCAsyncStorage: f47a7e8f927f7c9da947491fc55752eb9ce17f2d
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
-  RNCPushNotificationIOS: 61a7c72bd1ebad3568025957d001e0f0e7b32191
   RNFBApp: cc2ff3f925840c53f0117d92e0f5e269b356d0f7
   RNFBMessaging: ba11538f4d76a5ef89dc8c97dad04fbf2fa6ebef
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
@@ -705,6 +693,6 @@ SPEC CHECKSUMS:
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
 
-PODFILE CHECKSUM: 8d7ccffa77cd5966f1134157f0907bf15f6789b8
+PODFILE CHECKSUM: 94009a73f5226748bbffc378e7335397373dcd3f
 
 COCOAPODS: 1.10.1

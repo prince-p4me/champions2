@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { I18nManager, Platform, Alert } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import {I18nManager, Platform, Alert} from 'react-native';
 import Home from '../screens/Dashboard/Home';
 import Reffer from '../screens/Dashboard/Reffer';
 import LoginScreen from '../screens/Auth/Login';
 import OtpScreen from '../screens/Auth/Otp';
 import SignUpScreen from '../screens/Auth/SignUp';
 import LandingScreen from '../screens/Auth/Landing';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import ScanQrCode from '../screens/Dashboard/ScanQrCode';
 import SuccessModal from '../screens/Dashboard/SuccessModal';
@@ -34,7 +34,7 @@ import TutorialScreen from '../screens/Auth/Tutorial';
 import Notification from '../screens/Dashboard/Notification';
 import * as Actions from '../redux/action';
 // import MyRewards from '../screens/Dashboard/MyRewards';
-import { request, PERMISSIONS } from 'react-native-permissions';
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 import {
   GoogleSignin,
@@ -42,14 +42,10 @@ import {
 } from '@react-native-google-signin/google-signin';
 
 import messaging from '@react-native-firebase/messaging';
-import firebase from '@react-native-firebase/app';
 import Constant from '../utility/Constant';
 
+import * as Navigation from '../navigation/navigation';
 const Stack = createStackNavigator();
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(Constant.firebaseConfig);
-}
 
 const StackNavigator = () => {
   const dispatch = useDispatch();
@@ -96,12 +92,13 @@ const StackNavigator = () => {
         provisional: true,
       });
       console.log('Authorization status:', authStatus);
-      const enabled = (authStatus === messaging.AuthorizationStatus.AUTHORIZED) ||
-        (authStatus === messaging.AuthorizationStatus.PROVISIONAL);
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
       if (enabled) {
         const fcmToken = await messaging().getToken();
-        console.log("token", fcmToken);
+        console.log('token', fcmToken);
         dispatch(Actions.setFcmToken(fcmToken));
       }
     }
@@ -117,21 +114,23 @@ const StackNavigator = () => {
       if (granted) {
         console.log('Permission granted');
       } else {
-        Alert.alert("ALert!", 'Permission Not Granted.');
+        Alert.alert('ALert!', 'Permission Not Granted.');
       }
-    };
+    }
 
     requestLocationPermission();
 
     messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log('Message handled in the background!', remoteMessage);
+      // console.log('Message handled in the background!', remoteMessage);
+      handleNavigation(remoteMessage?.data);
     });
 
     messaging().onNotificationOpenedApp(remoteMessage => {
-      console.log(
-        'Notification caused app to open from background state:',
-        remoteMessage.notification,
-      );
+      // console.log(
+      //   'Notification caused app to open from background state:',
+      //   remoteMessage.data,
+      // );
+      handleNavigation(remoteMessage?.data);
       // navigation.navigate(remoteMessage.data.type);
     });
 
@@ -140,10 +139,11 @@ const StackNavigator = () => {
       .getInitialNotification()
       .then(remoteMessage => {
         if (remoteMessage) {
-          console.log(
-            'Notification caused app to open from quit state:',
-            remoteMessage.notification,
-          );
+          // console.log(
+          //   'Notification caused app to open from quit state:',
+          //   remoteMessage.data,
+          // );
+          handleNavigation(remoteMessage?.data);
           // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
         }
         // setLoading(false);
@@ -151,17 +151,46 @@ const StackNavigator = () => {
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      console.log({ remote10233: remoteMessage?.data });
+      // console.log({remote10233: remoteMessage?.data});
       // alert(JSON.stringify(remoteMessage?.data));
-      alert('Foreground');
+      // alert('Foreground');
+      handleNavigation(remoteMessage?.data);
     });
 
     return unsubscribe;
-  }
+  };
+
+  const handleNavigation = data => {
+    console.log('data', data);
+    let routeName = user && user.id ? 'Home' : 'Landing';
+    let id = null;
+    if (data) {
+      switch (data.type) {
+        case 'winner':
+          routeName = 'WinnerAll';
+          break;
+
+        case 'offer':
+          routeName = 'OfferDetail';
+          id = data.id;
+          break;
+
+        case 'recipe':
+          routeName = 'RecipieDetail';
+          id = data.id;
+          break;
+
+        default:
+          routeName = 'Home';
+          break;
+      }
+    }
+    Navigation.navigate(routeName, id && {id});
+  };
 
   console.log('rendered');
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       {user && user.id ? (
         <>
           <Stack.Screen name="Home" component={Home} />
