@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {I18nManager, Platform, Alert} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { I18nManager, Platform, Alert } from 'react-native';
 import Home from '../screens/Dashboard/Home';
 import Reffer from '../screens/Dashboard/Reffer';
 import LoginScreen from '../screens/Auth/Login';
 import OtpScreen from '../screens/Auth/Otp';
 import SignUpScreen from '../screens/Auth/SignUp';
 import LandingScreen from '../screens/Auth/Landing';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import ScanQrCode from '../screens/Dashboard/ScanQrCode';
 import SuccessModal from '../screens/Dashboard/SuccessModal';
@@ -34,7 +34,7 @@ import TutorialScreen from '../screens/Auth/Tutorial';
 import Notification from '../screens/Dashboard/Notification';
 import * as Actions from '../redux/action';
 // import MyRewards from '../screens/Dashboard/MyRewards';
-import {request, PERMISSIONS} from 'react-native-permissions';
+import { request, PERMISSIONS } from 'react-native-permissions';
 
 import {
   GoogleSignin,
@@ -88,9 +88,7 @@ const StackNavigator = () => {
     });
 
     async function requestFCMPermission() {
-      const authStatus = await messaging().requestPermission({
-        provisional: true,
-      });
+      const authStatus = await messaging().requestPermission();
       console.log('Authorization status:', authStatus);
       const enabled =
         authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -185,12 +183,12 @@ const StackNavigator = () => {
           break;
       }
     }
-    Navigation.navigate(routeName, id && {id});
+    Navigation.navigate(routeName, id && { id });
   };
 
   console.log('rendered');
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       {user && user.id ? (
         <>
           <Stack.Screen name="Home" component={Home} />

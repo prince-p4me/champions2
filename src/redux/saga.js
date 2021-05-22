@@ -518,6 +518,22 @@ function* getTransaction({ type, payload }) {
   }
 }
 
+function* getOfferDetail({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    let response = yield call(Apiservice.getOfferDetail, payload); //calling Api
+    console.log('response in getTransaction saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    showResponse(response);
+    if (response && response.status) {
+      yield put({ type: Types.OFFER_DETAIL, payload: response.data }); //set data
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -546,4 +562,5 @@ export default function* watcher() {
   yield takeLatest(Types.DELETE_ADDRESS, deleteAddress);
   yield takeLatest(Types.GET_NOTIFICATIONS, getNotification);
   yield takeLatest(Types.GET_TRANSACTIONS, getTransaction);
+  yield takeLatest(Types.GET_OFFER_DETAIL, getOfferDetail);
 }

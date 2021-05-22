@@ -187,3 +187,10 @@ export function getTransaction() {
   console.log('----------getTransaction Api Call ------------------');
   return callApi(Constants.API_URL + 'user_transaction_list.php', { user_id: state.getUser.id }, 'POST');
 }
+
+export function getOfferDetail(data) {
+  const state = store.getState();
+  data.user_id = state.getUser.id
+  console.log('----------getOfferDetail Api Call ------------------');
+  return callApi(Constants.API_URL + 'offer_details.php', data, 'POST');
+}
