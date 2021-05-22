@@ -14,11 +14,12 @@ import {request, PERMISSIONS} from 'react-native-permissions';
 import {Settings} from 'react-native-fbsdk-next';
 
 import messaging from '@react-native-firebase/messaging';
+import Constant from './src/utility/Constant';
+import firebase from '@react-native-firebase/app';
 
-// import {
-//   GoogleSignin,
-//   statusCodes,
-// } from '@react-native-google-signin/google-signin';
+if (!firebase.apps.length) {
+  firebase.initializeApp(Constant.firebaseConfig);
+}
 
 const App = () => {
   LogBox.ignoreAllLogs(true);
