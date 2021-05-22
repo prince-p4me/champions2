@@ -123,10 +123,6 @@ const StackNavigator = () => {
 
     requestLocationPermission();
 
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
-
     messaging().setBackgroundMessageHandler(async remoteMessage => {
       console.log('Message handled in the background!', remoteMessage);
     });
@@ -154,7 +150,7 @@ const StackNavigator = () => {
       });
 
     // If App is in foreground mode
-    messaging().onMessage(async remoteMessage => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
       console.log({ remote10233: remoteMessage?.data });
       // alert(JSON.stringify(remoteMessage?.data));
       alert('Foreground');
