@@ -44,9 +44,6 @@ import {request, PERMISSIONS} from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
 import {useSelector, useDispatch} from 'react-redux';
-import NotificationSounds, {
-  playSampleSound,
-} from 'react-native-notification-sounds';
 
 class HomeScreen extends React.Component {
   constructor(props) {

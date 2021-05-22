@@ -92,7 +92,9 @@ const StackNavigator = () => {
     });
 
     async function requestFCMPermission() {
-      const authStatus = await messaging().requestPermission();
+      const authStatus = await messaging().requestPermission({
+        provisional: true,
+      });
       console.log('Authorization status:', authStatus);
       const enabled = (authStatus === messaging.AuthorizationStatus.AUTHORIZED) ||
         (authStatus === messaging.AuthorizationStatus.PROVISIONAL);
@@ -121,16 +123,40 @@ const StackNavigator = () => {
 
     requestLocationPermission();
 
-    // const unsubscribe = messaging().onMessage(async remoteMessage => {
-    //   Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    // });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log('Message handled in the background!', remoteMessage);
+    });
 
-    // messaging().setBackgroundMessageHandler(async remoteMessage => {
-    //   console.log('Message handled in the background!', remoteMessage);
-    // });
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      console.log(
+        'Notification caused app to open from background state:',
+        remoteMessage.notification,
+      );
+      // navigation.navigate(remoteMessage.data.type);
+    });
 
-    // return unsubscribe;
+    // Check whether an initial notification is available
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        if (remoteMessage) {
+          console.log(
+            'Notification caused app to open from quit state:',
+            remoteMessage.notification,
+          );
+          // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+        }
+        // setLoading(false);
+      });
 
+    // If App is in foreground mode
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      console.log({ remote10233: remoteMessage?.data });
+      // alert(JSON.stringify(remoteMessage?.data));
+      alert('Foreground');
+    });
+
+    return unsubscribe;
   }
 
   console.log('rendered');

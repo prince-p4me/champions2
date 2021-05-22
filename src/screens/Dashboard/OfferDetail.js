@@ -30,10 +30,6 @@ import HTML from 'react-native-render-html';
 import { ScrollView } from 'react-native-gesture-handler';
 import SuccessModal from './SuccessModal';
 
-import NotificationSounds, {
-  playSampleSound,
-} from 'react-native-notification-sounds';
-
 const OfferDetail = ({ route, navigation }) => {
   const { offer } = route.params;
   const { offerDetail3 } = route.params;
@@ -51,7 +47,7 @@ const OfferDetail = ({ route, navigation }) => {
   const expired = new Date(offer.expiry_date) < new Date();
   const noBalance = parseInt(offer.balance) >= parseInt(offer.points);
 
-  const [soundsList, setSoundsList] = useState(null);
+  // const [soundsList, setSoundsList] = useState(null);
 
   const redeemOffer = () => {
     let obj = {
@@ -78,12 +74,6 @@ const OfferDetail = ({ route, navigation }) => {
       }, 2500);
     }
   };
-
-  useEffect(() => {
-    NotificationSounds.getNotifications('notification').then(soundsList => {
-      setSoundsList(soundsList);
-    });
-  }, []);
 
   return (
     <View style={{ flex: 1 }}>
