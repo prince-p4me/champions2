@@ -137,7 +137,7 @@ class HomeScreen extends React.Component {
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
           <View style={{ height: 20 }} />
-          {this.TokenBox()}
+          {/* {this.TokenBox()} */}
           <QRCodeContainer />
           <PointsContainer />
           <MenuContainer />
