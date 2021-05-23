@@ -48,6 +48,7 @@ import * as Navigation from '../navigation/navigation';
 
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIos from '@react-native-community/push-notification-ios';
+import {showToast} from '../utility/Index';
 
 const Stack = createStackNavigator();
 
@@ -157,7 +158,8 @@ const StackNavigator = () => {
       //     title: remoteMessage?.data?.title,
       //   });
       // }
-      handleNavigation(remoteMessage?.data);
+      showToast(remoteMessage?.notification?.body);
+      // handleNavigation(remoteMessage?.data);
     });
 
     return unsubscribe;
