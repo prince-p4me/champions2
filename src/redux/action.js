@@ -187,6 +187,20 @@ export function getReceipeDetail(payload) {
   };
 }
 
+export function sendFcmOTP(payload) {
+  return {
+    type: Types.SEND_FCM_OTP,
+    payload,
+  };
+}
+
+export function confirmFcmOTP(payload) {
+  return {
+    type: Types.CONFIRM_FCM_OTP,
+    payload,
+  };
+}
+
 export function AddAdress(payload) {
   return {
     type: Types.ADD_ADDRESS,
