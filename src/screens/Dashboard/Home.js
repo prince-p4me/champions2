@@ -5,7 +5,8 @@ import {
   Image,
   Button,
   SafeAreaView,
-  Alert, TextInput
+  Alert,
+  TextInput,
 } from 'react-native';
 import Header from '../../components/Header';
 import {
@@ -91,19 +92,24 @@ class HomeScreen extends React.Component {
 
   TokenBox = () => {
     let { token, list, isSuccess } = this.props;
-    return <TextInput
-      multiline={true}
-      style={{
-        width: "100%", height: 50,
-        borderWidth: 1, borderRadius: 10,
-        marginVertical: 10,
-        padding: 7
-      }}
-      placeholder="token"
-      keyboardType="phone-pad"
-      value={token}
-      maxLength={10} />
-  }
+    return (
+      <TextInput
+        multiline={true}
+        style={{
+          width: '100%',
+          height: 50,
+          borderWidth: 1,
+          borderRadius: 10,
+          marginVertical: 10,
+          padding: 7,
+        }}
+        placeholder="token"
+        keyboardType="phone-pad"
+        value={token}
+        maxLength={10}
+      />
+    );
+  };
 
   render() {
     let { token, list, isSuccess } = this.props;
@@ -126,7 +132,8 @@ class HomeScreen extends React.Component {
       <View style={styles.containerDashboard}>
         <SuccessModal visible={isSuccess} points={points} />
         <Header title={'Home'} dashboard={true} />
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
@@ -151,7 +158,7 @@ const mapStateToProps = state => ({
   visible: state.isSuccess,
   isRtl: state.isRtl,
   isSuccess: state.isSuccess,
-  token: state.getFcmToken
+  token: state.getFcmToken,
 });
 
 const mapDispatchToProps = dispatch => {

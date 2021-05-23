@@ -180,18 +180,26 @@ export function deleteAddress(body) {
 export function getNotification() {
   const state = store.getState();
   console.log('----------getNotification Api Call ------------------');
-  return callApi(Constants.API_URL + 'user_notification.php', { user_id: state.getUser.id }, 'POST');
+  return callApi(
+    Constants.API_URL + 'user_notification.php',
+    { user_id: state.getUser.id },
+    'POST',
+  );
 }
 
 export function getTransaction() {
   const state = store.getState();
   console.log('----------getTransaction Api Call ------------------');
-  return callApi(Constants.API_URL + 'user_transaction_list.php', { user_id: state.getUser.id }, 'POST');
+  return callApi(
+    Constants.API_URL + 'user_transaction_list.php',
+    { user_id: state.getUser.id },
+    'POST',
+  );
 }
 
 export function getOfferDetail(data) {
   const state = store.getState();
-  data.user_id = state.getUser.id
+  data.user_id = state.getUser.id;
   console.log('----------getOfferDetail Api Call ------------------');
   return callApi(Constants.API_URL + 'offer_details.php', data, 'POST');
 }
@@ -210,4 +218,9 @@ export async function sendFcmOTP(mobile) {
     console.log("error", error);
     Alert.alert("Error", error)
   }
+}
+
+export function getReceipeDetail(data) {
+  console.log('----------getRecipeDetail Api Call ------------------');
+  return callApi(Constants.API_URL + 'recipe_details.php', data, 'POST');
 }

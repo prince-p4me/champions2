@@ -44,3 +44,5 @@ export const STATE_LIST = 'STATE_LIST';
 export const ADD_ADDRESS = 'ADD_ADDRESS';
 export const DELETE_ADDRESS = 'DELETE_ADDRESS';
 export const FCM_TOKEN = 'FCM_TOKEN';
+
+export const GET_RECEIPE_DETAIL = 'GET_RECEIPE_DETAIL';

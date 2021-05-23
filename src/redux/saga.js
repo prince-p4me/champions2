@@ -134,35 +134,6 @@ function* getBanners({ type, payload }) {
   }
 }
 
-function* signUp({ type, payload }) {
-  try {
-    let token = store.getState().getFcmToken;
-    let data = payload.userInfoModify ? payload.userInfoModify : payload;
-    data.device_id = token ? token : "N/A";
-    let response = yield call(Apiservice.signUp, data);
-    //yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-    // let response = yield call(Apiservice.signUp, payload); //calling Api
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-    showResponse(response);
-    if (response.status == 10) {
-      yield put({ type: Types.USER, payload: response }); //set user
-    } else {
-      if (payload?.userInfoModify?.loginFrom == 'social') {
-        yield put({ type: Types.USER, payload: response });
-      } else {
-        Navigation.navigate('Otp', {
-          mobile: payload,
-          name: response.name,
-          login: false,
-        });
-      }
-    }
-  } catch (error) {
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-    console.log('error login', JSON.stringify(error));
-  }
-}
-
 function* logOut({ type, payload }) {
   try {
     //yield put({ type: Types.SET_LOADING, payload: true });
@@ -440,17 +411,22 @@ function* getNotification({ type, payload }) {
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     showResponse(response);
     if (response && response.status) {
-      let data = [{
-        title: I18n.t("Today"),
-        data: [],
-        today: true
-      }, {
-        title: I18n.t("Earlier"),
-        data: [],
-        today: false
-      }]
+      let data = [
+        {
+          title: I18n.t('Today'),
+          data: [],
+          today: true,
+        },
+        {
+          title: I18n.t('Earlier'),
+          data: [],
+          today: false,
+        },
+      ];
       for (let i = 0; i < response.data.length; i++) {
-        let isToday = response.data[i].created_at.split(" ")[0].split("-")[0] == new Date().getDate();
+        let isToday =
+          response.data[i].created_at.split(' ')[0].split('-')[0] ==
+          new Date().getDate();
         data[isToday ? 0 : 1].data.push(response.data[i]);
       }
       for (let i = 0; i < data.length; i++) {
@@ -486,17 +462,75 @@ function* getTransaction({ type, payload }) {
 
 function* getOfferDetail({ type, payload }) {
   try {
-    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-    let response = yield call(Apiservice.getOfferDetail, payload); //calling Api
-    console.log('response in getTransaction saga', JSON.stringify(response));
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-    showResponse(response);
-    if (response && response.status) {
-      yield put({ type: Types.OFFER_DETAIL, payload: response.data }); //set data
+    if (payload?.offer_id) {
+      yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+      let response = yield call(Apiservice.getOfferDetail, payload); //calling Api
+      console.log('response in getTransaction saga', JSON.stringify(response));
+      yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+      showResponse(response);
+      if (response && response.status) {
+        yield put({ type: Types.OFFER_DETAIL, payload: response.data[0] }); //set data
+      }
     }
   } catch (error) {
     console.log(error);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
+function* getReceipeDetail({ type, payload }) {
+  try {
+    if (payload?.recipe_id) {
+      yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+      let ReceipeInfo = {
+        recipe_id: payload?.recipe_id,
+      };
+      let response = yield call(Apiservice.getReceipeDetail, ReceipeInfo); //calling Api
+      console.log(
+        'response in getResponse detail saga',
+        JSON.stringify(response),
+      );
+      yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+      showResponse(response);
+      if (response && response.status) {
+        yield put({ type: Types.GET_RECEIPE_DETAIL, payload: response.data[0] }); //set data
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
+function* signUp({ type, payload }) {
+  try {
+    let token = store.getState().getFcmToken;
+    let data = payload.userInfoModify ? payload.userInfoModify : payload;
+    data.device_id = token ? token : 'N/A';
+    let response = yield call(Apiservice.signUp, data);
+    //yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    // let response = yield call(Apiservice.signUp, payload); //calling Api
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    showResponse(response);
+    if (response && response.status) {
+      if (response.status == 10) {
+        yield put({ type: Types.USER, payload: response }); //set user
+      } else {
+        if (payload?.userInfoModify?.loginFrom == 'social') {
+          yield put({ type: Types.USER, payload: response });
+        } else {
+          store.dispatch(Actions.sendFcmOTP({
+            mobile: payload.mobile,
+            name: response.name,
+            login: false,
+            device_id: token
+          }));
+        }
+      }
+    }
+  } catch (error) {
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    console.log('error login', JSON.stringify(error));
   }
 }
 
@@ -587,4 +621,5 @@ export default function* watcher() {
   yield takeLatest(Types.GET_NOTIFICATIONS, getNotification);
   yield takeLatest(Types.GET_TRANSACTIONS, getTransaction);
   yield takeLatest(Types.GET_OFFER_DETAIL, getOfferDetail);
+  yield takeLatest(Types.GET_RECEIPE_DETAIL, getReceipeDetail);
 }
