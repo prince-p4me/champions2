@@ -143,20 +143,20 @@ const StackNavigator = () => {
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      if (Platform?.OS == 'android') {
-        PushNotification.localNotification({
-          message: remoteMessage?.notification?.body,
-          title: remoteMessage?.notification.title,
-          bigPictureUrl: remoteMessage?.notification?.android?.imageUrl,
-          smallIcon: remoteMessage?.notification?.android?.imageUrl,
-        });
-      } else {
-        PushNotificationIos.addNotificationRequest({
-          id: remoteMessage?.data?.id,
-          body: remoteMessage?.data?.body,
-          title: remoteMessage?.data?.title,
-        });
-      }
+      // if (Platform?.OS == 'android') {
+      //   PushNotification.localNotification({
+      //     message: remoteMessage?.notification?.body,
+      //     title: remoteMessage?.notification.title,
+      //     bigPictureUrl: remoteMessage?.notification?.android?.imageUrl,
+      //     smallIcon: remoteMessage?.notification?.android?.imageUrl,
+      //   });
+      // } else {
+      //   PushNotificationIos.addNotificationRequest({
+      //     id: remoteMessage?.data?.id,
+      //     body: remoteMessage?.data?.body,
+      //     title: remoteMessage?.data?.title,
+      //   });
+      // }
       handleNavigation(remoteMessage?.data);
     });
 
