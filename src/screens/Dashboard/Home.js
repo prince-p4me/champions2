@@ -132,8 +132,7 @@ class HomeScreen extends React.Component {
       <View style={styles.containerDashboard}>
         <SuccessModal visible={isSuccess} points={points} />
         <Header title={'Home'} dashboard={true} />
-        <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />

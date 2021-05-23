@@ -293,8 +293,9 @@ function* redeemOffer({ type, payload }) {
     if (response && response.status) {
       // Navigation.goBack();
       getHomepageData();
+      store.dispatch(Actions.getOfferDetail(payload));
       yield put({ type: Types.IS_SUCCESS, payload: true }); //hide loading
-    }
+    } else Navigation.goBack();
   } catch (error) {
     console.log(error);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading

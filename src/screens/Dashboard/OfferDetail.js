@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -25,14 +25,14 @@ import {
 } from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
 import Color from '../../utility/Color';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import SuccessModal from './SuccessModal';
 
-const OfferDetail = ({route, navigation}) => {
-  const {id} = route.params;
-  const {offerDetail3} = route.params;
+const OfferDetail = ({ route, navigation }) => {
+  const { id } = route.params;
+  const { offerDetail3 } = route.params;
   const user = useSelector(state => state.getUser);
   const offerDetail = useSelector(state => state.getOfferDetail);
 
@@ -44,7 +44,7 @@ const OfferDetail = ({route, navigation}) => {
       offer_id: id,
     };
 
-    console.log({receipeInfo: offer_info});
+    console.log({ receipeInfo: offer_info });
     if (offer_info?.user_id) {
       dispatch(Actions.getOfferDetail(offer_info));
     }
@@ -64,14 +64,14 @@ const OfferDetail = ({route, navigation}) => {
     };
 
     dispatch(Actions.redeemOffer(obj));
-    setTimeout(() => {
-      dispatch(Actions.offerDetail(offerDetail));
-    }, 400);
+    // setTimeout(() => {
+    //   dispatch(Actions.offerDetail(offerDetail));
+    // }, 400);
     // setSuccess(true);
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <SuccessModal
         visible={isSuccess}
         points={offerDetail.points}
@@ -92,12 +92,12 @@ const OfferDetail = ({route, navigation}) => {
           backgroundColor: Colors.backgroundColor,
           padding: 10,
         }}>
-        <View style={{backgroundColor: Colors.white, paddingStart: 5}}>
+        <View style={{ backgroundColor: Colors.white, paddingStart: 5 }}>
           <View style={styles.offercontainer}>
             <View style={styles.imgBox}>
               <Image
-                source={{uri: Constant.IMAGE_URL + offerDetail.image}}
-                style={{height: 70, width: 70}}
+                source={{ uri: Constant.IMAGE_URL + offerDetail.image }}
+                style={{ height: 70, width: 70 }}
                 resizeMode="contain"></Image>
             </View>
             <View style={styles.secondSection}>
@@ -118,7 +118,7 @@ const OfferDetail = ({route, navigation}) => {
                   color: Color.text,
                 }}
               />
-              <View style={{flexDirection: 'row', marginTop: 10}}>
+              <View style={{ flexDirection: 'row', marginTop: 10 }}>
                 <TextMedium
                   text={'On ' + offerDetail.points + ' Points'}
                   style={{
@@ -149,13 +149,13 @@ const OfferDetail = ({route, navigation}) => {
             }}
           />
           <HTML
-            source={{html: offerDetail?.description}}
+            source={{ html: offerDetail?.description }}
             contentWidth={Constant.width}
           />
           <View style={styles.btnLine}>
             <TextThin
               text={'Ends on: ' + offerDetail.expiry_date}
-              style={[styles.date, {textAlign: !isRtl ? 'right' : 'left'}]}
+              style={[styles.date, { textAlign: !isRtl ? 'right' : 'left' }]}
             />
             <TouchableOpacity
               style={[
@@ -163,17 +163,17 @@ const OfferDetail = ({route, navigation}) => {
                 // !noBalance && {backgroundColor: Color.text},
               ]}
               onPress={redeemOffer}
-              // disabled={!noBalance || expired}
-              // disabled={expired}
+            // disabled={!noBalance || expired}
+            // disabled={expired}
             >
               <TextRegular
                 text={I18n.t('redeemnow')}
-                style={{color: Color.white, fontSize: Sizes.medium}}
+                style={{ color: Color.white, fontSize: Sizes.medium }}
               />
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{height: 70}}></View>
+        <View style={{ height: 70 }}></View>
       </ScrollView>
       <SafeAreaView />
     </View>
