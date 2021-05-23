@@ -135,12 +135,12 @@ export const getTransactionByCategory = (state = [], action) => {
   }
 };
 
-export const getOfferDetail = (state = [], action) => {
+export const getOfferDetail = (state = {}, action) => {
   switch (action.type) {
     case Types.OFFER_DETAIL:
       return action.payload;
     default:
-      return null;
+      return state;
   }
 };
 

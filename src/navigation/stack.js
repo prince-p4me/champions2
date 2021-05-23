@@ -88,9 +88,7 @@ const StackNavigator = () => {
     });
 
     async function requestFCMPermission() {
-      const authStatus = await messaging().requestPermission({
-        provisional: true,
-      });
+      const authStatus = await messaging().requestPermission();
       console.log('Authorization status:', authStatus);
       const enabled =
         authStatus === messaging.AuthorizationStatus.AUTHORIZED ||

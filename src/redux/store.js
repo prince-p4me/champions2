@@ -17,7 +17,7 @@ import {
   getStates,
   getNotification,
   getTransaction,
-  getFcmToken
+  getFcmToken,
 } from './reducer';
 import getListSaga from './saga';
 import { all, fork } from 'redux-saga/effects';
@@ -40,11 +40,11 @@ const rootReducer = combineReducers({
   getRecipes,
   getWinners,
   getTransactionByCategory,
-  getOfferDetail,
   getStates,
   getNotification,
   getTransaction,
-  getFcmToken
+  getFcmToken,
+  getOfferDetail
 });
 
 //creating, applying sagas

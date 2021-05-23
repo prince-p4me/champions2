@@ -174,9 +174,9 @@ export function updateUser(payload) {
   };
 }
 
-export function offerDetail(payload) {
+export function getOfferDetail(payload) {
   return {
-    type: Types.OFFER_DETAIL,
+    type: Types.GET_OFFER_DETAIL,
     payload,
   };
 }

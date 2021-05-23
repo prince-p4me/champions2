@@ -85,18 +85,16 @@ const OfferDetail = ({ route, navigation }) => {
       />
 
       {/* <SuccessModal visible={true} points={500} offerDetail={offer} /> */}
-      <Header
-        title={offer?.offer_name}
+      <Header title={offer?.offer_name}
         dashboard={false}
         back={true}
         help={true}
       />
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: Colors.backgroundColor,
-          padding: 10,
-        }}>
+      <ScrollView contentContainerStyle={{
+        flexGrow: 1,
+        backgroundColor: Colors.backgroundColor,
+        padding: 10,
+      }}>
         <View style={{ backgroundColor: Colors.white, paddingStart: 5 }}>
           <View style={styles.offercontainer}>
             <View style={styles.imgBox}>

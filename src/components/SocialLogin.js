@@ -96,7 +96,7 @@ const SocialLogin = props => {
         name: userInfo.name,
         email: userInfo.email,
         loginFrom: 'social',
-        type: type,
+        type,
       };
     } else {
       userInfoModify = {
@@ -105,18 +105,17 @@ const SocialLogin = props => {
         email: userInfo.user.email,
         profile_photo: userInfo.user.photo,
         loginFrom: 'social',
-        type: type,
+        type,
       };
     }
 
-    console.log({userInfoModify: userInfoModify});
     dispatch(Actions.signUp({userInfoModify}));
-
-    // if (typeScreen == 'login') {
-    //   dispatch(Actions.doLogin({ userInfoModify }));
-    // } else {
-    //   dispatch(Actions.signUp({ userInfoModify }));
-    // }
+    /*if (typeScreen == 'login') {
+    console.log({ userInfoModify: userInfoModify });
+      dispatch(Actions.doLogin({ userInfoModify }));
+    } else {
+      dispatch(Actions.signUp({ userInfoModify }));
+    }*/
   }
 
   return (

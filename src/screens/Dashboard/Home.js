@@ -114,10 +114,9 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let token = store.getState().getFcmToken;
-    let {visible, list, isSuccess} = this.props;
+    let {token, list, isSuccess} = this.props;
     let {points} = this.state;
-
+    // let token = store.getState().getFcmToken;
     if (isSuccess) {
       // if (this.state.soundsList && this.state.soundsList.length) {
       setTimeout(() => {
@@ -135,7 +134,6 @@ class HomeScreen extends React.Component {
       <View style={styles.containerDashboard}>
         <SuccessModal visible={isSuccess} points={points} />
         <Header title={'Home'} dashboard={true} />
-
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
@@ -144,7 +142,14 @@ class HomeScreen extends React.Component {
           <View style={{height: 20}} />
           <TextInput
             multiline={true}
-            style={{flex: 1, padding: 7}}
+            style={{
+              width: '100%',
+              height: 50,
+              borderWidth: 1,
+              borderRadius: 10,
+              marginVertical: 10,
+              padding: 7,
+            }}
             placeholder="token"
             keyboardType="phone-pad"
             value={token}
@@ -168,6 +173,7 @@ const mapStateToProps = state => ({
   visible: state.isSuccess,
   isRtl: state.isRtl,
   isSuccess: state.isSuccess,
+  token: state.getFcmToken,
 });
 
 const mapDispatchToProps = dispatch => {
