@@ -19,7 +19,7 @@ const OfferLayout = props => {
   let data = list.filter((obj) => parseInt(obj.redeemed) < 1);
   // let data = list;
   if (home) {
-    data = list.slice(0, 4);
+    data = data.slice(0, 4);
   }
 
   if (data && data.length) {
