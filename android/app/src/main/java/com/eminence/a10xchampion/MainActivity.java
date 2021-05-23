@@ -1,6 +1,7 @@
 package com.eminence.a10xchampion;
 
 import com.facebook.react.ReactActivity;
+import android.content.Intent;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +13,8 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "champions";
   }
+  @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
 }
