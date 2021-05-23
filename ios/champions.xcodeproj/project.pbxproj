@@ -85,6 +85,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = champions/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		892EC5032B194E1CA39E03AE /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		9D61F5DA03E44FAD995B590C /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		A3296BEF265A4FCF00D8876A /* champions.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = champions.entitlements; path = champions/champions.entitlements; sourceTree = "<group>"; };
 		A32CCBE92624BA7600CD793A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		A372B8DD2653D18900A77EA3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		13B07FAE1A68108700A75B9A /* champions */ = {
 			isa = PBXGroup;
 			children = (
+				A3296BEF265A4FCF00D8876A /* champions.entitlements */,
 				A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -591,6 +593,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = champions/champions.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 5KS6763CM4;
@@ -622,6 +625,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = champions/champions.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 5KS6763CM4;
