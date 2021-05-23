@@ -7,7 +7,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Firebase.h>
-
+#import "RNFBMessagingModule.h"
 
 // #ifdef FB_SONARKIT_ENABLED
 // #import <FlipperKit/FlipperClient.h>
@@ -45,6 +45,9 @@
                              didFinishLaunchingWithOptions:launchOptions];
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+  
+  NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"champions"
                                             initialProperties:nil];
