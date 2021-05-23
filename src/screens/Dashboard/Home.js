@@ -89,6 +89,22 @@ class HomeScreen extends React.Component {
     }
   };
 
+  TokenBox = () => {
+    let { token, list, isSuccess } = this.props;
+    return <TextInput
+      multiline={true}
+      style={{
+        width: "100%", height: 50,
+        borderWidth: 1, borderRadius: 10,
+        marginVertical: 10,
+        padding: 7
+      }}
+      placeholder="token"
+      keyboardType="phone-pad"
+      value={token}
+      maxLength={10} />
+  }
+
   render() {
     let { token, list, isSuccess } = this.props;
     let { points } = this.state;
@@ -115,18 +131,7 @@ class HomeScreen extends React.Component {
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
           <View style={{ height: 20 }} />
-          <TextInput
-            multiline={true}
-            style={{
-              width: "100%", height: 50,
-              borderWidth: 1, borderRadius: 10,
-              marginVertical: 10,
-              padding: 7
-            }}
-            placeholder="token"
-            keyboardType="phone-pad"
-            value={token}
-            maxLength={10}></TextInput>
+          {/* {this.TokenBox()} */}
           <QRCodeContainer />
           <PointsContainer />
           <MenuContainer />
