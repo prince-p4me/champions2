@@ -180,6 +180,12 @@ export function getOfferDetail(payload) {
     payload,
   };
 }
+export function getReceipeDetail(payload) {
+  return {
+    type: Types.GET_RECEIPE_DETAIL,
+    payload,
+  };
+}
 
 export function AddAdress(payload) {
   return {

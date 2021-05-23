@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -25,87 +25,84 @@ import {
 } from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
 import Color from '../../utility/Color';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import HTML from 'react-native-render-html';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import SuccessModal from './SuccessModal';
 
-const OfferDetail = ({ route, navigation }) => {
-  const { offer } = route.params;
-  const { offerDetail3 } = route.params;
+const OfferDetail = ({route, navigation}) => {
+  const {id} = route.params;
+  const {offerDetail3} = route.params;
+  const user = useSelector(state => state.getUser);
+  const offerDetail = useSelector(state => state.getOfferDetail);
 
   const dispatch = useDispatch();
-  console.log('offer', offer);
 
-  console.log('offer detail');
+  useEffect(() => {
+    let offer_info = {
+      user_id: user.id,
+      offer_id: id,
+    };
 
-  console.log({ offer: offer });
+    console.log({receipeInfo: offer_info});
+    if (offer_info?.user_id) {
+      dispatch(Actions.getOfferDetail(offer_info));
+    }
+  }, []);
 
   const isRtl = useSelector(state => state.isRtl);
   const isSuccess = useSelector(state => state.isSuccess);
   const align = isRtl ? 'right' : 'left';
-  const expired = new Date(offer.expiry_date) < new Date();
-  const noBalance = parseInt(offer.balance) >= parseInt(offer.points);
-
-  // const [soundsList, setSoundsList] = useState(null);
+  const expired = new Date(offerDetail.expiry_date) < new Date();
+  const noBalance =
+    parseInt(offerDetail.balance) >= parseInt(offerDetail.points);
 
   const redeemOffer = () => {
     let obj = {
-      offer_id: offer.id,
-      points: offer.points,
+      offer_id: offerDetail.id,
+      points: offerDetail.points,
     };
 
     dispatch(Actions.redeemOffer(obj));
-    // dispatch(Actions.setSuccessModal(true));
     setTimeout(() => {
-      dispatch(Actions.offerDetail(offer));
+      dispatch(Actions.offerDetail(offerDetail));
     }, 400);
     // setSuccess(true);
-
-    if (isSuccess) {
-      setTimeout(() => {
-        // playSampleSound(soundsList[1]);
-        // RNLocalNotifications.createNotification(
-        //   1,
-        //   'Notification',
-        //   'notification',
-        //   'default',
-        // );
-      }, 2500);
-    }
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <SuccessModal
         visible={isSuccess}
-        points={offer.points}
-        offerDetail={offer}
+        points={offerDetail.points}
+        offerDetail={offerDetail}
         offerDetail2={offerDetail3}
       />
 
       {/* <SuccessModal visible={true} points={500} offerDetail={offer} /> */}
-      <Header title={offer?.offer_name}
+      <Header
+        title={offerDetail?.offer_name}
         dashboard={false}
         back={true}
         help={true}
       />
-      <ScrollView contentContainerStyle={{
-        flexGrow: 1,
-        backgroundColor: Colors.backgroundColor,
-        padding: 10,
-      }}>
-        <View style={{ backgroundColor: Colors.white, paddingStart: 5 }}>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          backgroundColor: Colors.backgroundColor,
+          padding: 10,
+        }}>
+        <View style={{backgroundColor: Colors.white, paddingStart: 5}}>
           <View style={styles.offercontainer}>
             <View style={styles.imgBox}>
               <Image
-                source={{ uri: Constant.IMAGE_URL + offer.image }}
-                style={{ height: 70, width: 70 }}
+                source={{uri: Constant.IMAGE_URL + offerDetail.image}}
+                style={{height: 70, width: 70}}
                 resizeMode="contain"></Image>
             </View>
             <View style={styles.secondSection}>
               <TextMedium
-                text={offer?.product_name}
+                text={offerDetail?.product_name}
                 style={{
                   textAlign: align,
                   fontSize: Sizes.medium,
@@ -113,7 +110,7 @@ const OfferDetail = ({ route, navigation }) => {
                 }}
               />
               <TextSemiBold
-                text={offer?.offer_name}
+                text={offerDetail?.offer_name}
                 style={{
                   textAlign: align,
                   fontSize: Sizes.large,
@@ -121,9 +118,9 @@ const OfferDetail = ({ route, navigation }) => {
                   color: Color.text,
                 }}
               />
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
                 <TextMedium
-                  text={'On ' + offer.points + ' Points'}
+                  text={'On ' + offerDetail.points + ' Points'}
                   style={{
                     textAlign: align,
                     fontSize: Sizes.medium,
@@ -152,13 +149,13 @@ const OfferDetail = ({ route, navigation }) => {
             }}
           />
           <HTML
-            source={{ html: offer?.description }}
+            source={{html: offerDetail?.description}}
             contentWidth={Constant.width}
           />
           <View style={styles.btnLine}>
             <TextThin
-              text={'Ends on: ' + offer.expiry_date}
-              style={[styles.date, { textAlign: !isRtl ? 'right' : 'left' }]}
+              text={'Ends on: ' + offerDetail.expiry_date}
+              style={[styles.date, {textAlign: !isRtl ? 'right' : 'left'}]}
             />
             <TouchableOpacity
               style={[
@@ -166,17 +163,17 @@ const OfferDetail = ({ route, navigation }) => {
                 // !noBalance && {backgroundColor: Color.text},
               ]}
               onPress={redeemOffer}
-            // disabled={!noBalance || expired}
-            // disabled={expired}
+              // disabled={!noBalance || expired}
+              // disabled={expired}
             >
               <TextRegular
                 text={I18n.t('redeemnow')}
-                style={{ color: Color.white, fontSize: Sizes.medium }}
+                style={{color: Color.white, fontSize: Sizes.medium}}
               />
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ height: 70 }}></View>
+        <View style={{height: 70}}></View>
       </ScrollView>
       <SafeAreaView />
     </View>
