@@ -508,10 +508,7 @@ function* signUp({ type, payload }) {
     let data = payload.userInfoModify ? payload.userInfoModify : payload;
     data.device_id = token ? token : 'N/A';
     let response = yield call(Apiservice.signUp, data);
-    //yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-    // let response = yield call(Apiservice.signUp, payload); //calling Api
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-    showResponse(response);
     if (response && response.status) {
       if (response.status == 10) {
         yield put({ type: Types.USER, payload: response }); //set user
@@ -527,6 +524,8 @@ function* signUp({ type, payload }) {
           }));
         }
       }
+    } else {
+      showResponse(response);
     }
   } catch (error) {
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading

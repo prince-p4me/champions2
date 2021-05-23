@@ -31,7 +31,6 @@ const OtpScreen = props => {
   let [counter, setCounter] = useState(59);
 
   const [latitude, setLat] = useState(0);
-  // const [confirm, setConfirm] = useState(null);
   const [longitude, setLong] = useState(0);
 
   const { mobile, login: isLogin, name, confirmation } = props.route.params;
@@ -66,8 +65,6 @@ const OtpScreen = props => {
       showResponse({ message: 'Invalid code' });
     }
   }
-
-  // sendOtp();
 
   return (
     <View style={{ flex: 1 }}>
