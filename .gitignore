@@ -61,4 +61,5 @@ buck-out/
 yarn.lock
 yarn.lock
 /ios/Podfile.lock/
+/ios/project.pbxproj/
 
