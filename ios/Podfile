@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target '10XChampions' do
+target 'champions' do
   config = use_native_modules!
   # $RNFirebaseAsStaticFramework = true
 
@@ -21,7 +21,7 @@ target '10XChampions' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/@react-native-google-signin/google-signin'
 
-  target '10XChampionsTests' do
+  target 'championsTests' do
     inherit! :complete
     # Pods for testing
   end

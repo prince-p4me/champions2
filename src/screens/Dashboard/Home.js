@@ -6,6 +6,7 @@ import {
   Button,
   SafeAreaView,
   Alert,
+  TextInput,
 } from 'react-native';
 import Header from '../../components/Header';
 import {
@@ -44,6 +45,8 @@ import {request, PERMISSIONS} from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
 import {useSelector, useDispatch} from 'react-redux';
+
+import {store} from '../../redux/store';
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -111,6 +114,7 @@ class HomeScreen extends React.Component {
   };
 
   render() {
+    let token = store.getState().getFcmToken;
     let {visible, list, isSuccess} = this.props;
     let {points} = this.state;
 
@@ -131,12 +135,20 @@ class HomeScreen extends React.Component {
       <View style={styles.containerDashboard}>
         <SuccessModal visible={isSuccess} points={points} />
         <Header title={'Home'} dashboard={true} />
+
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
           <View style={{height: 20}} />
+          <TextInput
+            multiline={true}
+            style={{flex: 1, padding: 7}}
+            placeholder="token"
+            keyboardType="phone-pad"
+            value={token}
+            maxLength={10}></TextInput>
           <QRCodeContainer />
           <PointsContainer />
           <MenuContainer />
