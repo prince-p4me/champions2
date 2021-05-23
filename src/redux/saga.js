@@ -507,6 +507,7 @@ function* signUp({ type, payload }) {
     let token = store.getState().getFcmToken;
     let data = payload.userInfoModify ? payload.userInfoModify : payload;
     data.device_id = token ? token : 'N/A';
+    yield put({ type: Types.SET_LOADING, payload: true }); //hide loading
     let response = yield call(Apiservice.signUp, data);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
@@ -516,12 +517,17 @@ function* signUp({ type, payload }) {
         if (payload?.userInfoModify?.loginFrom == 'social') {
           yield put({ type: Types.USER, payload: response });
         } else {
-          store.dispatch(Actions.sendFcmOTP({
-            mobile: payload.mobile,
+          // store.dispatch(Actions.sendFcmOTP({
+          //   mobile: payload.mobile,
+          //   name: response.name,
+          //   login: false,
+          //   device_id: token
+          // }));
+          Navigation.navigate('Otp', {
+            mobile: payload,
             name: response.name,
             login: false,
-            device_id: token
-          }));
+          });
         }
       }
     } else {
@@ -542,11 +548,16 @@ function* login({ type, payload }) {
       if (response.status == 10 && response.id) {
         yield put({ type: Types.USER, payload: response }); //set user
       } else {
-        store.dispatch(Actions.sendFcmOTP({
+        // store.dispatch(Actions.sendFcmOTP({
+        //   mobile: payload,
+        //   name: response.name,
+        //   login: true
+        // }));
+        Navigation.navigate('Otp', {
           mobile: payload,
           name: response.name,
-          login: true
-        }));
+          login: true,
+        });
       }
     }
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading

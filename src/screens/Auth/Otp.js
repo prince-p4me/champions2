@@ -88,7 +88,7 @@ const OtpScreen = props => {
         style={{ textAlign: 'center', fontSize: Sizes.regular, marginTop: 30 }}
       />
 
-      <OTPInputView pinCount={6}
+      <OTPInputView pinCount={4}
         style={{ width: '80%', height: 200, marginLeft: 40 }}
         autoFocusOnLoad
         placeholderCharacter="*"
@@ -109,8 +109,8 @@ const OtpScreen = props => {
           if (isLogin) {
             obj.loginType = 1;
           }
-          // dispatch(Actions.verifyOtp(obj));
-          confirmFcmOtp(obj);
+          dispatch(Actions.verifyOtp(obj));
+          // confirmFcmOtp(obj);
         }}
           text={i18n.t(isLogin ? 'login' : 'signup2')}
           textColor={Colors.white}
@@ -127,8 +127,8 @@ const OtpScreen = props => {
               mobile: isLogin ? mobile : mobile.mobile,
               name
             };
-            // dispatch(Actions.resendOtp(isLogin ? obj : mobile));
-            dispatch(Actions.sendFcmOTP(obj));
+            dispatch(Actions.resendOtp(isLogin ? obj : mobile));
+            // dispatch(Actions.sendFcmOTP(obj));
             setCounter(59);
           }}
         />

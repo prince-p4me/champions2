@@ -34,7 +34,7 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
 
 const LoginScreen = () => {
-  const [mobile, setMobile] = useState('8178691529');
+  const [mobile, setMobile] = useState('8802854433');
   // const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
