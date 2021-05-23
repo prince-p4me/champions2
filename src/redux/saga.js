@@ -134,40 +134,6 @@ function* getBanners({ type, payload }) {
   }
 }
 
-function* login({ type, payload }) {
-  try {
-    //yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-    let response; //calling Api
-
-    if (payload?.userInfoModify?.loginFrom != 'social') {
-      response = yield call(Apiservice.loginApi, { mobile: payload });
-    } else {
-      response = yield call(Apiservice.loginApi, payload?.userInfoModify);
-    }
-    showResponse(response);
-    if (response && response.status) {
-      if (response.status == 10) {
-        yield put({ type: Types.USER, payload: response }); //set user
-      } else {
-        if (payload?.userInfoModify?.loginFrom != 'social') {
-          yield put({ type: Types.USER, payload: response });
-        } else {
-          Navigation.navigate('Otp', {
-            mobile: payload,
-            name: response.name,
-            login: true,
-          });
-        }
-      }
-    }
-
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-  } catch (error) {
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-    console.log('error login', JSON.stringify(error));
-  }
-}
-
 function* signUp({ type, payload }) {
   try {
     let token = store.getState().getFcmToken;
@@ -534,9 +500,67 @@ function* getOfferDetail({ type, payload }) {
   }
 }
 
+function* login({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    const response = yield call(Apiservice.loginApi, { mobile: payload });
+    // showResponse(response);
+    if (response && response.status) {
+      if (response.status == 10 && response.id) {
+        yield put({ type: Types.USER, payload: response }); //set user
+      } else {
+        store.dispatch(Actions.sendFcmOTP({
+          mobile: payload,
+          name: response.name,
+          login: true
+        }));
+      }
+    }
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  } catch (error) {
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    console.log('error login', JSON.stringify(error));
+  }
+}
+
+function* sendFcmOTP({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    const confirmation = yield call(Apiservice.sendFcmOTP, payload.mobile); //calling Api
+    console.log('response in sendFcmOTP saga', JSON.stringify(confirmation));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    showResponse({ message: "Otp sent successfully . . ." });
+    if (confirmation) {
+      payload.confirmation = confirmation;
+      Navigation.navigate('Otp', payload);
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
+function* confirmFcmOTP({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    let response = yield call(Apiservice.confirmFcmOTP, payload); //calling Api
+    console.log('response in confirmFcmOTP saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    showResponse(response);
+    if (response && response.status && response.id) {
+      yield put({ type: Types.USER, payload: response }); //set user
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
+  yield takeLatest(Types.SEND_FCM_OTP, sendFcmOTP);
+  yield takeLatest(Types.CONFIRM_FCM_OTP, confirmFcmOTP);
   yield takeLatest(Types.DO_LOGIN, login);
   yield takeLatest(Types.RESEND_OTP, resendOtp);
   yield takeLatest(Types.GET_BANNERS, getBanners);

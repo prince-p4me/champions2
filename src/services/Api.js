@@ -1,7 +1,8 @@
 import Constants from '../utility/Constant';
 import { store } from '../redux/store';
-import { BackHandler } from 'react-native';
+import { BackHandler, Alert } from 'react-native';
 import { showResponse } from '../utility/Index';
+import auth from '@react-native-firebase/auth';
 
 async function callApi(urlString, body, methodType) {
   console.log('-----------AXIOS  Api request is----------- ');
@@ -193,4 +194,20 @@ export function getOfferDetail(data) {
   data.user_id = state.getUser.id
   console.log('----------getOfferDetail Api Call ------------------');
   return callApi(Constants.API_URL + 'offer_details.php', data, 'POST');
+}
+
+export function confirmFcmOTP(data) {
+  console.log('----------confirmFcmOTP Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_otp_verify.php', data, 'POST');
+}
+
+export async function sendFcmOTP(mobile) {
+  console.log("mobile", mobile);
+  try {
+    const confirmation = await auth().signInWithPhoneNumber("+91" + mobile);
+    return confirmation;
+  } catch (error) {
+    console.log("error", error);
+    Alert.alert("Error", error)
+  }
 }

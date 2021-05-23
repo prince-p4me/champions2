@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -14,14 +14,16 @@ import Colors from '../../utility/Color';
 import i18n from '../../services/i18n';
 import Sizes from '../../utility/Sizes';
 import FullButton from '../../components/FullButton';
-import {TextBold, TextRegular} from '../../components/TextView';
+import { TextBold, TextRegular } from '../../components/TextView';
 import LinkButton from './LinkButton';
 import * as Actions from '../../redux/action';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import auth from '@react-native-firebase/auth';
 
 import Images from '../../utility/Image';
 
 import Geolocation from '@react-native-community/geolocation';
+import { showResponse } from '../../utility/Index';
 
 const OtpScreen = props => {
   const dispatch = useDispatch();
@@ -29,12 +31,14 @@ const OtpScreen = props => {
   let [counter, setCounter] = useState(59);
 
   const [latitude, setLat] = useState(0);
+  // const [confirm, setConfirm] = useState(null);
   const [longitude, setLong] = useState(0);
 
-  const {mobile, login: isLogin, name} = props.route.params;
+  const { mobile, login: isLogin, name, confirmation } = props.route.params;
   console.log('mobile', mobile);
   console.log('isLogin', isLogin);
   console.log('name', name);
+  console.log('confirmation', confirmation);
 
   useEffect(() => {
     getLocationPermissions();
@@ -54,69 +58,80 @@ const OtpScreen = props => {
     });
   };
 
+  const confirmFcmOtp = async (obj) => {
+    try {
+      await confirmation.confirm(code);
+      dispatch(Actions.confirmFcmOTP(obj));
+    } catch (error) {
+      showResponse({ message: 'Invalid code' });
+    }
+  }
+
+  // sendOtp();
+
   return (
-    <View>
-      <SafeAreaView style={{backgroundColor: Colors.theme}}></SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: Colors.theme }}></SafeAreaView>
 
       <TouchableOpacity onPress={() => Navigation.goBack()}>
         <Image
           source={Images.back}
-          style={{tintColor: '#000', margin: 20}}
+          style={{ tintColor: '#000', margin: 20 }}
           resizeMode="contain"></Image>
       </TouchableOpacity>
 
       <TextBold
         text={i18n.t('otplongtext')}
-        style={{textAlign: 'center', fontSize: Sizes.extraDouble}}
+        style={{ textAlign: 'center', fontSize: Sizes.extraDouble }}
       />
 
-      <TextRegular
-        text={i18n
-          .t(isLogin ? 'otplongtext2' : 'otplongtext3')
-          .replace('071*****88', mobile.mobile ? mobile.mobile : mobile)}
-        style={{textAlign: 'center', fontSize: Sizes.regular, marginTop: 30}}
+      <TextRegular text={i18n
+        .t(isLogin ? 'otplongtext2' : 'otplongtext3')
+        .replace('071*****88', mobile.mobile ? mobile.mobile : mobile)}
+        style={{ textAlign: 'center', fontSize: Sizes.regular, marginTop: 30 }}
       />
 
-      <OTPInputView
-        style={{width: '80%', height: 200, marginLeft: 40}}
-        pinCount={4}
+      <OTPInputView pinCount={6}
+        style={{ width: '80%', height: 200, marginLeft: 40 }}
         autoFocusOnLoad
         placeholderCharacter="*"
         codeInputFieldStyle={styles.underlineStyleBase}
         codeInputHighlightStyle={styles.underlineStyleHighLighted}
         onCodeFilled={code => setCode(code)}
       />
-      <View style={{width: '100%', paddingHorizontal: '10%'}}>
-        <FullButton
-          onPress={() => {
-            // Navigation.navigate('SignUp');
-            let obj = {
-              mobile: isLogin ? mobile : mobile.mobile,
-              name: isLogin ? name : mobile.name,
-              otp: code,
-              state: latitude + ',' + longitude,
-              loginType: 0,
-            };
-            if (isLogin) {
-              obj.loginType = 1;
-            }
-            dispatch(Actions.verifyOtp(obj));
-          }}
+      <View style={{ width: '100%', paddingHorizontal: '10%' }}>
+        <FullButton onPress={() => {
+          // Navigation.navigate('SignUp');
+          let obj = {
+            mobile: isLogin ? mobile : mobile.mobile,
+            name: isLogin ? name : mobile.name,
+            otp: code,
+            state: latitude + ',' + longitude,
+            loginType: 0,
+          };
+          if (isLogin) {
+            obj.loginType = 1;
+          }
+          // dispatch(Actions.verifyOtp(obj));
+          confirmFcmOtp(obj);
+        }}
           text={i18n.t(isLogin ? 'login' : 'signup2')}
           textColor={Colors.white}
           bgColor={Colors.theme}
         />
       </View>
-      <View style={{height: 30}}></View>
+      <View style={{ height: 30 }}></View>
       {counter <= 0 && (
         <LinkButton
           text={i18n.t('didntrecive')}
           btnText={i18n.t('click')}
           onPress={() => {
             let obj = {
-              mobile,
+              mobile: isLogin ? mobile : mobile.mobile,
+              name
             };
-            dispatch(Actions.resendOtp(isLogin ? obj : mobile));
+            // dispatch(Actions.resendOtp(isLogin ? obj : mobile));
+            dispatch(Actions.sendFcmOTP(obj));
             setCounter(59);
           }}
         />
@@ -128,7 +143,7 @@ const OtpScreen = props => {
           style={{
             textAlign: 'center',
             fontSize: Sizes.regular,
-            Color: Colors.theme,
+            color: Colors.theme,
           }}
         />
       )}
