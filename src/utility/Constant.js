@@ -6,8 +6,8 @@ export default Constants = {
   IMAGE_URL: baseUrl + 'images/',
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
-  GOOGLE_CLIENT_ID:
-    '190017235730-gi6fvvnrdotf203a29vvd70e43g0h5rv.apps.googleusercontent.com',
+  // GOOGLE_CLIENT_ID:'190017235730-gi6fvvnrdotf203a29vvd70e43g0h5rv.apps.googleusercontent.com',
+  GOOGLE_CLIENT_ID: "190017235730-4rl8813tiqet5j6msfpbhq6n4eupilpf.apps.googleusercontent.com",
   firebaseConfig: {
     apiKey: 'AIzaSyCw0q516IzpNPo-A8zFy714rCxh06DIlc8',
     authDomain: '190017235730.firebaseapp.com',

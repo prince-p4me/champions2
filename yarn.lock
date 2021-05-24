@@ -1454,7 +1454,7 @@
 
 "@react-native-community/push-notification-ios@^1.8.0":
   version "1.8.0"
-  resolved "https://registry.npmjs.org/@react-native-community/push-notification-ios/-/push-notification-ios-1.8.0.tgz"
+  resolved "https://registry.yarnpkg.com/@react-native-community/push-notification-ios/-/push-notification-ios-1.8.0.tgz#7d43cb37b9e644ff3069aafa91befe71688a2dc4"
   integrity sha512-vxvkeampafjmtDoQBN8Q4azP21l6cMX93+OQZemyIWZmG++OjCVDQVitobf/kWLm5zyGwdylejbpMGo75qo7rA==
   dependencies:
     invariant "^2.2.4"
@@ -1479,7 +1479,7 @@
 
 "@react-native-google-signin/google-signin@^6.0.0":
   version "6.0.0"
-  resolved "https://registry.npmjs.org/@react-native-google-signin/google-signin/-/google-signin-6.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-6.0.0.tgz#115b666221169cbd6aabd6d9a622a7f48205ea2e"
   integrity sha512-xmrrG2muhwmoPy9AdfP+ceLBZtnrXkZwgN/jR5u3xOHadyerJfvD76w2BSmm7zeoiMB1wwSkZkzFSa9+i1BdKA==
 
 "@react-native/assets@1.0.0":
@@ -6562,7 +6562,7 @@ react-native-permissions@^3.0.1:
 
 react-native-push-notification@^7.3.1:
   version "7.3.1"
-  resolved "https://registry.npmjs.org/react-native-push-notification/-/react-native-push-notification-7.3.1.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-7.3.1.tgz#1495feacd25169b998446dcf7b448a197ae5dca0"
   integrity sha512-5kSKPvDU23uZRmzgKTsGhbwGNvB2tidu1VnInBHP53ZD0VEPSBl5fbpuTfHH98ED+Gp1SCcT2/e6bJWkIspKvg==
 
 react-native-qrcode-scanner@^1.5.4:

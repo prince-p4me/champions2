@@ -32,7 +32,7 @@ const SocialLogin = props => {
 
   async function signIn(loginType) {
     try {
-      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
       const userInfo = await GoogleSignin.signIn();
       console.log({ userInfo: userInfo });
 
