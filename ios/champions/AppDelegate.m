@@ -11,6 +11,7 @@
 
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
+#import "RNGoogleSignin.h"
 
 // #ifdef FB_SONARKIT_ENABLED
 // #import <FlipperKit/FlipperClient.h>
@@ -121,14 +122,22 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+//
+//- (BOOL)application:(UIApplication *)app
+//            openURL:(NSURL *)url
+//            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+//{
+//  return [[FBSDKApplicationDelegate sharedInstance]application:app
+//                                                       openURL:url
+//                                                       options:options];
+//}
 
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+- (BOOL)application:(UIApplication *)application
+            openURL:(nonnull NSURL *)url
+            options:(nonnull NSDictionary<NSString *,id> *)options
 {
-  return [[FBSDKApplicationDelegate sharedInstance]application:app
-                                                       openURL:url
-                                                       options:options];
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url options:options] ||
+  [RNGoogleSignin application:application openURL:url options:options];
 }
-
 @end

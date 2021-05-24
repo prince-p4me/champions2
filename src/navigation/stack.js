@@ -144,6 +144,7 @@ const StackNavigator = () => {
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
+      showToast(remoteMessage?.notification?.body);
       // if (Platform?.OS == 'android') {
       //   PushNotification.localNotification({
       //     message: remoteMessage?.notification?.body,

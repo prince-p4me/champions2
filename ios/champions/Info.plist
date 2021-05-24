@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>champions</string>
+	<string>10X Champions</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -23,9 +23,18 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb316911893389345</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
 				<string>com.googleusercontent.apps.190017235730-jnela3rr6hbj2ogrlvbuh7s1b6nbgubu</string>
 			</array>
 		</dict>
@@ -35,7 +44,7 @@
 	<key>FacebookAppID</key>
 	<string>316911893389345</string>
 	<key>FacebookDisplayName</key>
-	<string>champions</string>
+	<string>10X Champions</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
 	<key>Item 0</key>
@@ -90,15 +99,15 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Please Give access to your camera for scanning that QR code through it and some reward champions points are received.</string>
+	<string>Please Give access to your camera for scanning that QR code through it and some reward 10X Champions points are received.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>champions would like to use your microphone (for videos)</string>
+	<string>10X Champions would like to use your microphone (for videos)</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please Give access to your gallery for scanning that QR code through it and some reward champions points are received.</string>
+	<string>Please Give access to your gallery for scanning that QR code through it and some reward 10X Champions points are received.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please Give access to your gallery for scanning that QR code through it and some reward champions points are received.</string>
+	<string>Please Give access to your gallery for scanning that QR code through it and some reward 10X Champions points are received.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string></string>
