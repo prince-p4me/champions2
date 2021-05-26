@@ -18,10 +18,10 @@ const OfferLayout = props => {
   const list = useSelector(state => state.getOffers);
 
   console.log({ list20: list });
-
-  let data = list.filter(obj => parseInt(obj.redeemed) < 1);
+  let data = [...list];
+  // let data = list.filter(obj => parseInt(obj.redeemed) < 1);
   if (home) {
-    data = data.slice(0, 4);
+    data = list.slice(0, 4);
   }
 
   // let data = list;
