@@ -12,6 +12,7 @@ import Images from '../utility/Image';
 import Constant from '../utility/Constant';
 import styles from '../utility/Style';
 import Color from '../utility/Color';
+import I18n from '../services/i18n';
 import FullButton from '../components/FullButton';
 
 import {
@@ -23,6 +24,7 @@ import { LoginManager, Profile, AccessToken } from 'react-native-fbsdk-next';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as Actions from '../redux/action';
+import TextDevider from './TextDevider';
 
 const SocialLogin = props => {
   const { typeScreen } = props;
@@ -118,12 +120,13 @@ const SocialLogin = props => {
 
   return (
     <View style={{
-      flex: 6, width: "100%",
-      paddingHorizontal: 28,
+      flex: 1, width: "100%",
+      // paddingHorizontal: 28,
       alignItems: "center",
-      justifyContent: "center",
+      justifyContent: "flex-start",
       // backgroundColor: "red"
     }}>
+      <TextDevider text={I18n.t(typeScreen == "signup" ? 'signupwith' : 'loginwith')}></TextDevider>
       {/* <TouchableOpacity style={[styles.cardView, {
         height: 45, marginBottom: 10,
         width: Constant.width - 56
