@@ -125,7 +125,7 @@ const EditProfile = () => {
     } else if (email == '' || (email && !regex.test(email))) {
       message = 'Please enter valid email id.';
     } else if (mobile == '' || (mobile.length && mobile.length < 10)) {
-      message = 'Please enter valid mobile number.';
+      message = 'Please enter valid 10 digit mobile number.';
     } else if (dob == '') {
       message = 'Please enter your date of birth.';
     } else if (user.aadhaar_photo && !aadhar || (!aadhar.length || aadhar.length != 12)) {
@@ -178,6 +178,7 @@ const EditProfile = () => {
           placeholder="+91-**********"
           keyboardType="phone-pad"
           returnKeyType="next"
+          maxLength={10}
           onChangeText={mobile => setMobile(mobile)}
         />
         <TextInput
