@@ -121,16 +121,17 @@ const SocialLogin = props => {
       flex: 6, width: "100%",
       paddingHorizontal: 28,
       alignItems: "center",
-      justifyContent: "space-around",
+      justifyContent: "center",
+      // backgroundColor: "red"
     }}>
-      <TouchableOpacity style={[styles.cardView, {
-        height: 45,
+      {/* <TouchableOpacity style={[styles.cardView, {
+        height: 45, marginBottom: 10,
         width: Constant.width - 56
       }]} onPress={() => signIn()}>
         <Image source={Images.google}
           style={{ width: '100%', height: "100%", resizeMode: "cover" }}
           resizeMode="contain"></Image>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity style={[styles.cardView, {
         height: 45,
