@@ -22,7 +22,8 @@ const InputBox = props => {
     value,
     onChangeText,
     placeholder,
-    rightIcon
+    rightIcon,
+    maxLength
   } = props;
   const isRtl = useSelector(state => state.isRtl);
   console.log("isRtl", isRtl);
@@ -103,6 +104,7 @@ const InputBox = props => {
           keyboardType={keyboardType || 'default'}
           onSubmitEditing={props?.onSubmitEditing}
           returnKeyType={returnKeyType || 'next'}
+          maxLength={maxLength || 1000}
         />
       </View>
     </View>
@@ -115,6 +117,7 @@ const styles = StyleSheet.create({
     height: 45,
     flexDirection: 'row',
     marginBottom: 20,
+    alignItems: "center"
   },
   iconBox: {
     width: 50,
@@ -140,13 +143,14 @@ const propTypes = {
   placeholder: PropTypes.string,
   returnKeyType: PropTypes.string,
   icon: PropTypes.any,
-  keyboardType: PropTypes.oneOf(['default', 'email-address', 'phone-pad']),
+  keyboardType: PropTypes.oneOf(['default', 'email-address', 'phone-pad', 'next']),
   onChangeText: PropTypes.func,
   onSubmitEditing: PropTypes.func,
   onPress: PropTypes.func,
   iconColor: PropTypes.string,
   rightButton: PropTypes.string,
   rightPress: PropTypes.func,
+  maxLength: PropTypes.number
 };
 
 InputBox.propTypes = propTypes;

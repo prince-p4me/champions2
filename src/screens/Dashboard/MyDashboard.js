@@ -53,13 +53,12 @@ const MyDashboard = ({ route, navigation, props }) => {
             <TextSemiBold text={item.point_source} style={{ fontSize: Sizes.semiLarge, color: Color.parrot }} />
             <TextThin text={time} style={{ fontSize: Sizes.regular }} />
           </View>
-          <View style={{ width: "100%", flexDirection: "row", marginBottom: 10 }}>
-            <TextSemiBold text={item.point_source == "Redeemed" ? "-" : "+"} style={{ fontSize: Sizes.large, color: Color.parrot }} />
+          <View style={{ width: "100%", flexDirection: "row", marginBottom: 17 }}>
+            <TextSemiBold text="+" style={{ fontSize: Sizes.large, color: Color.parrot }} />
             <TextSemiBold text={item.point_earned + " " + I18n.t("points")} style={{ fontSize: Sizes.semiLarge, color: Color.semiGold }} />
             <Image source={Images.star3} style={{ tintColor: Color.semiGold, width: 15, height: 15 }} />
           </View>
-          {item.point_source == "QR Scan" && <TextLite text={I18n.t("scan_of")}
-            style={{ fontSize: Sizes.regular }} />}
+          {/* <TextLite text={"Scan of rice packet"} style={{ fontSize: Sizes.regular }} /> */}
         </View>
       </View>
     )

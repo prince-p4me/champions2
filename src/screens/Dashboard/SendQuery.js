@@ -23,16 +23,16 @@ import { showToast } from '../../utility/Index';
 const ContactUs = (props) => {
     const dispatch = useDispatch();
     const [query, setQuery] = useState("");
-    const [subject, setSubject] = useState("");
+    const [sub, setSubject] = useState("");
     const user = useSelector(state => state.getUser)
     console.log("user", user);
 
     const sentQuery = () => {
-        if (!subject) {
+        if (!sub || (sub.length && !sub.trim().length)) {
             showToast("Please enter the subject . . .");
             return;
         }
-        if (!query) {
+        if (!query || !query.trim().length) {
             showToast("Please describe your query . . .");
             return;
         }
@@ -50,15 +50,15 @@ const ContactUs = (props) => {
             <View style={{ flex: 1, padding: 16, paddingTop: 25 }}>
                 <TextBold text={I18n.t("subject")} style={{ fontSize: Sizes.medium, alignSelf: "flex-start" }}></TextBold>
                 <TextInput style={[styles.input, { height: 40, width: "80%", marginBottom: 20 }]}
-                    value={subject}
-                    onChangeText={subject => setSubject(subject)}
-                    returnKeyType="done"
+                    value={sub}
+                    onChangeText={sub => setSubject(sub.trim())}
+                    returnKeyType="next"
                     onSubmitEditing={setSubject}></TextInput>
                 <TextBold text={I18n.t("yourquery")} style={{ fontSize: Sizes.medium, alignSelf: "flex-start" }}></TextBold>
                 <TextInput style={styles.input}
                     placeholder={I18n.t("describequery")}
                     value={query}
-                    onChangeText={query => setQuery(query)}
+                    onChangeText={query => setQuery(query.trim())}
                     numberOfLines={10}
                     maxLength={500}
                     multiline={true}

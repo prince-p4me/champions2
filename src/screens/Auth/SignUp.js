@@ -124,7 +124,7 @@ const SignupScreen = () => {
           <TextInput
             style={{flex: 1, padding: 7}}
             placeholder="Enter your 10 digits mobile number"
-            keyboardType="phone-pad"
+            keyboardType="numeric"
             value={mobile}
             returnKeyLabel="Done"
             returnKeyType="done"

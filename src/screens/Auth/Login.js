@@ -34,8 +34,8 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
 
 const LoginScreen = () => {
-  // const [mobile, setMobile] = useState('8802854433');
-  const [mobile, setMobile] = useState('');
+  const [mobile, setMobile] = useState('8802854433');
+  // const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
   const isRtl = useSelector(state => state.isRtl);
@@ -102,7 +102,7 @@ const LoginScreen = () => {
           <TextInput
             style={{ flex: 1, padding: 7 }}
             placeholder="Enter your 10 digits mobile number"
-            keyboardType="phone-pad"
+            keyboardType="numeric"
             value={mobile}
             onChangeText={mobile => setMobile(mobile)}
             maxLength={10}
