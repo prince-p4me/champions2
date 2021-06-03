@@ -1,7 +1,7 @@
 import Constants from '../utility/Constant';
-import { store } from '../redux/store';
-import { BackHandler, Alert } from 'react-native';
-import { showResponse } from '../utility/Index';
+import {store} from '../redux/store';
+import {BackHandler, Alert} from 'react-native';
+import {showResponse} from '../utility/Index';
 import auth from '@react-native-firebase/auth';
 
 async function callApi(urlString, body, methodType) {
@@ -182,7 +182,7 @@ export function getNotification() {
   console.log('----------getNotification Api Call ------------------');
   return callApi(
     Constants.API_URL + 'user_notification.php',
-    { user_id: state.getUser.id },
+    {user_id: state.getUser.id},
     'POST',
   );
 }
@@ -192,7 +192,7 @@ export function getTransaction() {
   console.log('----------getTransaction Api Call ------------------');
   return callApi(
     Constants.API_URL + 'user_transaction_list.php',
-    { user_id: state.getUser.id },
+    {user_id: state.getUser.id},
     'POST',
   );
 }
@@ -210,17 +210,32 @@ export function confirmFcmOTP(data) {
 }
 
 export async function sendFcmOTP(mobile) {
-  console.log("mobile", mobile);
+  console.log('mobile', mobile);
   try {
-    const confirmation = await auth().signInWithPhoneNumber("+91" + mobile);
+    const confirmation = await auth().signInWithPhoneNumber('+91' + mobile);
     return confirmation;
   } catch (error) {
-    console.log("error", error);
-    Alert.alert("Error", error)
+    console.log('error', error);
+    Alert.alert('Error', error);
   }
 }
 
 export function getReceipeDetail(data) {
   console.log('----------getRecipeDetail Api Call ------------------');
   return callApi(Constants.API_URL + 'recipe_details.php', data, 'POST');
+}
+
+export function getAddressLatLng(data) {
+  console.log('----------getAddressLatLng Api Call ------------------');
+  let url =
+    Constants.ADDRESS_URL +
+    '' +
+    data.latitude +
+    ',' +
+    data.longitude +
+    '&key=' +
+    Constants.MAP_KEY;
+
+  console.log(url);
+  return callApi(url, 'GET');
 }

@@ -179,6 +179,15 @@ export const getFcmToken = (state = null, action) => {
   }
 };
 
+export const getAddressLatLng = (state = null, action) => {
+  switch (action.type) {
+    case Types.GET_ADDRESS_LAT_LNG:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const getStates = (state = [], action) => {
   let statelist = [
     {id: 1, name: 'Andhra Pradesh'},

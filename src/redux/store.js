@@ -19,6 +19,7 @@ import {
   getTransaction,
   getFcmToken,
   getReceipeDetail,
+  getAddressLatLng,
 } from './reducer';
 import getListSaga from './saga';
 import {all, fork} from 'redux-saga/effects';
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   getFcmToken,
   getOfferDetail,
   getReceipeDetail,
+  getAddressLatLng,
 });
 
 //creating, applying sagas

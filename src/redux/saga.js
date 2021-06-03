@@ -602,6 +602,20 @@ function* confirmFcmOTP({type, payload}) {
   }
 }
 
+function* getAddressLatLng({type, payload}) {
+  try {
+    let response = yield call(Apiservice.getAddressLatLng, payload); //calling Api
+    if (response && response?.results && response?.results[0]) {
+      yield put({
+        type: Types.GET_ADDRESS_LAT_LNG,
+        payload: response?.results[0]?.formatted_address,
+      }); //set user
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -634,4 +648,5 @@ export default function* watcher() {
   yield takeLatest(Types.GET_TRANSACTIONS, getTransaction);
   yield takeLatest(Types.GET_OFFER_DETAIL, getOfferDetail);
   yield takeLatest(Types.GET_RECEIPE_DETAIL, getReceipeDetail);
+  yield takeLatest(Types.GET_ADDRESS_LAT_LNG, getAddressLatLng);
 }

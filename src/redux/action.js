@@ -236,4 +236,11 @@ export function setFcmToken(payload) {
   };
 }
 
+export function getAddressLatLng(payload) {
+  return {
+    type: Types.GET_ADDRESS_LAT_LNG,
+    payload,
+  };
+}
+
 // add another actions further
