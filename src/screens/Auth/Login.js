@@ -65,50 +65,52 @@ const LoginScreen = () => {
     <View
       style={[styles.container, { padding: 14, backgroundColor: Colors.white }]}>
       <SafeAreaView style={{ backgroundColor: Colors.theme }}></SafeAreaView>
+      <TouchableOpacity
+        style={{
+          width: 30,
+          alignSelf: 'flex-start',
+        }}
+        onPress={() => Navigation.goBack()}>
+        {isRtl ? (
+          <Icon name="arrow-right-alt" size={30} color="#000" />
+        ) : (
+          <Image
+            source={Images.back}
+            style={{ tintColor: '#000' }}
+            resizeMode="contain"></Image>
+        )}
+      </TouchableOpacity>
+
       <KeyboardAvoidingView behavior="position"
         style={{
           flex: 5,
           alignItems: 'center',
           paddingTop: 20,
           paddingHorizontal: 16,
+          justifyContent: "space-between"
         }}>
-        <TouchableOpacity
-          style={{
-            width: 30,
-            alignSelf: 'flex-start',
-          }}
-          onPress={() => Navigation.goBack()}>
-          {isRtl ? (
-            <Icon name="arrow-right-alt" size={30} color="#000" />
-          ) : (
-            <Image
-              source={Images.back}
-              style={{ tintColor: '#000' }}
-              resizeMode="contain"></Image>
-          )}
-        </TouchableOpacity>
         <TextBold text={I18n.t('login')}
           style={{ textAlign: 'center', fontSize: Sizes.extraDouble }}
         />
 
         <TextRegular text={I18n.t('otplongtext2')}
-          style={{ textAlign: 'center', fontSize: Sizes.regular, marginTop: 30 }}
+          style={{ textAlign: 'center', fontSize: Sizes.regular, marginTop: 20 }}
         />
 
-        <View style={styles.inputBox}>
+        <View style={[styles.inputBox, { marginTop: "10%" }]}>
           <View style={styles.dialCode}>
             <TextSemiBold text={isRtl ? '-91+' : '+91-'} />
           </View>
           <TextInput
             style={{ flex: 1, padding: 7 }}
             placeholder="Enter your 10 digits mobile number"
-            keyboardType="phone-pad"
+            keyboardType="numeric"
             value={mobile}
             onChangeText={mobile => setMobile(mobile)}
             maxLength={10}
             onSubmitEditing={doLogin}></TextInput>
         </View>
-        <FullButton btnStyle={{ width: Constant.width - 64, marginTop: 50 }}
+        <FullButton btnStyle={{ width: Constant.width - 64, marginTop: "15%" }}
           onPress={doLogin}
           text={I18n.t('Sendotp')}
           textColor={Colors.white}
@@ -116,11 +118,11 @@ const LoginScreen = () => {
         />
       </KeyboardAvoidingView>
 
-      <TextDevider text={I18n.t('loginwith')}></TextDevider>
+      {/* <TextDevider text={I18n.t('loginwith')}></TextDevider> */}
 
       <View style={{ flex: 5 }}>
         <SocialLogin typeScreen={'login'} />
-        <View style={{ height: 60, justifyContent: 'space-between' }}>
+        <View style={{ height: 60, justifyContent: 'space-between', paddingVertical: 7 }}>
           <LinkButton
             text={I18n.t('doyouhaveac')}
             btnText={I18n.t('signup2')}

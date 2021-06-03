@@ -50,7 +50,7 @@ const StateModal = props => {
                 ]}
                 onPress={() => onPress(item)}>
                 <TextLite
-                  text={item.name}
+                  text={item?.name}
                   style={{
                     textAlign: align,
                     fontSize: Sizes.medium,

@@ -42,7 +42,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 20,
-    marginTop: 50,
+    // marginTop: 30,
     overflow: 'hidden',
   },
   mikeButton: {

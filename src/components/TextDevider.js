@@ -8,7 +8,9 @@ const TextDevider = props => {
     <View style={{
       flexDirection: "row",
       width: "100%",
-      alignItems: "center"
+      alignItems: "center",
+      marginBottom: 10,
+      marginTop: "5%"
     }}>
       <View style={{
         backgroundColor: Colors.darkBGgray,

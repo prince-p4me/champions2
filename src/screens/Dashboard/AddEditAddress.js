@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -20,15 +20,15 @@ import {
   TextMedium,
 } from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import BottomTile from '../../components/BottomTile';
 import TextInput from '../../components/TextInput';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import StateModal from '../../components/StateModal';
-import {showResponse} from '../../utility/Index';
+import { showResponse, showToast } from '../../utility/Index';
 
-const AddEditAddress = ({route}) => {
-  const {item} = route.params;
+const AddEditAddress = ({ route }) => {
+  const { item } = route.params;
   const [hf_number, setHouseno] = useState('');
   const [address, setAddress] = useState('');
   const [landmark, setLandmark] = useState('');
@@ -44,9 +44,9 @@ const AddEditAddress = ({route}) => {
   const selected = value => {
     return value == type
       ? {
-          backgroundColor: Colors.theme,
-          borderColor: Colors.theme,
-        }
+        backgroundColor: Colors.theme,
+        borderColor: Colors.theme,
+      }
       : {};
   };
 
@@ -59,7 +59,7 @@ const AddEditAddress = ({route}) => {
           onPress={item => {
             if (item && item.id) {
             }
-            setState(item.name);
+            setState(item?.name);
             setModalVisible(false);
           }}
           onChangeState={text => {
@@ -88,17 +88,14 @@ const AddEditAddress = ({route}) => {
       message = 'Please Enter Landmark.';
     } else if (state == '') {
       message = 'Please Select State.';
-    } else if (pincode == '') {
-      message = 'Please Enter PinCode.';
+    } else if (pincode == '' || (pincode.length && pincode.length < 6)) {
+      message = 'Please Enter Valid PinCode.';
     } else if (type == '') {
       message = 'Please Select Type.';
     }
 
     if (message != '') {
-      let messageInfo = {
-        message: message,
-      };
-      showResponse(messageInfo);
+      showToast(message);
       return;
     }
 
@@ -127,29 +124,26 @@ const AddEditAddress = ({route}) => {
       setType(item.type);
     }
   }, []);
+
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       {renderModal()}
-      <Header
-        transparent={true}
+      <Header transparent={true}
         title={I18n.t('addnewaddress')}
         dashboard={false}
         back={true}
         help={true}
       />
-      <ScrollView
-        contentContainerStyle={{
-          flex: 1,
-          padding: 16,
-          backgroundColor: Colors.bgGray,
-        }}>
-        <TextRegular
-          text={I18n.t('fillther')}
-          style={{fontSize: Sizes.semiLarge}}
+      <ScrollView contentContainerStyle={{
+        flex: 1,
+        padding: 16,
+        backgroundColor: Colors.bgGray,
+      }}>
+        <TextRegular text={I18n.t('fillther')}
+          style={{ fontSize: Sizes.semiLarge }}
         />
-        <View style={{paddingStart: 7, paddingTop: 25}}>
-          <TextInput
-            value={hf_number}
+        <View style={{ paddingStart: 7, paddingTop: 25 }}>
+          <TextInput value={hf_number}
             lable="House/Flat number"
             placeholder="Enter House No."
             keyboardType="default"
@@ -188,7 +182,8 @@ const AddEditAddress = ({route}) => {
             lable="Pincode"
             placeholder="Enter pin code"
             borderColor={Colors.border}
-            keyboardType="default"
+            keyboardType="numeric"
+            maxLength={6}
             onChangeText={pincode => setPin(pincode)}
           />
         </View>
@@ -256,7 +251,7 @@ const AddEditAddress = ({route}) => {
           saveAddress();
         }}
       />
-      <SafeAreaView style={{backgroundColor: Colors.parrot}}></SafeAreaView>
+      <SafeAreaView style={{ backgroundColor: Colors.parrot }}></SafeAreaView>
     </View>
   );
 };
