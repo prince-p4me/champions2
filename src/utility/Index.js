@@ -1,7 +1,7 @@
 import Toast from 'react-native-simple-toast';
 
 function showResponse(response) {
-  if (response && response.message) {
+  if (response && response.message && !response.message.includes("Data")) {
     setTimeout(() => {
       Toast.showWithGravity(response.message, Toast.SHORT, Toast.BOTTOM);
     }, 1500);

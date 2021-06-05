@@ -115,9 +115,9 @@ const Header = props => {
               <TouchableOpacity style={styles.notification}
                 onPress={() => Navigation.navigate('Notification')}>
                 <Image source={alarm} style={styles.notifImg} />
-                {(data[0]?.today && data[0]?.data.length) && <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
+                {/* {(data[0]?.today && data[0]?.data.length) && <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
                   <TextThin text={data[0]?.data.length} style={{ fontSize: Sizes.small, color: Color.theme }} />
-                </View>}
+                </View>} */}
               </TouchableOpacity>
               <TouchableOpacity style={styles.helpSpacing}
                 onPress={() => Navigation.navigate('Help', { auth: false })}>

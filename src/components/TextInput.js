@@ -99,7 +99,7 @@ const InputBox = props => {
           style={styles.input}
           value={value}
           placeholder={placeholder}
-          placeholderTextColor={Colors.text}
+          placeholderTextColor={Colors.border}
           onChangeText={text => onChangeText(text)}
           keyboardType={keyboardType || 'default'}
           onSubmitEditing={props?.onSubmitEditing}
