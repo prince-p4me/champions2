@@ -1,7 +1,8 @@
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 const baseUrl = 'http://10xchampions.grmrice.com/';
 const mapUrl = 'https://maps.googleapis.com/';
 const MAP_KEY = 'AIzaSyAHACClfTrDU533R962fSyxAWiFJUXFmwI';
+// const MAP_KEY = "AIzaSyBDLnJznN3pyWOikJUhx-nnE7MnpQpknGE";
 // const baseUrl = 'http://drive13.in/10X/';
 export default Constants = {
   API_URL: baseUrl + 'api/',
