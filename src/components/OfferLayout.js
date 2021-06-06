@@ -10,12 +10,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
 import { Icon } from 'react-native-elements';
 import Constant from '../utility/Constant';
+import * as Actions from '../redux/action';
 
 const OfferLayout = props => {
   const { home } = props;
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
   const list = useSelector(state => state.getOffers);
+  const userData = useSelector(state => state.getPoints);
+  const dispatch = useDispatch();
 
   console.log({ list20: list });
 
@@ -48,7 +51,7 @@ const OfferLayout = props => {
         )}
         {data.map((item, index) => {
           const expired = new Date(item.expiry_date) < new Date();
-          const noBalance = parseInt(item.balance) >= parseInt(item.points);
+          const noBalance = parseInt(userData.balance) < parseInt(item.points);
 
           // if (parseInt(item.redeemed) < 1)
           return (
@@ -108,14 +111,20 @@ const OfferLayout = props => {
                     resizeMode="contain"></Image>
                 </View>
                 <View style={{ width: '100%', alignItems: 'flex-end' }}>
-                  <TouchableOpacity
+                  <TouchableOpacity disabled={noBalance}
                     style={[
                       styles.redeem,
-                      // !noBalance && {backgroundColor: Color.text},
+                      noBalance && { backgroundColor: Color.text },
                     ]}
                     onPress={() => {
                       console.log({ item103: item });
-                      Navigation.navigate('OfferDetail', { id: item.id });
+                      let obj = {
+                        offer_id: item.id,
+                        points: item.points,
+                      };
+
+                      dispatch(Actions.redeemOffer(obj));
+                      // Navigation.navigate('OfferDetail', { id: item.id });
                     }}>
                     <TextRegular
                       text={I18n.t('redeemnow')}

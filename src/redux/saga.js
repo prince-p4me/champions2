@@ -545,7 +545,6 @@ function* login({ type, payload }) {
   try {
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
     const response = yield call(Apiservice.loginApi, { mobile: payload });
-    // showResponse(response);
     if (response && response.status) {
       if (response.status == 10 && response.id) {
         yield put({ type: Types.USER, payload: response }); //set user
@@ -562,6 +561,7 @@ function* login({ type, payload }) {
         });
       }
     }
+    showResponse(response);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   } catch (error) {
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading

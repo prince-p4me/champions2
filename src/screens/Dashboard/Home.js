@@ -112,25 +112,11 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let { token, list, isSuccess } = this.props;
+    let { offerDetail, list, isSuccess } = this.props;
     let { points } = this.state;
-    // let token = store.getState().getFcmToken;
-    if (isSuccess) {
-      // if (this.state.soundsList && this.state.soundsList.length) {
-      setTimeout(() => {
-        // playSampleSound(this.state.soundsList[1]);
-        // RNLocalNotifications.createNotification(
-        //   1,
-        //   'Notification',
-        //   'notification',
-        //   'default',
-        // );
-      }, 3000);
-      // }
-    }
     return (
       <View style={styles.containerDashboard}>
-        <SuccessModal visible={isSuccess} points={points} />
+        <SuccessModal visible={isSuccess} points={points} offerDetail={offerDetail} />
         <Header title={'Home'} dashboard={true} />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}>
@@ -158,6 +144,7 @@ const mapStateToProps = state => ({
   isRtl: state.isRtl,
   isSuccess: state.isSuccess,
   token: state.getFcmToken,
+  offerDetail: state.getOfferDetail
 });
 
 const mapDispatchToProps = dispatch => {

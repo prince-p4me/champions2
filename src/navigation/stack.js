@@ -101,6 +101,8 @@ const StackNavigator = () => {
 
       if (enabled) {
         const fcmToken = await messaging().getToken();
+        await messaging().registerDeviceForRemoteMessages();
+
         console.log('token', fcmToken);
         dispatch(Actions.setFcmToken(fcmToken));
       }
@@ -123,10 +125,9 @@ const StackNavigator = () => {
 
     requestLocationPermission();
 
-    messaging().setBackgroundMessageHandler(async remoteMessage => {
-      // console.log('Message handled in the background!', remoteMessage);
-      handleNavigation(remoteMessage?.data);
-    });
+    // messaging().setBackgroundMessageHandler(async remoteMessage => {
+    //   handleNavigation(remoteMessage?.data);
+    // });
 
     messaging().onNotificationOpenedApp(remoteMessage => {
       handleNavigation(remoteMessage?.data);
@@ -139,27 +140,11 @@ const StackNavigator = () => {
         if (remoteMessage) {
           handleNavigation(remoteMessage?.data);
         }
-        // setLoading(false);
       });
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       showToast(remoteMessage?.notification?.body);
-      // if (Platform?.OS == 'android') {
-      //   PushNotification.localNotification({
-      //     message: remoteMessage?.notification?.body,
-      //     title: remoteMessage?.notification.title,
-      //     bigPictureUrl: remoteMessage?.notification?.android?.imageUrl,
-      //     smallIcon: remoteMessage?.notification?.android?.imageUrl,
-      //   });
-      // } else {
-      //   PushNotificationIos.addNotificationRequest({
-      //     id: remoteMessage?.data?.id,
-      //     body: remoteMessage?.data?.body,
-      //     title: remoteMessage?.data?.title,
-      //   });
-      // }
-      // handleNavigation(remoteMessage?.data);
     });
 
     return unsubscribe;

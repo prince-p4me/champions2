@@ -52,10 +52,10 @@ const OfferDetail = ({ route, navigation }) => {
 
   const isRtl = useSelector(state => state.isRtl);
   const isSuccess = useSelector(state => state.isSuccess);
+  const userData = useSelector(state => state.getPoints);
   const align = isRtl ? 'right' : 'left';
   const expired = new Date(offerDetail.expiry_date) < new Date();
-  const noBalance =
-    parseInt(offerDetail.balance) >= parseInt(offerDetail.points);
+  const noBalance = parseInt(userData.balance) < parseInt(offerDetail.points);
 
   const redeemOffer = () => {
     let obj = {
@@ -160,10 +160,10 @@ const OfferDetail = ({ route, navigation }) => {
             <TouchableOpacity
               style={[
                 styles.redeem,
-                // !noBalance && {backgroundColor: Color.text},
+                noBalance && { backgroundColor: Color.text },
               ]}
               onPress={redeemOffer}
-            // disabled={!noBalance || expired}
+              disabled={noBalance}
             // disabled={expired}
             >
               <TextRegular
