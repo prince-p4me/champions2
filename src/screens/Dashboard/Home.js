@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -31,20 +31,20 @@ import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
 
 import SuccessModal from './SuccessModal';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import OtpScreen from '../Auth/Otp';
 import LandingScreen from '../Auth/Landing';
 import Profilemain from './Profilemain';
 // import { NavigationEvents } from 'react-navigation';
-import { Icon } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Icon} from 'react-native-elements';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
-import { request, PERMISSIONS } from 'react-native-permissions';
+import {request, PERMISSIONS} from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -63,17 +63,12 @@ class HomeScreen extends React.Component {
 
   checkProps = () => {
     if (this.props.route.params && this.props.route.params.data) {
-      let { data } = this.props.route.params;
+      let {data} = this.props.route.params;
       console.log('scan data', data);
       console.log('executing data');
       data = data.split(',');
       console.log('scan data array', data);
-      let obj = { qr_id: data[0], points: data[1] };
-
-      // let successType = false;
-      // if (data.length) {
-      //   successType = true;
-      // }
+      let obj = {qr_id: data[0], points: data[1]};
       this.setState(
         {
           points: obj.points,
@@ -86,12 +81,13 @@ class HomeScreen extends React.Component {
         },
       );
     } else {
+      // alert(language);
       this.props.getBanners();
     }
   };
 
   TokenBox = () => {
-    let { token, list, isSuccess } = this.props;
+    let {token, list, language} = this.props;
     return (
       <TextInput
         multiline={true}
@@ -111,18 +107,31 @@ class HomeScreen extends React.Component {
     );
   };
 
+  updateLanguage = language => {
+    setTimeout(() => {
+      I18n.locale = language;
+      // forceUpdate();
+    }, 100);
+  };
+
   render() {
-    let { offerDetail, list, isSuccess } = this.props;
-    let { points } = this.state;
+    let {offerDetail, list, isSuccess, language} = this.props;
+    let {points} = this.state;
+    this.updateLanguage(language);
     return (
       <View style={styles.containerDashboard}>
-        <SuccessModal visible={isSuccess} points={points} offerDetail={offerDetail} />
+        <SuccessModal
+          visible={isSuccess}
+          points={points}
+          offerDetail={offerDetail}
+        />
         <Header title={'Home'} dashboard={true} />
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+        <ScrollView
+          contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
-          <View style={{ height: 20 }} />
+          <View style={{height: 20}} />
           {/* {this.TokenBox()} */}
           <QRCodeContainer />
           <PointsContainer />
@@ -130,7 +139,7 @@ class HomeScreen extends React.Component {
           <OfferLayout home={true} />
           <RecipeLayout horizontal={true} />
           <ReviewLayout />
-          <View style={{ height: 50 }}></View>
+          <View style={{height: 50}}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
       </View>
@@ -144,7 +153,8 @@ const mapStateToProps = state => ({
   isRtl: state.isRtl,
   isSuccess: state.isSuccess,
   token: state.getFcmToken,
-  offerDetail: state.getOfferDetail
+  offerDetail: state.getOfferDetail,
+  language: state.getLanguage,
 });
 
 const mapDispatchToProps = dispatch => {
