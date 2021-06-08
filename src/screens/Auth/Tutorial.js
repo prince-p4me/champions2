@@ -106,7 +106,7 @@ const Tutorial = ({ route }) => {
             justifyContent: 'flex-end',
             alignItems: 'center',
           }}>
-          <FullButton
+          {/* <FullButton
             bgColor={Color.theme}
             textColor={Color.white}
             text="Next"
@@ -125,7 +125,7 @@ const Tutorial = ({ route }) => {
                 }
               }, 400);
             }}
-          />
+          /> */}
 
           <TouchableOpacity
             style={{ padding: 14 }}

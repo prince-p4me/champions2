@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { FlatListSlider } from 'react-native-flatlist-slider';
+import { navigate } from '../navigation/navigation';
 import Color from '../utility/Color';
 import Constant from '../utility/Constant';
 
@@ -14,6 +15,7 @@ const SliderImg = (props) => {
         onPress={index => {
           // console.log(JSON.stringify(index));
           // bannerClicked(banners[index]);
+          navigate("OfferAll");
         }}
         contentContainerStyle={{ paddingHorizontal: 2 }}
         indicatorContainerStyle={{ position: 'absolute', bottom: 10 }}

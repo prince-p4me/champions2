@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {View, Image} from 'react-native';
-import {TextBold, TextSemiBold, TextThin} from './TextView';
+import React, { Component } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { View, Image } from 'react-native';
+import { TextBold, TextSemiBold, TextThin } from './TextView';
 import i18n from '../services/i18n';
 
 import star from '../assets/imgs/star.png';
@@ -27,7 +27,7 @@ const PointsContainer = () => {
       <View style={[styles.pointContainer]}>
         <TextBold
           text={i18n.t('points')}
-          style={{textAlign: align, fontSize: Sizes.large}}
+          style={{ textAlign: align, fontSize: Sizes.large }}
         />
 
         <Image source={star} style={styles.starIcon}></Image>
@@ -35,40 +35,40 @@ const PointsContainer = () => {
 
       <TouchableOpacity
         onPress={() => {
-          // Navigation.navigate('MyReward', {data});
+          Navigation.navigate('MyDashboard');
         }}>
         <View style={[styles.pointTypesContainer]}>
           <View style={styles.pointTypeCol}>
             <Image source={earned} style={styles.pointIcon}></Image>
             <TextSemiBold
               text={data.total_earned}
-              style={{textAlign: align, fontSize: Sizes.semiLarge}}
+              style={{ textAlign: align, fontSize: Sizes.semiLarge }}
             />
             <TextThin
               text={i18n.t('earned')}
-              style={{textAlign: align, fontSize: Sizes.semiLarge}}
+              style={{ textAlign: align, fontSize: Sizes.semiLarge }}
             />
           </View>
           <View style={styles.pointTypeColMiddle}>
             <Image source={Redeem} style={styles.pointIcon}></Image>
             <TextSemiBold
               text={data.total_redeemed}
-              style={{textAlign: align, fontSize: Sizes.semiLarge}}
+              style={{ textAlign: align, fontSize: Sizes.semiLarge }}
             />
             <TextThin
               text={i18n.t('redeem')}
-              style={{textAlign: align, fontSize: Sizes.semiLarge}}
+              style={{ textAlign: align, fontSize: Sizes.semiLarge }}
             />
           </View>
           <View style={styles.pointTypeCol}>
             <Image source={Balance} style={styles.pointIcon}></Image>
             <TextSemiBold
               text={data.balance}
-              style={{textAlign: align, fontSize: Sizes.semiLarge}}
+              style={{ textAlign: align, fontSize: Sizes.semiLarge }}
             />
             <TextThin
               text={i18n.t('balance')}
-              style={{textAlign: align, fontSize: Sizes.semiLarge}}
+              style={{ textAlign: align, fontSize: Sizes.semiLarge }}
             />
           </View>
         </View>

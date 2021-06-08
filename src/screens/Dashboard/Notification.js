@@ -11,7 +11,7 @@ import Color from '../../utility/Color';
 import I18n from '../../services/i18n';
 import Sizes from '../../utility/Sizes';
 import Images from '../../utility/Image';
-import { navigate } from '../../navigation/navigation';
+import * as Navigation from '../../navigation/navigation';
 
 const Notification = () => {
   const data = useSelector(state => state.getNotification);
@@ -23,10 +23,42 @@ const Notification = () => {
     dispatch(Actions.getNotification());
   }, []);
 
+  const handleNavigation = data => {
+    console.log('data', data);
+    let routeName = 'Home';
+    let id = null;
+    if (data) {
+      switch (data?.type?.toLowerCase()) {
+        case 'winner':
+          routeName = 'WinnerAll';
+          break;
+
+        case 'offer':
+          routeName = 'OfferDetail';
+          id = data.n_id;
+          break;
+
+        case 'recipe':
+          routeName = 'RecipieDetail';
+          id = data.n_id;
+          break;
+
+        case 'redeemed':
+          routeName = 'MyReward';
+          break;
+
+        default:
+          routeName = 'Home';
+          break;
+      }
+    }
+    Navigation.navigate(routeName, id && { id });
+  };
+
   const renderItem = item => {
     return (
       <TouchableOpacity style={styles.notif}
-        onPress={() => navigate("MyReward")}>
+        onPress={() => handleNavigation(item)}>
         <View style={styles.imgBox}>
           <Image source={Images.notif} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
         </View>
@@ -35,7 +67,7 @@ const Notification = () => {
             numberOfLines={3} />
           <TextThin text={item.type} style={{ fontSize: Sizes.regular, marginTop: 3 }} />
           <View style={{ width: "100%", alignItems: "flex-end" }}>
-            <TextThin text={item.created_at.split(" ")[0]} style={{ fontSize: Sizes.small, marginBottom: -20 }} />
+            <TextThin text={item.created_at.split(" ")[0] + " | " + item.created_at.split(" ")[1]} style={{ fontSize: Sizes.small, marginBottom: -20 }} />
           </View>
         </View>
       </TouchableOpacity>
