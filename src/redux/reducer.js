@@ -197,6 +197,24 @@ export const getAboutUs = (state = null, action) => {
   }
 };
 
+export const getTancC = (state = null, action) => {
+  switch (action.type) {
+    case Types.SET_TANDC:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const getPrivacyPolicy = (state = null, action) => {
+  switch (action.type) {
+    case Types.SET_PRIVACY_POLICY:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const getStates = (state = [], action) => {
   let statelist = [
     {id: 1, name: 'Andhra Pradesh'},

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Image,
@@ -16,8 +16,18 @@ import Header from '../../components/Header';
 import Sizes from '../../utility/Sizes';
 import Font from '../../utility/Font';
 import HTML from 'react-native-render-html';
+import Constant from '../../utility/Constant';
+import {useSelector, useDispatch} from 'react-redux';
+import * as Actions from '../../redux/action';
 
 const Privacy = () => {
+  const dispatch = useDispatch();
+  const privacyPolicy = useSelector(state => state.getPrivacyPolicy);
+
+  useEffect(() => {
+    dispatch(Actions.getPrivacyPolicy(null));
+  }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: Colors.lightGreen}}>
       <Header title={I18n.t('Privacy')} dashboard={false} back={true} />

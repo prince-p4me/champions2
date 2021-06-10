@@ -631,10 +631,41 @@ function* getAboutUs({type, payload}) {
   }
 }
 
+function* getTancC({type, payload}) {
+  try {
+    console.log('init payload');
+    let response = yield call(Apiservice.getContent, payload); //calling Api
+    if (response && response?.status && response?.status == 1) {
+      yield put({
+        type: Types.SET_TANDC,
+        payload: response?.term_condition,
+      }); //set user
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* getPrivacyPolicy({type, payload}) {
+  try {
+    console.log('init payload');
+    let response = yield call(Apiservice.getContent, payload); //calling Api
+    if (response && response?.status && response?.status == 1) {
+      yield put({
+        type: Types.SET_PRIVACY_POLICY,
+        payload: response?.privacy_policy,
+      }); //set user
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
-
+  yield takeLatest(Types.SET_TANDC, getTancC);
+  yield takeLatest(Types.SET_PRIVACY_POLICY, getPrivacyPolicy);
   yield takeLatest(Types.SET_ABOUT_US, getAboutUs);
   yield takeLatest(Types.SEND_FCM_OTP, sendFcmOTP);
   yield takeLatest(Types.CONFIRM_FCM_OTP, confirmFcmOTP);
