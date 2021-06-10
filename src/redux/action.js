@@ -243,4 +243,25 @@ export function getAddressLatLng(payload) {
   };
 }
 
+export function getAboutUs(payload) {
+  return {
+    type: Types.SET_ABOUT_US,
+    payload,
+  };
+}
+
+export function getPrivacyPolicy(payload) {
+  return {
+    type: Types.SET_PRIVACY_POLICY,
+    payload,
+  };
+}
+
+export function getTancC(payload) {
+  return {
+    type: Types.SET_TANDC,
+    payload,
+  };
+}
+
 // add another actions further

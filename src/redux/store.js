@@ -20,6 +20,9 @@ import {
   getFcmToken,
   getReceipeDetail,
   getAddressLatLng,
+  getAboutUs,
+  getTancC,
+  getPrivacyPolicy,
 } from './reducer';
 import getListSaga from './saga';
 import {all, fork} from 'redux-saga/effects';
@@ -49,6 +52,9 @@ const rootReducer = combineReducers({
   getOfferDetail,
   getReceipeDetail,
   getAddressLatLng,
+  getAboutUs,
+  getPrivacyPolicy,
+  getTancC,
 });
 
 //creating, applying sagas

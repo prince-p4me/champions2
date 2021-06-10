@@ -239,3 +239,8 @@ export function getAddressLatLng(data) {
   console.log(url);
   return callApi(url, 'GET');
 }
+
+export function getContent() {
+  console.log('----------getContent Api Call ------------------');
+  return callApi(Constants.API_URL + 'content.php', {}, 'GET');
+}
