@@ -1,52 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  ScrollView, Image
-  , FlatList
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, ScrollView, Image, FlatList} from 'react-native';
 import Header from '../../components/Header';
-import { TextBold, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
+import {
+  TextBold,
+  TextRegular,
+  TextSemiBold,
+  TextThin,
+} from '../../components/TextView';
 import styles from '../../utility/Style';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import SliderImg from '../../components/SliderImg';
 import Winnerlayoutfull from '../../components/Winnerlayoutfull';
 import * as Actions from '../../redux/action';
 
 import SuccessModal from './SuccessModal';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux';
 import OtpScreen from '../Auth/Otp';
 import LandingScreen from '../Auth/Landing';
 import Profilemain from './Profilemain';
 // import { NavigationEvents } from 'react-navigation';
-import { Icon } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Icon} from 'react-native-elements';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
 
 const OfferAll = () => {
-  const isRtl = useSelector((state) => state.isRtl);
-  const align = isRtl ? "right" : "left";
-  const list = useSelector((state) => state.getBanners);
-  const data = useSelector((state) => state.getWinners);
+  const isRtl = useSelector(state => state.isRtl);
+  const align = isRtl ? 'right' : 'left';
+  const list = useSelector(state => state.getBanners);
+  const data = useSelector(state => state.getWinners);
 
   return (
     <View style={styles.containerDashboard}>
+      <Header title={I18n.t('allwinner')} dashboard={false} back={true} />
 
-      <Header title={I18n.t("allwinner")} dashboard={false} back={true} />
-
-      {(list && list.length) ? <SliderImg slideImgs={list} /> : <View />}
-      <FlatList data={data}
+      {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
+      <FlatList
+        data={data}
         contentContainerStyle={{
-          flexGrow: 1, alignItems: "center",
-          flex: 1
+          flexGrow: 1,
+          alignItems: 'center',
+          // flex: 1,
+          // paddingBottom: 50,
         }}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item.id}
-        renderItem={({ item, index }) => <Winnerlayoutfull item={item} />}
+        renderItem={({item, index}) => <Winnerlayoutfull item={item} />}
+        ListFooterComponent={<View style={{height: 20}} />}
       />
     </View>
   );
-
 };
 
-export default OfferAll
+export default OfferAll;

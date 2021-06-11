@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
 const baseUrl = 'http://10xchampions.grmrice.com/';
 const mapUrl = 'https://maps.googleapis.com/';
 const MAP_KEY = 'AIzaSyAHACClfTrDU533R962fSyxAWiFJUXFmwI';

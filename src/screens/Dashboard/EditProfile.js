@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -19,16 +19,16 @@ import Images from '../../utility/Image';
 import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import BottomTile from '../../components/BottomTile';
 import Color from '../../utility/Color';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import TextInput from '../../components/TextInput';
 import ProfilePicModal from '../../components/ProfilePicModal';
 
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-import { showToast } from '../../utility/Index';
+import {showToast} from '../../utility/Index';
 import DatePicker from 'react-native-datepicker';
 
 const EditProfile = () => {
@@ -93,7 +93,7 @@ const EditProfile = () => {
       });
     } else if (imageType == 'gallery') {
       launchImageLibrary(option, response => {
-        console.log({ response: response });
+        console.log({response: response});
         if (response.didCancel) {
           showToast('Please select your profile picture');
           return;
@@ -122,13 +122,19 @@ const EditProfile = () => {
     const regex = /\S+@\S+\.\S+/;
     if (name == '') {
       message = 'Please enter your name';
-    } else if (email == '' || (email && !regex.test(email))) {
-      message = 'Please enter valid email id.';
-    } else if (mobile == '' || (mobile.length && mobile.length < 10)) {
-      message = 'Please enter valid 10 digit mobile number.';
-    } else if (dob == '') {
-      message = 'Please enter your date of birth.';
-    } else if (user.aadhaar_photo && !aadhar || (!aadhar.length || aadhar.length != 12)) {
+    }
+    // else if (email == '' || (email && !regex.test(email))) {
+    //   message = 'Please enter valid email id.';
+    // } else if (mobile == '' || (mobile.length && mobile.length < 10)) {
+    //   message = 'Please enter valid 10 digit mobile number.';
+    // } else if (dob == '') {
+    //   message = 'Please enter your date of birth.';
+    // }
+    else if (
+      (user.aadhaar_photo && !aadhar) ||
+      !aadhar.length ||
+      aadhar.length != 12
+    ) {
       message = 'Please enter valid aadhar number.';
     }
 
@@ -151,7 +157,7 @@ const EditProfile = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <Header
         back={true}
         title={I18n.t('editdetails')}
@@ -161,7 +167,7 @@ const EditProfile = () => {
       <ScrollView
         contentContainerStyle={[
           styles.container,
-          { padding: 14, backgroundColor: Colors.white },
+          {padding: 14, backgroundColor: Colors.white},
         ]}>
         <TextInput
           value={name}
@@ -212,7 +218,6 @@ const EditProfile = () => {
           returnKeyType="next"
         />
 
-
         <TextInput
           value={responseImg && responseImg.fileName}
           lable="Upload Aadhar ID Photo"
@@ -240,7 +245,7 @@ const EditProfile = () => {
 
       <DatePicker
         date={dob}
-        style={{ width: 0, height: 0, opacity: 0 }}
+        style={{width: 0, height: 0, opacity: 0}}
         ref={datePickerRef}
         mode="date"
         placeholder="select date"
@@ -255,7 +260,7 @@ const EditProfile = () => {
       />
 
       <BottomTile title={I18n.t('uploadprofile')} onPress={updateProfile} />
-      <SafeAreaView style={{ backgroundColor: Colors.parrot }}></SafeAreaView>
+      <SafeAreaView style={{backgroundColor: Colors.parrot}}></SafeAreaView>
     </View>
   );
 };
