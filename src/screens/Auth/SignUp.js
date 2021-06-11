@@ -152,7 +152,7 @@ const SignupScreen = () => {
           width: '100%',
           justifyContent: 'flex-end',
         }}>
-        <SocialLogin typeScreen={'signup'} />
+        {/* <SocialLogin typeScreen={'signup'} /> */}
 
         <View style={{ height: 60, justifyContent: 'space-between', paddingVertical: 7 }}>
           <LinkButton

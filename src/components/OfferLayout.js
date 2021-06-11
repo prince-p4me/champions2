@@ -11,6 +11,7 @@ import * as Navigation from '../navigation/navigation';
 import { Icon } from 'react-native-elements';
 import Constant from '../utility/Constant';
 import * as Actions from '../redux/action';
+import { showToast } from '../utility/Index';
 
 const OfferLayout = props => {
   const { home } = props;
@@ -111,7 +112,8 @@ const OfferLayout = props => {
                     resizeMode="contain"></Image>
                 </View>
                 <View style={{ width: '100%', alignItems: 'flex-end' }}>
-                  <TouchableOpacity disabled={noBalance}
+                  <TouchableOpacity
+                    // disabled={noBalance}
                     style={[
                       styles.redeem,
                       noBalance && { backgroundColor: Color.text },
@@ -122,7 +124,10 @@ const OfferLayout = props => {
                         offer_id: item.id,
                         points: item.points,
                       };
-
+                      if (noBalance) {
+                        showToast("Insufficient balance");
+                        return;
+                      }
                       dispatch(Actions.redeemOffer(obj));
                       // Navigation.navigate('OfferDetail', { id: item.id });
                     }}>

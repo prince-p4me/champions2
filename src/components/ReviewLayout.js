@@ -47,11 +47,11 @@ const ReviewLayout = () => {
 
   return (
     <View style={{ marginBottom: 20 }}>
-      <View style={{ width: "100%", alignItems: "flex-start", paddingBottom: 10 }}>
+      {(data && data.length) ? < View style={{ width: "100%", alignItems: "flex-start", paddingBottom: 10 }}>
         <TextBold text={I18n.t('reviews')}
           style={{ fontSize: Sizes.semiLarge, marginStart: 10 }}
         />
-      </View>
+      </View> : null}
       <FlatList data={data}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -64,7 +64,7 @@ const ReviewLayout = () => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => renderItem(item)}
       />
-    </View>
+    </View >
   );
 };
 

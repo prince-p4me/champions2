@@ -12,7 +12,7 @@ import styles from '../utility/Style';
 import Constants from '../utility/Constant';
 import SideIcon from '../assets/imgs/arrow.png';
 import About from '../assets/imgs/user.jpeg';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as Actions from '../redux/action';
 
 import Logout from '../assets/imgs/home-logout.png';
@@ -25,37 +25,37 @@ import Icon1 from 'react-native-vector-icons/dist/MaterialIcons';
 
 import * as Navigation from '../navigation/navigation';
 import Color from '../utility/Color';
-import {TextMedium, TextThin} from './TextView';
+import { TextMedium, TextThin } from './TextView';
 import Sizes from '../utility/Sizes';
 import scan from '../assets/imgs/scan.png';
 
 const Header = props => {
-  const {title, transparent, bgColor, back, dashboard, help} = props;
+  const { title, transparent, bgColor, back, dashboard, help } = props;
   const isRtl = useSelector(state => state.isRtl);
   const user = useSelector(state => state.getUser);
   const data = useSelector(state => state.getNotification);
   const dispatch = useDispatch();
 
   return (
-    <View style={{width: '100%'}}>
+    <View style={{ width: '100%' }}>
       <SafeAreaView
         style={[
           styles.safeArea,
-          transparent && {backgroundColor: Color.white},
-          bgColor && {backgroundColor: bgColor},
+          transparent && { backgroundColor: Color.white },
+          bgColor && { backgroundColor: bgColor },
         ]}></SafeAreaView>
       {!dashboard && (
         <View
           style={[
             styles.header,
-            transparent && {backgroundColor: Color.white},
-            bgColor && {backgroundColor: bgColor},
+            transparent && { backgroundColor: Color.white },
+            bgColor && { backgroundColor: bgColor },
           ]}>
           {back && (
             <TouchableOpacity
               style={[
                 styles.drawerButton,
-                {position: 'relative', alignItems: 'flex-start'},
+                { position: 'relative', alignItems: 'flex-start' },
               ]}
               activeOpacity={0.7}
               onPress={() => Navigation.goBack()}>
@@ -70,13 +70,13 @@ const Header = props => {
                   source={Back}
                   style={[
                     styles.sideIcon,
-                    transparent && {tintColor: Color.black},
+                    transparent && { tintColor: Color.black },
                   ]}></Image>
               )}
             </TouchableOpacity>
           )}
-          <View style={{flex: 1, alignItems: 'flex-start'}}>
-            <Text style={[styles.title, transparent && {color: Color.text}]}>
+          <View style={{ flex: 1, alignItems: 'flex-start' }}>
+            <Text style={[styles.title, transparent && { color: Color.text }]}>
               {title}
             </Text>
           </View>
@@ -84,10 +84,10 @@ const Header = props => {
             <TouchableOpacity
               style={[
                 styles.drawerButton,
-                {position: 'relative', alignItems: 'flex-end'},
+                { position: 'relative', alignItems: 'flex-end' },
               ]}
               activeOpacity={0.7}
-              onPress={() => Navigation.navigate('Help', {auth: false})}>
+              onPress={() => Navigation.navigate('Help', { auth: false })}>
               <Icon
                 name="help-circle-outline"
                 size={30}
@@ -113,10 +113,10 @@ const Header = props => {
                 ]}
                 onPress={() => Navigation.navigate('Profilemain')}>
                 <ImageBackground
-                  style={{width: '100%', height: '100%'}}
+                  style={{ width: '100%', height: '100%' }}
                   source={About}>
                   <Image
-                    source={{uri: Constants.IMAGE_URL + user.profile_photo}}
+                    source={{ uri: Constants.IMAGE_URL + user.profile_photo }}
                     style={styles.profileIcon}></Image>
                 </ImageBackground>
               </TouchableOpacity>
@@ -132,16 +132,16 @@ const Header = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.helpSpacing}
-                onPress={() => Navigation.navigate('Help', {auth: false})}>
+                onPress={() => Navigation.navigate('Help', { auth: false })}>
                 <Image
                   source={Help}
-                  style={[styles.rightHeaderIcon, {tintColor: Color.white}]}
+                  style={[styles.rightHeaderIcon, { tintColor: Color.white }]}
                 />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => Navigation.navigate('Scan')}>
                 {/* <Image source={scan} style={styles.rightHeaderIcon}></Image> */}
-                <Icon name="scan-outline" size={30} color={'#fff'} />
+                <Icon1 name="qr-code-scanner" size={30} color={'#fff'} />
               </TouchableOpacity>
             </View>
           </View>

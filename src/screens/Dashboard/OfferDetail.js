@@ -29,6 +29,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
 import { ScrollView } from 'react-native-gesture-handler';
 import SuccessModal from './SuccessModal';
+import { showToast } from '../../utility/Index';
 
 const OfferDetail = ({ route, navigation }) => {
   const { id } = route.params;
@@ -62,6 +63,10 @@ const OfferDetail = ({ route, navigation }) => {
       offer_id: offerDetail.id,
       points: offerDetail.points,
     };
+    if (noBalance) {
+      showToast("Insufficient balance");
+      return;
+    }
 
     dispatch(Actions.redeemOffer(obj));
     // setTimeout(() => {
@@ -163,7 +168,7 @@ const OfferDetail = ({ route, navigation }) => {
                 noBalance && { backgroundColor: Color.text },
               ]}
               onPress={redeemOffer}
-              disabled={noBalance}
+            // disabled={noBalance}
             // disabled={expired}
             >
               <TextRegular

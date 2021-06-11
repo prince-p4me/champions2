@@ -20,13 +20,13 @@ import Sizes from '../../utility/Sizes';
 import * as Actions from '../../redux/action';
 
 const Tutorial = ({ route }) => {
-  const { userInfo } = route.params;
+  // const { userInfo } = route.params;
   let [index, setIndex] = useState(1);
   const dispatch = useDispatch();
 
   const sliderScroll = useRef(null);
 
-  console.log({ userInfo28: userInfo });
+  // console.log({ userInfo28: userInfo });
   const images = [
     {
       banner: Images.congrats2,
@@ -40,7 +40,7 @@ const Tutorial = ({ route }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 6 }}>
         <FlatListSlider
           ref={sliderScroll}
           data={images}
@@ -86,7 +86,7 @@ const Tutorial = ({ route }) => {
           active
         />
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 4 }}>
         <View
           style={{
             flex: 1,
@@ -128,7 +128,7 @@ const Tutorial = ({ route }) => {
           /> */}
 
           <TouchableOpacity
-            style={{ padding: 14 }}
+            style={{ padding: 14, marginBottom: 15 }}
             activeOpacity={0.7}
             onPress={() => {
               dispatch(Actions.updateUser(userInfo));
