@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   SafeAreaView,
@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Colors from '../../utility/Color';
 import styles from '../../utility/Style';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import * as Actions from '../../redux/action';
 
 import Images from '../../utility/Image';
@@ -64,8 +64,8 @@ const LoginScreen = () => {
 
   return (
     <View
-      style={[styles.container, { padding: 14, backgroundColor: Colors.white }]}>
-      <SafeAreaView style={{ backgroundColor: Colors.theme }}></SafeAreaView>
+      style={[styles.container, {padding: 14, backgroundColor: Colors.white}]}>
+      <SafeAreaView style={{backgroundColor: Colors.theme}}></SafeAreaView>
       <TouchableOpacity
         style={{
           width: 30,
@@ -77,33 +77,36 @@ const LoginScreen = () => {
         ) : (
           <Image
             source={Images.back}
-            style={{ tintColor: '#000' }}
+            style={{tintColor: '#000'}}
             resizeMode="contain"></Image>
         )}
       </TouchableOpacity>
 
-      <KeyboardAvoidingView behavior="position"
+      <KeyboardAvoidingView
+        behavior="position"
         style={{
           flex: 5,
           alignItems: 'center',
           paddingTop: 20,
           paddingHorizontal: 16,
-          justifyContent: "space-between"
+          justifyContent: 'space-between',
         }}>
-        <TextBold text={I18n.t('login')}
-          style={{ textAlign: 'center', fontSize: Sizes.extraDouble }}
+        <TextBold
+          text={I18n.t('login')}
+          style={{textAlign: 'center', fontSize: Sizes.extraDouble}}
         />
 
-        <TextRegular text={I18n.t('otplongtext2')}
-          style={{ textAlign: 'center', fontSize: Sizes.regular, marginTop: 20 }}
+        <TextRegular
+          text={I18n.t('otplongtext2')}
+          style={{textAlign: 'center', fontSize: Sizes.regular, marginTop: 20}}
         />
 
-        <View style={[styles.inputBox, { marginTop: "10%" }]}>
+        <View style={[styles.inputBox, {marginTop: '10%'}]}>
           <View style={styles.dialCode}>
             <TextSemiBold text={isRtl ? '-91+' : '+91-'} />
           </View>
           <TextInput
-            style={{ flex: 1, padding: 7 }}
+            style={{flex: 1, padding: 7}}
             placeholder="Enter your 10 digits mobile number"
             keyboardType="numeric"
             value={mobile}
@@ -111,7 +114,8 @@ const LoginScreen = () => {
             maxLength={10}
             onSubmitEditing={doLogin}></TextInput>
         </View>
-        <FullButton btnStyle={{ width: Constant.width - 64, marginTop: "15%" }}
+        <FullButton
+          btnStyle={{width: Constant.width - 64, marginTop: '15%'}}
           onPress={doLogin}
           text={I18n.t('Sendotp')}
           textColor={Colors.white}
@@ -121,9 +125,14 @@ const LoginScreen = () => {
 
       {/* <TextDevider text={I18n.t('loginwith')}></TextDevider> */}
 
-      <View style={{ flex: 5 }}>
-        <SocialLogin typeScreen={'login'} />
-        <View style={{ height: 60, justifyContent: 'space-between', paddingVertical: 7 }}>
+      <View style={{flex: 5}}>
+        {/* <SocialLogin typeScreen={'login'} /> */}
+        <View
+          style={{
+            height: 60,
+            justifyContent: 'space-between',
+            paddingVertical: 7,
+          }}>
           <LinkButton
             text={I18n.t('doyouhaveac')}
             btnText={I18n.t('signup2')}
@@ -135,7 +144,7 @@ const LoginScreen = () => {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onPress={() => Navigation.navigate('Help', { auth: true })}>
+            onPress={() => Navigation.navigate('Help', {auth: true})}>
             <Image
               source={Images.help}
               style={{
@@ -147,11 +156,11 @@ const LoginScreen = () => {
             />
             <TextLite
               text="Help"
-              style={{ fontSize: Sizes.regular, marginStart: 7 }}
+              style={{fontSize: Sizes.regular, marginStart: 7}}
             />
           </TouchableOpacity>
         </View>
-        <View style={{ height: 40 }}></View>
+        <View style={{height: 40}}></View>
         <View
           style={{
             width: '100%',
@@ -162,7 +171,7 @@ const LoginScreen = () => {
           }}>
           <TextSemiBold
             text={I18n.t('chooselanguage')}
-            style={{ marginEnd: 7 }}
+            style={{marginEnd: 7}}
           />
 
           <ChangeLanguage />

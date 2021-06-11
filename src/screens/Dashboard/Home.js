@@ -139,6 +139,7 @@ class HomeScreen extends React.Component {
           <OfferLayout home={true} />
           <RecipeLayout horizontal={true} />
           <ReviewLayout />
+
           <View style={{height: 50}}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
