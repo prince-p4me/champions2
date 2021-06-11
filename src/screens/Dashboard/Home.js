@@ -166,12 +166,12 @@ class HomeScreen extends React.Component {
           <Winnerlayout />
           <View style={{ height: 20 }} />
           {/* {this.TokenBox()} */}
-          {/* <QRCodeContainer />
+          <QRCodeContainer />
           <PointsContainer />
           <MenuContainer />
           <OfferLayout home={true} />
           <RecipeLayout horizontal={true} />
-          <ReviewLayout /> */}
+          <ReviewLayout />
           {this.renderBottomLinks()}
           <View style={{ height: 50 }}></View>
         </ScrollView>

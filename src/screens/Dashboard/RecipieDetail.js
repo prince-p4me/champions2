@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   TextInput,
@@ -8,7 +8,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import Header from '../../components/Header';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SliderImg from '../../components/SliderImg';
 import * as Actions from '../../redux/action';
 import * as Navigation from '../../navigation/navigation';
@@ -27,10 +27,10 @@ import {
 import Sizes from '../../utility/Sizes';
 import FullButton from '../../components/FullButton';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-import {showToast} from '../../utility/Index';
+import { showToast } from '../../utility/Index';
 import HTML from 'react-native-render-html';
 
-const SendFeedback = ({id, navigation}) => {
+const SendFeedback = ({ id, navigation }) => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const user = useSelector(state => state.getUser);
@@ -54,8 +54,8 @@ const SendFeedback = ({id, navigation}) => {
 
   return (
     <View
-      style={[{flex: 1}, isFocus ? {marginBottom: 260} : {marginBottom: 40}]}>
-      <View style={{flex: 1, padding: 16, paddingTop: 25}}>
+      style={[{ flex: 1 }, isFocus ? { marginBottom: 260 } : { marginBottom: 40 }]}>
+      <View style={{ flex: 1, padding: 16, paddingTop: 25 }}>
         <TextBold
           text={I18n.t('rate')}
           style={{
@@ -63,11 +63,11 @@ const SendFeedback = ({id, navigation}) => {
             alignSelf: 'flex-start',
             marginTop: 20,
           }}></TextBold>
-        <View style={{flexDirection: 'row', marginVertical: 15}}>
+        <View style={{ flexDirection: 'row', marginVertical: 15 }}>
           {[1, 2, 3, 4, 5].map((value, index) => (
             <TouchableOpacity
               key={index}
-              style={{marginStart: index != 0 ? 10 : 0}}
+              style={{ marginStart: index != 0 ? 10 : 0 }}
               onPress={() => setStar(value)}
               activeOpacity={0.9}>
               <Icon
@@ -114,15 +114,15 @@ const SendFeedback = ({id, navigation}) => {
           text={I18n.t('sendnow')}
           textColor={Colors.white}
           onPress={sentQuery}
-          btnStyle={{width: '80%', marginHorizontal: '10%', marginTop: 30}}
+          btnStyle={{ width: '80%', marginHorizontal: '10%', marginTop: 30 }}
         />
       </View>
     </View>
   );
 };
 
-const RecipieDetail = ({route, navigation}) => {
-  const {id} = route.params;
+const RecipieDetail = ({ route, navigation }) => {
+  const { id } = route.params;
 
   const receipeDetail = useSelector(state => state.getReceipeDetail);
 
@@ -149,7 +149,7 @@ const RecipieDetail = ({route, navigation}) => {
     let receipeInfo = {
       recipe_id: id,
     };
-    console.log({receipeInfo: receipeInfo});
+    console.log({ receipeInfo: receipeInfo });
     if (receipeInfo?.recipe_id) {
       dispatch(Actions.getReceipeDetail(receipeInfo));
     }
@@ -158,8 +158,8 @@ const RecipieDetail = ({route, navigation}) => {
   return (
     <View style={styles.containerDashboard}>
       <ImageBackground
-        style={{width: '100%', height: Constant.height / 2.7}}
-        source={{uri: Constant.IMAGE_URL + receipeDetail.image}}
+        style={{ width: '100%', height: Constant.height / 2.7 }}
+        source={{ uri: Constant.IMAGE_URL + receipeDetail.image }}
       />
       <View style={styles.container}>
         <Header
@@ -175,12 +175,12 @@ const RecipieDetail = ({route, navigation}) => {
           <View style={styles.heading}>
             <TextSemiBold
               text={receipeDetail.title}
-              style={{fontSize: Sizes.medium}}
+              style={{ fontSize: Sizes.medium }}
             />
           </View>
-          <View style={{padding: 10}}>
+          <View style={{ padding: 10 }}>
             <HTML
-              source={{html: receipeDetail?.description}}
+              source={{ html: receipeDetail?.description }}
               contentWidth={Constant.width}
             />
           </View>
@@ -194,7 +194,7 @@ const RecipieDetail = ({route, navigation}) => {
               bgColor={Color.theme}
               text="See more Receipes"
               textColor={Color.white}
-              onPress={() => Navigation.goBack()}
+              onPress={() => Navigation.navigate("RecipieAll")}
             />
           </View>
           {<SendFeedback item={id} />}
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
   },
-  containerDashboard: {flex: 1, backgroundColor: Color.white},
+  containerDashboard: { flex: 1, backgroundColor: Color.white },
   container: {
     height: Constant.height,
     width: Constant.width,

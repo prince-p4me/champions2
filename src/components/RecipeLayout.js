@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {View, Image, FlatList, StyleSheet} from 'react-native';
-import {TextMedium, TextRegular, TextBold} from './TextView';
+import React, { Component } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { View, Image, FlatList, StyleSheet } from 'react-native';
+import { TextMedium, TextRegular, TextBold } from './TextView';
 import Color from '../utility/Color';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import Sizes from '../utility/Sizes';
 import I18n from '../services/i18n';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
 import Constant from '../utility/Constant';
 
 const RecipeLayout = props => {
-  const {hideTitle, horizontal} = props;
+  const { hideTitle, horizontal } = props;
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'left' : 'right';
   const data = useSelector(state => state.getRecipes);
@@ -19,37 +19,37 @@ const RecipeLayout = props => {
   const renderItem = item => {
     const text = item?.description.replace(/<\/?[^>]+>/gi, ' ');
     return (
-      <View
+      <TouchableOpacity
+        onPress={() =>
+          Navigation.navigate('RecipieDetail', { id: item.id })
+        }
         style={[
           styles.offercontainer,
-          horizontal && {width: Constant.width - 28},
+          horizontal && { width: Constant.width - 28 },
         ]}>
-        <View style={{width: 130}}>
+        <View style={{ width: 130 }}>
           <Image
-            source={{uri: Constant.IMAGE_URL + item.logo}}
+            source={{ uri: Constant.IMAGE_URL + item.logo }}
             style={styles.img}
             resizeMode="cover"></Image>
         </View>
         <View style={styles.secondSection}>
-          <View style={{flex: 1, alignItems: 'flex-start', flexWrap: 'wrap'}}>
+          <View style={{ flex: 1, alignItems: 'flex-start', flexWrap: 'wrap' }}>
             <TextMedium
               text={item.title}
               style={[
-                {fontSize: Sizes.semiLarge},
-                isRtl && {textAlign: 'left'},
+                { fontSize: Sizes.semiLarge },
+                isRtl && { textAlign: 'left' },
               ]}
             />
             <TextRegular
               text={text.slice(0, 80) + ' . . .'}
-              style={[{fontSize: Sizes.regular}, isRtl && {textAlign: 'left'}]}
+              style={[{ fontSize: Sizes.regular }, isRtl && { textAlign: 'left' }]}
             />
           </View>
-          <View style={{width: '100%', alignItems: 'flex-end'}}>
-            <TouchableOpacity
-              style={styles.readBtn}
-              onPress={() =>
-                Navigation.navigate('RecipieDetail', {id: item.id})
-              }>
+          <View style={{ width: '100%', alignItems: 'flex-end' }}>
+            <View
+              style={styles.readBtn}>
               <TextRegular
                 text={I18n.t('readmore')}
                 style={{
@@ -58,10 +58,10 @@ const RecipeLayout = props => {
                   textTransform: 'uppercase',
                 }}
               />
-            </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -69,15 +69,15 @@ const RecipeLayout = props => {
     <View>
       {!hideTitle && (
         <View style={styles.title}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <TextBold
               text={I18n.t('recipe')}
-              style={{fontSize: Sizes.semiLarge, marginStart: 10}}
+              style={{ fontSize: Sizes.semiLarge, marginStart: 10 }}
             />
             <Icon name="star" size={20} />
           </View>
           <TouchableOpacity onPress={() => Navigation.navigate('RecipieAll')}>
-            <View style={{alignItems: 'center', flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
               <TextRegular text={I18n.t('Seeall')} />
               <Icon
                 name={'keyboard-arrow-' + (isRtl ? 'left' : 'right')}
@@ -90,10 +90,10 @@ const RecipeLayout = props => {
       <FlatList
         data={data}
         horizontal={horizontal}
-        contentContainerStyle={{flexGrow: 1}}
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item.id}
-        renderItem={({item, index}) => renderItem(item)}
+        renderItem={({ item, index }) => renderItem(item)}
       />
     </View>
   );
