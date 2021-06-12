@@ -120,7 +120,7 @@ const OtpScreen = props => {
               };
               if (isLogin) {
                 obj.loginType = 1;
-                dispatch(Actions.checkFirstTime(true));
+                // dispatch(Actions.checkFirstTime(true));
               } else {
                 dispatch(Actions.checkFirstTime(true));
               }
