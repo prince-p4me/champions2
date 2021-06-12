@@ -1,11 +1,11 @@
 export default Colors = {
-  theme: '#004c2f',
+  theme: '#D95225',
   white: '#ffffff',
   black: 'black',
   text: '#3d3d3d',
   bgColor: '#f8f8f8',
   lightGreen: 'rgb(244,255,243)',
-  parrot: "#60B953",
+  parrot: '#60B953',
   bgGray: '#f5f5f5',
   darkBGgray: '#6e6e6e',
   semiGold: '#c2ad7f',

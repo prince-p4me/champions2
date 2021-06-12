@@ -1,9 +1,10 @@
 import { Dimensions } from 'react-native';
 const baseUrl = 'http://10xchampions.grmrice.com/';
+// const baseUrl = 'http://drive13.in/10X/';
+
 const mapUrl = 'https://maps.googleapis.com/';
 // const MAP_KEY = 'AIzaSyAHACClfTrDU533R962fSyxAWiFJUXFmwI';
-const MAP_KEY = "AIzaSyBFAIKLbqht_ZPBjwmIkILZbVlc9WbY6as";
-// const baseUrl = 'http://drive13.in/10X/';
+const MAP_KEY = 'AIzaSyBFAIKLbqht_ZPBjwmIkILZbVlc9WbY6as';
 export default Constants = {
   API_URL: baseUrl + 'api/',
   IMAGE_URL: baseUrl + 'images/',
@@ -23,5 +24,5 @@ export default Constants = {
   },
   ADDRESS_URL: mapUrl + 'maps/api/geocode/json?latlng=',
   MAP_KEY: MAP_KEY,
-  iosApp: "https://apps.apple.com/eg/app/10x-champions/id1562137449"
+  iosApp: 'https://apps.apple.com/eg/app/10x-champions/id1562137449',
 };

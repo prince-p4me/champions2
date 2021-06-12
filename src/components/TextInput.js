@@ -38,7 +38,7 @@ const InputBox = props => {
           <View style={styles.iconBox}>
             <Icon
               name={icon}
-              color={iconColor ? iconColor : Colors.parrot}
+              color={iconColor ? iconColor : Colors.theme}
               size={size}></Icon>
           </View>
         )}
@@ -54,7 +54,7 @@ const InputBox = props => {
         {rightTick && (
           <Icon
             name={icon}
-            color={iconColor ? iconColor : Colors.parrot}
+            color={iconColor ? iconColor : Colors.theme}
             size={size}></Icon>
         )}
 
@@ -62,7 +62,7 @@ const InputBox = props => {
           <View style={[{
             position: "absolute", bottom: 8
           }, isRtl ? { left: 5 } : { right: 5, }]}>
-            <Icon name={rightIcon} color={Colors.text} size={size} />
+            <Icon name={rightIcon} color={Colors.theme} size={size} />
           </View>
         )}
 
@@ -76,7 +76,7 @@ const InputBox = props => {
             onPress={onPress}>
             <TextMedium
               text={rightButton}
-              style={{ color: Colors.parrot, fontSize: Sizes.regular }}
+              style={{ color: Colors.theme, fontSize: Sizes.regular }}
             />
           </TouchableOpacity>
         )}
@@ -89,7 +89,7 @@ const InputBox = props => {
         <View style={styles.iconBox}>
           <Icon
             name={icon}
-            color={iconColor ? iconColor : Colors.parrot}
+            color={iconColor ? iconColor : Colors.theme}
             size={size}></Icon>
         </View>
       )}

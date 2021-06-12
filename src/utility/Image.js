@@ -34,6 +34,8 @@ export default Images = {
   contactus: require('../assets/profileimg/contactus.png'),
   congrat: require('../assets/imgs/congrat.png'),
   congrats2: require('../assets/imgs/congrats2.png'),
+  intro: require('../assets/imgs/intro-1.png'),
+  intro2: require('../assets/imgs/intro-2.png'),
   logout: require('../assets/profileimg/Log-out.png'),
   dust: require('../assets/imgs/sparkling magical dust particles.png'),
   fb: require('../assets/imgs/fb.png'),

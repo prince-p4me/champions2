@@ -174,6 +174,13 @@ export function updateUser(payload) {
   };
 }
 
+export function setFirstUser(payload) {
+  return {
+    type: Types.FIRST_LOGIN,
+    payload,
+  };
+}
+
 export function getOfferDetail(payload) {
   return {
     type: Types.GET_OFFER_DETAIL,

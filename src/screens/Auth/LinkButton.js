@@ -19,7 +19,7 @@ const LinkBUtton = props => {
       <View style={{ width: 10 }}></View>
       <TextSemiBold text={btnText} style={{
         fontSize: Sizes.regular,
-        color: Colors.green
+        color: Colors.theme
       }}></TextSemiBold>
     </TouchableOpacity>
   )

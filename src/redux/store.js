@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {
   getUser,
   isLoading,
@@ -23,11 +23,12 @@ import {
   getAboutUs,
   getTancC,
   getPrivacyPolicy,
+  isFirstUser,
 } from './reducer';
 import getListSaga from './saga';
-import {all, fork} from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
-import {persistReducer, persistStore} from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // creating reducers
@@ -55,6 +56,7 @@ const rootReducer = combineReducers({
   getAboutUs,
   getPrivacyPolicy,
   getTancC,
+  isFirstUser,
 });
 
 //creating, applying sagas
@@ -72,7 +74,7 @@ const persistConfig = {
   // Storage Method (React Native)
   storage: AsyncStorage,
   // Whitelist (Save Specific Reducers)
-  whitelist: ['getLanguage', 'isRtl', 'getUser'],
+  whitelist: ['getLanguage', 'isRtl', 'getUser', 'isFirstUser'],
   blacklist: [],
   throttle: 1000,
   debounce: 1000,
@@ -88,4 +90,4 @@ let persistor = persistStore(store);
 //running saga middleware
 sagaMiddleware.run(rootSaga);
 
-export {store, persistor};
+export { store, persistor };

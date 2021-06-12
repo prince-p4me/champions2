@@ -31,8 +31,8 @@
 		A32CCB9B2624B95800CD793A /* Metropolis-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C2C534807664ECBABCBCAA8 /* Metropolis-SemiBoldItalic.otf */; };
 		A32CCB9C2624B95800CD793A /* Metropolis-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED05F8F208434C2FB4E80963 /* Metropolis-Thin.otf */; };
 		A32CCB9D2624B95800CD793A /* Metropolis-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C094994E408424190B47308 /* Metropolis-ThinItalic.otf */; };
-		A32CCBEA2624BA7600CD793A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A32CCBE92624BA7600CD793A /* splash.png */; };
 		A372B8DE2653D18900A77EA3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372B8DD2653D18900A77EA3 /* File.swift */; };
+		A3751E5026753FBB001D1B5E /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A3751E4F26753FBB001D1B5E /* splash.png */; };
 		A391C7FD26554FDF009D3CA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */; };
 		A39D15412652D9A400374FA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
@@ -86,8 +86,8 @@
 		892EC5032B194E1CA39E03AE /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		9D61F5DA03E44FAD995B590C /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		A3296BEF265A4FCF00D8876A /* champions.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = champions.entitlements; path = champions/champions.entitlements; sourceTree = "<group>"; };
-		A32CCBE92624BA7600CD793A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		A372B8DD2653D18900A77EA3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		A3751E4F26753FBB001D1B5E /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = champions/splash.png; sourceTree = "<group>"; };
 		A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3D9F0252651B3A30059598B /* champions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "champions-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6FC25376330443A9B761C13 /* Metropolis-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Metropolis-Bold.otf"; path = "../src/assets/fonts/Metropolis-Bold.otf"; sourceTree = "<group>"; };
@@ -151,8 +151,8 @@
 				A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				A3751E4F26753FBB001D1B5E /* splash.png */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				A32CCBE92624BA7600CD793A /* splash.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				A372B8DD2653D18900A77EA3 /* File.swift */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
@@ -350,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A32CCB8C2624B95800CD793A /* Metropolis-Black.otf in Resources */,
-				A32CCBEA2624BA7600CD793A /* splash.png in Resources */,
 				A32CCB8D2624B95800CD793A /* Metropolis-BlackItalic.otf in Resources */,
 				A32CCB8E2624B95800CD793A /* Metropolis-Bold.otf in Resources */,
 				A32CCB8F2624B95800CD793A /* Metropolis-BoldItalic.otf in Resources */,
@@ -358,6 +357,7 @@
 				A32CCB912624B95800CD793A /* Metropolis-ExtraBoldItalic.otf in Resources */,
 				A32CCB922624B95800CD793A /* Metropolis-ExtraLight.otf in Resources */,
 				A32CCB932624B95800CD793A /* Metropolis-ExtraLightItalic.otf in Resources */,
+				A3751E5026753FBB001D1B5E /* splash.png in Resources */,
 				A32CCB942624B95800CD793A /* Metropolis-Light.otf in Resources */,
 				A32CCB952624B95800CD793A /* Metropolis-LightItalic.otf in Resources */,
 				A32CCB962624B95800CD793A /* Metropolis-Medium.otf in Resources */,
@@ -826,7 +826,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -891,7 +891,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

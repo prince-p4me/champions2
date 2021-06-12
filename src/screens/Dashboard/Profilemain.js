@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   ImageBackground,
@@ -8,12 +8,12 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import {TextRegular, TextSemiBold} from '../../components/TextView';
+import { TextRegular, TextSemiBold } from '../../components/TextView';
 import I18n from '../../services/i18n';
 import Images from '../../utility/Image';
 import Header from '../../components/Header';
 import * as Navigation from '../../navigation/navigation';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as Actions from '../../redux/action';
 import Language from '../../assets/language/language.json';
 import LanguageModal from '../../components/LanguageModal';
@@ -21,11 +21,12 @@ import RNRestart from 'react-native-restart';
 import ProfilePicModal from '../../components/ProfilePicModal';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import Color from '../../utility/Color';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Constant from '../../utility/Constant';
-import {showToast} from '../../utility/Index';
+import { showToast } from '../../utility/Index';
 
 import About from '../../assets/imgs/user.jpeg';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const languages = ['English', 'Hindi', 'Punjabi', 'Bangla', 'Urdu'];
 const langTypes = ['en', 'hn', 'pu', 'ba', 'ur'];
@@ -76,7 +77,7 @@ const Profilemain = props => {
       <>
         <TextSemiBold
           text={I18n.t('help')}
-          style={{margin: 10, alignSelf: 'flex-start'}}
+          style={{ margin: 10, alignSelf: 'flex-start' }}
         />
         <TouchableOpacity
           style={styles.closeImage}
@@ -152,7 +153,7 @@ const Profilemain = props => {
         </TouchableOpacity>
         <View style={styles.line} />
         <TouchableOpacity
-          style={[styles.closeImage, {alignItems: 'center'}]}
+          style={[styles.closeImage, { alignItems: 'center' }]}
           onPress={() => setModalVisible(true)}>
           <View
             style={{
@@ -172,7 +173,7 @@ const Profilemain = props => {
               alignItems: 'flex-end',
             }}>
             <TextRegular
-              style={[styles.textstyle, {color: Color.green}]}
+              style={[styles.textstyle, { color: Color.theme }]}
               text={getLanguage()}
             />
           </View>
@@ -235,7 +236,7 @@ const Profilemain = props => {
             console.log(text);
             if (text == '' || !text) {
               //   alert(Language.length);
-              console.log({Language: Language});
+              console.log({ Language: Language });
               updateLanguageList(Language);
               return;
             }
@@ -279,7 +280,7 @@ const Profilemain = props => {
               });
             } else if (imageType == 'gallery') {
               launchImageLibrary(option, response => {
-                console.log({response: response});
+                console.log({ response: response });
                 if (response.didCancel) {
                   showToast('Please select your profile picture');
                   return;
@@ -311,14 +312,14 @@ const Profilemain = props => {
         }}>
         <TouchableOpacity
           disabled={false}
-          style={{height: 100, width: 100, padding: 10}}
+          style={{ height: 100, width: 100, padding: 10 }}
           onPress={() => setProfilePicVisible(true)}>
           <ImageBackground
-            style={{width: '100%', height: '100%'}}
+            style={{ width: '100%', height: '100%' }}
             source={About}>
             <Image
-              source={{uri: Constants.IMAGE_URL + user.profile_photo}}
-              style={{width: '100%', height: '100%', borderRadius: 100}}
+              source={{ uri: Constants.IMAGE_URL + user.profile_photo }}
+              style={{ width: '100%', height: '100%', borderRadius: 100 }}
               resizeMode="cover"></Image>
           </ImageBackground>
 
@@ -339,17 +340,17 @@ const Profilemain = props => {
             alignItems: 'flex-start',
           }}>
           <TextRegular
-            style={[styles.textstyle, {marginTop: 15}]}
+            style={[styles.textstyle, { marginTop: 15 }]}
             text={user.name}
           />
           {user.email ? (
             <TextRegular
-              style={[styles.textstyle, {marginTop: 7}]}
+              style={[styles.textstyle, { marginTop: 7 }]}
               text={user.email}
             />
           ) : null}
           <TextRegular
-            style={[styles.textstyle, {marginTop: 7}]}
+            style={[styles.textstyle, { marginTop: 7 }]}
             text={user.mobile}
           />
         </View>
@@ -370,6 +371,7 @@ const Profilemain = props => {
               width: 30,
               alignSelf: 'center',
               marginEnd: 15,
+              tintColor: Color.theme
             }}
             resizeMode="contain"></Image>
         </TouchableOpacity>
@@ -378,7 +380,7 @@ const Profilemain = props => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       {renderModal()}
       <Header title={'Profile'} dashboard={false} back={true} help={true} />
       <ScrollView>
@@ -387,17 +389,17 @@ const Profilemain = props => {
         {upperSection()}
         {renderHelpSection()}
         <TouchableOpacity
-          style={[styles.closeImage, {backgroundColor: 'transparent'}]}
+          style={[styles.closeImage, { backgroundColor: 'transparent' }]}
           onPress={() => {
             dispatch(Actions.logOut());
           }}>
-          <View style={{width: 40}}>
+          <View style={{ width: 40 }}>
             <Image
               source={Images.logout}
-              style={{height: 18, width: 18}}
+              style={{ height: 18, width: 18 }}
               resizeMode="contain"></Image>
           </View>
-          <TextSemiBold text={I18n.t('logout')} style={{marginStart: 5}} />
+          <TextSemiBold text={I18n.t('logout')} style={{ marginStart: 5 }} />
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -423,6 +425,7 @@ const styles = StyleSheet.create({
   image: {
     height: 25,
     width: 25,
+    tintColor: Color.theme
   },
 });
 

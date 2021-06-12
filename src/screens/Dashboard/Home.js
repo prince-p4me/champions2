@@ -46,6 +46,7 @@ import MenuContainer from '../../components/MenuContainer';
 
 import { useSelector, useDispatch } from 'react-redux';
 import Color from '../../utility/Color';
+import WelcomeModal from './Welcome';
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -118,39 +119,72 @@ class HomeScreen extends React.Component {
   RenderLink = (img, title, subtitle, link) => {
     const { isRtl } = this.props;
     return (
-      <TouchableOpacity style={{ width: "100%", flexDirection: "row", marginBottom: 15 }}
-        onPress={() => Navigation.navigate(link, link == "Help" && { isAuth: true })}>
-        <Image source={img} style={{ width: 55, height: 55, marginEnd: 15 }}></Image>
-        <View style={{
-          flex: 1, borderBottomWidth: 1, borderColor: Color.border,
-          justifyContent: "center",
-          alignItems: "flex-start"
-        }}>
-          <TextSemiBold text={I18n.t(title)} style={[{
-            fontSize: Sizes.regular, marginBottom: 7,
-          }, isRtl && { textAlign: "left" }]} />
-          <TextRegular text={I18n.t(subtitle)} style={[{
-            fontSize: Sizes.regular,
-          }, isRtl && { textAlign: "left" }]} />
+      <TouchableOpacity
+        style={{ width: '100%', flexDirection: 'row', marginBottom: 15 }}
+        onPress={() =>
+          Navigation.navigate(link, link == 'Help' && { isAuth: true })
+        }>
+        <Image
+          source={img}
+          style={{ width: 55, height: 55, marginEnd: 15 }}></Image>
+        <View
+          style={{
+            flex: 1,
+            borderBottomWidth: 1,
+            borderColor: Color.border,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}>
+          <TextSemiBold
+            text={I18n.t(title)}
+            style={[
+              {
+                fontSize: Sizes.regular,
+                marginBottom: 7,
+              },
+              isRtl && { textAlign: 'left' },
+            ]}
+          />
+          <TextRegular
+            text={I18n.t(subtitle)}
+            style={[
+              {
+                fontSize: Sizes.regular,
+              },
+              isRtl && { textAlign: 'left' },
+            ]}
+          />
         </View>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   renderBottomLinks = () => {
     return (
-      <View style={{ width: "100%", marginTop: 15, paddingHorizontal: 7 }}>
-        {this.RenderLink(Imagess.transactionlink, "transaction", "transactiontext", "MyDashboard")}
-        {this.RenderLink(Imagess.help247, "support", "supporttext", "Help")}
-        {this.RenderLink(Imagess.feedbacklink, "feedback", "feedbacktext", "SendFeedback")}
+      <View style={{ width: '100%', marginTop: 15, paddingHorizontal: 7 }}>
+        {this.RenderLink(
+          Imagess.transactionlink,
+          'transaction',
+          'transactiontext',
+          'MyDashboard',
+        )}
+        {this.RenderLink(Imagess.help247, 'support', 'supporttext', 'Help')}
+        {this.RenderLink(
+          Imagess.feedbacklink,
+          'feedback',
+          'feedbacktext',
+          'SendFeedback',
+        )}
       </View>
-    )
-  }
+    );
+  };
 
   render() {
-    let { offerDetail, list, isSuccess, language } = this.props;
+    let { offerDetail, list, isSuccess, language, isFirstUser } = this.props;
     let { points } = this.state;
     this.updateLanguage(language);
+
+    console.log("isFirstUser", isFirstUser);
     return (
       <View style={styles.containerDashboard}>
         <SuccessModal
@@ -158,6 +192,8 @@ class HomeScreen extends React.Component {
           points={points}
           offerDetail={offerDetail}
         />
+
+        <WelcomeModal />
         <Header title={'Home'} dashboard={true} />
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
@@ -165,7 +201,6 @@ class HomeScreen extends React.Component {
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
           <View style={{ height: 20 }} />
-          {/* {this.TokenBox()} */}
           <QRCodeContainer />
           <PointsContainer />
           <MenuContainer />
@@ -189,6 +224,7 @@ const mapStateToProps = state => ({
   token: state.getFcmToken,
   offerDetail: state.getOfferDetail,
   language: state.getLanguage,
+  isFirstUser: state.isFirstUser,
 });
 
 const mapDispatchToProps = dispatch => {

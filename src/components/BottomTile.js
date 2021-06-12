@@ -8,7 +8,7 @@ const BottomTile = props => {
   return (
     <TouchableOpacity style={{
       width: "100%", height: 45,
-      backgroundColor: Colors.parrot,
+      backgroundColor: Colors.theme,
       alignItems: "center",
       justifyContent: "center",
     }} activeOpacity={.7} onPress={() => onPress()}>

@@ -15,12 +15,12 @@ import I18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatListSlider } from 'react-native-flatlist-slider';
-import { TextBold, TextLite, TextThin } from '../../components/TextView';
+import { TextBold, TextLite, TextSemiBold, TextThin } from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
 import * as Actions from '../../redux/action';
 
 const Tutorial = ({ route }) => {
-  // const { userInfo } = route.params;
+  // const {userInfo} = route.params;
   let [index, setIndex] = useState(1);
   const dispatch = useDispatch();
 
@@ -29,112 +29,79 @@ const Tutorial = ({ route }) => {
   // console.log({ userInfo28: userInfo });
   const images = [
     {
-      banner: Images.congrats2,
+      banner: Images.intro,
       desc: 'Banners',
     },
     {
-      banner: Images.congrat,
+      banner: Images.intro2,
       desc: 'Banners',
     },
   ];
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: Color.theme }]}>
       <SafeAreaView />
-      <View style={{ flex: 6 }}>
+      <View style={{ flex: 7 }}>
         <FlatListSlider
           ref={sliderScroll}
           data={images}
           height={'100%'}
-          // timer={10000}
+          timer={5000}
           local
           imageKey={'banner'}
-          resizeMode={'contain'}
+          resizeMode={"center"}
           index={index}
-          autoscroll={false}
+          autoscroll={true}
           onPress={index => {
-            // console.log(JSON.stringify(index));
-            // bannerClicked(banners[index]);
             setIndex(index++);
-
-            setTimeout(() => {
-              console.log('index== 58' + index);
-              if (index > 2) {
-                dispatch(Actions.updateUser(userInfo));
-              }
-            }, 400);
           }}
           currentIndexCallback={index => {
             setIndex(index++);
-
-            setTimeout(() => {
-              // sliderScroll.scrollToIndex({
-              //   index: index,
-              //   animated: true,
-              // });
-              console.log('index== 58' + index);
-              if (index > 2) {
-                dispatch(Actions.updateUser(userInfo));
-              }
-            }, 400);
+            console.log("index is" + index);
           }}
           contentContainerStyle={{ paddingHorizontal: 2 }}
           indicatorContainerStyle={{ position: 'absolute', bottom: 10 }}
-          indicatorActiveColor={Color.parrot}
+          indicatorActiveColor={Color.white}
           indicatorInActiveColor={Color.darkBGgray}
-          indicatorActiveWidth={6}
+          indicatorActiveWidth={20}
           animation
           active
         />
       </View>
-      <View style={{ flex: 4 }}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'space-around',
-          }}>
+      <View style={{ flex: 3 }}>
+        <View style={{ width: "90%", alignItems: "center", marginTop: 20 }}>
           <TextBold
-            text={'Scan QR Code'}
-            style={{ fontSize: Sizes.extraLarge }}
+            text={I18n.t(index == 1 ? "scan" : "share")}
+            style={{ fontSize: Sizes.extraLarge, color: Color.white }}
           />
-          <TextLite text="Scan and won prizes with rewarded points" />
+          <TextSemiBold
+            text={I18n.t(index == 1 ? "scantext" : "sharetext")}
+            style={{ color: Color.white, textAlign: "center", marginTop: 10 }} />
+
         </View>
         <View
           style={{
             flex: 1,
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'center',
             alignItems: 'center',
           }}>
-          {/* <FullButton
-            bgColor={Color.theme}
-            textColor={Color.white}
-            text="Next"
+          <FullButton
+            bgColor={Color.white}
+            textColor={Color.theme}
+            text={I18n.t("continue")}
             onPress={() => {
-              // bannerClicked(banners[index]);
-              setIndex(index++);
-
-              console.log(sliderScroll);
-              setTimeout(() => {
-                // sliderScroll.scrollToIndex({
-                //   index: index,
-                //   animated: true,
-                // });
-                if (index > 2) {
-                  dispatch(Actions.updateUser(userInfo));
-                }
-              }, 400);
+              dispatch(Actions.updateUser(userInfo));
             }}
-          /> */}
+          />
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{ padding: 14, marginBottom: 15 }}
             activeOpacity={0.7}
             onPress={() => {
               dispatch(Actions.updateUser(userInfo));
             }}>
             <TextLite text="Skip" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <SafeAreaView />

@@ -114,5 +114,10 @@
     "won": "Won",
     "earn": "Earn",
     "mobile": "Mobile Number",
-    "enter_mobile": "Enter Your Mobile Number"
+    "enter_mobile": "Enter Your Mobile Number",
+    "continue": "Continue",
+    "scan": "Scan QR Code",
+    "scantext": "Scan the QR Code and win unlimited points and prizes",
+    "share": "Share and Earn",
+    "sharetext": "Share the app to your friends and get rewards up to 100 points"
 }

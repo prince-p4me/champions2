@@ -1,20 +1,14 @@
-import React, { useEffect, useReducer } from 'react';
-import {
-  View,
-  StyleSheet,
-  ImageBackground,
-  Image,
-} from 'react-native';
+import React, {useEffect, useReducer} from 'react';
+import {View, StyleSheet, ImageBackground, Image} from 'react-native';
 import globalStyles from '../../utility/Style';
 import Images from '../../utility/Image';
 import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 
 const SplashScreen = () => {
-
   useEffect(() => {
     setTimeout(() => {
-      Navigation.navigate("Landing");
+      Navigation.navigate('Landing');
     }, 2000);
   }, []);
 
@@ -23,9 +17,7 @@ const SplashScreen = () => {
     <ImageBackground
       source={fixedUri}
       resizeMode="cover"
-      style={globalStyles.container}>
-
-    </ImageBackground>
+      style={globalStyles.container}></ImageBackground>
   );
 };
 export default SplashScreen;
@@ -43,6 +35,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: '5%',
     // backgroundColor: "red",
-    justifyContent: "space-around"
+    justifyContent: 'space-around',
   },
 });
