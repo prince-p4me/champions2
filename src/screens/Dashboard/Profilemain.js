@@ -172,7 +172,7 @@ const Profilemain = props => {
               alignItems: 'flex-end',
             }}>
             <TextRegular
-              style={[styles.textstyle, {color: Color.green}]}
+              style={[styles.textstyle, {color: Color.theme}]}
               text={getLanguage()}
             />
           </View>

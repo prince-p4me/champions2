@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Image,
@@ -9,15 +9,15 @@ import {
   // Modal
 } from 'react-native';
 import Colors from '../../utility/Color';
-import { TextRegular, TextBold, TextLite } from '../../components/TextView';
+import {TextRegular, TextBold, TextLite} from '../../components/TextView';
 import I18n from '../../services/i18n';
 import Images from '../../utility/Image';
 import Header from '../../components/Header';
 import * as Navigation from '../../navigation/navigation';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import * as Actions from '../../redux/action';
 import Sizes from '../../utility/Sizes';
-import { showToast } from '../../utility/Index';
+import {showToast} from '../../utility/Index';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import FullButton from '../../components/FullButton';
 
@@ -41,21 +41,21 @@ const SendFeedback = props => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.lightGreen }}>
+    <View style={{flex: 1, backgroundColor: Colors.lightGreen}}>
       <Header
         title={I18n.t('Sendfeedback')}
         dashboard={false}
         back={true}
         help={true}
       />
-      <View style={{ flex: 1, padding: 16, paddingTop: 25 }}>
+      <View style={{flex: 1, padding: 16, paddingTop: 25}}>
         <TextBold
           text={I18n.t('hi') + ' ' + user.name}
-          style={{ fontSize: Sizes.medium, alignSelf: 'flex-start' }}
+          style={{fontSize: Sizes.medium, alignSelf: 'flex-start'}}
         />
         <TextRegular
           text={I18n.t('feedbacklongtext')}
-          style={{ fontSize: Sizes.medium, alignSelf: 'flex-start' }}
+          style={{fontSize: Sizes.medium, alignSelf: 'flex-start'}}
         />
         <TextBold
           text={I18n.t('rate')}
@@ -64,11 +64,11 @@ const SendFeedback = props => {
             alignSelf: 'flex-start',
             marginTop: 20,
           }}></TextBold>
-        <View style={{ flexDirection: 'row', marginVertical: 15 }}>
+        <View style={{flexDirection: 'row', marginVertical: 15}}>
           {[1, 2, 3, 4, 5].map((value, index) => (
             <TouchableOpacity
               key={index}
-              style={{ marginStart: index != 0 ? 10 : 0 }}
+              style={{marginStart: index != 0 ? 10 : 0}}
               onPress={() => setStar(value)}
               activeOpacity={0.9}>
               <Icon
@@ -94,9 +94,7 @@ const SendFeedback = props => {
           maxLength={500}
           multiline={true}
           returnKeyType="done"
-          onSubmitEditing={sentQuery}
-
-        ></TextInput>
+          onSubmitEditing={sentQuery}></TextInput>
         <View
           style={{
             width: '100%',
@@ -111,7 +109,7 @@ const SendFeedback = props => {
           text={I18n.t('sendnow')}
           textColor={Colors.white}
           onPress={sentQuery}
-          btnStyle={{ width: '80%', marginHorizontal: '10%', marginTop: 30 }}
+          btnStyle={{width: '80%', marginHorizontal: '10%', marginTop: 30}}
         />
       </View>
     </View>
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: Colors.white,
     borderWidth: 1,
-    borderColor: Colors.green,
+    borderColor: Colors.theme,
     borderRadius: 8,
     marginTop: 10,
     padding: 10,
