@@ -29,6 +29,7 @@ import FullButton from '../../components/FullButton';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { showToast } from '../../utility/Index';
 import HTML from 'react-native-render-html';
+import { Keyboard } from 'react-native';
 
 const SendFeedback = ({ id, navigation }) => {
   const dispatch = useDispatch();
@@ -88,12 +89,15 @@ const SendFeedback = ({ id, navigation }) => {
           style={styles.input}
           placeholder={I18n.t('describequery')}
           value={query}
-          onChangeText={query => setQuery(query)}
+          onChangeText={query => setQuery(query?.trimStart())}
           numberOfLines={10}
           maxLength={500}
           multiline={true}
           returnKeyType="done"
-          onSubmitEditing={sentQuery}
+          onSubmitEditing={() => {
+            Keyboard.dismiss();
+            sentQuery();
+          }}
           onFocus={() => {
             setFocus(true);
           }}
@@ -252,4 +256,5 @@ const styles = StyleSheet.create({
     left: 0,
   },
 });
+
 export default RecipieDetail;

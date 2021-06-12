@@ -89,7 +89,7 @@ const SendFeedback = props => {
           style={styles.input}
           placeholder={I18n.t('describequery')}
           value={query}
-          onChangeText={query => setQuery(query.trim())}
+          onChangeText={query => setQuery(query?.trimStart())}
           numberOfLines={10}
           maxLength={500}
           multiline={true}

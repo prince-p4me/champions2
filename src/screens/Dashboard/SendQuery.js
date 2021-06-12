@@ -51,14 +51,14 @@ const ContactUs = (props) => {
                 <TextBold text={I18n.t("subject")} style={{ fontSize: Sizes.medium, alignSelf: "flex-start" }}></TextBold>
                 <TextInput style={[styles.input, { height: 40, width: "80%", marginBottom: 20 }]}
                     value={sub}
-                    onChangeText={sub => setSubject(sub.trim())}
+                    onChangeText={sub => setSubject(sub?.trimStart())}
                     returnKeyType="next"
                     onSubmitEditing={setSubject}></TextInput>
                 <TextBold text={I18n.t("yourquery")} style={{ fontSize: Sizes.medium, alignSelf: "flex-start" }}></TextBold>
                 <TextInput style={styles.input}
                     placeholder={I18n.t("describequery")}
                     value={query}
-                    onChangeText={query => setQuery(query.trim())}
+                    onChangeText={query => setQuery(query?.trimStart())}
                     numberOfLines={10}
                     maxLength={500}
                     multiline={true}

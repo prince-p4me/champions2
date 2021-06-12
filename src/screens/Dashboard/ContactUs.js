@@ -27,7 +27,7 @@ const ContactUs = (props) => {
     console.log("user", user);
 
     const sentQuery = () => {
-        if (!query || !query.trim().length) {
+        if (!query || !query?.trimStart().length) {
             showToast("Please describe your query . . .");
             return;
         }
@@ -46,7 +46,7 @@ const ContactUs = (props) => {
                 <TextInput style={styles.input}
                     placeholder={I18n.t("describequery")}
                     value={query}
-                    onChangeText={query => setQuery(query.trim())}
+                    onChangeText={query => setQuery(query?.trimStart())}
                     numberOfLines={10}
                     maxLength={500}
                     multiline={true}
