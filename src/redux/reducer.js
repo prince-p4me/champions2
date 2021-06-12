@@ -90,6 +90,15 @@ export const getUser = (state = {}, action) => {
   }
 };
 
+export const checkFirstTime = (state = {}, action) => {
+  switch (action.type) {
+    case Types.FIRST_LOGIN:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const getAddressList = (state = [], action) => {
   switch (action.type) {
     case Types.ADDRESS_LIST:

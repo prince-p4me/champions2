@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState, useRef } from 'react';
+import React, {useEffect, useReducer, useState, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,14 +13,14 @@ import * as Navigation from '../../navigation/navigation';
 import Color from '../../utility/Color';
 import I18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
-import { useSelector, useDispatch } from 'react-redux';
-import { FlatListSlider } from 'react-native-flatlist-slider';
-import { TextBold, TextLite, TextThin } from '../../components/TextView';
+import {useSelector, useDispatch} from 'react-redux';
+import {FlatListSlider} from 'react-native-flatlist-slider';
+import {TextBold, TextLite, TextThin} from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
 import * as Actions from '../../redux/action';
 
-const Tutorial = ({ route }) => {
-  // const { userInfo } = route.params;
+const Tutorial = ({route}) => {
+  const {userInfo} = route.params;
   let [index, setIndex] = useState(1);
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ const Tutorial = ({ route }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <View style={{ flex: 6 }}>
+      <View style={{flex: 6}}>
         <FlatListSlider
           ref={sliderScroll}
           data={images}
@@ -77,8 +77,8 @@ const Tutorial = ({ route }) => {
               }
             }, 400);
           }}
-          contentContainerStyle={{ paddingHorizontal: 2 }}
-          indicatorContainerStyle={{ position: 'absolute', bottom: 10 }}
+          contentContainerStyle={{paddingHorizontal: 2}}
+          indicatorContainerStyle={{position: 'absolute', bottom: 10}}
           indicatorActiveColor={Color.parrot}
           indicatorInActiveColor={Color.darkBGgray}
           indicatorActiveWidth={6}
@@ -86,7 +86,7 @@ const Tutorial = ({ route }) => {
           active
         />
       </View>
-      <View style={{ flex: 4 }}>
+      <View style={{flex: 4}}>
         <View
           style={{
             flex: 1,
@@ -95,7 +95,7 @@ const Tutorial = ({ route }) => {
           }}>
           <TextBold
             text={'Scan QR Code'}
-            style={{ fontSize: Sizes.extraLarge }}
+            style={{fontSize: Sizes.extraLarge}}
           />
           <TextLite text="Scan and won prizes with rewarded points" />
         </View>
@@ -128,7 +128,7 @@ const Tutorial = ({ route }) => {
           /> */}
 
           <TouchableOpacity
-            style={{ padding: 14, marginBottom: 15 }}
+            style={{padding: 14, marginBottom: 15}}
             activeOpacity={0.7}
             onPress={() => {
               dispatch(Actions.updateUser(userInfo));

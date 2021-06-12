@@ -52,3 +52,5 @@ export const ADDRESS_LAT_LNG = 'ADDRESS_LAT_LNG';
 export const SET_TANDC = 'SET_TANDC';
 export const SET_PRIVACY_POLICY = 'SET_PRIVACY_POLICY';
 export const SET_ABOUT_US = 'SET_ABOUT_US';
+
+export const FIRST_LOGIN = 'FIRST_LOGIN';

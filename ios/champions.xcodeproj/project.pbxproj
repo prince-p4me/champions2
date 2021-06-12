@@ -34,7 +34,7 @@
 		A32CCBEA2624BA7600CD793A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A32CCBE92624BA7600CD793A /* splash.png */; };
 		A372B8DE2653D18900A77EA3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372B8DD2653D18900A77EA3 /* File.swift */; };
 		A391C7FD26554FDF009D3CA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */; };
-		A39D15412652D9A400374FA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A39D15412652D9A400374FA2 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -518,7 +518,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				A372B8DE2653D18900A77EA3 /* File.swift in Sources */,
-				A39D15412652D9A400374FA2 /* (null) in Sources */,
+				A39D15412652D9A400374FA2 /* BuildFile in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,7 +826,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -891,7 +891,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
