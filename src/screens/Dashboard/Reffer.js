@@ -15,6 +15,7 @@ import Sizes from '../../utility/Sizes';
 import Images from '../../utility/Image';
 import star from '../../assets/imgs/star.png';
 import FullButton from '../../components/FullButton';
+import Constant from '../../utility/Constant';
 
 const Reffer = () => {
   const user = useSelector(state => state.getUser);
@@ -26,7 +27,7 @@ const Reffer = () => {
     try {
       const result = await Share.share({
         message:
-          "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - https://play.google.com/store/apps/details?id=com.eminence.a10xchampion&referrer=lg4x6ytt9h"
+          "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - " + Constant.iosApp
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
