@@ -122,7 +122,7 @@ const Address = () => {
           Navigation.navigate('AddEditAddress', {});
         }}
       />
-      <SafeAreaView style={{ backgroundColor: Colors.parrot }}></SafeAreaView>
+      <SafeAreaView style={{ backgroundColor: Colors.theme }}></SafeAreaView>
     </View>
   );
 };

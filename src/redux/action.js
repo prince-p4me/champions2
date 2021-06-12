@@ -174,7 +174,7 @@ export function updateUser(payload) {
   };
 }
 
-export function checkFirstTime(payload) {
+export function setFirstUser(payload) {
   return {
     type: Types.FIRST_LOGIN,
     payload,
