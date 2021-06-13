@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState, useRef } from 'react';
+import React, {useEffect, useReducer, useState, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,19 +13,29 @@ import * as Navigation from '../../navigation/navigation';
 import Color from '../../utility/Color';
 import I18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
-import { useSelector, useDispatch } from 'react-redux';
-import { FlatListSlider } from 'react-native-flatlist-slider';
-import { TextBold, TextLite, TextSemiBold, TextThin } from '../../components/TextView';
+import {useSelector, useDispatch} from 'react-redux';
+import {FlatListSlider} from 'react-native-flatlist-slider';
+import {
+  TextBold,
+  TextLite,
+  TextSemiBold,
+  TextThin,
+} from '../../components/TextView';
 import Sizes from '../../utility/Sizes';
 import * as Actions from '../../redux/action';
+import WelcomeModal from '../Dashboard/Welcome';
 
-const Tutorial = ({ route }) => {
-  // const {userInfo} = route.params;
+const Tutorial = ({route}) => {
+  const {userInfo} = route.params;
   let [index, setIndex] = useState(1);
   const dispatch = useDispatch();
 
   const sliderScroll = useRef(null);
+  const isFirstUser = useSelector(state => state.isFirstUser);
 
+  useEffect(() => {
+    dispatch(Actions.setFirstUser(false));
+  }, []);
   // console.log({ userInfo28: userInfo });
   const images = [
     {
@@ -38,9 +48,10 @@ const Tutorial = ({ route }) => {
     },
   ];
   return (
-    <View style={[styles.container, { backgroundColor: Color.theme }]}>
+    <View style={[styles.container, {backgroundColor: Color.theme}]}>
       <SafeAreaView />
-      <View style={{ flex: 7 }}>
+      <WelcomeModal data={userInfo} visible={isFirstUser} />
+      <View style={{flex: 7}}>
         <FlatListSlider
           ref={sliderScroll}
           data={images}
@@ -48,7 +59,7 @@ const Tutorial = ({ route }) => {
           timer={5000}
           local
           imageKey={'banner'}
-          resizeMode={"center"}
+          resizeMode={'center'}
           index={index}
           autoscroll={true}
           onPress={index => {
@@ -56,10 +67,10 @@ const Tutorial = ({ route }) => {
           }}
           currentIndexCallback={index => {
             setIndex(index++);
-            console.log("index is" + index);
+            console.log('index is' + index);
           }}
-          contentContainerStyle={{ paddingHorizontal: 2 }}
-          indicatorContainerStyle={{ position: 'absolute', bottom: 10 }}
+          contentContainerStyle={{paddingHorizontal: 2}}
+          indicatorContainerStyle={{position: 'absolute', bottom: 10}}
           indicatorActiveColor={Color.white}
           indicatorInActiveColor={Color.darkBGgray}
           indicatorActiveWidth={20}
@@ -67,16 +78,16 @@ const Tutorial = ({ route }) => {
           active
         />
       </View>
-      <View style={{ flex: 3 }}>
-        <View style={{ width: "90%", alignItems: "center", marginTop: 20 }}>
+      <View style={{flex: 3}}>
+        <View style={{width: '90%', alignItems: 'center', marginTop: 20}}>
           <TextBold
-            text={I18n.t(index == 1 ? "scan" : "share")}
-            style={{ fontSize: Sizes.extraLarge, color: Color.white }}
+            text={I18n.t(index == 1 ? 'scan' : 'share')}
+            style={{fontSize: Sizes.extraLarge, color: Color.white}}
           />
           <TextSemiBold
-            text={I18n.t(index == 1 ? "scantext" : "sharetext")}
-            style={{ color: Color.white, textAlign: "center", marginTop: 10 }} />
-
+            text={I18n.t(index == 1 ? 'scantext' : 'sharetext')}
+            style={{color: Color.white, textAlign: 'center', marginTop: 10}}
+          />
         </View>
         <View
           style={{
@@ -88,7 +99,7 @@ const Tutorial = ({ route }) => {
           <FullButton
             bgColor={Color.white}
             textColor={Color.theme}
-            text={I18n.t("continue")}
+            text={I18n.t('continue')}
             onPress={() => {
               dispatch(Actions.updateUser(userInfo));
             }}

@@ -36,9 +36,15 @@ const Help = props => {
       showToast('Please describe your query . . .');
       return;
     }
+    // let obj = {
+    //   mobile: isAuth ? mobile : user.mobile,
+    //   query,
+    // };
+    // dispatch(Actions.help(obj));
+
     let obj = {
-      mobile: isAuth ? mobile : user.mobile,
-      query,
+      user_id: user.id,
+      message: query,
     };
     dispatch(Actions.help(obj));
   };

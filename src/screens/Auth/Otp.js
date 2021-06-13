@@ -121,9 +121,11 @@ const OtpScreen = props => {
               if (isLogin) {
                 obj.loginType = 1;
                 // dispatch(Actions.checkFirstTime(true));
+                // dispatch(Actions.setFirstUser(true));
               } else {
-                dispatch(Actions.checkFirstTime(true));
+                // dispatch(Actions.setFirstUser(true));
               }
+              dispatch(Actions.setFirstUser(false));
               dispatch(Actions.verifyOtp(obj));
             }
 

@@ -99,7 +99,7 @@ export function verifyOtp(body) {
 
 export function help(body) {
   console.log('----------resendOtp Api Call ------------------');
-  return callApi(Constants.API_URL + 'help.php', body, 'POST');
+  return callApi(Constants.API_URL + 'user_call_request.php', body, 'POST');
 }
 
 export function sendQuery(body) {
@@ -243,4 +243,8 @@ export function getAddressLatLng(data) {
 export function getContent() {
   console.log('----------getContent Api Call ------------------');
   return callApi(Constants.API_URL + 'content.php', {}, 'GET');
+}
+export function sendFeedback(data) {
+  console.log('----------sendFeedback Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_app_feedback.php', data, 'POST');
 }

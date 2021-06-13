@@ -1,8 +1,14 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, Share, Image } from 'react-native';
+import React, {useEffect} from 'react';
+import {View, StyleSheet, Share, Image} from 'react-native';
 import Header from '../../components/Header';
-import { useSelector, useDispatch } from 'react-redux';
-import { TextBold, TextLite, TextRegular, TextSemiBold, TextThin } from '../../components/TextView';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  TextBold,
+  TextLite,
+  TextRegular,
+  TextSemiBold,
+  TextThin,
+} from '../../components/TextView';
 import i18n from '../../services/i18n';
 
 import * as Actions from '../../redux/action';
@@ -27,16 +33,17 @@ const Reffer = () => {
     try {
       const result = await Share.share({
         message:
-          "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - " + Constant.iosApp
+          "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - " +
+          Constant.iosApp,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          console.log("user shared with activity type of result.activityType");
+          console.log('user shared with activity type of result.activityType');
         } else {
-          console.log("user shared the content");
+          console.log('user shared the content');
         }
       } else if (result.action === Share.dismissedAction) {
-        console.log("user cancelled the share action");
+        console.log('user cancelled the share action');
       }
     } catch (error) {
       alert(error.message);
@@ -44,20 +51,43 @@ const Reffer = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Header title={I18n.t("refer2")} dashboard={false} back={true} help={true} />
+    <View style={{flex: 1}}>
+      <Header
+        title={I18n.t('refer2')}
+        dashboard={false}
+        back={true}
+        help={true}
+      />
       <View style={styles.container}>
         <View style={styles.box1}>
-          <TextBold text={I18n.t("earn") + " 1000"} style={{ fontSize: Sizes.extraDouble2x, textAlign: align }} />
-          <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
-            <TextBold text={I18n.t("points")} style={{ fontSize: Sizes.extraDouble2x }} />
-            <Image source={Images.star3} style={{ width: 35, height: 35, tintColor: Color.semiGold }} />
+          <TextBold
+            text={I18n.t('earn') + ' 50'}
+            style={{fontSize: Sizes.extraDouble2x, textAlign: align}}
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginBottom: 30,
+            }}>
+            <TextBold
+              text={I18n.t('points')}
+              style={{fontSize: Sizes.extraDouble2x}}
+            />
+            <Image
+              source={Images.star3}
+              style={{width: 35, height: 35, tintColor: Color.semiGold}}
+            />
           </View>
-          <TextThin text={I18n.t("referearnlongtext")} style={{ fontSize: Sizes.semiLarge, textAlign: align }} />
-          <FullButton bgColor={Color.theme}
-            text={I18n.t("invite")}
+          <TextThin
+            text={I18n.t('referearnlongtext')}
+            style={{fontSize: Sizes.semiLarge, textAlign: align}}
+          />
+          <FullButton
+            bgColor={Color.theme}
+            text={I18n.t('invite')}
             textColor={Color.white}
-            btnStyle={{ marginTop: 150 }}
+            btnStyle={{marginTop: 150}}
             onPress={onShare}
           />
         </View>
@@ -65,7 +95,7 @@ const Reffer = () => {
 
         </View> */}
       </View>
-    </View >
+    </View>
   );
   // }
 };
@@ -75,12 +105,14 @@ export default Reffer;
 
 const styles = StyleSheet.create({
   box1: {
-    flex: 5.2, paddingHorizontal: 18,
+    flex: 5.2,
+    paddingHorizontal: 18,
     paddingVertical: 30,
-    alignItems: "flex-start"
+    alignItems: 'flex-start',
   },
   container: {
-    flex: 1, backgroundColor: Color.lightGreen,
+    flex: 1,
+    backgroundColor: Color.lightGreen,
     paddingHorizontal: 5,
   },
   box2: {
@@ -88,5 +120,5 @@ const styles = StyleSheet.create({
     backgroundColor: Color.white,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-  }
+  },
 });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -31,20 +31,20 @@ import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
 
 import SuccessModal from './SuccessModal';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import OtpScreen from '../Auth/Otp';
 import LandingScreen from '../Auth/Landing';
 import Profilemain from './Profilemain';
 // import { NavigationEvents } from 'react-navigation';
-import { Icon } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Icon} from 'react-native-elements';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
-import { request, PERMISSIONS } from 'react-native-permissions';
+import {request, PERMISSIONS} from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Color from '../../utility/Color';
 import WelcomeModal from './Welcome';
 
@@ -55,6 +55,7 @@ class HomeScreen extends React.Component {
       points: '',
       isSuccess: false,
       soundsList: [],
+      scanPoints: false,
     };
     this.props.navigation.addListener('focus', () => {
       // do something
@@ -65,15 +66,16 @@ class HomeScreen extends React.Component {
 
   checkProps = () => {
     if (this.props.route.params && this.props.route.params.data) {
-      let { data } = this.props.route.params;
+      let {data} = this.props.route.params;
       console.log('scan data', data);
       console.log('executing data');
       data = data.split(',');
       console.log('scan data array', data);
-      let obj = { qr_id: data[0], points: data[1] };
+      let obj = {qr_id: data[0], points: data[1]};
       this.setState(
         {
           points: obj.points,
+          scanPoints: true,
           // isSuccess: successType,
         },
         () => {
@@ -89,7 +91,7 @@ class HomeScreen extends React.Component {
   };
 
   TokenBox = () => {
-    let { token, list, language } = this.props;
+    let {token, list, language} = this.props;
     return (
       <TextInput
         multiline={true}
@@ -117,16 +119,16 @@ class HomeScreen extends React.Component {
   };
 
   RenderLink = (img, title, subtitle, link) => {
-    const { isRtl } = this.props;
+    const {isRtl} = this.props;
     return (
       <TouchableOpacity
-        style={{ width: '100%', flexDirection: 'row', marginBottom: 15 }}
+        style={{width: '100%', flexDirection: 'row', marginBottom: 15}}
         onPress={() =>
-          Navigation.navigate(link, link == 'Help' && { isAuth: true })
+          Navigation.navigate(link, link == 'Help' && {isAuth: true})
         }>
         <Image
           source={img}
-          style={{ width: 55, height: 55, marginEnd: 15 }}></Image>
+          style={{width: 55, height: 55, marginEnd: 15}}></Image>
         <View
           style={{
             flex: 1,
@@ -142,7 +144,7 @@ class HomeScreen extends React.Component {
                 fontSize: Sizes.regular,
                 marginBottom: 7,
               },
-              isRtl && { textAlign: 'left' },
+              isRtl && {textAlign: 'left'},
             ]}
           />
           <TextRegular
@@ -151,7 +153,7 @@ class HomeScreen extends React.Component {
               {
                 fontSize: Sizes.regular,
               },
-              isRtl && { textAlign: 'left' },
+              isRtl && {textAlign: 'left'},
             ]}
           />
         </View>
@@ -161,7 +163,7 @@ class HomeScreen extends React.Component {
 
   renderBottomLinks = () => {
     return (
-      <View style={{ width: '100%', marginTop: 15, paddingHorizontal: 7 }}>
+      <View style={{width: '100%', marginTop: 15, paddingHorizontal: 7}}>
         {this.RenderLink(
           Imagess.transactionlink,
           'transaction',
@@ -180,27 +182,30 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let { offerDetail, list, isSuccess, language, isFirstUser } = this.props;
-    let { points } = this.state;
+    let {offerDetail, list, isSuccess, language, isFirstUser} = this.props;
+    let {points} = this.state;
     this.updateLanguage(language);
 
-    console.log("isFirstUser", isFirstUser);
+    console.log('isFirstUser', isFirstUser);
+
+    console.log('issuccess==', isSuccess);
     return (
       <View style={styles.containerDashboard}>
         <SuccessModal
           visible={isSuccess}
           points={points}
           offerDetail={offerDetail}
+          scanPoints={this.state.scanPoints}
         />
 
-        <WelcomeModal />
+        <WelcomeModal visible={isFirstUser} />
         <Header title={'Home'} dashboard={true} />
         <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
           {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
           <Winnerlayout />
-          <View style={{ height: 20 }} />
+          <View style={{height: 20}} />
           <QRCodeContainer />
           <PointsContainer />
           <MenuContainer />
@@ -208,7 +213,7 @@ class HomeScreen extends React.Component {
           <RecipeLayout horizontal={true} />
           <ReviewLayout />
           {this.renderBottomLinks()}
-          <View style={{ height: 50 }}></View>
+          <View style={{height: 50}}></View>
         </ScrollView>
         <SafeAreaView></SafeAreaView>
       </View>

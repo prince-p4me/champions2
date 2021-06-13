@@ -11,11 +11,11 @@ import {
 import Colors from '../../utility/Color';
 import congrat from '../../assets/imgs/amazon.png';
 import Images from '../../utility/Image';
-import { TextMedium, TextSemiBold, TextBold } from '../../components/TextView';
+import {TextMedium, TextSemiBold, TextBold} from '../../components/TextView';
 import i18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 import Sizes from '../../utility/Sizes';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Modal from 'react-native-modal';
 import Clipboard from '@react-native-community/clipboard';
 import Toast from 'react-native-simple-toast';
@@ -25,25 +25,27 @@ import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 import Icon1 from 'react-native-vector-icons/dist/MaterialIcons';
 
-const WelcomeModal = () => {
+const WelcomeModal = props => {
   const isFirstUser = useSelector(state => state.isFirstUser);
   const isRtl = useSelector(state => state.isRtl);
   const dispatch = useDispatch();
 
+  console.log('data==');
+  console.log({props});
+  console.log(props.data);
   return (
-    <Modal isVisible={isFirstUser} style={{ margin: 0 }}>
+    <Modal isVisible={props.visible} style={{margin: 0}}>
       <SafeAreaView />
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <TouchableOpacity
           onPress={() => {
-            dispatch(Actions.setFirstUser(false));
-            // Navigation.navigate('Home');
+            dispatch(Actions.updateUser(props.data));
           }}
-          style={[styles.closeBtn, isRtl ? { left: 20 } : { right: 20 }]}>
+          style={[styles.closeBtn, isRtl ? {left: 20} : {right: 20}]}>
           <Image source={Images.close} style={styles.closeImage}></Image>
         </TouchableOpacity>
         <View style={[styles.bgColor, styles.viewContainer]}>
-          <View style={{ height: 30 }}></View>
+          <View style={{height: 30}}></View>
           <TextMedium
             text={'Congratulations!!'}
             style={styles.congrats}></TextMedium>
@@ -77,11 +79,11 @@ const styles = StyleSheet.create({
   },
   bgColor: {
     // backgroundColor: "rgb(211,138,65)",
-    backgroundColor: "#f98404",
+    backgroundColor: '#f98404',
     flex: 1 / 3,
     // width: '50%',
     margin: 35,
-    padding: 5
+    padding: 5,
   },
   viewContainer: {
     borderRadius: 20,

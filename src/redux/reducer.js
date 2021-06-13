@@ -90,7 +90,7 @@ export const getUser = (state = {}, action) => {
   }
 };
 
-export const isFirstUser = (state = true, action) => {
+export const isFirstUser = (state = false, action) => {
   switch (action.type) {
     case Types.FIRST_LOGIN:
       return action.payload;
@@ -226,25 +226,25 @@ export const getPrivacyPolicy = (state = null, action) => {
 
 export const getStates = (state = [], action) => {
   let statelist = [
-    { id: 1, name: 'Andhra Pradesh' },
-    { id: 2, name: 'Arunachal Pradesh' },
-    { id: 3, name: 'Assam' },
-    { id: 4, name: 'Bihar' },
-    { id: 5, name: 'Chattisgarh' },
-    { id: 6, name: 'Goa' },
-    { id: 7, name: 'New Delhi' },
-    { id: 8, name: 'Gujrat' },
-    { id: 9, name: 'Haryana' },
-    { id: 10, name: 'Himachal Pradesh' },
-    { id: 11, name: 'Jammu and Kashmir' },
-    { id: 12, name: 'JharKand' },
-    { id: 13, name: 'Karnatka' },
-    { id: 14, name: 'Kerla' },
-    { id: 15, name: 'Madhya Pradesh' },
-    { id: 16, name: 'Maharashtra' },
-    { id: 17, name: 'Manipur' },
-    { id: 18, name: 'Mizoram' },
-    { id: 19, name: 'Nagaland' },
+    {id: 1, name: 'Andhra Pradesh'},
+    {id: 2, name: 'Arunachal Pradesh'},
+    {id: 3, name: 'Assam'},
+    {id: 4, name: 'Bihar'},
+    {id: 5, name: 'Chattisgarh'},
+    {id: 6, name: 'Goa'},
+    {id: 7, name: 'New Delhi'},
+    {id: 8, name: 'Gujrat'},
+    {id: 9, name: 'Haryana'},
+    {id: 10, name: 'Himachal Pradesh'},
+    {id: 11, name: 'Jammu and Kashmir'},
+    {id: 12, name: 'JharKand'},
+    {id: 13, name: 'Karnatka'},
+    {id: 14, name: 'Kerla'},
+    {id: 15, name: 'Madhya Pradesh'},
+    {id: 16, name: 'Maharashtra'},
+    {id: 17, name: 'Manipur'},
+    {id: 18, name: 'Mizoram'},
+    {id: 19, name: 'Nagaland'},
   ];
   switch (action.type) {
     case Types.STATE_LIST:

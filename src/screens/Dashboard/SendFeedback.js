@@ -34,10 +34,11 @@ const SendFeedback = props => {
       return;
     }
     let obj = {
-      mobile: user.mobile,
-      query,
+      user_id: user.id,
+      star_rate: star,
+      feedback: query,
     };
-    dispatch(Actions.help(obj));
+    dispatch(Actions.sendFeedback(obj));
   };
 
   return (

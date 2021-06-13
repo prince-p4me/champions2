@@ -14,6 +14,13 @@ export function help(payload) {
   };
 }
 
+export function sendFeedback(payload) {
+  return {
+    type: Types.SEND_FEEDBACK,
+    payload,
+  };
+}
+
 export function sendRecipeReview(payload) {
   return {
     type: Types.SEND_FEEDBACK,
