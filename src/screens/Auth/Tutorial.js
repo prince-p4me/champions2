@@ -24,6 +24,7 @@ import {
 import Sizes from '../../utility/Sizes';
 import * as Actions from '../../redux/action';
 import WelcomeModal from '../Dashboard/Welcome';
+import Toast from 'react-native-simple-toast';
 
 const Tutorial = ({route}) => {
   const {userInfo} = route.params;
@@ -50,16 +51,16 @@ const Tutorial = ({route}) => {
   return (
     <View style={[styles.container, {backgroundColor: Color.theme}]}>
       <SafeAreaView />
-      <WelcomeModal data={userInfo} visible={isFirstUser} />
+      {/* <WelcomeModal data={userInfo} visible={isFirstUser} /> */}
       <View style={{flex: 7}}>
         <FlatListSlider
           ref={sliderScroll}
           data={images}
-          height={'100%'}
+          height={'87%'}
           timer={5000}
           local
           imageKey={'banner'}
-          resizeMode={'center'}
+          resizeMode={'contain'}
           index={index}
           autoscroll={true}
           onPress={index => {
@@ -102,6 +103,15 @@ const Tutorial = ({route}) => {
             text={I18n.t('continue')}
             onPress={() => {
               dispatch(Actions.updateUser(userInfo));
+              // dispatch(Actions.setFirstUser(true));
+
+              setTimeout(() => {
+                Toast.showWithGravity(
+                  'Congratulations you have earned 50 points!!',
+                  Toast.LONG,
+                  Toast.BOTTOM,
+                );
+              }, 1500);
             }}
           />
 

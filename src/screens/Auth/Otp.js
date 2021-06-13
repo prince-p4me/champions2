@@ -125,7 +125,7 @@ const OtpScreen = props => {
               } else {
                 // dispatch(Actions.setFirstUser(true));
               }
-              dispatch(Actions.setFirstUser(false));
+              // dispatch(Actions.setFirstUser(false));
               dispatch(Actions.verifyOtp(obj));
             }
 

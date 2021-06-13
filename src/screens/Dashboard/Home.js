@@ -47,6 +47,8 @@ import MenuContainer from '../../components/MenuContainer';
 import {useSelector, useDispatch} from 'react-redux';
 import Color from '../../utility/Color';
 import WelcomeModal from './Welcome';
+import {showToast} from '../../utility/Index';
+import Toast from 'react-native-simple-toast';
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -88,6 +90,19 @@ class HomeScreen extends React.Component {
       // alert(language);
       this.props.getBanners();
     }
+
+    // if (this.props.isFirstUser) {
+
+    //   Toast.showWithGravity(
+    //     'Congratulations you have earned 50 points!!',
+    //     Toast.LONG,
+    //     Toast.BOTTOM,
+    //   );
+
+    //   setTimeout(() => {
+    //     this.props.setFirstUser(false);
+    //   }, 5000);
+    // }
   };
 
   TokenBox = () => {
@@ -198,7 +213,7 @@ class HomeScreen extends React.Component {
           scanPoints={this.state.scanPoints}
         />
 
-        <WelcomeModal visible={isFirstUser} />
+        {/* <WelcomeModal visible={isFirstUser} /> */}
         <Header title={'Home'} dashboard={true} />
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
@@ -237,6 +252,7 @@ const mapDispatchToProps = dispatch => {
     scanQr: data => dispatch(Actions.scanQr(data)),
     getBanners: () => dispatch(Actions.getBanners()),
     getPoints: () => dispatch(Actions.getPoints()),
+    setFirstUser: () => dispatch(Actions.setFirstUser(false)),
   };
 };
 

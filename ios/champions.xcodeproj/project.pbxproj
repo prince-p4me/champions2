@@ -34,7 +34,7 @@
 		A372B8DE2653D18900A77EA3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372B8DD2653D18900A77EA3 /* File.swift */; };
 		A3751E5026753FBB001D1B5E /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A3751E4F26753FBB001D1B5E /* splash.png */; };
 		A391C7FD26554FDF009D3CA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A391C7FC26554FDF009D3CA1 /* GoogleService-Info.plist */; };
-		A39D15412652D9A400374FA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A39D15412652D9A400374FA2 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -518,7 +518,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				A372B8DE2653D18900A77EA3 /* File.swift in Sources */,
-				A39D15412652D9A400374FA2 /* (null) in Sources */,
+				A39D15412652D9A400374FA2 /* BuildFile in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -675,7 +675,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -778,7 +778,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
