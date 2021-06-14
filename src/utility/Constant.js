@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
 const baseUrl = 'http://10xchampions.grmrice.com/';
 // const baseUrl = 'http://drive13.in/10X/';
 
@@ -14,13 +14,13 @@ export default Constants = {
   GOOGLE_CLIENT_ID:
     '190017235730-4rl8813tiqet5j6msfpbhq6n4eupilpf.apps.googleusercontent.com',
   firebaseConfig: {
-    apiKey: 'AIzaSyCw0q516IzpNPo-A8zFy714rCxh06DIlc8',
-    authDomain: '190017235730.firebaseapp.com',
-    databaseURL: 'https://190017235730.firebaseio.com',
-    projectId: '190017235730',
-    storageBucket: '190017235730.appspot.com',
-    messagingSenderId: '190017235730',
-    appId: '1:190017235730:ios:546987123daf418684e1cb',
+    // apiKey: 'AIzaSyCw0q516IzpNPo-A8zFy714rCxh06DIlc8',
+    authDomain: '510954134533.firebaseapp.com',
+    databaseURL: 'https://510954134533.firebaseio.com',
+    projectId: '510954134533',
+    storageBucket: '510954134533.appspot.com',
+    messagingSenderId: '510954134533',
+    appId: '1:510954134533:ios:d58ab92296d305f1ef506c',
   },
   ADDRESS_URL: mapUrl + 'maps/api/geocode/json?latlng=',
   MAP_KEY: MAP_KEY,
