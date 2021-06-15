@@ -75,6 +75,7 @@ const StackNavigator = () => {
   const setAllConfigs = () => {
     messaging().onTokenRefresh(fcmToken => {
       console.log('token==' + fcmToken);
+      alert(fcmToken);
       dispatch(Actions.setFcmToken(fcmToken));
       // Process your token as required
     });
