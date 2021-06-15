@@ -66,10 +66,10 @@ const StackNavigator = () => {
     dispatch(Actions.setRtl(isRtl));
     I18nManager.allowRTL(isRtl);
     I18nManager.forceRTL(isRtl);
-    // setTimeout(() => {
-    //   SplashScreen.hide();
-    // }, 5000);
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 3000);
+    // SplashScreen.hide();
 
     console.log('Splashscreen hidden');
     setAllConfigs();
