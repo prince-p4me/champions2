@@ -42,6 +42,8 @@ import SocialLogin from '../../components/SocialLogin';
 const SignupScreen = () => {
   const [mobile, setMobile] = useState('');
   const [name, setName] = useState('');
+  // const [mobile, setMobile] = useState('8178691529');
+  // const [name, setName] = useState('Prince Kumar');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
   const isRtl = useSelector(state => state.isRtl);

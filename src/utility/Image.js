@@ -40,4 +40,5 @@ export default Images = {
   dust: require('../assets/imgs/sparkling magical dust particles.png'),
   fb: require('../assets/imgs/fb.png'),
   google: require('../assets/imgs/googleSignin.png'),
+  welcome: require('../assets/imgs/welcome.jpeg'),
 };

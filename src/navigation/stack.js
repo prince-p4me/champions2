@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {I18nManager, Platform, Alert} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { I18nManager, Platform, Alert } from 'react-native';
 import Home from '../screens/Dashboard/Home';
 import Reffer from '../screens/Dashboard/Reffer';
 import LoginScreen from '../screens/Auth/Login';
 import OtpScreen from '../screens/Auth/Otp';
 import SignUpScreen from '../screens/Auth/SignUp';
 import LandingScreen from '../screens/Auth/Landing';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import ScanQrCode from '../screens/Dashboard/ScanQrCode';
 import SuccessModal from '../screens/Dashboard/SuccessModal';
@@ -34,7 +34,7 @@ import TutorialScreen from '../screens/Auth/Tutorial';
 import Notification from '../screens/Dashboard/Notification';
 import * as Actions from '../redux/action';
 // import MyRewards from '../screens/Dashboard/MyRewards';
-import {request, PERMISSIONS} from 'react-native-permissions';
+import { request, PERMISSIONS } from 'react-native-permissions';
 
 import {
   GoogleSignin,
@@ -48,7 +48,7 @@ import * as Navigation from '../navigation/navigation';
 
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIos from '@react-native-community/push-notification-ios';
-import {showToast} from '../utility/Index';
+import { showToast } from '../utility/Index';
 
 const Stack = createStackNavigator();
 
@@ -66,7 +66,10 @@ const StackNavigator = () => {
     dispatch(Actions.setRtl(isRtl));
     I18nManager.allowRTL(isRtl);
     I18nManager.forceRTL(isRtl);
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 3000);
+    // SplashScreen.hide();
 
     console.log('Splashscreen hidden');
     setAllConfigs();
@@ -176,12 +179,12 @@ const StackNavigator = () => {
           break;
       }
     }
-    Navigation.navigate(routeName, id && {id});
+    Navigation.navigate(routeName, id && { id });
   };
 
   console.log('rendered');
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       {user && user.id ? (
         <>
           {/* <Stack.Screen name="Tutorial" component={TutorialScreen} /> */}

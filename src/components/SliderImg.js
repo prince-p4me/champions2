@@ -8,7 +8,7 @@ import Constant from '../utility/Constant';
 const SliderImg = (props) => {
   const { slideImgs } = props;
   return (
-    <View style={{ marginBottom: 10 }}>
+    <View style={{ marginBottom: 10, paddingHorizontal: 5 }}>
       <FlatListSlider data={slideImgs ? slideImgs : []}
         height={130}
         timer={10000}
@@ -17,7 +17,7 @@ const SliderImg = (props) => {
           // bannerClicked(banners[index]);
           navigate("OfferAll");
         }}
-        contentContainerStyle={{ paddingHorizontal: 2 }}
+        // contentContainerStyle={{ paddingHorizontal: 2 }}
         indicatorContainerStyle={{ position: 'absolute', bottom: 10 }}
         indicatorActiveColor={Color.semiGold}
         indicatorInActiveColor={Color.white}

@@ -1,19 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   ScrollView,
   Image,
-  Button,
+  // Modal,
   SafeAreaView,
-  Alert,
+  DeviceEventEmitter,
   TextInput,
+  TouchableOpacity
 } from 'react-native';
 import Header from '../../components/Header';
 import {
-  TextBold,
   TextRegular,
   TextSemiBold,
-  TextThin,
 } from '../../components/TextView';
 import styles from '../../utility/Style';
 import Imagess from '../../utility/Image';
@@ -24,89 +23,73 @@ import Sizes from '../../utility/Sizes';
 import PointsContainer from '../../components/PointsContainer';
 import QRCodeContainer from '../../components/QRCodeContainer';
 import Winnerlayout from '../../components/Winnerlayout';
-import RewardLayout from '../../components/RewardLayout';
-import FeedbackLayout from '../../components/FeedbackLayout';
 import OfferLayout from '../../components/OfferLayout';
 import RecipeLayout from '../../components/RecipeLayout';
 import * as Actions from '../../redux/action';
 
 import SuccessModal from './SuccessModal';
-import {connect} from 'react-redux';
-import OtpScreen from '../Auth/Otp';
-import LandingScreen from '../Auth/Landing';
-import Profilemain from './Profilemain';
-// import { NavigationEvents } from 'react-navigation';
-import {Icon} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
-import {request, PERMISSIONS} from 'react-native-permissions';
+import { request, PERMISSIONS } from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
-import {useSelector, useDispatch} from 'react-redux';
 import Color from '../../utility/Color';
 import WelcomeModal from './Welcome';
-import {showToast} from '../../utility/Index';
-import Toast from 'react-native-simple-toast';
+import Constant from '../../utility/Constant';
+import Modal from 'react-native-modal';
+import { useSelector, useDispatch } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 
-class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      points: '',
-      isSuccess: false,
-      soundsList: [],
-      scanPoints: false,
-    };
-    this.props.navigation.addListener('focus', () => {
-      // do something
-      console.log('rendered again and checking the props');
-      this.checkProps();
-    });
-  }
+const HomeScreen = props => {
+  const [points, setPoints] = useState('');
+  const [scanPoints, setScanPoints] = useState(false);
+  const [isFirstUser, setFirstUser] = useState(true);
+  const isLoading = useSelector(state => state.isLoading);
 
-  checkProps = () => {
-    if (this.props.route.params && this.props.route.params.data) {
-      let {data} = this.props.route.params;
+  const dispatch = useDispatch();
+
+  const list = useSelector(state => state.getBanners);
+  const isSuccess = useSelector(state => state.isSuccess);
+  const isRtl = useSelector(state => state.isRtl);
+  const token = useSelector(state => state.getFcmToken);
+  const offerDetail = useSelector(state => state.getOfferDetail);
+  const language = useSelector(state => state.getLanguage);
+  // const isFirstUser = useSelector(state => state.isFirstUser);
+  const forceUpdate = React.useReducer(bool => !bool)[1];
+
+  useEffect(() => {
+    setTimeout(() => {
+      I18n.locale = language;
+      forceUpdate();
+    }, 10);
+  }, [language]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      checkProps();
+    }, [])
+  );
+
+  const checkProps = () => {
+    if (props.route.params && props.route.params.data) {
+      let { data } = props.route.params;
       console.log('scan data', data);
       console.log('executing data');
       data = data.split(',');
       console.log('scan data array', data);
-      let obj = {qr_id: data[0], points: data[1]};
-      this.setState(
-        {
-          points: obj.points,
-          scanPoints: true,
-          // isSuccess: successType,
-        },
-        () => {
-          this.props.scanQr(obj);
-          // playSampleSound(this.state.soundsList[1]);
-          // playSampleSound(this.state.soundsList[1]);
-        },
-      );
+      let obj = { qr_id: data[0], points: data[1] };
+      setPoints(obj.points);
+      setScanPoints(true);
+      dispatch(Actions.scanQr(obj))
     } else {
-      // alert(language);
-      this.props.getBanners();
+      dispatch(Actions.getBanners());
     }
-
-    // if (this.props.isFirstUser) {
-
-    //   Toast.showWithGravity(
-    //     'Congratulations you have earned 50 points!!',
-    //     Toast.LONG,
-    //     Toast.BOTTOM,
-    //   );
-
-    //   setTimeout(() => {
-    //     this.props.setFirstUser(false);
-    //   }, 5000);
-    // }
   };
 
-  TokenBox = () => {
-    let {token, list, language} = this.props;
+  const TokenBox = () => {
+    let { token, list, language } = props;
     return (
       <TextInput
         multiline={true}
@@ -126,24 +109,16 @@ class HomeScreen extends React.Component {
     );
   };
 
-  updateLanguage = language => {
-    setTimeout(() => {
-      I18n.locale = language;
-      // forceUpdate();
-    }, 100);
-  };
-
-  RenderLink = (img, title, subtitle, link) => {
-    const {isRtl} = this.props;
+  const RenderLink = (img, title, subtitle, link) => {
     return (
       <TouchableOpacity
-        style={{width: '100%', flexDirection: 'row', marginBottom: 15}}
+        style={{ width: '100%', flexDirection: 'row', marginBottom: 15 }}
         onPress={() =>
-          Navigation.navigate(link, link == 'Help' && {isAuth: true})
+          Navigation.navigate(link, link == 'Help' && { isAuth: true })
         }>
         <Image
           source={img}
-          style={{width: 55, height: 55, marginEnd: 15}}></Image>
+          style={{ width: 55, height: 55, marginEnd: 15 }}></Image>
         <View
           style={{
             flex: 1,
@@ -159,7 +134,7 @@ class HomeScreen extends React.Component {
                 fontSize: Sizes.regular,
                 marginBottom: 7,
               },
-              isRtl && {textAlign: 'left'},
+              isRtl && { textAlign: 'left' },
             ]}
           />
           <TextRegular
@@ -168,7 +143,7 @@ class HomeScreen extends React.Component {
               {
                 fontSize: Sizes.regular,
               },
-              isRtl && {textAlign: 'left'},
+              isRtl && { textAlign: 'left' },
             ]}
           />
         </View>
@@ -176,17 +151,17 @@ class HomeScreen extends React.Component {
     );
   };
 
-  renderBottomLinks = () => {
+  const renderBottomLinks = () => {
     return (
-      <View style={{width: '100%', marginTop: 15, paddingHorizontal: 7}}>
-        {this.RenderLink(
+      <View style={{ width: '100%', marginTop: 15, paddingHorizontal: 7 }}>
+        {RenderLink(
           Imagess.transactionlink,
           'transaction',
           'transactiontext',
           'MyDashboard',
         )}
-        {this.RenderLink(Imagess.help247, 'support', 'supporttext', 'Help')}
-        {this.RenderLink(
+        {RenderLink(Imagess.help247, 'support', 'supporttext', 'Help')}
+        {RenderLink(
           Imagess.feedbacklink,
           'feedback',
           'feedbacktext',
@@ -196,64 +171,37 @@ class HomeScreen extends React.Component {
     );
   };
 
-  render() {
-    let {offerDetail, list, isSuccess, language, isFirstUser} = this.props;
-    let {points} = this.state;
-    this.updateLanguage(language);
-
-    console.log('isFirstUser', isFirstUser);
-
-    console.log('issuccess==', isSuccess);
-    return (
-      <View style={styles.containerDashboard}>
-        <SuccessModal
-          visible={isSuccess}
-          points={points}
-          offerDetail={offerDetail}
-          scanPoints={this.state.scanPoints}
-        />
-
-        {/* <WelcomeModal visible={isFirstUser} /> */}
-        <Header title={'Home'} dashboard={true} />
-        <ScrollView
-          contentContainerStyle={{flexGrow: 1}}
-          showsVerticalScrollIndicator={false}>
-          {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
-          <Winnerlayout />
-          <View style={{height: 20}} />
-          <QRCodeContainer />
-          <PointsContainer />
-          <MenuContainer />
-          <OfferLayout home={true} />
-          <RecipeLayout horizontal={true} />
-          <ReviewLayout />
-          {this.renderBottomLinks()}
-          <View style={{height: 50}}></View>
-        </ScrollView>
-        <SafeAreaView></SafeAreaView>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.containerDashboard}>
+      {!isLoading ?
+        <>
+          <SuccessModal
+            visible={isSuccess}
+            points={points}
+            offerDetail={offerDetail}
+            scanPoints={scanPoints}
+          />
+          <WelcomeModal />
+        </> : null}
+      <Header title={'Home'} dashboard={true} />
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}
+        showsVerticalScrollIndicator={false}>
+        {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
+        <Winnerlayout />
+        <View style={{ height: 20 }} />
+        <QRCodeContainer />
+        <PointsContainer />
+        <MenuContainer />
+        <OfferLayout home={true} />
+        <RecipeLayout horizontal={true} />
+        <ReviewLayout />
+        {renderBottomLinks()}
+        <View style={{ height: 50 }}></View>
+      </ScrollView>
+      <SafeAreaView></SafeAreaView>
+    </View>
+  );
 }
 
-const mapStateToProps = state => ({
-  list: state.getBanners,
-  visible: state.isSuccess,
-  isRtl: state.isRtl,
-  isSuccess: state.isSuccess,
-  token: state.getFcmToken,
-  offerDetail: state.getOfferDetail,
-  language: state.getLanguage,
-  isFirstUser: state.isFirstUser,
-});
-
-const mapDispatchToProps = dispatch => {
-  return {
-    scanQr: data => dispatch(Actions.scanQr(data)),
-    getBanners: () => dispatch(Actions.getBanners()),
-    getPoints: () => dispatch(Actions.getPoints()),
-    setFirstUser: () => dispatch(Actions.setFirstUser(false)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;
