@@ -11,11 +11,11 @@ import {
 import Colors from '../../utility/Color';
 import congrat from '../../assets/imgs/amazon.png';
 import Images from '../../utility/Image';
-import {TextMedium, TextSemiBold} from '../../components/TextView';
+import { TextMedium, TextSemiBold } from '../../components/TextView';
 import i18n from '../../services/i18n';
 import FullButton from '../../components/FullButton';
 import Sizes from '../../utility/Sizes';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-native-modal';
 import Clipboard from '@react-native-community/clipboard';
 import Toast from 'react-native-simple-toast';
@@ -25,7 +25,7 @@ import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 
 const SuccessModal = props => {
-  const {visible, close, points, offerDetail, scanPoints} = props;
+  const { visible, close, points, offerDetail, scanPoints } = props;
   const user = useSelector(state => state.getUser);
 
   const isRtl = useSelector(state => state.isRtl);
@@ -35,15 +35,15 @@ const SuccessModal = props => {
   const isSuccess = useSelector(state => state.isSuccess);
   // const offerDetail = useSelector(state => state.getOfferDetail);
 
-  console.log({props333331: props});
+  console.log({ props333331: props });
 
-  console.log({offerDetail352222222: offerDetail});
+  console.log({ offerDetail352222222: offerDetail });
   const renderRefer = () => {
     return (
       <>
         <TextMedium
           text={i18n.t('earn_point')}
-          style={[styles.congratsEarn, {color: Colors.text}]}
+          style={[styles.congratsEarn, { color: Colors.text }]}
         />
 
         <TouchableOpacity
@@ -56,16 +56,16 @@ const SuccessModal = props => {
               Toast.BOTTOM,
             );
           }}>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <TextMedium
               text="https://10Xchampions/8768732/"
-              style={[styles.congratsLink, {color: Colors.darkBGgray}]}
+              style={[styles.congratsLink, { color: Colors.darkBGgray }]}
             />
           </View>
           <View style={styles.copySection}>
             <TextMedium
               text={i18n.t('copy')}
-              style={[styles.congratsLink, {color: 'blue'}]}
+              style={[styles.congratsLink, { color: 'blue' }]}
             />
           </View>
         </TouchableOpacity>
@@ -79,9 +79,10 @@ const SuccessModal = props => {
   };
 
   return (
-    <Modal isVisible={visible || isSuccess} style={{margin: 0}}>
-      <SafeAreaView style={{backgroundColor: Colors.parrot}} />
-      <View style={{flex: 1, backgroundColor: Colors.bgColor}}>
+    <Modal isVisible={visible || isSuccess} style={{ margin: 0 }}>
+      {/* // <Modal isVisible={true} style={{ margin: 0 }}> */}
+      <SafeAreaView style={{ backgroundColor: Colors.theme }} />
+      <View style={{ flex: 1, backgroundColor: Colors.bgColor }}>
         <View style={styles.firstSection}>
           <TouchableOpacity
             onPress={() => {
@@ -89,7 +90,7 @@ const SuccessModal = props => {
               dispatch(Actions.getOfferDetail(offer_info));
               Navigation.navigate('Home');
             }}
-            style={[styles.closeBtn, isRtl ? {left: 20} : {right: 20}]}>
+            style={[styles.closeBtn, isRtl ? { left: 20 } : { right: 20 }]}>
             <Image source={Images.close} style={styles.closeImage}></Image>
           </TouchableOpacity>
           <ImageBackground
@@ -101,7 +102,7 @@ const SuccessModal = props => {
             source={
               points && scanPoints
                 ? Images.gift
-                : {uri: Constant.IMAGE_URL + offerDetail.image}
+                : { uri: Constant.IMAGE_URL + offerDetail.image }
             }
             resizeMode="contain"
             style={{
@@ -123,17 +124,17 @@ const SuccessModal = props => {
               <View style={[styles.congratsText, styles.congratTxt]}>
                 <TextSemiBold
                   text={points}
-                  style={[styles.congrats, {fontSize: Sizes.double}]}
+                  style={[styles.congrats, { fontSize: Sizes.double }]}
                 />
-                <View style={{width: 5}}></View>
+                <View style={{ width: 5 }}></View>
                 <Image source={Images.star} style={styles.starImage}></Image>
               </View>
             </View>
           </ImageBackground>
-          <View style={{flex: 1, width: '80%', justifyContent: 'center'}}>
+          <View style={{ flex: 1, width: '80%', justifyContent: 'center' }}>
             <FullButton
               text={i18n.t('go_redeem')}
-              btnStyle={[styles.outlineBtn, {position: 'absolute', bottom: 60}]}
+              btnStyle={[styles.outlineBtn, { position: 'absolute', bottom: 60 }]}
               textStyle={styles.outlineBtnText}
               onPress={() => {
                 console.log('going to redeem history');
@@ -145,7 +146,7 @@ const SuccessModal = props => {
         <View style={styles.secondSection}>
           {renderRefer()}
 
-          <View style={{width: '60%'}}>
+          <View style={{ width: '60%' }}>
             <FullButton
               text={i18n.t('go_reward')}
               bgColor={Colors.theme}
@@ -155,7 +156,7 @@ const SuccessModal = props => {
                 // close();
                 dispatch(Actions.getOfferDetail(offer_info));
                 dispatch(Actions.setSuccessModal(false));
-                Navigation.navigate('MyReward', {data});
+                Navigation.navigate('MyReward', { data });
               }}></FullButton>
           </View>
         </View>
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   firstSection: {
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.theme,
     flex: 3,
     alignItems: 'center',
     // justifyContent: 'space-between',

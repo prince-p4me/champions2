@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, ScrollView, FlatList, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, FlatList, Image } from 'react-native';
 import Header from '../../components/Header';
-import {TextRegular, TextThin} from '../../components/TextView';
-import {useSelector, useDispatch} from 'react-redux';
+import { TextRegular, TextThin } from '../../components/TextView';
+import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../../services/i18n';
 
 import RewardPointlayout from '../../components/RewardPointlayout';
@@ -11,7 +11,7 @@ import QRCodeContainer from '../../components/QRCodeContainer';
 import * as Actions from '../../redux/action';
 
 // import { NavigationEvents } from 'react-navigation';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Color from '../../utility/Color';
 import Constant from '../../utility/Constant';
 import Sizes from '../../utility/Sizes';
@@ -38,10 +38,10 @@ const PointWonLayout = item => {
             tintColor: Color.darkBGgray,
           }}></Image>
         {pointInfo.product_name ? (
-          <View style={{width: '100%', paddingTop: 10, paddingHorizontal: 3}}>
+          <View style={{ width: '100%', paddingTop: 10, paddingHorizontal: 3 }}>
             <TextRegular
               text={'Redeemed ' + pointInfo.points}
-              style={{textAlign: 'center', fontSize: Sizes.semiLarge}}
+              style={{ textAlign: 'center', fontSize: Sizes.semiLarge }}
             />
             <TextRegular
               text={'for ' + pointInfo.product_name}
@@ -65,7 +65,7 @@ const PointWonLayout = item => {
         )}
         {!pointInfo.product_name && (
           <View
-            style={{flexDirection: 'row', marginTop: 5, alignItems: 'center'}}>
+            style={{ flexDirection: 'row', marginTop: 5, alignItems: 'center' }}>
             <Image
               source={Images.star}
               style={{
@@ -79,7 +79,7 @@ const PointWonLayout = item => {
               resizeMode="contain"></Image>
             <TextRegular
               text={pointInfo.points}
-              style={{textAlign: align, fontSize: Sizes.regular, marginTop: 5}}
+              style={{ textAlign: align, fontSize: Sizes.regular, marginTop: 5 }}
             />
           </View>
         )}
@@ -101,16 +101,16 @@ const MyDashboard = () => {
   const [transactionType, setTransactionType] = useState('QR Scan');
   const transactionList = useSelector(state => state.getTransactionByCategory);
 
-  console.log({transactionList: transactionList});
+  console.log({ transactionList: transactionList });
   const user = useSelector(state => state.getUser);
   const dispatch = useDispatch();
 
-  const EmptyListMessage = ({item}) => {
+  const EmptyListMessage = ({ item }) => {
     return (
       // Flat List Item
       // <Text>No Data Found</Text>
       // <TextRegular></TextRegular>
-      <TextRegular text={'No Data Found'} style={{textAlign: 'center'}} />
+      <TextRegular text={'No Data Found'} style={{ textAlign: 'center' }} />
     );
   };
   function getTransaction(type) {
@@ -132,7 +132,7 @@ const MyDashboard = () => {
           style={[
             styles1.button,
             transactionType == 'QR Scan' && {
-              borderColor: Color.parrot,
+              borderColor: Color.theme,
             },
           ]}
           onPress={() => {
@@ -141,29 +141,29 @@ const MyDashboard = () => {
           }}>
           <TextRegular
             text={i18n.t('EarnedWon')}
-            style={{textAlign: 'center'}}
+            style={{ textAlign: 'center' }}
           />
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles1.button,
             transactionType == 'Redeemed' && {
-              borderColor: Color.parrot,
+              borderColor: Color.theme,
             },
           ]}
           onPress={() => {
             setTransactionType('Redeemed');
             getTransaction('Redeemed');
           }}>
-          <TextRegular text={i18n.t('redeem')} style={{textAlign: 'center'}} />
+          <TextRegular text={i18n.t('redeem')} style={{ textAlign: 'center' }} />
         </TouchableOpacity>
       </View>
     );
   };
 
-  console.log({ListTransaction: transactionList});
+  console.log({ ListTransaction: transactionList });
   return (
-    <View style={{flex: 1, backgroundColor: Color.lightGreen}}>
+    <View style={{ flex: 1, backgroundColor: Color.lightGreen }}>
       <Header
         title={I18n.t('rewardpoint')}
         dashboard={false}
@@ -171,7 +171,7 @@ const MyDashboard = () => {
         help={true}
       />
       <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}>
         <RewardPointlayout />
         <QRCodeContainer bgColor={Color.lightGreen} />
@@ -184,11 +184,11 @@ const MyDashboard = () => {
             }}
             data={transactionList}
             numColumns={2}
-            renderItem={({item, index}) => <PointWonLayout item={item} />}
+            renderItem={({ item, index }) => <PointWonLayout item={item} />}
             scrollEnabled={false}
             keyExtractor={(item, index) => index.toString()}
-            ListFooterComponent={<View style={{height: 50}}></View>}
-            // ListHeaderComponent={<ButtonBar />}
+            ListFooterComponent={<View style={{ height: 50 }}></View>}
+          // ListHeaderComponent={<ButtonBar />}
           />
         )}
       </ScrollView>

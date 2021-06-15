@@ -139,7 +139,10 @@ const Header = props => {
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => Navigation.navigate('Scan')}>
+              <TouchableOpacity onPress={() => {
+                Navigation.navigate('Scan');
+                // dispatch(Actions.logOut())
+              }}>
                 {/* <Image source={scan} style={styles.rightHeaderIcon}></Image> */}
                 <Icon1 name="qr-code-scanner" size={30} color={'#fff'} />
               </TouchableOpacity>
