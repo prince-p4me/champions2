@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
-// const baseUrl = 'http://10xchampions.grmrice.com/';
-const baseUrl = 'http://drive13.in/10X/';
+const baseUrl = 'http://10xchampions.grmrice.com/';
+// const baseUrl = 'http://drive13.in/10X/';
 
 const mapUrl = 'https://maps.googleapis.com/';
 // const MAP_KEY = 'AIzaSyAHACClfTrDU533R962fSyxAWiFJUXFmwI';
@@ -10,7 +10,6 @@ export default Constants = {
   IMAGE_URL: baseUrl + 'images/',
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
-  // GOOGLE_CLIENT_ID:'190017235730-gi6fvvnrdotf203a29vvd70e43g0h5rv.apps.googleusercontent.com',
   GOOGLE_CLIENT_ID:
     '190017235730-4rl8813tiqet5j6msfpbhq6n4eupilpf.apps.googleusercontent.com',
   firebaseConfig: {
