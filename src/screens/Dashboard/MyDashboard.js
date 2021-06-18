@@ -41,10 +41,12 @@ const MyDashboard = ({route, navigation, props}) => {
   }, []);
 
   const renderItem = item => {
-    let date = item.created_at.split(' ');
-    let time = date[1]?.split(':');
-    time = time[0] + ':' + time[1] + ' ' + date[2];
+    // let date = item.created_at.split(' ');
+    let date = item.created_at;
+    let time = date?.split('-');
+    time = time[0] + ':' + time[1] + ' ' + time[2];
 
+    console.log({item});
     return (
       <View style={styles.tncBox}>
         <View style={{width: 100, height: '100%'}}>
@@ -61,7 +63,7 @@ const MyDashboard = ({route, navigation, props}) => {
             alignItems: 'flex-start',
           }}>
           <View style={{width: '100%', alignItems: 'flex-end'}}>
-            <TextLite text={date[0]} style={{fontSize: Sizes.regular}} />
+            {/* <TextLite text={date[0]} style={{fontSize: Sizes.regular}} /> */}
           </View>
           <View
             style={{
@@ -99,8 +101,6 @@ const MyDashboard = ({route, navigation, props}) => {
       </View>
     );
   };
-
-  // console.log({ ListTransaction: data });
   return (
     <View style={{flex: 1}}>
       <Header
