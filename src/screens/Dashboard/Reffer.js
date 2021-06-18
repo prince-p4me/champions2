@@ -22,6 +22,8 @@ import Images from '../../utility/Image';
 import star from '../../assets/imgs/star.png';
 import FullButton from '../../components/FullButton';
 import Constant from '../../utility/Constant';
+// import firebase from 'react-native-firebase';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 const Reffer = () => {
   const user = useSelector(state => state.getUser);
@@ -29,6 +31,39 @@ const Reffer = () => {
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
 
+  useEffect(() => {
+    async function generateLink() {
+      const link = await dynamicLinks().buildLink({
+        link: Constant.iosApp,
+        domainUriPrefix: 'https://eminence.page.link',
+      });
+
+      console.log(link);
+    }
+    const handleDynamicLink = link => {
+      // Handle dynamic link inside your own application
+
+      console.log(link);
+      if (link.url === 'https://invertase.io/offer') {
+        // ...navigate to your offers screen
+      }
+    };
+
+    dynamicLinks()
+      .getInitialLink()
+      .then(link => {
+        console.log({link: link});
+        if (link.url === 'https://invertase.io/offer') {
+          // ...set initial route as offers screen
+        }
+      });
+
+    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
+    // When the component is unmounted, remove the listener
+    return () => unsubscribe();
+
+    generateLink();
+  }, []);
   const onShare = async () => {
     try {
       const result = await Share.share({

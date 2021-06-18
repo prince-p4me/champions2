@@ -33,6 +33,9 @@ PODS:
     - FirebaseAuth (~> 8.0.0)
   - Firebase/CoreOnly (8.0.0):
     - FirebaseCore (= 8.0.0)
+  - Firebase/DynamicLinks (8.0.0):
+    - Firebase/CoreOnly
+    - FirebaseDynamicLinks (~> 8.0.0)
   - Firebase/Messaging (8.0.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 8.0.0)
@@ -50,6 +53,8 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
+  - FirebaseDynamicLinks (8.0.0):
+    - FirebaseCore (~> 8.0)
   - FirebaseInstallations (8.0.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
@@ -97,7 +102,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - Permission-Camera (3.0.4):
+  - Permission-Camera (3.0.3):
     - RNPermissions
   - PromisesObjC (1.2.12)
   - RCT-Folly (2020.01.13.00):
@@ -405,6 +410,11 @@ PODS:
     - Firebase/Auth (= 8.0.0)
     - React-Core
     - RNFBApp
+  - RNFBDynamicLinks (12.1.0):
+    - Firebase/DynamicLinks (= 8.0.0)
+    - GoogleUtilities/AppDelegateSwizzler
+    - React-Core
+    - RNFBApp
   - RNFBMessaging (12.0.0):
     - Firebase/Messaging (= 8.0.0)
     - React-Core
@@ -416,9 +426,9 @@ PODS:
     - React-Core
   - RNI18n (2.0.15):
     - React
-  - RNLocalize (2.1.0):
+  - RNLocalize (2.0.3):
     - React-Core
-  - RNPermissions (3.0.4):
+  - RNPermissions (3.0.3):
     - React-Core
   - RNReanimated (2.1.0):
     - DoubleConversion
@@ -504,6 +514,7 @@ DEPENDENCIES:
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
+  - "RNFBDynamicLinks (from `../node_modules/@react-native-firebase/dynamic-links`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
@@ -527,6 +538,7 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseDynamicLinks
     - FirebaseInstallations
     - FirebaseMessaging
     - GoogleDataTransport
@@ -621,6 +633,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
     :path: "../node_modules/@react-native-firebase/auth"
+  RNFBDynamicLinks:
+    :path: "../node_modules/@react-native-firebase/dynamic-links"
   RNFBMessaging:
     :path: "../node_modules/@react-native-firebase/messaging"
   RNGestureHandler:
@@ -657,6 +671,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: b8cd992fca5b53dc6eec09e873a3f375f000c5a1
   FirebaseCore: 3f09591d51292843e2a46f18358d60bf4e996255
   FirebaseCoreDiagnostics: a31d987ba0fe16d59886a5dbadc2f1de871f88c8
+  FirebaseDynamicLinks: 42858c22626d9c519b28e0421b2ea6bcc5a241ff
   FirebaseInstallations: c4aab1005d6547b00a7529777fe52f5d4d45165b
   FirebaseMessaging: 1a33b4af3c8042ed6ddacb6c031894af2064bfab
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
@@ -666,7 +681,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  Permission-Camera: ffd449756840ddc0f6294e95d688fecaadfe238c
+  Permission-Camera: 104ac17250aa2632a0d488caca4e91b1d42fb70a
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: 2f8cb5b7533219bf4218a045f92768129cf7050a
@@ -704,12 +719,13 @@ SPEC CHECKSUMS:
   RNCPushNotificationIOS: 5b1cf9ad2aaa107ecb92d5d2d7005ba521b2b97a
   RNFBApp: cc2ff3f925840c53f0117d92e0f5e269b356d0f7
   RNFBAuth: 6853dd2d92ed8635831679b695a6690151ae6b77
+  RNFBDynamicLinks: 9c2b29473d8247b38f27a3b69c58e7d0bdb94aa6
   RNFBMessaging: ba11538f4d76a5ef89dc8c97dad04fbf2fa6ebef
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: 111fd4792913208f338fe3178005f7a22e490ff9
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
-  RNLocalize: ff053575acafb6ae18284974469bdf04fcaf6514
-  RNPermissions: 75128bfb4c4ef92f572a8efdb8adfbfab75e8ed0
+  RNLocalize: 29e84ea169d3bca6c3b83584536c7f586a07fb98
+  RNPermissions: d6679ecf0c21bf6de5a619b20df4304182792da8
   RNReanimated: b8c8004b43446e3c2709fe64b2b41072f87428ad
   RNScreens: c277bfc4b5bb7c2fe977d19635df6f974f95dfd6
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f

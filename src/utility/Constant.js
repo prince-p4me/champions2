@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import {Dimensions} from 'react-native';
-=======
-import { Dimensions } from 'react-native';
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 const baseUrl = 'http://10xchampions.grmrice.com/';
 // const baseUrl = 'http://drive13.in/10X/';
 

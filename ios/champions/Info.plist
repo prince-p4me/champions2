@@ -42,6 +42,16 @@
 				<string>com.googleusercontent.apps.190017235730-jnela3rr6hbj2ogrlvbuh7s1b6nbgubu</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>BundleID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.eminence.champions</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
