@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {Dimensions} from 'react-native';
+=======
+import { Dimensions } from 'react-native';
+>>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 const baseUrl = 'http://10xchampions.grmrice.com/';
 // const baseUrl = 'http://drive13.in/10X/';
 
@@ -10,7 +14,6 @@ export default Constants = {
   IMAGE_URL: baseUrl + 'images/',
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
-  // GOOGLE_CLIENT_ID:'190017235730-gi6fvvnrdotf203a29vvd70e43g0h5rv.apps.googleusercontent.com',
   GOOGLE_CLIENT_ID:
     '190017235730-4rl8813tiqet5j6msfpbhq6n4eupilpf.apps.googleusercontent.com',
   firebaseConfig: {

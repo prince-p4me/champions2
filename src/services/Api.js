@@ -1,7 +1,7 @@
 import Constants from '../utility/Constant';
-import {store} from '../redux/store';
-import {BackHandler, Alert} from 'react-native';
-import {showResponse} from '../utility/Index';
+import { store } from '../redux/store';
+import { BackHandler, Alert } from 'react-native';
+import { showResponse } from '../utility/Index';
 import auth from '@react-native-firebase/auth';
 
 async function callApi(urlString, body, methodType) {
@@ -53,6 +53,7 @@ export function loginApi(body) {
 }
 
 export function signUp(body) {
+  body.os_type = "iOS";
   console.log('----------Sign up Api Call ------------------');
   return callApi(Constants.API_URL + 'user_signup.php', body, 'POST');
 }
@@ -93,6 +94,7 @@ export function scanQr(body) {
 }
 
 export function verifyOtp(body) {
+  body.os_type = "iOS";
   console.log('----------resendOtp Api Call ------------------');
   return callApi(Constants.API_URL + 'user_otp_verify.php', body, 'POST');
 }
@@ -182,7 +184,7 @@ export function getNotification() {
   console.log('----------getNotification Api Call ------------------');
   return callApi(
     Constants.API_URL + 'user_notification.php',
-    {user_id: state.getUser.id},
+    { user_id: state.getUser.id },
     'POST',
   );
 }
@@ -192,7 +194,7 @@ export function getTransaction() {
   console.log('----------getTransaction Api Call ------------------');
   return callApi(
     Constants.API_URL + 'user_transaction_list.php',
-    {user_id: state.getUser.id},
+    { user_id: state.getUser.id },
     'POST',
   );
 }
