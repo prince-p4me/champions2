@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { I18nManager, Platform, Alert } from 'react-native';
+import { I18nManager, Platform, Alert, DeviceEventEmitter } from 'react-native';
 import Home from '../screens/Dashboard/Home';
 import Reffer from '../screens/Dashboard/Reffer';
 import LoginScreen from '../screens/Auth/Login';
@@ -36,6 +36,7 @@ import Referral from '../screens/Auth/Referral';
 import * as Actions from '../redux/action';
 // import MyRewards from '../screens/Dashboard/MyRewards';
 import { request, PERMISSIONS } from 'react-native-permissions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   GoogleSignin,
@@ -57,7 +58,7 @@ const StackNavigator = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.getUser);
   const isRtl = useSelector(state => state.isRtl);
-  const count = useSelector(state => state.getCount);
+  // let count = useSelector(state => state.getCount);
   const language = useSelector(state => state.getLanguage);
   // const isRtl = true;
 
@@ -76,6 +77,23 @@ const StackNavigator = () => {
     console.log('Splashscreen hidden');
     setAllConfigs();
   }, [language]);
+
+  const setCount = async () => {
+    try {
+      let count = await AsyncStorage.getItem(Constant.COUNT);
+      // debugger
+      if (!count) {
+        count = 0;
+      }
+      count = JSON.parse(count) + 1;
+      console.log("setCount", count);
+      await AsyncStorage.setItem(Constant.COUNT, JSON.stringify(count));
+      DeviceEventEmitter.emit(Constant.FETCH_COUNT);
+    } catch (e) {
+      // saving error
+      console.log("error in async storage", e);
+    }
+  }
 
   const setAllConfigs = () => {
     messaging().onTokenRefresh(fcmToken => {
@@ -131,13 +149,16 @@ const StackNavigator = () => {
 
     requestLocationPermission();
 
-    // messaging().setBackgroundMessageHandler(async remoteMessage => {
-    //   handleNavigation(remoteMessage?.data);
-    // });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      handleNavigation(remoteMessage?.data);
+      // dispatch(Actions.setCount(count + 1));
+      setCount();
+    });
 
     messaging().onNotificationOpenedApp(remoteMessage => {
       handleNavigation(remoteMessage?.data);
-      dispatch(Actions.setCount(count + 1));
+      // dispatch(Actions.setCount(count + 1));
+      setCount();
     });
 
     // Check whether an initial notification is available
@@ -146,14 +167,16 @@ const StackNavigator = () => {
       .then(remoteMessage => {
         if (remoteMessage) {
           handleNavigation(remoteMessage?.data);
-          dispatch(Actions.setCount(count + 1));
+          // dispatch(Actions.setCount(count + 1));
+          setCount();
         }
       });
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       showToast(remoteMessage?.notification?.body);
-      dispatch(Actions.setCount(count + 1));
+      // dispatch(Actions.setCount(count + 1));
+      setCount();
     });
 
     return unsubscribe;

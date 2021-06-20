@@ -8,45 +8,45 @@ import { name as appName } from './app.json';
 import messaging from '@react-native-firebase/messaging';
 import { store } from './src/redux/store';
 import * as Navigation from './src/navigation/navigation';
+import * as Actions from './src/redux/action';
 import React from "react";
 
-messaging().setBackgroundMessageHandler(async remoteMessage => {
-  const user = store.getState().getUser;
-  // console.log('Message handled in the background!', remoteMessage);
-  // handleNavigation(remoteMessage?.data);
-  console.log('data', remoteMessage?.data);
-  let routeName = user && user.id ? 'Home' : 'Landing';
-  let id = null;
-  if (remoteMessage.data) {
-    switch (remoteMessage.data.type) {
-      case 'winner':
-        routeName = 'WinnerAll';
-        break;
+// messaging().setBackgroundMessageHandler(async remoteMessage => {
+//   const user = store.getState().getUser;
+//   let count = store.getState().getCount;
+//   console.log('data', remoteMessage?.data);
+//   let routeName = user && user.id ? 'Home' : 'Landing';
+//   let id = null;
+//   if (remoteMessage.data) {
+//     switch (remoteMessage.data.type) {
+//       case 'winner':
+//         routeName = 'WinnerAll';
+//         break;
 
-      case 'offer':
-        routeName = 'OfferDetail';
-        id = data.id;
-        break;
+//       case 'offer':
+//         routeName = 'OfferDetail';
+//         id = data.id;
+//         break;
 
-      case 'recipe':
-        routeName = 'RecipieDetail';
-        id = data.id;
-        break;
+//       case 'recipe':
+//         routeName = 'RecipieDetail';
+//         id = data.id;
+//         break;
 
-      default:
-        routeName = 'Home';
-        break;
-    }
-    Navigation.navigate(routeName, id && { id });
-  }
-});
+//       default:
+//         routeName = 'Home';
+//         break;
+//     }
+//     dispatch(Actions.setCount(count + 1));
+//     Navigation.navigate(routeName, id && { id });
+//   }
+// });
 
-function HeadlessCheck({ isHeadless }) {
-  if (isHeadless) {
-    // App has been launched in the background by iOS, ignore
-    return null;
-  }
-  return <App />;
-}
+// function HeadlessCheck({ isHeadless }) {
+//   if (isHeadless) {
+//     return null;
+//   }
+//   return <App />;
+// }
 
-AppRegistry.registerComponent(appName, () => HeadlessCheck);
+AppRegistry.registerComponent(appName, () => App);

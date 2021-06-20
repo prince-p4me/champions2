@@ -67,6 +67,7 @@ const HomeScreen = props => {
   useFocusEffect(
     React.useCallback(() => {
       checkProps();
+      DeviceEventEmitter.emit(Constant.FETCH_COUNT);
     }, [])
   );
 

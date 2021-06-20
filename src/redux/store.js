@@ -60,7 +60,7 @@ const rootReducer = combineReducers({
   getTancC,
   isFirstUser,
   getCount,
-  getRefferCode
+  getRefferCode,
 });
 
 //creating, applying sagas
@@ -78,7 +78,7 @@ const persistConfig = {
   // Storage Method (React Native)
   storage: AsyncStorage,
   // Whitelist (Save Specific Reducers)
-  whitelist: ['getLanguage', 'isRtl', 'getUser', 'isFirstUser'],
+  whitelist: ['getLanguage', 'isRtl', 'getUser', 'isFirstUser', 'getCount'],
   blacklist: [],
   throttle: 1000,
   debounce: 1000,

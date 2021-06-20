@@ -26,4 +26,6 @@ export default Constants = {
   iosApp: 'https://apps.apple.com/eg/app/10x-champions/id1562137449',
   android: "https://play.google.com/store/apps/details?id=com.eminence.a10xchampion&referrer=",
   WELCOME: 'WELCOME',
+  COUNT: "COUNT",
+  FETCH_COUNT: "FETCH_COUNT"
 };

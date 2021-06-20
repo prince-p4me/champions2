@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   TouchableOpacity,
   StatusBar,
@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Text,
   Image,
+  DeviceEventEmitter,
   ImageBackground,
 } from 'react-native';
 import styles from '../utility/Style';
@@ -28,13 +29,38 @@ import Color from '../utility/Color';
 import { TextMedium, TextThin } from './TextView';
 import Sizes from '../utility/Sizes';
 import scan from '../assets/imgs/scan.png';
+import { useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Header = props => {
   const { title, transparent, bgColor, back, dashboard, help } = props;
   const isRtl = useSelector(state => state.isRtl);
   const user = useSelector(state => state.getUser);
-  const count = useSelector(state => state.getCount);
+  // const count = useSelector(state => state.getCount);
   const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
+
+  const fetchCount = async () => {
+    try {
+      let count = await AsyncStorage.getItem(Constants.COUNT);
+      // debugger;
+      if (count) {
+        count = JSON.parse(count);
+      } else count = 0;
+      setCount(count);
+    } catch (e) {
+      // saving error
+      console.log("error in async storage", e);
+    }
+  }
+
+  useEffect(() => {
+    DeviceEventEmitter.addListener(Constants.FETCH_COUNT, fetchCount);
+
+    return (() => {
+      DeviceEventEmitter.removeAllListeners();
+    })
+  }, []);
 
   return (
     <View style={{ width: '100%' }}>
@@ -126,7 +152,8 @@ const Header = props => {
                 style={styles.notification}
                 onPress={() => {
                   Navigation.navigate('Notification');
-                  dispatch(Actions.setCount(0));
+                  setCount(0);
+                  AsyncStorage.setItem(Constants.COUNT, "0");
                 }}>
                 <Image source={alarm} style={styles.notifImg} />
                 {(count && count > 0) ? <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
