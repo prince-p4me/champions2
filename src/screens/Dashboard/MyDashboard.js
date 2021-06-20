@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Image, FlatList} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Image, FlatList } from 'react-native';
 import Header from '../../components/Header';
 import {
   TextBold,
@@ -7,7 +7,7 @@ import {
   TextSemiBold,
   TextThin,
 } from '../../components/TextView';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import i18n from '../../services/i18n';
 
 import RewardPointlayout from '../../components/RewardPointlayout';
@@ -21,7 +21,7 @@ import Sizes from '../../utility/Sizes';
 import Images from '../../utility/Image';
 import star from '../../assets/imgs/star.png';
 
-const MyDashboard = ({route, navigation, props}) => {
+const MyDashboard = ({ route, navigation, props }) => {
   const data = useSelector(state => state.getTransaction);
   const user = useSelector(state => state.getUser);
   const dispatch = useDispatch();
@@ -46,13 +46,13 @@ const MyDashboard = ({route, navigation, props}) => {
     let time = date?.split('-');
     time = time[0] + ':' + time[1] + ' ' + time[2];
 
-    console.log({item});
+    console.log({ item });
     return (
       <View style={styles.tncBox}>
-        <View style={{width: 100, height: '100%'}}>
+        <View style={{ width: 100, height: '100%' }}>
           <Image
             source={Images.transaction}
-            style={{resizeMode: 'cover', height: '100%', width: '100%'}}
+            style={{ resizeMode: 'cover', height: '100%', width: '100%' }}
           />
         </View>
         <View
@@ -62,7 +62,7 @@ const MyDashboard = ({route, navigation, props}) => {
             paddingStart: 10,
             alignItems: 'flex-start',
           }}>
-          <View style={{width: '100%', alignItems: 'flex-end'}}>
+          <View style={{ width: '100%', alignItems: 'flex-end' }}>
             {/* <TextLite text={date[0]} style={{fontSize: Sizes.regular}} /> */}
           </View>
           <View
@@ -73,27 +73,25 @@ const MyDashboard = ({route, navigation, props}) => {
             }}>
             <TextSemiBold
               text={item.point_source}
-              style={{fontSize: Sizes.semiLarge, color: Color.theme}}
+              style={{ fontSize: Sizes.semiLarge, color: Color.theme }}
             />
-            <TextThin text={time} style={{fontSize: Sizes.regular}} />
+            <TextThin text={time} style={{ fontSize: Sizes.regular }} />
           </View>
-          <View style={{width: '100%', flexDirection: 'row', marginBottom: 17}}>
-            {item.point_source == 'Redeemed' && (
-              <TextSemiBold
-                text="-"
-                style={{
-                  fontSize: Sizes.large,
-                  color: Color.semiGold,
-                }}
-              />
-            )}
+          <View style={{ width: '100%', flexDirection: 'row', marginBottom: 17 }}>
+            <TextSemiBold
+              text={item.point_source == 'Redeemed' ? "-" : "+"}
+              style={{
+                fontSize: Sizes.large,
+                color: Color.semiGold,
+              }}
+            />
             <TextSemiBold
               text={item.point_earned + ' ' + I18n.t('points')}
-              style={{fontSize: Sizes.semiLarge, color: Color.semiGold}}
+              style={{ fontSize: Sizes.semiLarge, color: Color.semiGold }}
             />
             <Image
               source={Images.star3}
-              style={{tintColor: Color.semiGold, width: 15, height: 15}}
+              style={{ tintColor: Color.semiGold, width: 15, height: 15 }}
             />
           </View>
           {/* <TextLite text={"Scan of rice packet"} style={{ fontSize: Sizes.regular }} /> */}
@@ -102,7 +100,7 @@ const MyDashboard = ({route, navigation, props}) => {
     );
   };
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <Header
         title={I18n.t('my_dashboard')}
         dashboard={false}
@@ -112,17 +110,17 @@ const MyDashboard = ({route, navigation, props}) => {
       <View style={styles.container}>
         <FlatList
           data={data}
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => item.id}
-          renderItem={({item, index}) => renderItem(item)}
-          ListFooterComponent={<View style={{height: 50}}></View>}
+          renderItem={({ item, index }) => renderItem(item)}
+          ListFooterComponent={<View style={{ height: 50 }}></View>}
           ListHeaderComponent={
-            <View style={{width: '100%'}}>
+            <View style={{ width: '100%' }}>
               <View style={[styles.pointContainer]}>
                 <TextBold
                   text={i18n.t('my_points')}
-                  style={{textAlign: align, fontSize: Sizes.semiLarge}}
+                  style={{ textAlign: align, fontSize: Sizes.semiLarge }}
                 />
                 <Image source={star} style={styles.starIcon}></Image>
               </View>
@@ -130,7 +128,7 @@ const MyDashboard = ({route, navigation, props}) => {
               <View style={[styles.pointContainer]}>
                 <TextBold
                   text={i18n.t('transactions')}
-                  style={{textAlign: align, fontSize: Sizes.semiLarge}}
+                  style={{ textAlign: align, fontSize: Sizes.semiLarge }}
                 />
               </View>
             </View>
