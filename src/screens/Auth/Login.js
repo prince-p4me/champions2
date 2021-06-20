@@ -77,7 +77,7 @@ const LoginScreen = () => {
         ) : (
           <Image
             source={Images.back}
-            style={{ tintColor: '#000' }}
+            style={{ tintColor: Colors.text }}
             resizeMode="contain"></Image>
         )}
       </TouchableOpacity>
@@ -136,7 +136,7 @@ const LoginScreen = () => {
           <LinkButton
             text={I18n.t('doyouhaveac')}
             btnText={I18n.t('signup2')}
-            onPress={() => Navigation.navigate('SignUp')}
+            onPress={() => Navigation.navigate('Referral')}
           />
           <TouchableOpacity
             style={{

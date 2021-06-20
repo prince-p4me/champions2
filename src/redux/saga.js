@@ -37,8 +37,11 @@ function* getPoints({ type, payload }) {
 
 function* verifyOtp({ type, payload }) {
   try {
+    const code = store.getState().getRefferCode;
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-
+    if (payload.loginType != 1 && code && code.length) {
+      payload.referral_by = code;
+    }
     let response = yield call(Apiservice.verifyOtp, payload); //calling Api
 
     console.log('response in saga', JSON.stringify(response));
@@ -59,6 +62,7 @@ function* verifyOtp({ type, payload }) {
         Navigation.navigate('Tutorial', {
           userInfo: response,
         });
+        yield put({ type: Types.REFFER_CODE, payload: null });
         yield put({ type: Types.FIRST_LOGIN, payload: true });
       }
       // yield put({ type: Types.FIRST_LOGIN, payload: true });

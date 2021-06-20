@@ -24,7 +24,8 @@ import {
   getTancC,
   getPrivacyPolicy,
   isFirstUser,
-  getCount
+  getCount,
+  getRefferCode
 } from './reducer';
 import getListSaga from './saga';
 import { all, fork } from 'redux-saga/effects';
@@ -58,7 +59,8 @@ const rootReducer = combineReducers({
   getPrivacyPolicy,
   getTancC,
   isFirstUser,
-  getCount
+  getCount,
+  getRefferCode
 });
 
 //creating, applying sagas

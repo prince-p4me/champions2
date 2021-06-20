@@ -32,6 +32,7 @@ import RecipieDetail from '../screens/Dashboard/RecipieDetail';
 import PointsDetail from '../screens/Dashboard/PointsDetail';
 import TutorialScreen from '../screens/Auth/Tutorial';
 import Notification from '../screens/Dashboard/Notification';
+import Referral from '../screens/Auth/Referral';
 import * as Actions from '../redux/action';
 // import MyRewards from '../screens/Dashboard/MyRewards';
 import { request, PERMISSIONS } from 'react-native-permissions';
@@ -218,8 +219,8 @@ const StackNavigator = () => {
         </>
       ) : (
         <>
-          {/* <Stack.Screen name="Tutorial" component={TutorialScreen} /> */}
           <Stack.Screen name="Landing" component={LandingScreen} />
+          <Stack.Screen name="Referral" component={Referral} />
           <Stack.Screen name="SignIn" component={LoginScreen} />
           <Stack.Screen name="Help" component={Help} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />

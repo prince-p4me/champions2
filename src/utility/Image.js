@@ -41,4 +41,5 @@ export default Images = {
   fb: require('../assets/imgs/fb.png'),
   google: require('../assets/imgs/googleSignin.png'),
   welcome: require('../assets/imgs/welcome.jpeg'),
+  reffer: require('../assets/imgs/Referal-icon-gift.png'),
 };

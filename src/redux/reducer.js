@@ -224,6 +224,15 @@ export const getCount = (state = 0, action) => {
   }
 };
 
+export const getRefferCode = (state = null, action) => {
+  switch (action.type) {
+    case Types.REFFER_CODE:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const getPrivacyPolicy = (state = null, action) => {
   switch (action.type) {
     case Types.SET_PRIVACY_POLICY:

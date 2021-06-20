@@ -257,6 +257,13 @@ export function setCount(payload) {
   };
 }
 
+export function setRefferCode(payload) {
+  return {
+    type: Types.REFFER_CODE,
+    payload,
+  };
+}
+
 export function getAddressLatLng(payload) {
   return {
     type: Types.GET_ADDRESS_LAT_LNG,

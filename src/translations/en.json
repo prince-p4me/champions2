@@ -22,6 +22,7 @@
     "earned": "Earned",
     "balance": "Balance",
     "redeem": "Redeem",
+    "redeem1": "REDEEM NOW!",
     "wonmorepoints": "Won more Points",
     "scanfor": "Scan For",
     "myreward": "My Reward",
@@ -119,5 +120,9 @@
     "scan": "Scan QR Code",
     "scantext": "Scan the QR Code and win unlimited points and prizes",
     "share": "Share and Earn",
-    "sharetext": "Share the app to your friends and get rewards up to 100 points"
+    "sharetext": "Share the app to your friends and get rewards up to 100 points",
+    "delighted": "We're so delighted\nyou're here!",
+    "collectcode": "Collect your 10X Champions\n Points on entering referral code",
+    "entercode": "Enter Referral Code",
+    "skip": "Skip"
 }

@@ -55,3 +55,4 @@ export const SET_ABOUT_US = 'SET_ABOUT_US';
 
 export const FIRST_LOGIN = 'FIRST_LOGIN';
 export const NOTIFICATIONS_COUNT = 'NOTIFICATIONS_COUNT';
+export const REFFER_CODE = 'REFFER_CODE';

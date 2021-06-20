@@ -85,7 +85,7 @@ const SignupScreen = () => {
         ) : (
           <Image
             source={Images.back}
-            style={{ tintColor: '#000' }}
+            style={{ tintColor: Colors.text }}
             resizeMode="contain"></Image>
         )}
       </TouchableOpacity>
