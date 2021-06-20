@@ -45,7 +45,6 @@ import { useFocusEffect } from '@react-navigation/native';
 const HomeScreen = props => {
   const [points, setPoints] = useState('');
   const [scanPoints, setScanPoints] = useState(false);
-  const [isFirstUser, setFirstUser] = useState(true);
   const isLoading = useSelector(state => state.isLoading);
 
   const dispatch = useDispatch();
@@ -56,7 +55,6 @@ const HomeScreen = props => {
   const token = useSelector(state => state.getFcmToken);
   const offerDetail = useSelector(state => state.getOfferDetail);
   const language = useSelector(state => state.getLanguage);
-  // const isFirstUser = useSelector(state => state.isFirstUser);
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
   useEffect(() => {
@@ -171,6 +169,10 @@ const HomeScreen = props => {
     );
   };
 
+  // return (
+  //   <View></View>
+  // )
+
   return (
     <View style={styles.containerDashboard}>
       {!isLoading ?
@@ -199,7 +201,7 @@ const HomeScreen = props => {
         {renderBottomLinks()}
         <View style={{ height: 50 }}></View>
       </ScrollView>
-      <SafeAreaView></SafeAreaView>
+      <SafeAreaView />
     </View>
   );
 }

@@ -129,9 +129,9 @@ const Header = props => {
                   dispatch(Actions.setCount(0));
                 }}>
                 <Image source={alarm} style={styles.notifImg} />
-                {(count && count > 0) && <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
+                {(count && count > 0) ? <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
                   <TextThin text={count} style={{ fontSize: Sizes.small, color: Color.theme }} />
-                </View>}
+                </View> : null}
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.helpSpacing}

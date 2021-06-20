@@ -72,15 +72,15 @@ const Referral = () => {
         <TextBold text={I18n.t("delighted")} style={{ textAlign: "center", fontSize: Sizes.extraLarge }} />
         {/* <TextBold text={I18n.t("delighted")}/> */}
         <Image source={Images.reffer} style={{
-          width: 150, height: 150,
-          marginTop: 60,
+          width: 130, height: 130,
+          marginTop: 40,
           resizeMode: "contain"
         }}></Image>
 
-        <TextRegular text={I18n.t("collectcode")} style={{ textAlign: "center", fontSize: Sizes.large, marginTop: 20 }} />
-        <TextRegular text={I18n.t("entercode")} style={{ textAlign: "center", fontSize: Sizes.regular, marginTop: 70 }} />
+        <TextRegular text={I18n.t("collectcode")} style={{ textAlign: "center", fontSize: Sizes.large, marginTop: "7%" }} />
+        <TextRegular text={I18n.t("entercode")} style={{ textAlign: "center", fontSize: Sizes.regular, marginTop: "7%" }} />
         <View style={{
-          marginTop: '10%',
+          marginTop: '7%',
           borderBottomWidth: 1,
           height: 45, width: 200
         }}>

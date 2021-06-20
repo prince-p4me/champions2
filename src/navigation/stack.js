@@ -190,7 +190,7 @@ const StackNavigator = () => {
   console.log('rendered');
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {user && user.id ? (
+      {(user && user.id) ? (
         <>
           {/* <Stack.Screen name="Tutorial" component={TutorialScreen} /> */}
           <Stack.Screen name="Home" component={Home} />

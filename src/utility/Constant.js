@@ -24,5 +24,6 @@ export default Constants = {
   ADDRESS_URL: mapUrl + 'maps/api/geocode/json?latlng=',
   MAP_KEY: MAP_KEY,
   iosApp: 'https://apps.apple.com/eg/app/10x-champions/id1562137449',
+  android: "https://play.google.com/store/apps/details?id=com.eminence.a10xchampion&referrer=",
   WELCOME: 'WELCOME',
 };

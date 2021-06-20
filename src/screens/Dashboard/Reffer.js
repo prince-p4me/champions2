@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import {View, StyleSheet, Share, Image} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Share, Image } from 'react-native';
 import Header from '../../components/Header';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   TextBold,
   TextLite,
@@ -40,36 +40,15 @@ const Reffer = () => {
 
       console.log(link);
     }
-    const handleDynamicLink = link => {
-      // Handle dynamic link inside your own application
-
-      console.log(link);
-      if (link.url === 'https://invertase.io/offer') {
-        // ...navigate to your offers screen
-      }
-    };
-
-    dynamicLinks()
-      .getInitialLink()
-      .then(link => {
-        console.log({link: link});
-        if (link.url === 'https://invertase.io/offer') {
-          // ...set initial route as offers screen
-        }
-      });
-
-    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
-    // When the component is unmounted, remove the listener
-    return () => unsubscribe();
-
     generateLink();
   }, []);
+
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - " +
-          Constant.iosApp,
+          "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - \n iOS :- " +
+          Constant.iosApp + ("\nAndroid :- " + Constant.android + user.referral_code) + "\n\nUse my referral code:-" + user.referral_code,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -86,7 +65,7 @@ const Reffer = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <Header
         title={I18n.t('refer2')}
         dashboard={false}
@@ -97,7 +76,7 @@ const Reffer = () => {
         <View style={styles.box1}>
           <TextBold
             text={I18n.t('earn') + ' 50'}
-            style={{fontSize: Sizes.extraDouble2x, textAlign: align}}
+            style={{ fontSize: Sizes.extraDouble2x, textAlign: align }}
           />
           <View
             style={{
@@ -107,22 +86,22 @@ const Reffer = () => {
             }}>
             <TextBold
               text={I18n.t('points')}
-              style={{fontSize: Sizes.extraDouble2x}}
+              style={{ fontSize: Sizes.extraDouble2x }}
             />
             <Image
               source={Images.star3}
-              style={{width: 35, height: 35, tintColor: Color.semiGold}}
+              style={{ width: 35, height: 35, tintColor: Color.semiGold }}
             />
           </View>
           <TextThin
             text={I18n.t('referearnlongtext')}
-            style={{fontSize: Sizes.semiLarge, textAlign: align}}
+            style={{ fontSize: Sizes.semiLarge, textAlign: align }}
           />
           <FullButton
             bgColor={Color.theme}
             text={I18n.t('invite')}
             textColor={Color.white}
-            btnStyle={{marginTop: 150}}
+            btnStyle={{ marginTop: 150 }}
             onPress={onShare}
           />
         </View>
