@@ -127,6 +127,7 @@ const OtpScreen = props => {
               }
               // dispatch(Actions.setFirstUser(false));
               dispatch(Actions.verifyOtp(obj));
+              setCode("");
             }
 
             // confirmFcmOtp(obj);
