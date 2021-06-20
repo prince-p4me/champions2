@@ -250,6 +250,13 @@ export function setFcmToken(payload) {
   };
 }
 
+export function setCount(payload) {
+  return {
+    type: Types.NOTIFICATIONS_COUNT,
+    payload,
+  };
+}
+
 export function getAddressLatLng(payload) {
   return {
     type: Types.GET_ADDRESS_LAT_LNG,

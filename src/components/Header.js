@@ -33,7 +33,7 @@ const Header = props => {
   const { title, transparent, bgColor, back, dashboard, help } = props;
   const isRtl = useSelector(state => state.isRtl);
   const user = useSelector(state => state.getUser);
-  const data = useSelector(state => state.getNotification);
+  const count = useSelector(state => state.getCount);
   const dispatch = useDispatch();
 
   return (
@@ -124,11 +124,14 @@ const Header = props => {
             <View style={styles.headerRightRow}>
               <TouchableOpacity
                 style={styles.notification}
-                onPress={() => Navigation.navigate('Notification')}>
+                onPress={() => {
+                  Navigation.navigate('Notification');
+                  dispatch(Actions.setCount(0));
+                }}>
                 <Image source={alarm} style={styles.notifImg} />
-                {/* {(data[0]?.today && data[0]?.data.length) && <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
-                  <TextThin text={data[0]?.data.length} style={{ fontSize: Sizes.small, color: Color.theme }} />
-                </View>} */}
+                {(count && count > 0) && <View style={[styles.badge, isRtl ? { left: 25 } : { right: 0 }]}>
+                  <TextThin text={count} style={{ fontSize: Sizes.small, color: Color.theme }} />
+                </View>}
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.helpSpacing}

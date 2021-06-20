@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		16BA0D850C66D7E1FA0EB2F4 /* libPods-champions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA9FE40B138F015433DBF76 /* libPods-champions.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A31BF2EB267E01F500FDA84E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A31BF2EA267E01F500FDA84E /* GoogleService-Info.plist */; };
 		A32CCB8C2624B95800CD793A /* Metropolis-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7A514D6F24674415B216CC7B /* Metropolis-Black.otf */; };
 		A32CCB8D2624B95800CD793A /* Metropolis-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B1020CD7857E4BAB90661E09 /* Metropolis-BlackItalic.otf */; };
 		A32CCB8E2624B95800CD793A /* Metropolis-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A6FC25376330443A9B761C13 /* Metropolis-Bold.otf */; };
@@ -31,14 +32,9 @@
 		A32CCB9B2624B95800CD793A /* Metropolis-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C2C534807664ECBABCBCAA8 /* Metropolis-SemiBoldItalic.otf */; };
 		A32CCB9C2624B95800CD793A /* Metropolis-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED05F8F208434C2FB4E80963 /* Metropolis-Thin.otf */; };
 		A32CCB9D2624B95800CD793A /* Metropolis-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C094994E408424190B47308 /* Metropolis-ThinItalic.otf */; };
-		A350FF742679CB3A00F44A42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A350FF732679CB3A00F44A42 /* GoogleService-Info.plist */; };
 		A372B8DE2653D18900A77EA3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372B8DD2653D18900A77EA3 /* File.swift */; };
 		A3751E5026753FBB001D1B5E /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A3751E4F26753FBB001D1B5E /* splash.png */; };
 		A39D15412652D9A400374FA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
-<<<<<<< HEAD
-		A3C26AEE267923FD005F200A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3C26AED267923FD005F200A /* GoogleService-Info.plist */; };
-=======
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 		FCD1C9BCC660A86A456F9D7A /* libPods-champions-championsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E05455702263760ADA93182 /* libPods-champions-championsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -89,14 +85,10 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = champions/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		892EC5032B194E1CA39E03AE /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		9D61F5DA03E44FAD995B590C /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		A31BF2EA267E01F500FDA84E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3296BEF265A4FCF00D8876A /* champions.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = champions.entitlements; path = champions/champions.entitlements; sourceTree = "<group>"; };
-		A350FF732679CB3A00F44A42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A372B8DD2653D18900A77EA3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A3751E4F26753FBB001D1B5E /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = champions/splash.png; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		A3C26AED267923FD005F200A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
-=======
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 		A3D9F0252651B3A30059598B /* champions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "champions-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6FC25376330443A9B761C13 /* Metropolis-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Metropolis-Bold.otf"; path = "../src/assets/fonts/Metropolis-Bold.otf"; sourceTree = "<group>"; };
 		AD29C6AF0F1A4E43B30AD1D6 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -155,14 +147,13 @@
 		13B07FAE1A68108700A75B9A /* champions */ = {
 			isa = PBXGroup;
 			children = (
-				A3C26AED267923FD005F200A /* GoogleService-Info.plist */,
 				A3296BEF265A4FCF00D8876A /* champions.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				A3751E4F26753FBB001D1B5E /* splash.png */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				A350FF732679CB3A00F44A42 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				A31BF2EA267E01F500FDA84E /* GoogleService-Info.plist */,
 				A372B8DD2653D18900A77EA3 /* File.swift */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -377,11 +368,7 @@
 				A32CCB9B2624B95800CD793A /* Metropolis-SemiBoldItalic.otf in Resources */,
 				A32CCB9C2624B95800CD793A /* Metropolis-Thin.otf in Resources */,
 				A32CCB9D2624B95800CD793A /* Metropolis-ThinItalic.otf in Resources */,
-<<<<<<< HEAD
-				A3C26AEE267923FD005F200A /* GoogleService-Info.plist in Resources */,
-=======
-				A350FF742679CB3A00F44A42 /* GoogleService-Info.plist in Resources */,
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
+				A31BF2EB267E01F500FDA84E /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -607,13 +594,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = champions/champions.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 1;
-=======
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.2;
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 				DEVELOPMENT_TEAM = 5KS6763CM4;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -693,11 +676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 2.2;
-=======
 				MARKETING_VERSION = 2.3;
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -705,11 +684,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eminence.champions;
 				PRODUCT_NAME = champions;
-<<<<<<< HEAD
-				PROVISIONING_PROFILE_SPECIFIER = 10xProfileNew;
-=======
-				PROVISIONING_PROFILE_SPECIFIER = 10xnew;
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "champions-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -724,15 +699,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = champions/champions.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-=======
-				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.2;
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 				DEVELOPMENT_TEAM = 5KS6763CM4;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				HEADER_SEARCH_PATHS = (
@@ -811,11 +781,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 2.2;
-=======
 				MARKETING_VERSION = 2.3;
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -823,11 +789,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eminence.champions;
 				PRODUCT_NAME = champions;
-<<<<<<< HEAD
-				PROVISIONING_PROFILE_SPECIFIER = 10xProfileNew;
-=======
 				PROVISIONING_PROFILE_SPECIFIER = 10xnew;
->>>>>>> 3bf96ec1d39ec04eeb89b9e023481f7f30a68106
 				SWIFT_OBJC_BRIDGING_HEADER = "champions-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -867,7 +829,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -932,7 +894,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

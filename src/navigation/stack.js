@@ -56,6 +56,7 @@ const StackNavigator = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.getUser);
   const isRtl = useSelector(state => state.isRtl);
+  const count = useSelector(state => state.getCount);
   const language = useSelector(state => state.getLanguage);
   // const isRtl = true;
 
@@ -135,6 +136,7 @@ const StackNavigator = () => {
 
     messaging().onNotificationOpenedApp(remoteMessage => {
       handleNavigation(remoteMessage?.data);
+      dispatch(Actions.setCount(count + 1));
     });
 
     // Check whether an initial notification is available
@@ -143,12 +145,14 @@ const StackNavigator = () => {
       .then(remoteMessage => {
         if (remoteMessage) {
           handleNavigation(remoteMessage?.data);
+          dispatch(Actions.setCount(count + 1));
         }
       });
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       showToast(remoteMessage?.notification?.body);
+      dispatch(Actions.setCount(count + 1));
     });
 
     return unsubscribe;

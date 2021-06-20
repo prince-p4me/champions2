@@ -12,6 +12,7 @@ import { LogBox, StatusBar, Platform } from 'react-native';
 import Color from './src/utility/Color';
 import Constant from './src/utility/Constant';
 import messaging from '@react-native-firebase/messaging';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 import firebase from '@react-native-firebase/app';
 
@@ -23,9 +24,30 @@ const App = () => {
   LogBox.ignoreAllLogs(true);
 
   useEffect(() => {
-    // registerAppWithFCM();
+
+    //Background/Quit events
+    dynamicLinks()
+      .getInitialLink()
+      .then(link => {
+        console.log("link", link);
+        // if (link.url === 'https://invertase.io/offer') {
+        //   // ...set initial route as offers screen
+        // }
+      });
+
+    const handleDynamicLink = link => {
+      console.log("link1", link);
+      // Handle dynamic link inside your own application
+      // if (link.url === 'https://invertase.io/offer') {
+      //   // ...navigate to your offers screen
+      // }
+    };
+
+    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
+
     return () => {
       isReadyRef.current = false;
+      unsubscribe();
       // unsubscribe;
     };
   }, []);
