@@ -160,7 +160,7 @@ const SignupScreen = () => {
           <LinkButton
             text={I18n.t('alreay')}
             btnText={I18n.t('login')}
-            onPress={() => Navigation.goBack()}
+            onPress={() => Navigation.navigate("SignIn")}
           />
           <TouchableOpacity
             style={{
