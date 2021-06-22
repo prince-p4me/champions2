@@ -17,7 +17,7 @@ const OfferAll = props => {
       <SuccessModal visible={isSuccess} points={offerDetail.points} offerDetail={offerDetail} />
 
       <Header title={'All Offer'} dashboard={false} back={true} help={true} />
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}>
         {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
 
         <OfferLayout />

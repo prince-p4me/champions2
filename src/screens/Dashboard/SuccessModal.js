@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ImageBackground,
   SafeAreaView,
-  // Modal
+  Share
 } from 'react-native';
 import Colors from '../../utility/Color';
 import congrat from '../../assets/imgs/amazon.png';
@@ -39,26 +39,30 @@ const SuccessModal = props => {
 
   console.log({ offerDetail352222222: offerDetail });
   const renderRefer = () => {
+    const message = "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - \n iOS :- " +
+      Constant.iosApp + ("\nAndroid :- " + Constant.android + user.referral_code) + "\n\nUse my referral code:-" + user.referral_code;
+
     return (
       <>
         <TextMedium
-          text={i18n.t('earn_point')}
-          style={[styles.congratsEarn, { color: Colors.text }]}
+          text={i18n.t('referearnlongtext')}
+          numberOfLines={4}
+          style={[styles.congratsEarn, { color: Colors.text, paddingHorizontal: 7 }]}
         />
 
         <TouchableOpacity
           style={styles.dashButton}
           onPress={async () => {
-            await Clipboard.getString('https://10Xchampions/8768732/');
+            await Clipboard.setString(message);
             Toast.showWithGravity(
-              'Copied successfully . . .',
+              'Message copied successfully . . .',
               Toast.LONG,
               Toast.BOTTOM,
             );
           }}>
           <View style={{ flex: 1 }}>
             <TextMedium
-              text="https://10Xchampions/8768732/"
+              text={"Referral code:-" + user.referral_code}
               style={[styles.congratsLink, { color: Colors.darkBGgray }]}
             />
           </View>
@@ -123,8 +127,8 @@ const SuccessModal = props => {
               <TextMedium text={i18n.t('won_points')} style={styles.congrats} />
               <View style={[styles.congratsText, styles.congratTxt]}>
                 <TextSemiBold
-                  text={points}
-                  style={[styles.congrats, { fontSize: Sizes.double }]}
+                  text={offerDetail.points}
+                  style={[styles.congrats, { fontSize: Sizes.double, marginTop: 10 }]}
                 />
                 <View style={{ width: 5 }}></View>
                 <Image source={Images.star} style={styles.starImage}></Image>
@@ -138,8 +142,9 @@ const SuccessModal = props => {
               textStyle={styles.outlineBtnText}
               onPress={() => {
                 console.log('going to redeem history');
-                // close();
-                // dispatch(Actions.setSuccessModal(false));
+                dispatch(Actions.getOfferDetail(offer_info));
+                dispatch(Actions.setSuccessModal(false));
+                Navigation.navigate('OfferAll', { data });
               }}></FullButton>
           </View>
         </View>

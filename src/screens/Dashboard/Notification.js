@@ -56,18 +56,19 @@ const Notification = () => {
   };
 
   const renderItem = item => {
+    const date = item.created_at.split(" ");
     return (
       <TouchableOpacity style={styles.notif}
         onPress={() => handleNavigation(item)}>
         <View style={styles.imgBox}>
-          <Image source={Images.notif} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
+          <Image source={Images.transaction} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
         </View>
         <View style={{ flex: 1, height: "100%", padding: 8, justifyContent: "center" }}>
           <TextRegular text={item.description} style={{ fontSize: Sizes.regular }}
             numberOfLines={3} />
           <TextThin text={item.type} style={{ fontSize: Sizes.regular, marginTop: 3 }} />
           <View style={{ width: "100%", alignItems: "flex-end" }}>
-            <TextThin text={item.created_at.split(" ")[0] + " | " + item.created_at.split(" ")[1]} style={{ fontSize: Sizes.small, marginBottom: -20 }} />
+            <TextThin text={date[0] + " | " + date[1] + " " + date[2]} style={{ fontSize: Sizes.small, marginBottom: -20 }} />
           </View>
         </View>
       </TouchableOpacity>
@@ -77,7 +78,7 @@ const Notification = () => {
   return (
     <View style={{ flex: 1 }}>
       <Header title={I18n.t("notification")} dashboard={false} back={true} help={true} />
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: "#fbece7" }]}>
         <SectionList contentContainerStyle={{
           flexGrow: 1
         }}
