@@ -412,7 +412,7 @@ export default StyleSheet.create({
     // borderTopWidth: 0.3,
     // borderBottomWidth: 0.3,
     borderColor: Color.darkBGgray,
-    marginVertical: 20,
+    // marginVertical: 20,
   },
   menuTypeColMiddle: {
     flex: 1,

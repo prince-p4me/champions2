@@ -27,5 +27,6 @@ export default Constants = {
   android: "https://play.google.com/store/apps/details?id=com.eminence.a10xchampion&referrer=",
   WELCOME: 'WELCOME',
   COUNT: "COUNT",
-  FETCH_COUNT: "FETCH_COUNT"
+  FETCH_COUNT: "FETCH_COUNT",
+  productCatalogue: "https://drive.google.com/file/d/1P3VxzOcYweVjX11FdKOdBrHiYlDRSsDa/view"
 };

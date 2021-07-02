@@ -47,7 +47,7 @@ const Winnerlayout = () => {
   }
 
   return (
-    <>
+    <View style={{ backgroundColor: Color.white, marginBottom: 15, paddingBottom: 10 }}>
       {(data && data.length) ?
         <View style={{
           flexDirection: 'row',
@@ -79,7 +79,7 @@ const Winnerlayout = () => {
         keyExtractor={(item, index) => item.id}
         renderItem={({ item, index }) => renderItem(item)}
       />
-    </>
+    </View>
   );
 };
 

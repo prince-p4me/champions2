@@ -42,4 +42,6 @@ export default Images = {
   google: require('../assets/imgs/googleSignin.png'),
   welcome: require('../assets/imgs/welcome.jpeg'),
   reffer: require('../assets/imgs/Referal-icon-gift.png'),
+  scan2: require('../assets/imgs/scan-2.png'),
+  download: require('../assets/imgs/download.png'),
 };

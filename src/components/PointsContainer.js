@@ -24,7 +24,7 @@ const PointsContainer = () => {
 
   return (
     <View>
-      <View style={[styles.pointContainer]}>
+      <View style={[styles.pointContainer, { justifyContent: "center" }]}>
         <TextBold
           text={i18n.t('points')}
           style={{ textAlign: align, fontSize: Sizes.large }}

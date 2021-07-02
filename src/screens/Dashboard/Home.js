@@ -3,7 +3,7 @@ import {
   View,
   ScrollView,
   Image,
-  // Modal,
+  Linking,
   SafeAreaView,
   DeviceEventEmitter,
   TextInput,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Header from '../../components/Header';
 import {
+  TextMedium,
   TextRegular,
   TextSemiBold,
 } from '../../components/TextView';
@@ -174,6 +175,30 @@ const HomeScreen = props => {
   //   <View></View>
   // )
 
+  const renderQrCode = () => {
+    return (
+      <View style={{
+        width: "100%", padding: 10,
+        paddingVertical: 20,
+        flexDirection: "row",
+        backgroundColor: Color.white
+      }}>
+        <TouchableOpacity activeOpacity={.7} style={{ flex: 7, paddingHorizontal: 10 }}
+          onPress={() => Navigation.navigate('Scan')}>
+          <Image source={Imagess.scan2} style={{ height: 50, width: "100%", resizeMode: "cover", borderRadius: 5 }}></Image>
+          <TextMedium text={I18n.t("scancode")} style={{ color: Color.theme, fontSize: Sizes.regular, marginTop: 3, }} />
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={.7} style={{ flex: 3 }}
+          onPress={() => {
+            Linking.openURL(Constant.productCatalogue);
+          }}>
+          <Image source={Imagess.download} style={{ height: 50, width: "100%", resizeMode: "contain" }} />
+          <TextSemiBold text={"PRODUCT CATALOGUE"} style={{ color: Color.theme, fontSize: Sizes.medium, marginTop: 3, textAlign: "center" }} />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.containerDashboard}>
       {!isLoading ?
@@ -191,11 +216,12 @@ const HomeScreen = props => {
         contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}
         showsVerticalScrollIndicator={false}>
         {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
-        <Winnerlayout />
-        <View style={{ height: 20 }} />
-        <QRCodeContainer />
+        {/* <View style={{ height: 20 }} /> */}
+        {/* <QRCodeContainer /> */}
+        {renderQrCode()}
         <PointsContainer />
         <MenuContainer />
+        <Winnerlayout />
         <OfferLayout home={true} />
         <RecipeLayout horizontal={true} />
         <ReviewLayout />
