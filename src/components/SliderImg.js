@@ -8,10 +8,10 @@ import Constant from '../utility/Constant';
 const SliderImg = (props) => {
   const { slideImgs } = props;
   return (
-    <View style={{ marginBottom: 10, paddingHorizontal: 5 }}>
+    <View style={{ marginBottom: 10, paddingHorizontal: 0 }}>
       <FlatListSlider data={slideImgs ? slideImgs : []}
-        height={130}
-        timer={10000}
+        height={260}
+        timer={2000}
         onPress={index => {
           // console.log(JSON.stringify(index));
           // bannerClicked(banners[index]);

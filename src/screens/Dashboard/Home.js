@@ -213,7 +213,7 @@ const HomeScreen = props => {
         </> : null}
       <Header title={'Home'} dashboard={true} />
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}
+        contentContainerStyle={{ flexGrow: 1, paddingTop: 5 }}
         showsVerticalScrollIndicator={false}>
         {list && list.length ? <SliderImg slideImgs={list} /> : <View />}
         {/* <View style={{ height: 20 }} /> */}
