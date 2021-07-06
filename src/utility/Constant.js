@@ -28,5 +28,5 @@ export default Constants = {
   WELCOME: 'WELCOME',
   COUNT: "COUNT",
   FETCH_COUNT: "FETCH_COUNT",
-  productCatalogue: "https://drive.google.com/file/d/1P3VxzOcYweVjX11FdKOdBrHiYlDRSsDa/view"
+  productCatalogue: "http://10xchampions.grmrice.com/foodkraft-catalogue.pdf"
 };
