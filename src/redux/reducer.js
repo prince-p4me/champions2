@@ -233,6 +233,15 @@ export const getRefferCode = (state = null, action) => {
   }
 };
 
+export const getConfig = (state = {}, action) => {
+  switch (action.type) {
+    case Types.CONFIGS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const getPrivacyPolicy = (state = null, action) => {
   switch (action.type) {
     case Types.SET_PRIVACY_POLICY:

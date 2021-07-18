@@ -229,6 +229,8 @@ export function getReceipeDetail(data) {
 
 export function getAddressLatLng(data) {
   console.log('----------getAddressLatLng Api Call ------------------');
+  const config = store.getState().getConfig;
+  console.log("map key:--", config?.googleApiKey)
   let url =
     Constants.ADDRESS_URL +
     '' +
@@ -236,7 +238,7 @@ export function getAddressLatLng(data) {
     ',' +
     data.longitude +
     '&key=' +
-    Constants.MAP_KEY;
+    config?.googleApiKey;
 
   console.log(url);
   return callApi(url, 'GET');

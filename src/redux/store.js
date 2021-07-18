@@ -25,7 +25,8 @@ import {
   getPrivacyPolicy,
   isFirstUser,
   getCount,
-  getRefferCode
+  getRefferCode,
+  getConfig
 } from './reducer';
 import getListSaga from './saga';
 import { all, fork } from 'redux-saga/effects';
@@ -61,6 +62,7 @@ const rootReducer = combineReducers({
   isFirstUser,
   getCount,
   getRefferCode,
+  getConfig
 });
 
 //creating, applying sagas
@@ -78,7 +80,7 @@ const persistConfig = {
   // Storage Method (React Native)
   storage: AsyncStorage,
   // Whitelist (Save Specific Reducers)
-  whitelist: ['getLanguage', 'isRtl', 'getUser', 'isFirstUser', 'getCount'],
+  whitelist: ['getLanguage', 'isRtl', 'getUser', 'isFirstUser', 'getCount', 'getConfig'],
   blacklist: [],
   throttle: 1000,
   debounce: 1000,

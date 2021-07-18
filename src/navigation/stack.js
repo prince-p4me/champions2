@@ -51,6 +51,7 @@ import * as Navigation from '../navigation/navigation';
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIos from '@react-native-community/push-notification-ios';
 import { showToast } from '../utility/Index';
+import database from '@react-native-firebase/database';
 
 const Stack = createStackNavigator();
 
@@ -178,8 +179,20 @@ const StackNavigator = () => {
       // dispatch(Actions.setCount(count + 1));
       setCount();
     });
+    const onValueChange = database()
+      .ref(`/configs`)
+      .on('value', snapshot => {
+        const data = snapshot.val();
+        console.log('User data: ', data);
+        dispatch(Actions.setConfig(data));
+      });
 
-    return unsubscribe;
+    // Stop listening for updates when no longer required
+    return () => {
+      database().ref(`/configs`).off('value', onValueChange);
+      unsubscribe();
+    };
+
   };
 
   const handleNavigation = data => {

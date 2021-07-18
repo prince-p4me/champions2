@@ -257,6 +257,13 @@ export function setCount(payload) {
   };
 }
 
+export function setConfig(payload) {
+  return {
+    type: Types.CONFIGS,
+    payload
+  }
+}
+
 export function setRefferCode(payload) {
   return {
     type: Types.REFFER_CODE,
