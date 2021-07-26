@@ -49,9 +49,30 @@ import Constant from '../utility/Constant';
 import * as Navigation from '../navigation/navigation';
 
 import PushNotification from 'react-native-push-notification';
-import PushNotificationIos from '@react-native-community/push-notification-ios';
+// import PushNotificationIos from '@react-native-community/push-notification-ios';
 import { showToast } from '../utility/Index';
 import database from '@react-native-firebase/database';
+
+PushNotification.createChannel({ channelName: Constant.CHANNEL_NAME, playSound: true, vibrate: true, channelId: Constant.CHANNEL_NAME }, (b) => {
+});
+
+const showNotification = (remoteMessage: any) => {
+  if (remoteMessage?.notification) {
+    let messageData = remoteMessage?.notification
+    const { title, body }: any = messageData
+    console.log(remoteMessage)
+
+    PushNotification.localNotification({
+      channelId: Constant.CHANNEL_NAME,
+      title: title.trim() || "10X Champions",
+      ignoreInForeground: false,
+      importance: 'max',
+      message: body ?? "A New message arrived",
+      playSound: true,
+      priority: 'high',
+    });
+  }
+}
 
 const Stack = createStackNavigator();
 
@@ -175,7 +196,8 @@ const StackNavigator = () => {
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      showToast(remoteMessage?.notification?.body);
+      // showToast(remoteMessage?.notification?.body);
+      showNotification(remoteMessage);
       // dispatch(Actions.setCount(count + 1));
       setCount();
     });

@@ -10,6 +10,7 @@ export default Constants = {
   IMAGE_URL: baseUrl + 'images/',
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
+  CHANNEL_NAME: "high-priority",
   GOOGLE_CLIENT_ID:
     '190017235730-4rl8813tiqet5j6msfpbhq6n4eupilpf.apps.googleusercontent.com',
   // firebaseConfig: {
