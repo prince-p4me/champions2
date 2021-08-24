@@ -84,6 +84,13 @@ export function setSuccessModal(payload) {
   };
 }
 
+export function setLoading(payload) {
+  return {
+    type: Types.SET_LOADING,
+    payload,
+  };
+}
+
 export function setLanguage(payload) {
   return {
     type: Types.LANGUAGE,

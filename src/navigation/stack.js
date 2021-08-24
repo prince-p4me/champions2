@@ -196,8 +196,8 @@ const StackNavigator = () => {
 
     // If App is in foreground mode
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      // showToast(remoteMessage?.notification?.body);
-      showNotification(remoteMessage);
+      showToast(remoteMessage?.notification?.body);
+      // showNotification(remoteMessage);
       // dispatch(Actions.setCount(count + 1));
       setCount();
     });

@@ -46,9 +46,9 @@ const Winnerlayout = () => {
     )
   }
 
-  return (
-    <View style={{ backgroundColor: Color.white, marginBottom: 15, paddingBottom: 10 }}>
-      {(data && data.length) ?
+  if (data && data.length) {
+    return (
+      <View style={{ backgroundColor: Color.white, marginBottom: 15, paddingBottom: 10 }}>
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -66,21 +66,23 @@ const Winnerlayout = () => {
                 size={30} />
             </View>
           </TouchableOpacity>
-        </View> : null
-      }
-      <FlatList data={data}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{
-          justifyContent: "center",
-          paddingHorizontal: 7
-        }}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => item.id}
-        renderItem={({ item, index }) => renderItem(item)}
-      />
-    </View>
-  );
+        </View>
+        <FlatList data={data}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            justifyContent: "center",
+            paddingHorizontal: 7
+          }}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => item.id}
+          renderItem={({ item, index }) => renderItem(item)}
+        />
+      </View>
+    );
+  } else {
+    return <View />
+  }
 };
 
 export default Winnerlayout;
