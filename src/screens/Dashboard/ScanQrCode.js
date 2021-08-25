@@ -8,20 +8,29 @@ import { RNCamera } from 'react-native-camera';
 import Header from '../../components/Header';
 import * as Actions from '../../redux/action';
 import Constant from '../../utility/Constant';
-import { useDispatch } from 'react-redux';
+import { useDispatch ,useSelector } from 'react-redux';
 import { showResponse } from '../../utility/Index';
 
 
 const ScanQrCode = ({ navigation, route }) => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.getUser);
+
+  console.log({user19:user});
+  
   const onSuccess = e => {
     // let scanInfo = {};
     // scanInfo = e.data;
     // scanInfo.isSuccess = true;
     let data = e.data.split(',');
     console.log('scan data array', data);
-    let obj = { qr_id: data[0], points: data[1] };
 
+
+
+    let obj = { qr_id: data[0], points: data[1],user_id:user.id };
+
+
+    console.log({userData:obj});
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',

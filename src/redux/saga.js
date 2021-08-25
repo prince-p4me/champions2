@@ -11,6 +11,8 @@ import I18n from '../services/i18n';
 import { DeviceEventEmitter } from "react-native";
 
 const getHomepageData = () => {
+
+  
   store.dispatch(Actions.getPoints());
   store.dispatch(Actions.getOffers());
   store.dispatch(Actions.getRecipes());
@@ -25,8 +27,20 @@ const getAddress = () => {
 
 function* getPoints({ type, payload }) {
   try {
+
+    
+    console.log("getting points....");
+    // console.log({points:store.getUser()});
+    console.log({payload:payload});
+
     // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
     let response = yield call(Apiservice.getPoints, { mobile: payload }); //calling Api
+    console.log("pointsssss");
+
+    console.log({response:response});
+
+    
+
     yield put({ type: Types.POINTS, payload: response }); //hide loading
     yield put({ type: Types.SET_LOADING, payload: false });
   } catch (error) {

@@ -60,31 +60,54 @@ const HomeScreen = ({ route, navigation }) => {
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       I18n.locale = language;
       forceUpdate();
     }, 10);
+    return () => clearTimeout(timer);
   }, [language]);
+
+
 
   useFocusEffect(
     React.useCallback(() => {
       // checkProps();
       dispatch(Actions.getBanners());
-      dispatch(Actions.getOffers());
+
+      // updatePoints();
+
+      const timer = setTimeout(() => {
+        dispatch(Actions.getOffers());
+        dispatch(Actions.getPoints());
+      }, 3000);
+
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
+      return () => clearTimeout(timer);
     }, [])
   );
+
+
 
   React.useEffect(() => {
     console.log("data foound", route.params);
     // checkProps();
     dispatch(Actions.getBanners());
+    let timer;
     // dispatch(Actions.getPoints());
     if (route.params?.isSuccess) {
+
+      console.log("point redeemed=====");
+      // updatePoints();
+
+      timer = setTimeout(() => {
+        dispatch(Actions.getOffers());
+        dispatch(Actions.getPoints());
+      }, 3000);
       setPoints(route.params?.points);
       dispatch(Actions.setOfferDetail({}))
       dispatch(Actions.setSuccessModal(route.params?.isSuccess));
     }
+    return () => clearTimeout(timer);
   }, [route.params?.isSuccess]);
 
   const TokenBox = () => {

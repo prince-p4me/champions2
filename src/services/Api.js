@@ -105,6 +105,8 @@ export function getPoints(body) {
     user_id: state.getUser.id,
   };
   console.log('----------Points Api Call ------------------');
+  console.log({obj:obj});
+
   return callApi(Constants.API_URL + 'points.php', obj, 'POST');
 }
 
