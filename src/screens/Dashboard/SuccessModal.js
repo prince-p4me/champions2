@@ -104,7 +104,7 @@ const SuccessModal = props => {
             //     : Images.gift
             // }
             source={
-              points && scanPoints
+              (points || scanPoints)
                 ? Images.gift
                 : { uri: Constant.IMAGE_URL + offerDetail.image }
             }
@@ -127,7 +127,7 @@ const SuccessModal = props => {
               <TextMedium text={i18n.t('won_points')} style={styles.congrats} />
               <View style={[styles.congratsText, styles.congratTxt]}>
                 <TextSemiBold
-                  text={offerDetail.points}
+                  text={points || offerDetail.points}
                   style={[styles.congrats, { fontSize: Sizes.double, marginTop: 10 }]}
                 />
                 <View style={{ width: 5 }}></View>

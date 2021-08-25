@@ -42,8 +42,9 @@ import Constant from '../../utility/Constant';
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
+import { showResponse } from '../../utility/Index';
 
-const HomeScreen = props => {
+const HomeScreen = ({ route, navigation }) => {
   const [points, setPoints] = useState('');
   const [scanPoints, setScanPoints] = useState(false);
   const isLoading = useSelector(state => state.isLoading);
@@ -67,26 +68,24 @@ const HomeScreen = props => {
 
   useFocusEffect(
     React.useCallback(() => {
-      checkProps();
+      // checkProps();
+      dispatch(Actions.getBanners());
+      dispatch(Actions.getOffers());
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
     }, [])
   );
 
-  const checkProps = () => {
-    if (props.route.params && props.route.params.data) {
-      let { data } = props.route.params;
-      console.log('scan data', data);
-      console.log('executing data');
-      data = data.split(',');
-      console.log('scan data array', data);
-      let obj = { qr_id: data[0], points: data[1] };
-      setPoints(obj.points);
-      setScanPoints(true);
-      dispatch(Actions.scanQr(obj))
-    } else {
-      dispatch(Actions.getBanners());
+  React.useEffect(() => {
+    console.log("data foound", route.params);
+    // checkProps();
+    dispatch(Actions.getBanners());
+    // dispatch(Actions.getPoints());
+    if (route.params?.isSuccess) {
+      setPoints(route.params?.points);
+      dispatch(Actions.setOfferDetail({}))
+      dispatch(Actions.setSuccessModal(route.params?.isSuccess));
     }
-  };
+  }, [route.params?.isSuccess]);
 
   const TokenBox = () => {
     let { token, list, language } = props;
@@ -184,7 +183,7 @@ const HomeScreen = props => {
         backgroundColor: Color.white
       }}>
         <TouchableOpacity activeOpacity={.7} style={{ flex: 7, paddingHorizontal: 10 }}
-          onPress={() => Navigation.navigate('Scan')}>
+          onPress={() => navigation.navigate('Scan')}>
           <Image source={Imagess.scan2} style={{ height: 50, width: "100%", resizeMode: "cover", borderRadius: 5 }}></Image>
           <TextMedium text={I18n.t("scancode")} style={{ color: Color.theme, fontSize: Sizes.regular, marginTop: 3, }} />
         </TouchableOpacity>
@@ -207,11 +206,10 @@ const HomeScreen = props => {
             visible={isSuccess}
             points={points}
             offerDetail={offerDetail}
-            scanPoints={scanPoints}
           />
           <WelcomeModal />
         </> : null}
-      <Header title={'Home'} dashboard={true} />
+      <Header title={'Home'} dashboard={true} navigation={navigation} />
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, paddingTop: 5 }}
         showsVerticalScrollIndicator={false}>

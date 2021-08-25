@@ -1,27 +1,27 @@
-import React, {Component} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {View, Image, StyleSheet} from 'react-native';
-import {TextMedium, TextBold, TextRegular, TextThin} from './TextView';
+import React, { Component } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { View, Image, StyleSheet } from 'react-native';
+import { TextMedium, TextBold, TextRegular, TextThin } from './TextView';
 import Color from '../utility/Color';
 import Images from '../utility/Image';
 import Sizes from '../utility/Sizes';
 import I18n from '../services/i18n';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Navigation from '../navigation/navigation';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import Constant from '../utility/Constant';
 import * as Actions from '../redux/action';
-import {showToast} from '../utility/Index';
+import { showToast } from '../utility/Index';
 
 const OfferLayout = props => {
-  const {home} = props;
+  const { home } = props;
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
   const list = useSelector(state => state.getOffers);
   const userData = useSelector(state => state.getPoints);
   const dispatch = useDispatch();
 
-  console.log({list20: list});
+  // console.log({list20: list});
 
   let data = list.filter(obj => parseInt(obj.redeemed) < 1);
   if (home) {
@@ -30,17 +30,17 @@ const OfferLayout = props => {
 
   // let data = list;
   if (data && data.length) {
-    console.log('offers found', data);
+    // console.log('offers found', data);
     return (
-      <View style={{backgroundColor: Color.white}}>
+      <View style={{ backgroundColor: Color.white }}>
         {home && data.length && (
           <View style={styles.title}>
             <TextBold
               text={I18n.t('alloffer')}
-              style={{fontSize: Sizes.semiLarge, marginStart: 10}}
+              style={{ fontSize: Sizes.semiLarge, marginStart: 10 }}
             />
             <TouchableOpacity onPress={() => Navigation.navigate('OfferAll')}>
-              <View style={{alignItems: 'center', flexDirection: 'row'}}>
+              <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                 <TextRegular text={I18n.t('Seeall')} />
                 <Icon
                   name={'keyboard-arrow-' + (isRtl ? 'left' : 'right')}
@@ -60,28 +60,28 @@ const OfferLayout = props => {
               style={styles.offercontainer}
               key={index}
               onPress={() => {
-                Navigation.navigate('OfferDetail', {id: item.id});
+                Navigation.navigate('OfferDetail', { id: item.id });
               }}>
               <View style={styles.imgBox}>
                 <Image
-                  source={{uri: Constant.IMAGE_URL + item.image}}
-                  style={{height: 70, width: 70}}
+                  source={{ uri: Constant.IMAGE_URL + item.image }}
+                  style={{ height: 70, width: 70 }}
                   resizeMode="contain"></Image>
               </View>
               <View
                 style={[
                   styles.secondSection,
-                  !noBalance && {backgroundColor: Color.bgGray},
+                  !noBalance && { backgroundColor: Color.bgGray },
                 ]}>
-                <View style={{width: '100%', alignItems: 'flex-end'}}>
+                <View style={{ width: '100%', alignItems: 'flex-end' }}>
                   <TextThin
                     text={'Ends on : ' + item.expiry_date}
-                    style={[styles.date, expired && {color: 'red'}]}
+                    style={[styles.date, expired && { color: 'red' }]}
                   />
                 </View>
                 <TextThin
                   text={item.product_name}
-                  style={{fontSize: Sizes.regular}}
+                  style={{ fontSize: Sizes.regular }}
                 />
                 <TextMedium
                   text={item.offer_name}
@@ -91,7 +91,7 @@ const OfferLayout = props => {
                     color: Color.text,
                   }}
                 />
-                <View style={{flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                   <TextRegular
                     text={'On ' + item.points + ' Points'}
                     style={{
@@ -111,15 +111,15 @@ const OfferLayout = props => {
                     }}
                     resizeMode="contain"></Image>
                 </View>
-                <View style={{width: '100%', alignItems: 'flex-end'}}>
+                <View style={{ width: '100%', alignItems: 'flex-end' }}>
                   <TouchableOpacity
                     // disabled={noBalance}
                     style={[
                       styles.redeem,
-                      noBalance && {backgroundColor: Color.text},
+                      noBalance && { backgroundColor: Color.text },
                     ]}
                     onPress={() => {
-                      console.log({item103: item});
+                      console.log({ item103: item });
                       let obj = {
                         offer_id: item.id,
                         points: item.points,
@@ -134,7 +134,7 @@ const OfferLayout = props => {
                     }}>
                     <TextRegular
                       text={I18n.t('redeemnow')}
-                      style={{color: Color.white, fontSize: Sizes.medium}}
+                      style={{ color: Color.white, fontSize: Sizes.medium }}
                     />
                   </TouchableOpacity>
                 </View>

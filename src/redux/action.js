@@ -56,6 +56,13 @@ export function getOffers(payload) {
   };
 }
 
+export function setOfferDetail(payload) {
+  return {
+    type: Types.OFFER_DETAIL,
+    payload,
+  };
+}
+
 export function getPoints(payload) {
   return {
     type: Types.GET_POINTS,

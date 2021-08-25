@@ -46,7 +46,7 @@ const MyDashboard = ({ route, navigation, props }) => {
     let time = date?.split('-');
     time = time[0] + ':' + time[1] + ' ' + time[2];
 
-    console.log({ item });
+    // console.log({ item });
     return (
       <View style={styles.tncBox}>
         <View style={{ width: 100, height: '100%' }}>

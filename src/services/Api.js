@@ -3,8 +3,48 @@ import { store } from '../redux/store';
 import { BackHandler, Alert } from 'react-native';
 import { showResponse } from '../utility/Index';
 import auth from '@react-native-firebase/auth';
+import axios, { Method } from 'axios';
+
+import { logOut, setLoading } from "../redux/action";
 
 async function callApi(urlString, body, methodType) {
+  console.log("-----------AXIOS  Api request is----------- ");
+  console.log("url string " + urlString);
+  console.log("body " + JSON.stringify(body));
+  console.log("methodType " + methodType);
+
+  let headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+
+  return axios({
+    method: methodType, //you can set what request you want to be
+    url: urlString,
+    data: (methodType == 'POST' || methodType == 'PUT') ? JSON.stringify(body) : null,
+    headers
+  }).then(res => {
+    console.log("-----------AXIOS  Api Response is----------- ");
+    if (res.data && res.data.status && res.data.status == 100) {
+      Toast.showWithGravity(
+        'Your account has been suspended . . .',
+        Toast.SHORT,
+        Toast.BOTTOM,
+      );
+      setTimeout(() => {
+        store.dispatch(logOut());
+      }, 1000);
+    } else return res.data
+  }).catch(error => {
+    console.log("-----------AXIOS  Api catch is-----------")
+    console.log(error)
+    console.log("catch Error" + JSON.stringify(error))
+    store.dispatch(setLoading(false));
+    return error;
+  })
+}
+
+async function callApi1(urlString, body, methodType) {
   console.log('-----------AXIOS  Api request is----------- ');
   console.log('url string ' + urlString);
   console.log('methodType ' + methodType);
@@ -13,6 +53,7 @@ async function callApi(urlString, body, methodType) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
+
 
   const options = {
     method: methodType,

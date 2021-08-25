@@ -33,7 +33,7 @@ import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Header = props => {
-  const { title, transparent, bgColor, back, dashboard, help } = props;
+  const { title, transparent, bgColor, back, dashboard, help, navigation } = props;
   const isRtl = useSelector(state => state.isRtl);
   const user = useSelector(state => state.getUser);
   // const count = useSelector(state => state.getCount);
@@ -170,7 +170,7 @@ const Header = props => {
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => {
-                Navigation.navigate('Scan');
+                navigation.navigate('Scan');
                 // dispatch(Actions.logOut())
               }}>
                 {/* <Image source={scan} style={styles.rightHeaderIcon}></Image> */}

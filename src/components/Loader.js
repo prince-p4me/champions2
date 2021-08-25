@@ -8,19 +8,23 @@ import * as Actions from '../redux/action';
 const Loader = () => {
   const loading = useSelector(state => state.isLoading);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(Actions.setLoading(false));
-    }, 5000);
-    return () => {
-      if (timer) {
-        clearTimeout(timer);
-        console.log("cleared", timer);
-      }
-    }
-  }, []);
+  // setTimeout(() => {
+  //   dispatch(Actions.setLoading(false));
+  // }, 5000);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     dispatch(Actions.setLoading(false));
+  //   }, 5000);
+  //   return () => {
+  //     if (timer) {
+  //       clearTimeout(timer);
+  //       console.log("cleared", timer);
+  //     }
+  //   }
+  // }, []);
 
   return (
     <Spinner

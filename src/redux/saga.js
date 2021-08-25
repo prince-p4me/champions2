@@ -1,4 +1,4 @@
-import { delay, call, takeLatest, put } from 'redux-saga/effects';
+import { takeEvery, call, takeLatest, put } from 'redux-saga/effects';
 import * as Navigation from '../navigation/navigation';
 import * as Apiservice from '../services/Api';
 import * as Actions from './action';
@@ -140,9 +140,28 @@ function* resendOtp({ type, payload }) {
   }
 }
 
+function* scanQr({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+
+    let response = yield call(Apiservice.scanQr, payload); //calling Api
+
+    console.log('response in saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    showResponse(response);
+    getHomepageData();
+    if (response && response.status) {
+      store.dispatch(Actions.setSuccessModal(true));
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 function* getBanners({ type, payload }) {
   try {
-    yield put({ type: Types.SET_LOADING, payload: true });
+    // yield put({ type: Types.SET_LOADING, payload: true });
     let response = yield call(Apiservice.getBanners); //calling Api
     if (response && response.data) {
       for (let i = 0; i < response.data.length; i++) {
@@ -171,25 +190,6 @@ function* logOut({ type, payload }) {
   } catch (error) {
     console.log(error);
     yield put({ type: Types.SET_LOADING, payload: false });
-  }
-}
-
-function* scanQr({ type, payload }) {
-  try {
-    yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-
-    let response = yield call(Apiservice.scanQr, payload); //calling Api
-
-    console.log('response in saga', JSON.stringify(response));
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
-    showResponse(response);
-    if (response && response.status) {
-      getHomepageData();
-      store.dispatch(Actions.setSuccessModal(true));
-    }
-  } catch (error) {
-    console.log(error);
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   }
 }
 
@@ -710,7 +710,7 @@ export default function* watcher() {
   yield takeLatest(Types.VERIFY_OTP, verifyOtp);
   yield takeLatest(Types.LOG_OUT, logOut);
   yield takeLatest(Types.SIGN_UP, signUp);
-  yield takeLatest(Types.GET_POINTS, getPoints);
+  yield takeEvery(Types.GET_POINTS, getPoints);
   yield takeLatest(Types.SCAN_QR, scanQr);
   yield takeLatest(Types.HELP, help);
   yield takeLatest(Types.SEND_FEEDBACK, sendRecipeReview);
@@ -719,7 +719,7 @@ export default function* watcher() {
   yield takeLatest(Types.UPLOAD_ADHAR_IMAGE, uploadAdharImage);
   yield takeLatest(Types.UPDATE_PROFILE, updateProfile);
   yield takeLatest(Types.GET_ADDRESS_LIST, getAddressList);
-  yield takeLatest(Types.GET_OFFERS, getOffers);
+  yield takeEvery(Types.GET_OFFERS, getOffers);
   yield takeLatest(Types.REDEEM_OFFER, redeemOffer);
   yield takeLatest(Types.GET_REVIEWS, getAppReviews);
   yield takeLatest(Types.GET_RECIPES, getRecipes);
