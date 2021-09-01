@@ -1,4 +1,4 @@
-import { takeEvery, call, takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import * as Navigation from '../navigation/navigation';
 import * as Apiservice from '../services/Api';
 import * as Actions from './action';
@@ -8,11 +8,9 @@ import Constant from '../utility/Constant';
 import { store } from './store';
 import { showResponse } from '../utility/Index';
 import I18n from '../services/i18n';
-import { DeviceEventEmitter } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const getHomepageData = () => {
-
-
   store.dispatch(Actions.getPoints());
   store.dispatch(Actions.getOffers());
   store.dispatch(Actions.getRecipes());
@@ -60,7 +58,7 @@ function* verifyOtp({ type, payload }) {
     }
     let response = yield call(Apiservice.verifyOtp, payload); //calling Api
 
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in saga verifyOtp', JSON.stringify(response));
     showResponse(response);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
 
@@ -96,7 +94,7 @@ function* help({ type, payload }) {
 
     let response = yield call(Apiservice.help, payload); //calling Api
 
-    console.log('response in help saga', JSON.stringify(response));
+    console.log('response in help saga help', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
       Navigation.goBack();
@@ -141,13 +139,14 @@ function* sendFeedback({ type, payload }) {
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   }
 }
+
 function* resendOtp({ type, payload }) {
   try {
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
 
     let response = yield call(Apiservice.resendOtp, payload); //calling Api
 
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in saga resendOtp', JSON.stringify(response));
     showResponse(response);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   } catch (error) {
@@ -162,7 +161,7 @@ function* scanQr({ type, payload }) {
 
     let response = yield call(Apiservice.scanQr, payload); //calling Api
 
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in saga scanQr', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     showResponse(response);
     getHomepageData();
@@ -184,7 +183,7 @@ function* getBanners({ type, payload }) {
         response.data[i].image = Constant.IMAGE_URL + response.data[i].image;
       }
     }
-    // console.log('response in saga', JSON.stringify(response));
+    console.log('response in saga getBanners', JSON.stringify(response));
     yield put({ type: Types.BANNERS_LIST, payload: response.data }); //hide loading
     yield put({ type: Types.SET_LOADING, payload: false });
     getHomepageData();
@@ -311,7 +310,7 @@ function* getOffers({ type, payload }) {
 
     let response = yield call(Apiservice.getOffers, payload); //calling Api
 
-    console.log({ response: response });
+    console.log(" response getOffers:", response);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
 
     if (response && response.status) {
@@ -323,12 +322,13 @@ function* getOffers({ type, payload }) {
 }
 
 function* redeemOffer({ type, payload }) {
+  // const navigation = useNavigation();
   try {
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
 
     let response = yield call(Apiservice.redeemOffer, payload); //calling Api
 
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in redeemOffer saga', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     showResponse(response);
 
@@ -347,7 +347,9 @@ function* redeemOffer({ type, payload }) {
       // setTimeout(() => {
       //   yield put({type: Types.IS_SUCCESS, payload: true}); //hide loading
       // }, 1000);
-    } else Navigation.goBack();
+    } else if (Navigation.navigationRef.current.dangerouslyGetParent().state.index > 0) {
+      Navigation.goBack()
+    };
   } catch (error) {
     console.log(error);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
@@ -360,7 +362,7 @@ function* getAppReviews({ type, payload }) {
 
     let response = yield call(Apiservice.getAppReviews, payload); //calling Api
 
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in getAppReviews saga', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
       yield put({ type: Types.REVIEWS, payload: response.data }); //hide loading
@@ -377,7 +379,7 @@ function* getRecipes({ type, payload }) {
 
     let response = yield call(Apiservice.getRecipes, payload); //calling Api
 
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in getRecipes saga', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
       yield put({ type: Types.RECIPES, payload: response.data }); //hide loading
@@ -391,7 +393,7 @@ function* getRecipes({ type, payload }) {
 function* getWinners({ type, payload }) {
   try {
     let response = yield call(Apiservice.getWinners, payload); //calling Api
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in getWinners saga', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
       yield put({ type: Types.WINNERS, payload: response.data }); //hide loading
@@ -406,7 +408,7 @@ function* getTransactionCategory({ type, payload }) {
   if (payload.user_id) {
     try {
       let response = yield call(Apiservice.getTransactionByCategory, payload); //calling Api
-      console.log('response in saga', JSON.stringify(response));
+      console.log('response in getTransactionCategory saga', JSON.stringify(response));
       yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
       if (response && response.status) {
         yield put({ type: Types.TRANSACTION_CATEGORY, payload: response.data }); //hide loading
@@ -429,7 +431,7 @@ function* addAdress({ type, payload }) {
       response = yield call(Apiservice.addAdress, payload);
       response = yield call(Apiservice.updateAddress, payload); //calling Api
     }
-    console.log('response in saga', JSON.stringify(response));
+    console.log('response in addAdress saga', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
       getAddress();
@@ -726,7 +728,7 @@ export default function* watcher() {
   yield takeLatest(Types.VERIFY_OTP, verifyOtp);
   yield takeLatest(Types.LOG_OUT, logOut);
   yield takeLatest(Types.SIGN_UP, signUp);
-  yield takeEvery(Types.GET_POINTS, getPoints);
+  yield takeLatest(Types.GET_POINTS, getPoints);
   yield takeLatest(Types.SCAN_QR, scanQr);
   yield takeLatest(Types.HELP, help);
   yield takeLatest(Types.SEND_FEEDBACK, sendRecipeReview);
@@ -735,7 +737,7 @@ export default function* watcher() {
   yield takeLatest(Types.UPLOAD_ADHAR_IMAGE, uploadAdharImage);
   yield takeLatest(Types.UPDATE_PROFILE, updateProfile);
   yield takeLatest(Types.GET_ADDRESS_LIST, getAddressList);
-  yield takeEvery(Types.GET_OFFERS, getOffers);
+  yield takeLatest(Types.GET_OFFERS, getOffers);
   yield takeLatest(Types.REDEEM_OFFER, redeemOffer);
   yield takeLatest(Types.GET_REVIEWS, getAppReviews);
   yield takeLatest(Types.GET_RECIPES, getRecipes);
