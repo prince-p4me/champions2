@@ -35,10 +35,10 @@
     "mydashboard": "My Dashboard",
     "mypoints": "My Points",
     "transaction": "Transactions",
-    "transactiontext": "View your all transaction history",
+    "transactiontext": "View your transaction history",
     "feedback": "Feedback",
-    "feedbacktext": "Give your feedback application and about GRM Rice Product",
-    "support": "Support 24 * 7",
+    "feedbacktext": "Give your feedback about 10XChampion",
+    "support": "Support 24 X 7",
     "supporttext": "Get quick support on queries related to your Rewards and Products",
     "referearnlongtext": "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application",
     "invite": "Invite",
@@ -125,5 +125,6 @@
     "collectcode": "Collect your 10X Champions\n Points on entering referral code",
     "entercode": "Enter Referral Code",
     "skip": "Skip",
-    "scancode": "Scan the code in the coupon inside the 10X Rice packet and earn plenty of points."
+    "scancode": "Scan the code on the coupon inside your 10X Rice Bag and Earn the Point's",
+    "sucess_modal_msg": "Congratulations!! You have Won ABCDEF on redemption of"
 }

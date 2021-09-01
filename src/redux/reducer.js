@@ -152,6 +152,7 @@ export const getOfferDetail = (state = {}, action) => {
       return state;
   }
 };
+
 export const getReceipeDetail = (state = {}, action) => {
   switch (action.type) {
     case Types.GET_RECEIPE_DETAIL:
@@ -197,7 +198,7 @@ export const getAddressLatLng = (state = null, action) => {
   }
 };
 
-export const getAboutUs = (state = null, action) => {
+export const getAboutUs = (state = {}, action) => {
   switch (action.type) {
     case Types.SET_ABOUT_US:
       return action.payload;

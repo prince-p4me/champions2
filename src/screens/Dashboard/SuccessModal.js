@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Image,
@@ -33,6 +33,8 @@ const SuccessModal = props => {
   const data = useSelector(state => state.getPoints);
 
   const isSuccess = useSelector(state => state.isSuccess);
+  // const isSuccess = true;
+  // const points = 10;
   // const offerDetail = useSelector(state => state.getOfferDetail);
 
   console.log({ props333331: props });
@@ -98,11 +100,6 @@ const SuccessModal = props => {
             <Image source={Images.close} style={styles.closeImage}></Image>
           </TouchableOpacity>
           <ImageBackground
-            // source={
-            //   offerDetail && offerDetail.image
-            //     ? {uri: Constant.IMAGE_URL + offerDetail.image}
-            //     : Images.gift
-            // }
             source={
               (points || scanPoints)
                 ? Images.gift
@@ -112,19 +109,18 @@ const SuccessModal = props => {
             style={{
               width: '100%',
               justifyContent: 'flex-end',
-              height: 120,
-              marginTop: 50,
-              marginBottom: 20,
+              height: 140,
+              // marginTop: 30,
             }}>
             <View
               style={{
                 width: '100%',
                 alignItems: 'center',
                 position: 'absolute',
-                bottom: -85,
+                bottom: -90,
               }}>
-              <TextMedium text={i18n.t('congrat')} style={styles.congrats} />
-              <TextMedium text={i18n.t('won_points')} style={styles.congrats} />
+              <TextMedium text={i18n.t('sucess_modal_msg').replace("ABCDEF", offerDetail.product_name)} style={styles.congrats} />
+              {/* <TextMedium text={i18n.t('won_points')} style={styles.congrats} /> */}
               <View style={[styles.congratsText, styles.congratTxt]}>
                 <TextSemiBold
                   text={points || offerDetail.points}
@@ -138,7 +134,7 @@ const SuccessModal = props => {
           <View style={{ flex: 1, width: '80%', justifyContent: 'center' }}>
             <FullButton
               text={i18n.t('go_redeem')}
-              btnStyle={[styles.outlineBtn, { position: 'absolute', bottom: 60 }]}
+              btnStyle={[styles.outlineBtn, { position: 'absolute', bottom: "25%" }]}
               textStyle={styles.outlineBtnText}
               onPress={() => {
                 console.log('going to redeem history');

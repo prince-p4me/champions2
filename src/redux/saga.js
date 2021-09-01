@@ -12,7 +12,7 @@ import { DeviceEventEmitter } from "react-native";
 
 const getHomepageData = () => {
 
-  
+
   store.dispatch(Actions.getPoints());
   store.dispatch(Actions.getOffers());
   store.dispatch(Actions.getRecipes());
@@ -28,18 +28,18 @@ const getAddress = () => {
 function* getPoints({ type, payload }) {
   try {
 
-    
+
     console.log("getting points....");
     // console.log({points:store.getUser()});
-    console.log({payload:payload});
+    console.log({ payload: payload });
 
     // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
     let response = yield call(Apiservice.getPoints, { mobile: payload }); //calling Api
     console.log("pointsssss");
 
-    console.log({response:response});
+    console.log({ response: response });
 
-    
+
 
     yield put({ type: Types.POINTS, payload: response }); //hide loading
     yield put({ type: Types.SET_LOADING, payload: false });
@@ -53,8 +53,10 @@ function* verifyOtp({ type, payload }) {
   try {
     const code = store.getState().getRefferCode;
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    let isFirstUser = true;
     if (payload.loginType != 1 && code && code.length) {
       payload.referral_by = code;
+      isFirstUser = false;
     }
     let response = yield call(Apiservice.verifyOtp, payload); //calling Api
 
@@ -77,7 +79,7 @@ function* verifyOtp({ type, payload }) {
           userInfo: response,
         });
         yield put({ type: Types.REFFER_CODE, payload: null });
-        yield put({ type: Types.FIRST_LOGIN, payload: true });
+        yield put({ type: Types.FIRST_LOGIN, payload: isFirstUser });
       }
       // yield put({ type: Types.FIRST_LOGIN, payload: true });
       // DeviceEventEmitter.emit(Constant.WELCOME);
@@ -672,7 +674,7 @@ function* getAboutUs({ type, payload }) {
     if (response && response?.status && response?.status == 1) {
       yield put({
         type: Types.SET_ABOUT_US,
-        payload: response?.about,
+        payload: { content: response?.about, img: Constant.IMAGE_URL + response?.abt_image },
       }); //set user
     }
   } catch (error) {
