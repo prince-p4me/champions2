@@ -33,6 +33,9 @@
 //   [client start];
 // }
 // #endif
+#import <AVFoundation/AVFoundation.h>
+
+
 
 @implementation AppDelegate
 
@@ -49,6 +52,8 @@
   [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
 
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
+  
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   
   NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];

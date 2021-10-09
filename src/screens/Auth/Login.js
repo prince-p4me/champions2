@@ -7,6 +7,8 @@ import {
   TextInput,
   Keyboard,
   TouchableOpacity,
+  FlatList,
+  Text
 } from 'react-native';
 import Colors from '../../utility/Color';
 import styles from '../../utility/Style';
@@ -32,6 +34,9 @@ import ChangeLanguage from './ChangeLanguage';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
+
+import YouTube from 'react-native-youtube';
+
 
 const LoginScreen = () => {
   // const [mobile, setMobile] = useState('8802854433');
@@ -61,6 +66,46 @@ const LoginScreen = () => {
     }
     dispatch(Actions.doLogin(mobile));
   };
+
+
+  const DATA=['vFN3eNe0_Hs','a1CFxcTP3yQ','ym5dAu9gTPE']
+  const ListItem= ({ videoId }) => (
+     
+      // <Text>{videoId}</Text>
+      
+      <YouTube
+        showinfo={false}
+        controls={0}
+        fullscreen='false'
+        videoId={videoId} // The YouTube video ID
+        play // control playback of video with true/false
+        onReady={e => console.log("isReady")}
+        onChangeState={e => console.log("onChange")}
+        onChangeQuality={e => console.log("onQuality")}
+        onError={e => console.log("onError")}
+        style={{ alignSelf: 'stretch', height: 300,borderRadius:10 }}
+        modestbranding={true}
+        
+      />
+  )
+
+  return(
+    <View style={{flex:1,justifyContent:'center', padding:50}}>
+
+      <FlatList
+        data={DATA}
+        renderItem={({ item }) => (
+          <ListItem
+            videoId={item}
+          />
+        )}
+        keyExtractor={item => item}
+      />
+      
+    </View> 
+
+
+  )
 
   return (
     <View
