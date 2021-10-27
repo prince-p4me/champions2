@@ -16,7 +16,7 @@ function getFormattedAdress(data, coords) {
   let obj = {
     full_address: data?.formatted_address,
     state: "",
-    pin: "",
+    pincode: "",
     city: '',
     lat_long: (coords.latitude + "," + coords.longitude)
   };
@@ -28,7 +28,7 @@ function getFormattedAdress(data, coords) {
       obj.city = data.address_components[i].long_name;
     }
     if (data.address_components[i].types.includes("postal_code")) {
-      obj.pin = data.address_components[i].long_name;
+      obj.pincode = data.address_components[i].long_name;
     }
   }
   return obj;

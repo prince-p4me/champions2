@@ -241,14 +241,28 @@ export function getAddressLatLng(data) {
     config?.googleApiKey;
 
   console.log(url);
-  return callApi(url, 'GET');
+  return callApi(url, null, 'GET');
 }
 
 export function getContent() {
   console.log('----------getContent Api Call ------------------');
   return callApi(Constants.API_URL + 'content.php', {}, 'GET');
 }
+
+export function getVideos() {
+  console.log('----------getVideos Api Call ------------------');
+  return callApi(Constants.API_URL + 'videos.php', {}, 'GET');
+}
+
 export function sendFeedback(data) {
   console.log('----------sendFeedback Api Call ------------------');
   return callApi(Constants.API_URL + 'user_app_feedback.php', data, 'POST');
+}
+
+export function updateLocation() {
+  console.log('----------updateLocation Api Call ------------------');
+  const address = store.getState().getAddressLatLng;
+  let data = { ...address };
+  data.user_id = store.getState().getUser.id;
+  return callApi(Constants.API_URL + 'location_update.php', data, 'POST');
 }

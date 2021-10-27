@@ -35,7 +35,7 @@ import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
 
-import YouTube from 'react-native-youtube';
+// import YouTube from 'react-native-youtube';
 
 
 const LoginScreen = () => {
@@ -86,8 +86,8 @@ const LoginScreen = () => {
     />
   )
 
-  // return(
-  //   <View style={{flex:1,justifyContent:'center', padding:50}}>
+  // return (
+  //   <View style={{ flex: 1, justifyContent: 'center', padding: 50 }}>
   //     <FlatList
   //       data={DATA}
   //       renderItem={({ item }) => (
@@ -96,8 +96,8 @@ const LoginScreen = () => {
   //         />
   //       )}
   //       keyExtractor={item => item}
-  //     /> 
-  //   </View> 
+  //     />
+  //   </View>
   // )
 
   return (

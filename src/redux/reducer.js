@@ -191,7 +191,7 @@ export const getFcmToken = (state = null, action) => {
 export const getAddressLatLng = (state = {}, action) => {
   switch (action.type) {
     case Types.ADDRESS_LAT_LNG:
-      return { ...state, ...action.payload };
+      return action.payload;
     default:
       return state;
   }
@@ -245,6 +245,15 @@ export const getConfig = (state = {}, action) => {
 export const getPrivacyPolicy = (state = null, action) => {
   switch (action.type) {
     case Types.SET_PRIVACY_POLICY:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const getVideos = (state = [], action) => {
+  switch (action.type) {
+    case Types.SET_VIDEOS:
       return action.payload;
     default:
       return state;

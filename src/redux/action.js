@@ -7,6 +7,20 @@ export function doLogin(payload) {
   };
 }
 
+export function updateLocation(payload) {
+  return {
+    type: Types.UPDATE_LOCATION,
+    payload,
+  };
+}
+
+export function getVideos(payload) {
+  return {
+    type: Types.GET_VIDEOS,
+    payload,
+  };
+}
+
 export function help(payload) {
   return {
     type: Types.HELP,

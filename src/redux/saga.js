@@ -645,8 +645,19 @@ function* getAddressLatLng({ type, payload }) {
       yield put({
         type: Types.ADDRESS_LAT_LNG,
         payload: getFormattedAdress(response?.results[0], payload),
-      }); //set user
+      });
     }
+    yield put({ type: Types.UPDATE_LOCATION });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* updateLocation({ type, payload }) {
+  try {
+    const response = yield call(Apiservice.updateLocation);
+    yield put({ type: Types.SET_LOADING, payload: false });
+    showResponse(response);
   } catch (error) {
     console.log(error);
   }
@@ -675,6 +686,21 @@ function* getTancC({ type, payload }) {
       yield put({
         type: Types.SET_TANDC,
         payload: response?.term_condition,
+      }); //set user
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* getVideos({ type, payload }) {
+  try {
+    console.log('init payload');
+    let response = yield call(Apiservice.getVideos, payload); //calling Api
+    if (response && response?.status && response?.status == 1) {
+      yield put({
+        type: Types.SET_VIDEOS,
+        payload: response?.data,
       }); //set user
     }
   } catch (error) {
@@ -734,4 +760,6 @@ export default function* watcher() {
   yield takeLatest(Types.GET_RECEIPE_DETAIL, getReceipeDetail);
   yield takeLatest(Types.GET_ADDRESS_LAT_LNG, getAddressLatLng);
   yield takeLatest(Types.SEND_FEEDBACK, sendFeedback);
+  yield takeLatest(Types.UPDATE_LOCATION, updateLocation);
+  yield takeLatest(Types.GET_VIDEOS, getVideos);
 }

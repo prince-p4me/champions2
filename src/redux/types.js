@@ -1,6 +1,9 @@
 export const DO_LOGIN = 'DO_LOGIN';
 export const RESEND_OTP = 'RESEND_OTP';
 export const SET_LOADING = 'SET_LOADING';
+export const UPDATE_LOCATION = 'UPDATE_LOCATION';
+export const GET_VIDEOS = 'GET_VIDEOS';
+export const SET_VIDEOS = 'SET_VIDEOS';
 export const IS_LOGIN = 'IS_LOGIN';
 export const LANGUAGE = 'LANGUAGE';
 export const IS_RTL = 'IS_RTL';

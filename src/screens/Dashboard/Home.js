@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   ScrollView,
-  Image,
+  Image, Text,
   Linking,
   SafeAreaView,
   DeviceEventEmitter,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import Header from '../../components/Header';
 import {
@@ -42,6 +43,8 @@ import Constant from '../../utility/Constant';
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
+import Geolocation from '@react-native-community/geolocation';
+import YoutubeSection from '../../components/YoutubeSection';
 
 const HomeScreen = props => {
   const [points, setPoints] = useState('');
@@ -53,9 +56,9 @@ const HomeScreen = props => {
   const list = useSelector(state => state.getBanners);
   const isSuccess = useSelector(state => state.isSuccess);
   const isRtl = useSelector(state => state.isRtl);
-  const token = useSelector(state => state.getFcmToken);
   const offerDetail = useSelector(state => state.getOfferDetail);
   const language = useSelector(state => state.getLanguage);
+  const address = useSelector(state => state.getAddressLatLng);
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
   useEffect(() => {
@@ -69,8 +72,17 @@ const HomeScreen = props => {
     React.useCallback(() => {
       checkProps();
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
+      updateLocation();
     }, [])
   );
+
+  const updateLocation = () => {
+    Geolocation.getCurrentPosition(info => {
+      if (!address.full_address) {
+        dispatch(Actions.getAddressLatLng(info.coords));
+      }
+    });
+  }
 
   const checkProps = () => {
     if (props.route.params && props.route.params.data) {
@@ -171,10 +183,6 @@ const HomeScreen = props => {
     );
   };
 
-  // return (
-  //   <View></View>
-  // )
-
   const renderQrCode = () => {
     return (
       <View style={{
@@ -199,6 +207,8 @@ const HomeScreen = props => {
     )
   }
 
+
+
   return (
     <View style={styles.containerDashboard}>
       {!isLoading ?
@@ -219,6 +229,7 @@ const HomeScreen = props => {
         {/* <View style={{ height: 20 }} /> */}
         {/* <QRCodeContainer /> */}
         {renderQrCode()}
+        <YoutubeSection />
         <PointsContainer />
         <MenuContainer />
         <Winnerlayout />
