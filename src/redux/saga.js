@@ -6,7 +6,7 @@ import * as Types from './types';
 import { BackHandler } from 'react-native';
 import Constant from '../utility/Constant';
 import { store } from './store';
-import { showResponse } from '../utility/Index';
+import { getFormattedAdress, showResponse } from '../utility/Index';
 import I18n from '../services/i18n';
 import { DeviceEventEmitter } from "react-native";
 
@@ -125,6 +125,7 @@ function* sendFeedback({ type, payload }) {
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   }
 }
+
 function* resendOtp({ type, payload }) {
   try {
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
@@ -643,7 +644,7 @@ function* getAddressLatLng({ type, payload }) {
     if (response && response?.results && response?.results[0]) {
       yield put({
         type: Types.ADDRESS_LAT_LNG,
-        payload: response?.results[0]?.formatted_address,
+        payload: getFormattedAdress(response?.results[0], payload),
       }); //set user
     }
   } catch (error) {

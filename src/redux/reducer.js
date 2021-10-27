@@ -188,10 +188,10 @@ export const getFcmToken = (state = null, action) => {
   }
 };
 
-export const getAddressLatLng = (state = null, action) => {
+export const getAddressLatLng = (state = {}, action) => {
   switch (action.type) {
     case Types.ADDRESS_LAT_LNG:
-      return action.payload;
+      return { ...state, ...action.payload };
     default:
       return state;
   }

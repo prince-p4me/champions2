@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -24,6 +24,7 @@ import Images from '../../utility/Image';
 
 import Geolocation from '@react-native-community/geolocation';
 import { showResponse } from '../../utility/Index';
+import { useFocusEffect } from '@react-navigation/native';
 
 const OtpScreen = props => {
   const dispatch = useDispatch();
@@ -34,17 +35,16 @@ const OtpScreen = props => {
   const [longitude, setLong] = useState(0);
 
   const { mobile, login: isLogin, name, confirmation } = props.route.params;
-  const userCurrentLocation = useSelector(state => state.getAddressLatLng);
+  const address = useSelector(state => state.getAddressLatLng);
   const token = useSelector(state => state.getFcmToken);
 
-  console.log(userCurrentLocation);
+  console.log(address);
   console.log('mobile', mobile);
   console.log('isLogin', isLogin);
   console.log('name', name);
   console.log('confirmation', confirmation);
 
   useEffect(() => {
-    getLocationPermissions();
     const interval = setInterval(() => {
       counter--;
       setCounter(counter);
@@ -54,15 +54,17 @@ const OtpScreen = props => {
     };
   }, [counter]);
 
-  const getLocationPermissions = () => {
-    Geolocation.getCurrentPosition(info => {
-      setLat(info.coords.latitude);
-      setLong(info.coords.longitude);
-      if (!userCurrentLocation) {
-        dispatch(Actions.getAddressLatLng(info.coords));
-      }
-    });
-  };
+  useFocusEffect(
+    useCallback(() => {
+      Geolocation.getCurrentPosition(info => {
+        setLat(info.coords.latitude);
+        setLong(info.coords.longitude);
+        if (!address.full_address) {
+          dispatch(Actions.getAddressLatLng(info.coords));
+        }
+      });
+    }, [])
+  );
 
   const confirmFcmOtp = async obj => {
     try {
@@ -109,12 +111,11 @@ const OtpScreen = props => {
         <FullButton
           onPress={() => {
             // Navigation.navigate('SignUp');
-            if (userCurrentLocation) {
+            if (address && address.full_address) {
               let obj = {
                 mobile: isLogin ? mobile : mobile.mobile,
                 name: isLogin ? name : mobile.name,
                 otp: code,
-                state: userCurrentLocation ? userCurrentLocation : '',
                 loginType: 0,
                 device_id: token,
               };
@@ -126,7 +127,7 @@ const OtpScreen = props => {
                 // dispatch(Actions.setFirstUser(true));
               }
               // dispatch(Actions.setFirstUser(false));
-              dispatch(Actions.verifyOtp(obj));
+              dispatch(Actions.verifyOtp({ ...obj, ...address }));
               setCode("");
             }
 
