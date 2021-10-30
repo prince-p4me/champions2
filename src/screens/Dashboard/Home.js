@@ -51,6 +51,8 @@ const HomeScreen = props => {
   const [scanPoints, setScanPoints] = useState(false);
   const isLoading = useSelector(state => state.isLoading);
 
+  const [youtbelist, setYoutTubelist] = useState([]);
+
   const dispatch = useDispatch();
 
   const list = useSelector(state => state.getBanners);
@@ -60,8 +62,23 @@ const HomeScreen = props => {
   const language = useSelector(state => state.getLanguage);
   const address = useSelector(state => state.getAddressLatLng);
   const forceUpdate = React.useReducer(bool => !bool)[1];
+  // const youtubelist = useSelector(state => state.getYtVideos);
 
+
+  useEffect(()=>{
+    // dispatch(Actions.fetchYtVideos({}));
+    fetch(
+       Constant.API_URL+"videos.php")
+      .then((res) => res.json())
+      .then((json) => {
+        console.log({json});
+        setYoutTubelist(json.data);
+      })
+          
+  },[])
   useEffect(() => {
+    // console.log({youtubelist:youtubelist});
+    
     setTimeout(() => {
       I18n.locale = language;
       forceUpdate();
@@ -229,7 +246,7 @@ const HomeScreen = props => {
         {/* <View style={{ height: 20 }} /> */}
         {/* <QRCodeContainer /> */}
         {renderQrCode()}
-        <YoutubeSection />
+        <YoutubeSection list={youtbelist} />
         <PointsContainer />
         <MenuContainer />
         <Winnerlayout />

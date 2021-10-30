@@ -60,3 +60,5 @@ export const FIRST_LOGIN = 'FIRST_LOGIN';
 export const NOTIFICATIONS_COUNT = 'NOTIFICATIONS_COUNT';
 export const REFFER_CODE = 'REFFER_CODE';
 export const CONFIGS = 'CONFIGS';
+
+export const GET_YOUTUBE_LIST = 'GET_YOUTUBE_LIST';

@@ -25,10 +25,7 @@ const VideoModal = ({ videoId, onClose }) => {
     >
       <TouchableOpacity style={{ flex: 1, justifyContent: "center" }}
         onPress={onClose}
-      >
-        {/* <Text onPress={onClose} style={{ textAlign: "right" }}>
-          Close
-        </Text> */}
+        >
         <YoutubeIframe
           ref={playerRef}
           play={true}
@@ -76,6 +73,7 @@ const VideoItem = ({ videoId, onPress }) => {
 };
 
 const YoutubeSection = props => {
+  console.log({youtbelisting:props});
   const DATA = ['a1CFxcTP3yQ', 'ym5dAu9gTPE'];
   const [modalVisible, showModal] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -92,11 +90,13 @@ const YoutubeSection = props => {
   return (
     <View style={{ padding: 12 }}>
       <FlatList
-        data={DATA}
+        data={props.list}
+        // data={DATA}
         horizontal={true}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <VideoItem
-            videoId={item}
+            videoId={item.video_url}
             onPress={onVideoPress}
           />
         )}

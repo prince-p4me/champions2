@@ -254,6 +254,12 @@ export function getVideos() {
   return callApi(Constants.API_URL + 'videos.php', {}, 'GET');
 }
 
+export function getYoutubeVideo() {
+  console.log('----------getYTVideos Api Call ------------------');
+  return callApi(Constants.API_URL + 'videos.php', {}, 'GET');
+}
+
+
 export function sendFeedback(data) {
   console.log('----------sendFeedback Api Call ------------------');
   return callApi(Constants.API_URL + 'user_app_feedback.php', data, 'POST');

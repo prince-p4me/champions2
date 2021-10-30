@@ -63,6 +63,14 @@ export function getBanners(payload) {
   };
 }
 
+
+export function fetchYtVideos(payload) {
+  return {
+    type: Types.GET_YOUTUBE_LIST,
+    payload,
+  };
+}
+
 export function getOffers(payload) {
   return {
     type: Types.GET_OFFERS,

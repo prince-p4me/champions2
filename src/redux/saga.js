@@ -17,6 +17,7 @@ const getHomepageData = () => {
   store.dispatch(Actions.getWinners());
   store.dispatch(Actions.getReviews());
   store.dispatch(Actions.getNotification());
+  // store.dispatch(Actions.fetchYtVideos());
 };
 
 const getAddress = () => {
@@ -723,6 +724,22 @@ function* getPrivacyPolicy({ type, payload }) {
   }
 }
 
+function* fetchYtVideos({ type, payload }) {
+  try {
+    // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+
+    let response = yield call(Apiservice.getYoutubeVideo, payload); //calling Api
+    console.log('response in saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    if (response && response.status) {
+      yield put({ type: Types.GET_YOUTUBE_LIST, payload: response.data }); //hide loading
+    } else showResponse(response);
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -762,4 +779,5 @@ export default function* watcher() {
   yield takeLatest(Types.SEND_FEEDBACK, sendFeedback);
   yield takeLatest(Types.UPDATE_LOCATION, updateLocation);
   yield takeLatest(Types.GET_VIDEOS, getVideos);
+  yield takeLatest(Types.GET_YOUTUBE_LIST, fetchYtVideos);
 }

@@ -27,7 +27,8 @@ import {
   getCount,
   getRefferCode,
   getConfig,
-  getVideos
+  getVideos,
+  getYtVideos
 } from './reducer';
 import getListSaga from './saga';
 import { all, fork } from 'redux-saga/effects';
@@ -64,7 +65,8 @@ const rootReducer = combineReducers({
   getCount,
   getRefferCode,
   getConfig,
-  getVideos
+  getVideos,
+  getYtVideos
 });
 
 //creating, applying sagas
