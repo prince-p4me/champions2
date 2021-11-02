@@ -44,4 +44,5 @@ export default Images = {
   reffer: require('../assets/imgs/Referal-icon-gift.png'),
   scan2: require('../assets/imgs/scan-2.png'),
   download: require('../assets/imgs/download.png'),
+  youtube: require('../assets/imgs/youtube.png'),
 };

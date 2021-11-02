@@ -6,11 +6,17 @@ import {
   FlatList, Text, SafeAreaView
 } from 'react-native';
 import Modal from 'react-native-modal';
+import I18n from '../services/i18n';
 
 import YoutubeIframe, { getYoutubeMeta } from "react-native-youtube-iframe";
 import Images from '../utility/Image';
 import Colors from '../utility/Color';
 import { useSelector, useDispatch } from 'react-redux';
+import { TextBold, TextRegular } from './TextView';
+import { Icon } from 'react-native-elements';
+import Sizes from '../utility/Sizes';
+import { ImageBackground } from 'react-native';
+import Constant from '../utility/Constant';
 
 const VideoModal = ({ videoId, onClose }) => {
   const playerRef = React.useRef(null);
@@ -24,8 +30,8 @@ const VideoModal = ({ videoId, onClose }) => {
       }}
     >
       <TouchableOpacity style={{ flex: 1, justifyContent: "center" }}
-        onPress={onClose}
-        >
+      // onPress={onClose}
+      >
         <YoutubeIframe
           ref={playerRef}
           play={true}
@@ -57,15 +63,19 @@ const VideoItem = ({ videoId, onPress }) => {
       <TouchableOpacity
         onPress={() => onPress(videoId)}
         activeOpacity={.7}
-        style={{ flex: 1, height: 200, paddingHorizontal: 6 }}>
-        <Image
+        style={{ flex: 1, height: 200, paddingRight: 12 }}>
+        <ImageBackground
           source={{ uri: videoMeta.thumbnail_url }}
           style={{
-            width: videoMeta.thumbnail_width,
-            height: 200,
-            resizeMode: "cover"
-          }}
-        />
+            width: Constant.width - 12, height: 200,
+            alignItems: "center", justifyContent: "center"
+          }} resizeMode="cover">
+
+          <Image source={Images.youtube} style={{
+            width: 110, height: 80
+          }} resizeMode="contain"></Image>
+        </ImageBackground>
+
       </TouchableOpacity>
     );
   }
@@ -73,7 +83,7 @@ const VideoItem = ({ videoId, onPress }) => {
 };
 
 const YoutubeSection = props => {
-  console.log({youtbelisting:props});
+  console.log({ youtbelisting: props });
   const DATA = ['a1CFxcTP3yQ', 'ym5dAu9gTPE'];
   const [modalVisible, showModal] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -89,6 +99,27 @@ const YoutubeSection = props => {
 
   return (
     <View style={{ padding: 12 }}>
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}>
+        <TextBold
+          text={I18n.t('all_video')}
+          style={{ fontSize: Sizes.semiLarge, marginBottom: 8 }}
+        />
+        <TouchableOpacity onPress={() => Navigation.navigate('OfferAll')}
+          style={{ display: "none" }}>
+          <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+            <TextRegular text={I18n.t('Seeall')} />
+            <Icon
+              name={'keyboard-arrow-' + (isRtl ? 'left' : 'right')}
+              size={30}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+
       <FlatList
         data={props.list}
         // data={DATA}

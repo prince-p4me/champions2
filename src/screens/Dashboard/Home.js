@@ -65,20 +65,19 @@ const HomeScreen = props => {
   // const youtubelist = useSelector(state => state.getYtVideos);
 
 
-  useEffect(()=>{
+  useEffect(() => {
     // dispatch(Actions.fetchYtVideos({}));
     fetch(
-       Constant.API_URL+"videos.php")
+      Constant.API_URL + "videos.php")
       .then((res) => res.json())
       .then((json) => {
-        console.log({json});
+        console.log({ json });
         setYoutTubelist(json.data);
       })
-          
-  },[])
+    updateLocation();
+  }, [])
+
   useEffect(() => {
-    // console.log({youtubelist:youtubelist});
-    
     setTimeout(() => {
       I18n.locale = language;
       forceUpdate();
@@ -89,7 +88,6 @@ const HomeScreen = props => {
     React.useCallback(() => {
       checkProps();
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
-      updateLocation();
     }, [])
   );
 
@@ -223,8 +221,6 @@ const HomeScreen = props => {
       </View>
     )
   }
-
-
 
   return (
     <View style={styles.containerDashboard}>
