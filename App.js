@@ -23,6 +23,20 @@ if (!firebase.apps.length) {
 const App = () => {
   LogBox.ignoreAllLogs(true);
 
+
+  // XMLHttpRequest = GLOBAL.originalXMLHttpRequest ?
+  //   GLOBAL.originalXMLHttpRequest :
+  //   GLOBAL.XMLHttpRequest;
+
+    // fetch logger
+  // global._fetch = fetch;
+  // global.fetch = function (uri, options, ...args) {
+  //   return global._fetch(uri, options, ...args).then((response) => {
+  //     console.log('Fetch', { request: { uri, options, ...args }, response });
+  //     return response;
+  //   });
+  // };
+
   useEffect(() => {
 
     //Background/Quit events
@@ -75,6 +89,10 @@ const App = () => {
       </Provider>
     </SafeAreaProvider>
   );
+
+  
 };
+
+
 
 export default App;

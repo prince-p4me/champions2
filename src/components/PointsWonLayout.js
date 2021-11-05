@@ -88,6 +88,7 @@ const PointsWonLayout = ({ route }) => {
           flexGrow: 1,
           justifyContent: 'space-between',
         }}
+        keyExtractor={(item, index) => `key-${index}`}
         data={transactionList}
         numColumns={2}
         renderItem={({ item }) => {

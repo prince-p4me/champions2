@@ -26,7 +26,9 @@ async function callApi(urlString, body, methodType) {
   }
   console.log('options', options);
   try {
+    console.log("Starting");
     const response = await fetch(urlString, options);
+    console.log({response});
     const jsonResposne = await response.json();
     console.log('result :--', JSON.stringify(jsonResposne));
     if (jsonResposne && jsonResposne.status && jsonResposne.status == 100) {

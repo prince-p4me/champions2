@@ -131,7 +131,6 @@ const YoutubeSection = props => {
             onPress={onVideoPress}
           />
         )}
-        keyExtractor={item => item}
       />
       <Modal
         style={{ margin: 0 }}

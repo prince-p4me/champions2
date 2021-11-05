@@ -10,6 +10,9 @@ import { getFormattedAdress, showResponse } from '../utility/Index';
 import I18n from '../services/i18n';
 import { DeviceEventEmitter } from "react-native";
 
+
+
+
 const getHomepageData = () => {
   store.dispatch(Actions.getPoints());
   store.dispatch(Actions.getOffers());
@@ -20,14 +23,17 @@ const getHomepageData = () => {
   // store.dispatch(Actions.fetchYtVideos());
 };
 
+
 const getAddress = () => {
   store.dispatch(Actions.getAddressList());
 };
 
 function* getPoints({ type, payload }) {
   try {
+    
     // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
     let response = yield call(Apiservice.getPoints, { mobile: payload }); //calling Api
+    console.log({response});
     yield put({ type: Types.POINTS, payload: response }); //hide loading
     yield put({ type: Types.SET_LOADING, payload: false });
   } catch (error) {
@@ -142,10 +148,51 @@ function* resendOtp({ type, payload }) {
   }
 }
 
-function* getBanners({ type, payload }) {
+ async function getHomePageInfo(){
+  //  console.log();
+  const res = await Promise.all([
+    Apiservice.getPoints(),
+    Apiservice.getOffers(),
+    Apiservice.getRecipes(),
+    Apiservice.getWinners(),
+    Apiservice.getNotification()
+  ]);
+  
+
+  console.log({res:res});
+  // Actions.setLoading(false);
+  store.dispatch(Actions.setLoading(false));
+
+  setTimeout(()=>{
+    store.dispatch(Actions.setLoading(false));
+  },2000);  
+  store.dispatch(Actions.getPoints(res[0]['data']?res[0]['data']:[]));
+  store.dispatch(Actions.getOffers(res[1]['data']?res[1]['data']:[]));
+  store.dispatch(Actions.getRecipes(res[2]['data']?res[2]['data']:[]));
+  store.dispatch(Actions.getWinners(res[3]['data']?res[3]['data']:[]));
+  store.dispatch(Actions.getNotification(res[4]['data']?res[4]['data']:[]));
+
+  console.log({data163:data});
+ 
+}
+ function* getBanners({ type, payload }) {
   try {
     yield put({ type: Types.SET_LOADING, payload: true });
     let response = yield call(Apiservice.getBanners); //calling Api
+    
+    // const res = await Promise.all([
+    //   yield call(Apiservice.getPoints, { mobile: '' }),
+    //   yield call(Apiservice.getOffers, ''),
+    //   yield call(Apiservice.getRecipes, ''),
+    //   yield call(Apiservice.getWinners, ''),
+    //   yield call(Apiservice.getNotification, '')
+
+    // ]);
+    // const data = await Promise.all(res.map(r => r.json()))
+
+    // console.log({data163:data});
+
+    
     if (response && response.data) {
       for (let i = 0; i < response.data.length; i++) {
         response.data[i].image = Constant.IMAGE_URL + response.data[i].image;
@@ -154,7 +201,9 @@ function* getBanners({ type, payload }) {
     // console.log('response in saga', JSON.stringify(response));
     yield put({ type: Types.BANNERS_LIST, payload: response.data }); //hide loading
     yield put({ type: Types.SET_LOADING, payload: false });
-    getHomepageData();
+    // getHomepageData();
+    getHomePageInfo();
+
   } catch (error) {
     console.log(error);
     yield put({ type: Types.SET_LOADING, payload: false });

@@ -85,6 +85,13 @@ export function getPoints(payload) {
   };
 }
 
+export function setLoading(payload) {
+  return {
+    type: Types.SET_LOADING,
+    payload,
+  };
+}
+
 export function scanQr(payload) {
   return {
     type: Types.SCAN_QR,

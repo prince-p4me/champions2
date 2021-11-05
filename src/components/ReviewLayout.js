@@ -53,6 +53,7 @@ const ReviewLayout = () => {
         />
       </View> : null}
       <FlatList data={data}
+        
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{

@@ -88,6 +88,7 @@ const RecipeLayout = props => {
         </View>
       )}
       <FlatList
+        keyExtractor={(item, index) => `key-${index}`}
         data={data}
         horizontal={horizontal}
         contentContainerStyle={{ flexGrow: 1 }}

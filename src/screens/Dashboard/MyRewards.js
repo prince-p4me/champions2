@@ -194,7 +194,8 @@ const MyRewards = ({route, navigation}) => {
           data={transactionList}
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => item.date}
+          // keyExtractor={(item, index) => item.date}
+          keyExtractor={(item, index) => `key-${index}`}
           renderItem={({item, index}) => renderItem(item)}
         />
       </View>

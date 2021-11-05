@@ -182,11 +182,12 @@ const MyDashboard = () => {
               flexGrow: 1,
               justifyContent: 'center',
             }}
+            keyExtractor={(item, index) => `key-${index}`}
             data={transactionList}
             numColumns={2}
             renderItem={({ item, index }) => <PointWonLayout item={item} />}
             scrollEnabled={false}
-            keyExtractor={(item, index) => index.toString()}
+            // keyExtractor={(item, index) => index.toString()}
             ListFooterComponent={<View style={{ height: 50 }}></View>}
           // ListHeaderComponent={<ButtonBar />}
           />
