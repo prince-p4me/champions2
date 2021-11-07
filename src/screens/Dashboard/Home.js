@@ -110,6 +110,12 @@ const HomeScreen = props => {
     } else {
       dispatch(Actions.getHomeData());
     }
+
+    setTimeout(()=>{
+      dispatch(Actions.setLoading(false));
+    },6000);
+    
+
   };
 
   const TokenBox = () => {
