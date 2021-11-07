@@ -52,6 +52,7 @@ import PushNotification from 'react-native-push-notification';
 import PushNotificationIos from '@react-native-community/push-notification-ios';
 import { showToast } from '../utility/Index';
 import database from '@react-native-firebase/database';
+import AllVideo from '../screens/Dashboard/AllVideo';
 
 const Stack = createStackNavigator();
 
@@ -252,6 +253,8 @@ const StackNavigator = () => {
           <Stack.Screen name="MyDashboard" component={MyDashboard} />
           <Stack.Screen name="Reffer" component={Reffer} />
           <Stack.Screen name="Notification" component={Notification} />
+          <Stack.Screen name="AllVideo" component={AllVideo} />
+
         </>
       ) : (
         <>

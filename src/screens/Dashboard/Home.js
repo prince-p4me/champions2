@@ -239,7 +239,7 @@ const HomeScreen = props => {
         {/* <View style={{ height: 20 }} /> */}
         {/* <QRCodeContainer /> */}
         {renderQrCode()}
-        <YoutubeSection />
+        <YoutubeSection list={'horizontal'}/>
         <PointsContainer />
         <MenuContainer />
         <Winnerlayout />

@@ -19,6 +19,11 @@ const Notification = () => {
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
 
+  let notifications=[];
+
+  for(let i=0;i<data.length;i++){
+    notifications.push({data:data[i]})
+  }
   useEffect(() => {
     dispatch(Actions.getNotification());
   }, []);
@@ -56,7 +61,7 @@ const Notification = () => {
   };
 
   const renderItem = item => {
-    const date = item.created_at.split(" ");
+    const date = item.created_at?item.created_at.split(" "):'';
     return (
       <TouchableOpacity style={styles.notif}
         onPress={() => handleNavigation(item)}>
@@ -75,44 +80,53 @@ const Notification = () => {
     )
   }
 
+  console.log({data});
   return (
     <View style={{ flex: 1 }}>
       <Header title={I18n.t("notification")} dashboard={false} back={true} help={true} />
       <View style={[styles.container, { backgroundColor: "#fbece7" }]}>
-        <SectionList contentContainerStyle={{
-          flexGrow: 1
-        }}
-          sections={data}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item, index }) => renderItem(item)}
-          renderSectionHeader={({ section: { title } }) => (
-            <View style={{ width: "100%", alignItems: "flex-start", paddingVertical: 12 }}>
-              <TextRegular text={title} style={{ fontSize: Sizes.regular }} />
-            </View>
-          )}
-          keyExtractor={(item, index) => item + index}
-          ListFooterComponent={(<View style={{ height: 50 }}></View>)}
-          ListEmptyComponent={(<View style={{
-            flex: 1, justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <TextRegular text="No data found" />
-          </View>)} />
-        {/* <FlatList data={data}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
+         {data && data[0] && data[0].data  && <SectionList contentContainerStyle={{
             flexGrow: 1
-          }}
-          keyExtractor={(item, index) => item.id}
-          renderItem={({ item, index }) => renderItem(item)}
-          ListFooterComponent={(<View style={{ height: 50 }}></View>)}
-          ListEmptyComponent={(<View style={{
-            flex: 1, justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <TextRegular text="No data found" />
-          </View>)}
-        /> */}
+            }}
+            sections={data}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item, index }) => renderItem(item)}
+            renderSectionHeader={({ section: { title } }) => (
+              <View style={{ width: "100%", alignItems: "flex-start", paddingVertical: 12 }}>
+                <TextRegular text={title} style={{ fontSize: Sizes.regular }} />
+              </View>
+            )}
+            keyExtractor={(item, index) => item + index}
+            ListFooterComponent={(<View style={{ height: 50 }}></View>)}
+            ListEmptyComponent={(<View style={{
+              flex: 1, justifyContent: "center",
+              alignItems: "center"
+              }}>
+              <TextRegular text="No data found" />
+            </View>
+            )} 
+          />}
+
+          {/* <FlatList
+            // columnWrapperStyle={{
+            //   flexGrow: 1,
+            //   justifyContent: 'center',
+            // }}
+            keyExtractor={(item, index) => `key-${index}`}
+            data={data}
+            horizontal={false}
+            renderItem={({ item, index }) => renderItem(item)}
+            scrollEnabled={true}
+            ListFooterComponent={(<View style={{ height: 50 }}></View>)}
+            ListEmptyComponent={(<View style={{
+              flex: 1, justifyContent: "center",
+              alignItems: "center"
+              }}>
+              <TextRegular text="No data found" />
+             </View>
+            )} 
+              // ListHeaderComponent={<ButtonBar />}
+          />      */}
       </View>
     </View >
   );

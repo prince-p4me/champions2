@@ -17,6 +17,7 @@ import { Icon } from 'react-native-elements';
 import Sizes from '../utility/Sizes';
 import { ImageBackground } from 'react-native';
 import Constant from '../utility/Constant';
+import * as Navigation from '../navigation/navigation';
 
 const VideoModal = ({ videoId, onClose }) => {
   const playerRef = React.useRef(null);
@@ -82,7 +83,8 @@ const VideoItem = ({ videoId, onPress }) => {
   return null;
 };
 
-const YoutubeSection = () => {
+const YoutubeSection = (props) => {
+  console.log({props});
   // console.log({ youtbelisting: props });
   const DATA = ['a1CFxcTP3yQ', 'ym5dAu9gTPE'];
   const [modalVisible, showModal] = useState(false);
@@ -109,8 +111,8 @@ const YoutubeSection = () => {
           text={I18n.t('all_video')}
           style={{ fontSize: Sizes.semiLarge, marginBottom: 8 }}
         />
-        <TouchableOpacity onPress={() => Navigation.navigate('OfferAll')}
-          style={{ display: "none" }}>
+        <TouchableOpacity onPress={() => Navigation.navigate('AllVideo')}
+          style={props.list=='horizontal'?{opacity:1}:{opacity:0}}>
           <View style={{ alignItems: 'center', flexDirection: 'row' }}>
             <TextRegular text={I18n.t('Seeall')} />
             <Icon
@@ -124,7 +126,7 @@ const YoutubeSection = () => {
       <FlatList
         data={list}
         // data={DATA}
-        horizontal={true}
+        horizontal={props.list=='horizontal'?true:false}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <VideoItem
