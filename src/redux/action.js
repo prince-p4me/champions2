@@ -63,6 +63,13 @@ export function getBanners(payload) {
   };
 }
 
+export function getHomeData(payload) {
+  return {
+    type: Types.GET_HOME_DATA,
+    payload,
+  };
+}
+
 
 export function fetchYtVideos(payload) {
   return {

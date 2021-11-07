@@ -82,12 +82,13 @@ const VideoItem = ({ videoId, onPress }) => {
   return null;
 };
 
-const YoutubeSection = props => {
-  console.log({ youtbelisting: props });
+const YoutubeSection = () => {
+  // console.log({ youtbelisting: props });
   const DATA = ['a1CFxcTP3yQ', 'ym5dAu9gTPE'];
   const [modalVisible, showModal] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const isRtl = useSelector(state => state.isRtl);
+  const list = useSelector(state => state.getYtVideos);
 
   const onVideoPress = useCallback((videoId) => {
     showModal(true);
@@ -121,7 +122,7 @@ const YoutubeSection = props => {
       </View>
 
       <FlatList
-        data={props.list}
+        data={list}
         // data={DATA}
         horizontal={true}
         keyExtractor={item => item.id}

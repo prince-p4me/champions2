@@ -61,4 +61,6 @@ export const NOTIFICATIONS_COUNT = 'NOTIFICATIONS_COUNT';
 export const REFFER_CODE = 'REFFER_CODE';
 export const CONFIGS = 'CONFIGS';
 
+export const YOUTUBE_LIST = 'YOUTUBE_LIST';
 export const GET_YOUTUBE_LIST = 'GET_YOUTUBE_LIST';
+export const GET_HOME_DATA = 'GET_HOME_DATA';

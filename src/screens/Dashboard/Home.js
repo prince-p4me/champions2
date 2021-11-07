@@ -64,18 +64,15 @@ const HomeScreen = props => {
   const forceUpdate = React.useReducer(bool => !bool)[1];
   // const youtubelist = useSelector(state => state.getYtVideos);
 
-
-  useEffect(() => {
-    // dispatch(Actions.fetchYtVideos({}));
-    fetch(
-      Constant.API_URL + "videos.php")
-      .then((res) => res.json())
-      .then((json) => {
-        console.log({ json });
-        setYoutTubelist(json.data);
-      })
-    updateLocation();
-  }, [])
+  // useEffect(() => {
+  //   fetch(
+  //     Constant.API_URL + "videos.php")
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       console.log({ json });
+  //       setYoutTubelist(json.data);
+  //     })
+  // }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -88,14 +85,14 @@ const HomeScreen = props => {
     React.useCallback(() => {
       checkProps();
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
+      updateLocation();
     }, [])
   );
 
   const updateLocation = () => {
+    console.log("fetching address");
     Geolocation.getCurrentPosition(info => {
-      if (!address.full_address) {
-        dispatch(Actions.getAddressLatLng(info.coords));
-      }
+      dispatch(Actions.getAddressLatLng(info.coords));
     });
   }
 
@@ -111,7 +108,7 @@ const HomeScreen = props => {
       setScanPoints(true);
       dispatch(Actions.scanQr(obj))
     } else {
-      dispatch(Actions.getBanners());
+      dispatch(Actions.getHomeData());
     }
   };
 
@@ -242,7 +239,7 @@ const HomeScreen = props => {
         {/* <View style={{ height: 20 }} /> */}
         {/* <QRCodeContainer /> */}
         {renderQrCode()}
-        <YoutubeSection list={youtbelist} />
+        <YoutubeSection />
         <PointsContainer />
         <MenuContainer />
         <Winnerlayout />

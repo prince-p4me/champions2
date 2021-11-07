@@ -262,7 +262,7 @@ export const getVideos = (state = [], action) => {
 
 export const getYtVideos = (state = [], action) => {
   switch (action.type) {
-    case Types.GET_YOUTUBE_LIST:
+    case Types.YOUTUBE_LIST:
       return action.payload;
     default:
       return state;

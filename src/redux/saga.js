@@ -1,4 +1,4 @@
-import { delay, call, takeLatest, put } from 'redux-saga/effects';
+import { all, call, takeLatest, put } from 'redux-saga/effects';
 import * as Navigation from '../navigation/navigation';
 import * as Apiservice from '../services/Api';
 import * as Actions from './action';
@@ -30,10 +30,10 @@ const getAddress = () => {
 
 function* getPoints({ type, payload }) {
   try {
-    
+
     // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
     let response = yield call(Apiservice.getPoints, { mobile: payload }); //calling Api
-    console.log({response});
+    console.log({ response });
     yield put({ type: Types.POINTS, payload: response }); //hide loading
     yield put({ type: Types.SET_LOADING, payload: false });
   } catch (error) {
@@ -148,61 +148,78 @@ function* resendOtp({ type, payload }) {
   }
 }
 
- async function getHomePageInfo(){
-  //  console.log();
-  const res = await Promise.all([
-    Apiservice.getPoints(),
-    Apiservice.getOffers(),
-    Apiservice.getRecipes(),
-    Apiservice.getWinners(),
-    Apiservice.getNotification()
-  ]);
-  
+function* getHomeData({ type, payload }) {
+  try {
+    yield put({ type: Types.SET_LOADING, payload: true });
+    let res = yield all([
+      call(Apiservice.getBanners),
+      call(Apiservice.getPoints),
+      call(Apiservice.getOffers),
+      call(Apiservice.getRecipes),
+      call(Apiservice.getWinners),
+      call(Apiservice.getNotification),
+      call(Apiservice.getYoutubeVideo),
+    ]); //calling Api
+    debugger
+    if (res && res[0]['data']) {
+      for (let i = 0; i < res[0]['data'].length; i++) {
+        res[0]['data'][i].image = Constant.IMAGE_URL + res[0]['data'][i].image;
+      }
+    }
+    if (res && res[5]['data']) {
+      let data = [
+        {
+          title: I18n.t('Today'),
+          data: [],
+          today: true,
+        },
+        {
+          title: I18n.t('Earlier'),
+          data: [],
+          today: false,
+        },
+      ];
+      for (let i = 0; i < res[5]['data'].length; i++) {
+        let isToday =
+          res[5]['data'][i].created_at.split(' ')[0].split('-')[0] ==
+          new Date().getDate();
+        data[isToday ? 0 : 1].data.push(res[5]['data'][i]);
+      }
+      for (let i = 0; i < data.length; i++) {
+        if (!data[i].data.length) {
+          data.splice(i, 1);
+          i--;
+        }
+      }
+      yield put({ type: Types.NOTIFICATIONS, payload: res[5]['data'] }); //set notification
+    }
+    console.log('response in getHomeData saga', res);
+    yield put({ type: Types.BANNERS_LIST, payload: res[0]['data'] ? res[0]['data'] : [] }); //set banner
+    yield put({ type: Types.POINTS, payload: res[1] }); //set points
+    yield put({ type: Types.OFFERS, payload: res[2]['data'] ? res[2]['data'] : [] }); //set offers
+    yield put({ type: Types.RECIPES, payload: res[3]['data'] ? res[3]['data'] : [] }); //set recipies
+    yield put({ type: Types.WINNERS, payload: res[4]['data'] ? res[4]['data'] : [] }); //set winners
+    yield put({ type: Types.YOUTUBE_LIST, payload: res[6]['data'] ? res[6]['data'] : [] }); //set winners
+    yield put({ type: Types.SET_LOADING, payload: false });
 
-  console.log({res:res});
-  // Actions.setLoading(false);
-  store.dispatch(Actions.setLoading(false));
-
-  setTimeout(()=>{
-    store.dispatch(Actions.setLoading(false));
-  },2000);  
-  store.dispatch(Actions.getPoints(res[0]['data']?res[0]['data']:[]));
-  store.dispatch(Actions.getOffers(res[1]['data']?res[1]['data']:[]));
-  store.dispatch(Actions.getRecipes(res[2]['data']?res[2]['data']:[]));
-  store.dispatch(Actions.getWinners(res[3]['data']?res[3]['data']:[]));
-  store.dispatch(Actions.getNotification(res[4]['data']?res[4]['data']:[]));
-
-  console.log({data163:data});
- 
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false });
+  }
 }
- function* getBanners({ type, payload }) {
+
+function* getBanners({ type, payload }) {
   try {
     yield put({ type: Types.SET_LOADING, payload: true });
     let response = yield call(Apiservice.getBanners); //calling Api
-    
-    // const res = await Promise.all([
-    //   yield call(Apiservice.getPoints, { mobile: '' }),
-    //   yield call(Apiservice.getOffers, ''),
-    //   yield call(Apiservice.getRecipes, ''),
-    //   yield call(Apiservice.getWinners, ''),
-    //   yield call(Apiservice.getNotification, '')
 
-    // ]);
-    // const data = await Promise.all(res.map(r => r.json()))
-
-    // console.log({data163:data});
-
-    
     if (response && response.data) {
       for (let i = 0; i < response.data.length; i++) {
         response.data[i].image = Constant.IMAGE_URL + response.data[i].image;
       }
     }
-    // console.log('response in saga', JSON.stringify(response));
     yield put({ type: Types.BANNERS_LIST, payload: response.data }); //hide loading
     yield put({ type: Types.SET_LOADING, payload: false });
-    // getHomepageData();
-    getHomePageInfo();
 
   } catch (error) {
     console.log(error);
@@ -232,12 +249,11 @@ function* scanQr({ type, payload }) {
     let response = yield call(Apiservice.scanQr, payload); //calling Api
 
     console.log('response in saga', JSON.stringify(response));
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     showResponse(response);
     if (response && response.status) {
-      getHomepageData();
-      store.dispatch(Actions.setSuccessModal(true));
-    }
+      yield put({ type: Types.GET_HOME_DATA }); //getting home page data
+      yield put({ type: Types.IS_SUCCESS, payload: true }); //setSuccessModal true
+    } else yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   } catch (error) {
     console.log(error);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
@@ -368,20 +384,10 @@ function* redeemOffer({ type, payload }) {
     showResponse(response);
 
     if (response && response.status) {
-      // Navigation.goBack();
-      getHomepageData();
-      store.dispatch(Actions.getOfferDetail(payload));
-      // Navigation.goBack();
+      yield put({ type: Types.GET_HOME_DATA }); //getting home page data
 
-      // setTimeout(()=>{
-      //   yield put({type: Types.IS_SUCCESS, payload: true}); //hide loading
-      // },1000);
-
+      yield put({ type: Types.GET_OFFER_DETAIL, payload }); //hide loading
       yield put({ type: Types.IS_SUCCESS, payload: true });
-
-      // setTimeout(() => {
-      //   yield put({type: Types.IS_SUCCESS, payload: true}); //hide loading
-      // }, 1000);
     } else Navigation.goBack();
   } catch (error) {
     console.log(error);
@@ -631,6 +637,7 @@ function* login({ type, payload }) {
   try {
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
     const response = yield call(Apiservice.loginApi, { mobile: payload });
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
       if (response.status == 10 && response.id) {
         yield put({ type: Types.USER, payload: response }); //set user
@@ -648,7 +655,6 @@ function* login({ type, payload }) {
       }
     }
     showResponse(response);
-    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   } catch (error) {
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     console.log('error login', JSON.stringify(error));
@@ -707,7 +713,8 @@ function* updateLocation({ type, payload }) {
   try {
     const response = yield call(Apiservice.updateLocation);
     yield put({ type: Types.SET_LOADING, payload: false });
-    showResponse(response);
+    // showResponse(response);
+    console.log("update location saga response", response);
   } catch (error) {
     console.log(error);
   }
@@ -781,7 +788,7 @@ function* fetchYtVideos({ type, payload }) {
     console.log('response in saga', JSON.stringify(response));
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
     if (response && response.status) {
-      yield put({ type: Types.GET_YOUTUBE_LIST, payload: response.data }); //hide loading
+      yield put({ type: Types.YOUTUBE_LIST, payload: response.data }); //hide loading
     } else showResponse(response);
   } catch (error) {
     console.log(error);
@@ -793,6 +800,7 @@ function* fetchYtVideos({ type, payload }) {
 export default function* watcher() {
   // Take Last Action Only
   yield takeLatest(Types.SET_TANDC, getTancC);
+  yield takeLatest(Types.GET_HOME_DATA, getHomeData);
   yield takeLatest(Types.SET_PRIVACY_POLICY, getPrivacyPolicy);
   yield takeLatest(Types.SET_ABOUT_US, getAboutUs);
   yield takeLatest(Types.SEND_FCM_OTP, sendFcmOTP);
