@@ -64,7 +64,7 @@ const VideoItem = ({ videoId, onPress }) => {
       <TouchableOpacity
         onPress={() => onPress(videoId)}
         activeOpacity={.7}
-        style={{ flex: 1, height: 200, paddingRight: 12 }}>
+        style={{ flex: 1, height: 200, paddingRight: 12, marginTop: 14 }}>
         <ImageBackground
           source={{ uri: videoMeta.thumbnail_url }}
           style={{
@@ -84,9 +84,9 @@ const VideoItem = ({ videoId, onPress }) => {
 };
 
 const YoutubeSection = (props) => {
-  console.log({props});
+  console.log({ props });
   // console.log({ youtbelisting: props });
-  const DATA = ['a1CFxcTP3yQ', 'ym5dAu9gTPE'];
+  const DATA = ['a1CFxcTP3yQ', 'ym5dAu9gTPE', 'CdasiOH2XFM', 'TFW21ylLvU0'];
   const [modalVisible, showModal] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const isRtl = useSelector(state => state.isRtl);
@@ -102,17 +102,16 @@ const YoutubeSection = (props) => {
 
   return (
     <View style={{ padding: 12 }}>
-      <View style={{
-        flexDirection: 'row',
+      {props.type == 'horizontal' && <View style={{
+        flexDirection: 'row', alignItems: 'center',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        marginBottom: -8
       }}>
         <TextBold
           text={I18n.t('all_video')}
-          style={{ fontSize: Sizes.semiLarge, marginBottom: 8 }}
+          style={{ fontSize: Sizes.semiLarge }}
         />
-        <TouchableOpacity onPress={() => Navigation.navigate('AllVideo')}
-          style={props.list=='horizontal'?{opacity:1}:{opacity:0}}>
+        <TouchableOpacity onPress={() => Navigation.navigate('AllVideo')}>
           <View style={{ alignItems: 'center', flexDirection: 'row' }}>
             <TextRegular text={I18n.t('Seeall')} />
             <Icon
@@ -121,12 +120,12 @@ const YoutubeSection = (props) => {
             />
           </View>
         </TouchableOpacity>
-      </View>
+      </View>}
 
       <FlatList
         data={list}
         // data={DATA}
-        horizontal={props.list=='horizontal'?true:false}
+        horizontal={props.type == 'horizontal' ? true : false}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <VideoItem

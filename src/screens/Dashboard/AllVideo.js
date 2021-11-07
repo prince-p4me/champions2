@@ -15,8 +15,8 @@ const AllVideo = props => {
     <View style={styles.containerDashboard}>
 
       <Header title={I18n.t('all_video')} dashboard={false} back={true} help={true} />
-      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}>
-            <YoutubeSection list={'vertical'} />
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <YoutubeSection type={'vertical'} />
 
         <View style={{ height: 50 }}></View>
       </ScrollView>

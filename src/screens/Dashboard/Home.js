@@ -111,10 +111,10 @@ const HomeScreen = props => {
       dispatch(Actions.getHomeData());
     }
 
-    setTimeout(()=>{
+    setTimeout(() => {
       dispatch(Actions.setLoading(false));
-    },6000);
-    
+    }, 6000);
+
 
   };
 
@@ -245,7 +245,7 @@ const HomeScreen = props => {
         {/* <View style={{ height: 20 }} /> */}
         {/* <QRCodeContainer /> */}
         {renderQrCode()}
-        <YoutubeSection list={'horizontal'}/>
+        <YoutubeSection type={'horizontal'} />
         <PointsContainer />
         <MenuContainer />
         <Winnerlayout />
