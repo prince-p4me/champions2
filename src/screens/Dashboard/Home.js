@@ -85,11 +85,11 @@ const HomeScreen = props => {
     React.useCallback(() => {
       checkProps();
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
-      updateLocation();
+      fetchLocation();
     }, [])
   );
 
-  const updateLocation = () => {
+  const fetchLocation = () => {
     console.log("fetching address");
     Geolocation.getCurrentPosition(info => {
       dispatch(Actions.getAddressLatLng(info.coords));
@@ -110,12 +110,9 @@ const HomeScreen = props => {
     } else {
       dispatch(Actions.getHomeData());
     }
-
     setTimeout(() => {
       dispatch(Actions.setLoading(false));
     }, 6000);
-
-
   };
 
   const TokenBox = () => {

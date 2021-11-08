@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { persistor, store } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import Geocoder from 'react-native-geocoding';
 
 import Loader from './src/components/Loader';
 import { LogBox, StatusBar, Platform } from 'react-native';
@@ -28,7 +29,7 @@ const App = () => {
   //   GLOBAL.originalXMLHttpRequest :
   //   GLOBAL.XMLHttpRequest;
 
-    // fetch logger
+  // fetch logger
   // global._fetch = fetch;
   // global.fetch = function (uri, options, ...args) {
   //   return global._fetch(uri, options, ...args).then((response) => {
@@ -38,6 +39,7 @@ const App = () => {
   // };
 
   useEffect(() => {
+    Geocoder.init(Constant.MAP_KEY); // initiating geocoding
 
     //Background/Quit events
     dynamicLinks()
@@ -90,7 +92,7 @@ const App = () => {
     </SafeAreaProvider>
   );
 
-  
+
 };
 
 

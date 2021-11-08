@@ -59,9 +59,7 @@ const OtpScreen = props => {
       Geolocation.getCurrentPosition(info => {
         setLat(info.coords.latitude);
         setLong(info.coords.longitude);
-        if (!address.full_address) {
-          dispatch(Actions.getAddressLatLng(info.coords));
-        }
+        dispatch(Actions.getAddressLatLng(info.coords));
       });
     }, [])
   );

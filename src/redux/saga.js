@@ -696,14 +696,15 @@ function* confirmFcmOTP({ type, payload }) {
 
 function* getAddressLatLng({ type, payload }) {
   try {
-    let response = yield call(Apiservice.getAddressLatLng, payload); //calling Api
+    let response = yield call(Apiservice.fetchAddress, payload); //calling Api
+    console.log("getAddressLatLng saga", response);
     if (response && response?.results && response?.results[0]) {
       yield put({
         type: Types.ADDRESS_LAT_LNG,
         payload: getFormattedAdress(response?.results[0], payload),
       });
+      yield put({ type: Types.UPDATE_LOCATION });
     }
-    yield put({ type: Types.UPDATE_LOCATION });
   } catch (error) {
     console.log(error);
   }

@@ -3,6 +3,9 @@ import { store } from '../redux/store';
 import { BackHandler, Alert } from 'react-native';
 import { showResponse } from '../utility/Index';
 import auth from '@react-native-firebase/auth';
+import axios from "axios";
+import { setLoading } from '../redux/action';
+import Geocoder from 'react-native-geocoding';
 
 async function callApi(urlString, body, methodType) {
   console.log('-----------AXIOS  Api request is----------- ');
@@ -26,11 +29,21 @@ async function callApi(urlString, body, methodType) {
   }
   console.log('options', options);
   try {
-    console.log("Starting");
+    console.log("Starting api");
     const response = await fetch(urlString, options);
-    console.log({response});
+    console.log({ response });
     const jsonResposne = await response.json();
-    console.log('result :--', JSON.stringify(jsonResposne));
+
+    // let jsonResposne = await axios({
+    //   method: methodType, //you can set what request you want to be
+    //   url: urlString,
+    //   data: (methodType != "GET" && body) ? JSON.stringify(body) : null,
+    //   headers: headers,
+    // });
+    // console.log('result :--', JSON.stringify(jsonResposne));
+    // if (jsonResposne.data) {
+    //   jsonResposne.data.status = jsonResposne.status;
+    // }
     if (jsonResposne && jsonResposne.status && jsonResposne.status == 100) {
       Toast.showWithGravity(
         'Your account has been suspended . . .',
@@ -45,6 +58,7 @@ async function callApi(urlString, body, methodType) {
     }
   } catch (error) {
     console.log('error :--', JSON.stringify(error));
+    store.dispatch(setLoading(false));
     return error;
   }
 }
@@ -265,6 +279,11 @@ export function getYoutubeVideo() {
 export function sendFeedback(data) {
   console.log('----------sendFeedback Api Call ------------------');
   return callApi(Constants.API_URL + 'user_app_feedback.php', data, 'POST');
+}
+
+export function fetchAddress(data) {
+  console.log('----------fetchAddress Api Call ------------------');
+  return Geocoder.from(data.latitude, data.longitude);
 }
 
 export function updateLocation() {
