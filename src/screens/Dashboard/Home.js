@@ -216,7 +216,7 @@ const HomeScreen = props => {
             Linking.openURL(Constant.productCatalogue);
           }}>
           <Image source={Imagess.download} style={{ height: 50, width: "100%", resizeMode: "contain" }} />
-          <TextSemiBold text={"PRODUCT CATALOGUE"} style={{ color: Color.theme, fontSize: Sizes.medium, marginTop: 3, textAlign: "center" }} />
+          <TextSemiBold text={I18n.t("scancode2")} style={{ color: Color.theme, fontSize: Sizes.medium, marginTop: 3, textAlign: "center" }} />
         </TouchableOpacity>
       </View>
     )
