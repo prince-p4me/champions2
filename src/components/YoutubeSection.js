@@ -18,6 +18,7 @@ import Sizes from '../utility/Sizes';
 import { ImageBackground } from 'react-native';
 import Constant from '../utility/Constant';
 import * as Navigation from '../navigation/navigation';
+import Color from '../utility/Color';
 
 const VideoModal = ({ videoId, onClose }) => {
   const playerRef = React.useRef(null);
@@ -83,6 +84,30 @@ const VideoItem = ({ videoId, onPress }) => {
   return null;
 };
 
+const RenderDots = () => {
+  const list = useSelector(state => state.getYtVideos);
+
+  return (
+    <View style={{
+      height: 30, width: Constant.width - 24,
+      position: "absolute", bottom: 0, left: 12,
+      flexDirection: "row", justifyContent: "center",
+      alignItems: "flex-start",
+    }}>
+      {
+        list.map((data, index) => (
+          <View key={index} style={{
+            width: 10, height: 10,
+            backgroundColor: Color.white,
+            borderRadius: 10,
+            marginHorizontal: 5
+          }}></View>
+        ))
+      }
+    </View>
+  )
+}
+
 const YoutubeSection = (props) => {
   console.log({ props });
   // console.log({ youtbelisting: props });
@@ -134,6 +159,7 @@ const YoutubeSection = (props) => {
           />
         )}
       />
+      <RenderDots />
       <Modal
         style={{ margin: 0 }}
         visible={modalVisible}

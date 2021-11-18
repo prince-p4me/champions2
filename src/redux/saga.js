@@ -160,7 +160,7 @@ function* getHomeData({ type, payload }) {
       call(Apiservice.getNotification),
       call(Apiservice.getYoutubeVideo),
     ]); //calling Api
-    debugger
+    // debugger
     if (res && res[0]['data']) {
       for (let i = 0; i < res[0]['data'].length; i++) {
         res[0]['data'][i].image = Constant.IMAGE_URL + res[0]['data'][i].image;
