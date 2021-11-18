@@ -97,16 +97,15 @@ const HomeScreen = props => {
   }
 
   const checkProps = () => {
-    if (props.route.params && props.route.params.data) {
-      let { data } = props.route.params;
-      console.log('scan data', data);
+    if (Constant.scanData) {
+      console.log('scan data', Constant.scanData);
       console.log('executing data');
-      data = data.split(',');
+      let data = Constant.scanData.split(',');
       console.log('scan data array', data);
       let obj = { qr_id: data[0], points: data[1] };
       setPoints(obj.points);
       setScanPoints(true);
-      dispatch(Actions.scanQr(obj))
+      dispatch(Actions.scanQr(obj));
     } else {
       dispatch(Actions.getHomeData());
     }

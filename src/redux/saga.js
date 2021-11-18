@@ -50,7 +50,7 @@ function* verifyOtp({ type, payload }) {
       payload.referral_by = code;
     }
     let response = yield call(Apiservice.verifyOtp, payload); //calling Api
-
+    Constant.scanData = null;
     console.log('response in saga', JSON.stringify(response));
     showResponse(response);
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
@@ -232,6 +232,7 @@ function* logOut({ type, payload }) {
     //yield put({ type: Types.SET_LOADING, payload: true });
     yield put({ type: Types.USER, payload: {} });
     yield put({ type: Types.SET_LOADING, payload: false });
+    Constant.scanData = null;
     showResponse({ message: 'Logged out successfully . . .' });
     setTimeout(() => {
       BackHandler.exitApp();
@@ -247,7 +248,7 @@ function* scanQr({ type, payload }) {
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
 
     let response = yield call(Apiservice.scanQr, payload); //calling Api
-
+    Constant.scanData = null;
     console.log('response in saga', JSON.stringify(response));
     showResponse(response);
     if (response && response.status) {

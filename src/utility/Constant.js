@@ -37,5 +37,6 @@ export default Constants = {
   WELCOME: 'WELCOME',
   COUNT: "COUNT",
   FETCH_COUNT: "FETCH_COUNT",
-  productCatalogue: "http://10xchampions.grmrice.com/foodkraft-catalogue.pdf"
+  productCatalogue: "http://10xchampions.grmrice.com/foodkraft-catalogue.pdf",
+  scanData: null
 };

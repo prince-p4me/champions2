@@ -84,7 +84,9 @@ const Header = props => {
                 { position: 'relative', alignItems: 'flex-start' },
               ]}
               activeOpacity={0.7}
-              onPress={() => Navigation.goBack()}>
+              onPress={() => {
+                Navigation.goBack();
+              }}>
               {isRtl ? (
                 <Icon1
                   name="arrow-right-alt"
