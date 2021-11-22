@@ -106,7 +106,14 @@ export function scanQr(body) {
   const state = store.getState();
   body.user_id = state.getUser.id;
   console.log('----------scanQr Api Call ------------------');
-  return callApi(Constants.API_URL + 'scan_qr.php', body, 'POST');
+  return callApi(Constants.API_URL + 'scan_qr.php', body, 'POST')
+    .then(data => {
+      console.log("scanning success", data);
+      return data;
+    }).catch(err => {
+      console.log("error in scanning", err);
+      return err;
+    });
 }
 
 export function verifyOtp(body) {

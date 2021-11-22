@@ -45,6 +45,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
 import Geolocation from '@react-native-community/geolocation';
 import YoutubeSection from '../../components/YoutubeSection';
+import * as ApiService from "../../services/Api";
+import { showResponse, showToast } from '../../utility/Index';
 
 const HomeScreen = props => {
   const [points, setPoints] = useState('');
@@ -98,14 +100,46 @@ const HomeScreen = props => {
 
   const checkProps = () => {
     if (Constant.scanData) {
+      let options = {
+        method: "POST",
+        headers: {
+          "Accept": 'application/json',
+          'Content-Type': 'application/json',
+        }
+      }
       console.log('scan data', Constant.scanData);
       console.log('executing data');
       let data = Constant.scanData.split(',');
       console.log('scan data array', data);
       let obj = { qr_id: data[0], points: data[1] };
+      options.body = JSON.stringify(obj);
       setPoints(obj.points);
       setScanPoints(true);
-      dispatch(Actions.scanQr(obj));
+      dispatch(Actions.setLoading(true));
+      fetch(Constant.API_URL + "scan_qr.php", {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj),
+      })
+        .then(data => data.json())
+        .then(response => {
+          console.log('Success:', response);
+          dispatch(Actions.setLoading(false));
+          if (response.message) {
+            showToast(response.message);
+          }
+          if (response.status && response.message) {
+            dispatch(Actions.getHomeData());
+          }
+        })
+        .catch((error) => {
+          dispatch(Actions.setLoading(false));
+          console.error('Error:', error);
+        }).finally(() => {
+          dispatch(Actions.setLoading(false));
+        });
     } else {
       dispatch(Actions.getHomeData());
     }
