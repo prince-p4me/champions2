@@ -62,7 +62,7 @@ const HomeScreen = props => {
   const isRtl = useSelector(state => state.isRtl);
   const offerDetail = useSelector(state => state.getOfferDetail);
   const language = useSelector(state => state.getLanguage);
-  const address = useSelector(state => state.getAddressLatLng);
+  const user = useSelector(state => state.getUser);
   const forceUpdate = React.useReducer(bool => !bool)[1];
   // const youtubelist = useSelector(state => state.getYtVideos);
 
@@ -111,7 +111,11 @@ const HomeScreen = props => {
       console.log('executing data');
       let data = Constant.scanData.split(',');
       console.log('scan data array', data);
-      let obj = { qr_id: data[0], points: data[1] };
+      let obj = {
+        qr_id: data[0],
+        points: data[1],
+        user_id = user.id
+      };
       options.body = JSON.stringify(obj);
       setPoints(obj.points);
       setScanPoints(true);
