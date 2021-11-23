@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -10,29 +10,34 @@ import {
   // Modal
 } from 'react-native';
 import Colors from '../../utility/Color';
-import {TextRegular, TextBold, TextLite} from '../../components/TextView';
+import { TextRegular, TextBold, TextLite } from '../../components/TextView';
 import I18n from '../../services/i18n';
 import Header from '../../components/Header';
 import Sizes from '../../utility/Sizes';
 import Font from '../../utility/Font';
 import HTML from 'react-native-render-html';
 import Constant from '../../utility/Constant';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as Actions from '../../redux/action';
 
 const Privacy = () => {
   const dispatch = useDispatch();
-  const privacyPolicy = useSelector(state => state.getPrivacyPolicy);
+  const data = useSelector(state => state.getContent);
+  const imgUrl = Constant.IMAGE_URL + data?.pp_image;
+  console.log("image url", imgUrl);
 
   useEffect(() => {
-    dispatch(Actions.getPrivacyPolicy(null));
+    dispatch(Actions.getContents());
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: Colors.lightGreen}}>
+    <View style={{ flex: 1, backgroundColor: Colors.lightGreen }}>
       <Header title={I18n.t('Privacy')} dashboard={false} back={true} />
-      <ScrollView contentContainerStyle={{flex: 1, padding: 16}}>
-        <HTML source={{html: privacyPolicy}} contentWidth={Constant.width} />
+      <ScrollView contentContainerStyle={{ flex: 1, padding: 16 }}>
+        {data.pp_image && <Image source={{ uri: imgUrl }} style={{
+          width: "100%", height: 150,
+        }} resizeMode="contain" />}
+        <HTML source={{ html: data?.privacy_policy }} contentWidth={Constant.width} />
       </ScrollView>
     </View>
   );

@@ -722,29 +722,14 @@ function* updateLocation({ type, payload }) {
   }
 }
 
-function* getAboutUs({ type, payload }) {
+function* getContents({ type, payload }) {
   try {
     console.log('init payload');
     let response = yield call(Apiservice.getContent, payload); //calling Api
     if (response && response?.status && response?.status == 1) {
       yield put({
-        type: Types.SET_ABOUT_US,
-        payload: response?.about,
-      }); //set user
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function* getTancC({ type, payload }) {
-  try {
-    console.log('init payload');
-    let response = yield call(Apiservice.getContent, payload); //calling Api
-    if (response && response?.status && response?.status == 1) {
-      yield put({
-        type: Types.SET_TANDC,
-        payload: response?.term_condition,
+        type: Types.SET_CONTENTS,
+        payload: response,
       }); //set user
     }
   } catch (error) {
@@ -767,20 +752,6 @@ function* getVideos({ type, payload }) {
   }
 }
 
-function* getPrivacyPolicy({ type, payload }) {
-  try {
-    console.log('init payload');
-    let response = yield call(Apiservice.getContent, payload); //calling Api
-    if (response && response?.status && response?.status == 1) {
-      yield put({
-        type: Types.SET_PRIVACY_POLICY,
-        payload: response?.privacy_policy,
-      }); //set user
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 function* fetchYtVideos({ type, payload }) {
   try {
@@ -801,10 +772,8 @@ function* fetchYtVideos({ type, payload }) {
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
-  yield takeLatest(Types.SET_TANDC, getTancC);
+  yield takeLatest(Types.GET_CONTENT, getContents);
   yield takeLatest(Types.GET_HOME_DATA, getHomeData);
-  yield takeLatest(Types.SET_PRIVACY_POLICY, getPrivacyPolicy);
-  yield takeLatest(Types.SET_ABOUT_US, getAboutUs);
   yield takeLatest(Types.SEND_FCM_OTP, sendFcmOTP);
   yield takeLatest(Types.CONFIRM_FCM_OTP, confirmFcmOTP);
   yield takeLatest(Types.DO_LOGIN, login);

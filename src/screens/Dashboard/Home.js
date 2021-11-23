@@ -114,7 +114,7 @@ const HomeScreen = props => {
       let obj = {
         qr_id: data[0],
         points: data[1],
-        user_id = user.id
+        user_id: user.id
       };
       options.body = JSON.stringify(obj);
       setPoints(obj.points);

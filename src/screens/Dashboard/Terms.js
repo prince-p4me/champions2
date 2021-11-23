@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -10,29 +10,35 @@ import {
   // Modal
 } from 'react-native';
 import Colors from '../../utility/Color';
-import {TextRegular, TextBold, TextLite} from '../../components/TextView';
+import { TextRegular, TextBold, TextLite } from '../../components/TextView';
 import I18n from '../../services/i18n';
 import Header from '../../components/Header';
 import Sizes from '../../utility/Sizes';
 import Font from '../../utility/Font';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
 import Constant from '../../utility/Constant';
 import * as Actions from '../../redux/action';
 
 const Terms = () => {
   const dispatch = useDispatch();
-  const Terms = useSelector(state => state.getTancC);
+  const data = useSelector(state => state.getContent);
+  const imgUrl = Constant.IMAGE_URL + data?.tc_image;
+  console.log("image url", imgUrl);
 
   useEffect(() => {
-    dispatch(Actions.getTancC(null));
+    dispatch(Actions.getContents());
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: Colors.lightGreen}}>
+    <View style={{ flex: 1, backgroundColor: Colors.lightGreen }}>
       <Header title={I18n.t('termcondition')} dashboard={false} back={true} />
-      <ScrollView contentContainerStyle={{flex: 1, padding: 16}}>
-        <HTML source={{html: Terms}} contentWidth={Constant.width} />
+      <ScrollView contentContainerStyle={{ flex: 1, padding: 16 }}>
+        {data.tc_image && <Image source={{ uri: imgUrl }} style={{
+          width: "100%", height: 150,
+        }} resizeMode="contain" />}
+
+        <HTML source={{ html: data?.term_condition }} contentWidth={Constant.width} />
       </ScrollView>
     </View>
   );

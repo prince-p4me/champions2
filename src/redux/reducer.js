@@ -242,9 +242,9 @@ export const getConfig = (state = {}, action) => {
   }
 };
 
-export const getPrivacyPolicy = (state = null, action) => {
+export const getContent = (state = {}, action) => {
   switch (action.type) {
-    case Types.SET_PRIVACY_POLICY:
+    case Types.SET_CONTENTS:
       return action.payload;
     default:
       return state;

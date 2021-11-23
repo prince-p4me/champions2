@@ -321,9 +321,9 @@ export function getAboutUs(payload) {
   };
 }
 
-export function getPrivacyPolicy(payload) {
+export function getContents(payload) {
   return {
-    type: Types.SET_PRIVACY_POLICY,
+    type: Types.GET_CONTENT,
     payload,
   };
 }
