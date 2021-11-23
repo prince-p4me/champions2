@@ -46,6 +46,7 @@ function* verifyOtp({ type, payload }) {
   try {
     const code = store.getState().getRefferCode;
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    payload.referral_by = "N/A";
     if (payload.loginType != 1 && code && code.length) {
       payload.referral_by = code;
     }
@@ -150,7 +151,7 @@ function* resendOtp({ type, payload }) {
 
 function* getHomeData({ type, payload }) {
   try {
-    yield put({ type: Types.SET_LOADING, payload: true });
+    // yield put({ type: Types.SET_LOADING, payload: true });
     let res = yield all([
       call(Apiservice.getBanners),
       call(Apiservice.getPoints),

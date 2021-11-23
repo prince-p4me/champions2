@@ -34,14 +34,16 @@ import ChangeLanguage from './ChangeLanguage';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
+import * as ApiService from "../../services/Api";
+import { showResponse, showToast } from '../../utility/Index';
 
 // import YouTube from 'react-native-youtube';
 
 
 const LoginScreen = () => {
   // const [mobile, setMobile] = useState('8802854433');
-  // const [mobile, setMobile] = useState('8285724681');
-  const [mobile, setMobile] = useState('');
+  const [mobile, setMobile] = useState('8285724681');
+  // const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
   const isRtl = useSelector(state => state.isRtl);
@@ -64,7 +66,31 @@ const LoginScreen = () => {
       Keyboard.dismiss();
       return;
     }
-    dispatch(Actions.doLogin(mobile));
+    // dispatch(Actions.doLogin(mobile));
+    dispatch(Actions.setLoading(true));
+    ApiService.loginApi({ mobile })
+      .then((response) => {
+        dispatch(Actions.setLoading(false));
+        if (response && response.status) {
+          if (response.status == 10 && response.id) {
+            // yield put({ type: Types.USER, payload: response }); //set user
+            dispatch(Actions.updateUser(response));
+          } else {
+            Navigation.navigate('Otp', {
+              mobile,
+              name: response.name,
+              login: true,
+            });
+          }
+        }
+        showToast(response?.message);
+      }).catch(err => {
+        console.log("err", err);
+        dispatch(Actions.setLoading(false));
+      });
+    setTimeout(() => {
+      dispatch(Actions.setLoading(false));
+    }, 6000);
   };
 
   const DATA = ['vFN3eNe0_Hs', 'a1CFxcTP3yQ', 'ym5dAu9gTPE'];
