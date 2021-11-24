@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
-// const baseUrl = 'http://10xchampions.grmrice.com/';
-const baseUrl = 'http://10xchampions.e-aahar.com/';
+const baseUrl = 'http://10xchampions.grmrice.com/';
+// const baseUrl = 'http://10xchampions.e-aahar.com/';
 // const baseUrl = 'http://drive13.in/10X/';
 
 const mapUrl = 'https://maps.googleapis.com/';

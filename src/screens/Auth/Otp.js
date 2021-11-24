@@ -85,14 +85,14 @@ const OtpScreen = props => {
       </TouchableOpacity>
 
       <TextBold
-        text={i18n.t('otplongtext')}
+        text={i18n
+          .t('otplongtext')
+          .replace('****', mobile.mobile ? mobile.mobile : mobile)}
         style={{ textAlign: 'center', fontSize: Sizes.extraDouble }}
       />
 
       <TextRegular
-        text={i18n
-          .t(isLogin ? 'otplongtext2' : 'otplongtext3')
-          .replace('071*****88', mobile.mobile ? mobile.mobile : mobile)}
+        text={i18n.t('otplongtext2')}
         style={{ textAlign: 'center', fontSize: Sizes.regular, marginTop: 30 }}
       />
 
