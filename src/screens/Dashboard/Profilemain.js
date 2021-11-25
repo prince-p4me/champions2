@@ -382,7 +382,7 @@ const Profilemain = props => {
   return (
     <View style={{ flex: 1 }}>
       {renderModal()}
-      <Header title={'Profile'} dashboard={false} back={true} help={true} />
+      <Header title={I18n.t('Profile')} dashboard={false} back={true} help={true} />
       <ScrollView>
         {renderProfile()}
         <View style={styles.line} />

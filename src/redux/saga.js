@@ -253,8 +253,8 @@ function* scanQr({ type, payload }) {
     console.log('response in saga', JSON.stringify(response));
     showResponse(response);
     if (response && response.status) {
-      yield put({ type: Types.GET_HOME_DATA }); //getting home page data
       yield put({ type: Types.IS_SUCCESS, payload: true }); //setSuccessModal true
+      yield put({ type: Types.GET_HOME_DATA }); //getting home page data
     } else yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
   } catch (error) {
     console.log(error);
