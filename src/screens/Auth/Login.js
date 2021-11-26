@@ -127,8 +127,7 @@ const LoginScreen = () => {
   // )
 
   return (
-    <View
-      style={[styles.container, { padding: 14, backgroundColor: Colors.white }]}>
+    <View style={[styles.container, { padding: 14, backgroundColor: Colors.white }]}>
       <SafeAreaView style={{ backgroundColor: Colors.theme }}></SafeAreaView>
       <TouchableOpacity
         style={{
