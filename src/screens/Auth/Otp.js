@@ -3,9 +3,11 @@ import {
   View,
   StyleSheet,
   SafeAreaView,
-  TextInput,
+  Linking,
+  Alert,
   TouchableOpacity,
   Image,
+  Platform
 } from 'react-native';
 import GlobalStyles from '../../utility/Style';
 import * as Navigation from '../../navigation/navigation';
@@ -25,6 +27,8 @@ import Images from '../../utility/Image';
 import Geolocation from '@react-native-community/geolocation';
 import { showResponse } from '../../utility/Index';
 import { useFocusEffect } from '@react-navigation/native';
+import { PERMISSIONS, check, request } from 'react-native-permissions'
+import Constant from '../../utility/Constant';
 
 const OtpScreen = props => {
   const dispatch = useDispatch();
@@ -37,9 +41,10 @@ const OtpScreen = props => {
   const { mobile, login: isLogin, name, confirmation } = props.route.params;
   const address = useSelector(state => state.getAddressLatLng);
   const token = useSelector(state => state.getFcmToken);
+  const number = isLogin ? mobile : mobile.mobile;
 
   console.log(address);
-  console.log('mobile', mobile);
+  console.log('mobile', number);
   console.log('isLogin', isLogin);
   console.log('name', name);
   console.log('confirmation', confirmation);
@@ -56,13 +61,75 @@ const OtpScreen = props => {
 
   useFocusEffect(
     useCallback(() => {
-      Geolocation.getCurrentPosition(info => {
-        setLat(info.coords.latitude);
-        setLong(info.coords.longitude);
-        dispatch(Actions.getAddressLatLng(info.coords));
-      });
+      accessLocation();
     }, [])
   );
+
+  const accessLocation = async () => {
+    if (number && number == Constant.testData) {
+      let obj = {
+        full_address: "Testing",
+        state: "Testing",
+        pincode: "100000",
+        city: 'Testing',
+        lat_long: "12000,09788"
+      }
+      dispatch(Actions.setAddressLatLng(obj));
+      return;
+    }
+    const permission =
+      parseInt(Platform.Version, 10) < 13
+        ? PERMISSIONS.IOS.LOCATION_ALWAYS
+        : PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
+    const res = await check(permission);
+    if (res == RESULTS.GRANTED) {
+      console.log("location access provided");
+      getLocation();
+    } else {
+      var result = await request(permission);
+      console.log("result is ", result);
+      if (result == RESULTS.GRANTED) {
+        console.log("location access provided");
+        getLocation();
+      } else {
+        showAlert();
+      }
+    }
+  }
+
+  const getLocation = () => {
+    Geolocation.getCurrentPosition(info => {
+      console.log("location fetched", info);
+      setLat(info.coords.latitude);
+      setLong(info.coords.longitude);
+      dispatch(Actions.getAddressLatLng(info.coords));
+    }, error => {
+      console.log("Error in fetching location", error);
+      showAlert();
+    });
+  }
+
+  const showAlert = () => {
+    const msg = parseInt(Platform.Version, 10) < 13 ? "always" : "when using the app";
+    Alert.alert("Location not provided!!!", "Please provide location access as " + msg + " to proceed further",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "GO TO SETTINGS", onPress: () => {
+            console.log("OK Pressed");
+            Linking.openSettings().then(() => {
+              console.log("opened settings")
+            }).catch(err => {
+              console.log("error while opening settings", err);
+            })
+          }
+        }
+      ])
+  }
 
   const confirmFcmOtp = async obj => {
     try {
@@ -72,6 +139,23 @@ const OtpScreen = props => {
       showResponse({ message: 'Invalid code' });
     }
   };
+
+  const verifyOtp = () => {
+    if (address && address.full_address) {
+      let obj = {
+        mobile: number,
+        name: isLogin ? name : mobile.name,
+        otp: code,
+        loginType: 0,
+        device_id: token,
+      };
+      if (isLogin) {
+        obj.loginType = 1;
+      }
+      dispatch(Actions.verifyOtp({ ...obj, ...address }));
+      setCode("");
+    }
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -107,30 +191,7 @@ const OtpScreen = props => {
       />
       <View style={{ width: '100%', paddingHorizontal: '10%' }}>
         <FullButton
-          onPress={() => {
-            // Navigation.navigate('SignUp');
-            if (address && address.full_address) {
-              let obj = {
-                mobile: isLogin ? mobile : mobile.mobile,
-                name: isLogin ? name : mobile.name,
-                otp: code,
-                loginType: 0,
-                device_id: token,
-              };
-              if (isLogin) {
-                obj.loginType = 1;
-                // dispatch(Actions.checkFirstTime(true));
-                // dispatch(Actions.setFirstUser(true));
-              } else {
-                // dispatch(Actions.setFirstUser(true));
-              }
-              // dispatch(Actions.setFirstUser(false));
-              dispatch(Actions.verifyOtp({ ...obj, ...address }));
-              setCode("");
-            }
-
-            // confirmFcmOtp(obj);
-          }}
+          onPress={verifyOtp}
           text={i18n.t(isLogin ? 'login' : 'signup2')}
           textColor={Colors.white}
           bgColor={Colors.theme}

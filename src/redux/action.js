@@ -224,6 +224,13 @@ export function setFirstUser(payload) {
   };
 }
 
+export function setAddressLatLng(payload) {
+  return {
+    type: Types.ADDRESS_LAT_LNG,
+    payload,
+  };
+};
+
 export function getOfferDetail(payload) {
   return {
     type: Types.GET_OFFER_DETAIL,

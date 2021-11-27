@@ -130,6 +130,8 @@
 	<string>Please Give access to your gallery for scanning that QR code through it and some reward 10X Champions points are received.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please Give access to your gallery for scanning that QR code through it and some reward 10X Champions points are received.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Allow 10X Champion to access your reminders</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string></string>

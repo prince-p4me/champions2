@@ -7,8 +7,9 @@ import {
   TextInput,
   Keyboard,
   TouchableOpacity,
-  FlatList,
-  Text
+  Platform,
+  Linking,
+  Alert
 } from 'react-native';
 import Colors from '../../utility/Color';
 import styles from '../../utility/Style';
@@ -36,14 +37,15 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import SocialLogin from '../../components/SocialLogin';
 import * as ApiService from "../../services/Api";
 import { showResponse, showToast } from '../../utility/Index';
+import Geolocation from '@react-native-community/geolocation';
 
-// import YouTube from 'react-native-youtube';
+import { PERMISSIONS, check, requestLocationAccuracy, RESULTS, request } from 'react-native-permissions'
 
 
 const LoginScreen = () => {
-  // const [mobile, setMobile] = useState('8802854433');
+  const [mobile, setMobile] = useState('8802854433');
   // const [mobile, setMobile] = useState('8285724681');
-  const [mobile, setMobile] = useState('');
+  // const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
   const isRtl = useSelector(state => state.isRtl);
@@ -111,20 +113,6 @@ const LoginScreen = () => {
 
     />
   )
-
-  // return (
-  //   <View style={{ flex: 1, justifyContent: 'center', padding: 50 }}>
-  //     <FlatList
-  //       data={DATA}
-  //       renderItem={({ item }) => (
-  //         <ListItem
-  //           videoId={item}
-  //         />
-  //       )}
-  //       keyExtractor={item => item}
-  //     />
-  //   </View>
-  // )
 
   return (
     <View style={[styles.container, { padding: 14, backgroundColor: Colors.white }]}>
