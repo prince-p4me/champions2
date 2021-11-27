@@ -43,9 +43,9 @@ import { PERMISSIONS, check, requestLocationAccuracy, RESULTS, request } from 'r
 
 
 const LoginScreen = () => {
-  const [mobile, setMobile] = useState('8802854433');
+  // const [mobile, setMobile] = useState('8802854433');
   // const [mobile, setMobile] = useState('8285724681');
-  // const [mobile, setMobile] = useState('');
+  const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
   const isRtl = useSelector(state => state.isRtl);

@@ -46,7 +46,7 @@ function* verifyOtp({ type, payload }) {
   try {
     const code = store.getState().getRefferCode;
     yield put({ type: Types.SET_LOADING, payload: true }); //show loading
-    payload.referral_by = "N/A";
+    payload.referral_by = "";
     if (payload.loginType != 1 && code && code.length) {
       payload.referral_by = code;
     }
@@ -67,11 +67,11 @@ function* verifyOtp({ type, payload }) {
         // });
         yield put({ type: Types.USER, payload: response });
       } else {
+        yield put({ type: Types.REFFER_CODE, payload: null });
+        yield put({ type: Types.FIRST_LOGIN, payload: code ? false : true });
         Navigation.navigate('Tutorial', {
           userInfo: response,
         });
-        yield put({ type: Types.REFFER_CODE, payload: null });
-        yield put({ type: Types.FIRST_LOGIN, payload: true });
       }
       // yield put({ type: Types.FIRST_LOGIN, payload: true });
       // DeviceEventEmitter.emit(Constant.WELCOME);

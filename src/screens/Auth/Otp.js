@@ -27,7 +27,7 @@ import Images from '../../utility/Image';
 import Geolocation from '@react-native-community/geolocation';
 import { showResponse } from '../../utility/Index';
 import { useFocusEffect } from '@react-navigation/native';
-import { PERMISSIONS, check, request } from 'react-native-permissions'
+import { PERMISSIONS, check, request, RESULTS } from 'react-native-permissions'
 import Constant from '../../utility/Constant';
 
 const OtpScreen = props => {
@@ -66,22 +66,23 @@ const OtpScreen = props => {
   );
 
   const accessLocation = async () => {
-    if (number && number == Constant.testData) {
-      let obj = {
-        full_address: "Testing",
-        state: "Testing",
-        pincode: "100000",
-        city: 'Testing',
-        lat_long: "12000,09788"
-      }
-      dispatch(Actions.setAddressLatLng(obj));
-      return;
-    }
+    // if (number && number == Constant.testData) {
+    //   let obj = {
+    //     full_address: "Testing",
+    //     state: "Testing",
+    //     pincode: "100000",
+    //     city: 'Testing',
+    //     lat_long: "12000,09788"
+    //   }
+    //   dispatch(Actions.setAddressLatLng(obj));
+    //   return;
+    // }
     const permission =
       parseInt(Platform.Version, 10) < 13
         ? PERMISSIONS.IOS.LOCATION_ALWAYS
         : PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
     const res = await check(permission);
+    console.log("result is", res);
     if (res == RESULTS.GRANTED) {
       console.log("location access provided");
       getLocation();

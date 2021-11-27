@@ -114,37 +114,38 @@ const HomeScreen = props => {
       let obj = {
         qr_id: data[0],
         points: data[1],
-        // user_id: user.id
+        user_id: user.id
       };
       setPoints(obj.points);
       setScanPoints(true);
-      dispatch(Actions.scanQr(obj));
-      // options.body = JSON.stringify(obj);
-      // dispatch(Actions.setLoading(true));
-      // fetch(Constant.API_URL + "scan_qr.php", {
-      //   method: 'POST', // or 'PUT'
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(obj),
-      // })
-      //   .then(data => data.json())
-      //   .then(response => {
-      //     console.log('Success:', response);
-      //     dispatch(Actions.setLoading(false));
-      //     if (response.message) {
-      //       showToast(response.message);
-      //     }
-      //     if (response.status && response.message) {
-      //       dispatch(Actions.getHomeData());
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     dispatch(Actions.setLoading(false));
-      //     console.error('Error:', error);
-      //   }).finally(() => {
-      //     dispatch(Actions.setLoading(false));
-      //   });
+      // dispatch(Actions.scanQr(obj));
+      options.body = JSON.stringify(obj);
+      dispatch(Actions.setLoading(true));
+      fetch(Constant.API_URL + "scan_qr.php", {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj),
+      })
+        .then(data => data.json())
+        .then(response => {
+          console.log('Success:', response);
+          dispatch(Actions.setLoading(false));
+          if (response.message) {
+            showToast(response.message);
+          }
+          if (response.status && response.message) {
+            dispatch(Actions.setSuccessModal(true));
+            dispatch(Actions.getHomeData());
+          }
+        })
+        .catch((error) => {
+          dispatch(Actions.setLoading(false));
+          console.error('Error:', error);
+        }).finally(() => {
+          dispatch(Actions.setLoading(false));
+        });
     } else {
       dispatch(Actions.getHomeData());
     }

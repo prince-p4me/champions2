@@ -42,7 +42,7 @@ import SocialLogin from '../../components/SocialLogin';
 const SignupScreen = () => {
   const [mobile, setMobile] = useState('');
   const [name, setName] = useState('');
-  // const [mobile, setMobile] = useState('8178691529');
+  // const [mobile, setMobile] = useState('8285724681');
   // const [name, setName] = useState('Prince Kumar');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
