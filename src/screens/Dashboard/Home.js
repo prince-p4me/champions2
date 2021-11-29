@@ -124,11 +124,14 @@ const HomeScreen = props => {
       fetch(Constant.API_URL + "scan_qr.php", {
         method: 'POST', // or 'PUT'
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/html; charset=UTF-8',
         },
         body: JSON.stringify(obj),
       })
-        .then(data => data.json())
+        .then(data => {
+          console.log("data received", data);
+          return data.json();
+        })
         .then(response => {
           console.log('Success:', response);
           dispatch(Actions.setLoading(false));
@@ -246,7 +249,10 @@ const HomeScreen = props => {
         backgroundColor: Color.white
       }}>
         <TouchableOpacity activeOpacity={.7} style={{ flex: 7, paddingHorizontal: 10 }}
-          onPress={() => Navigation.navigate('Scan')}>
+          onPress={() => {
+            Navigation.navigate('Scan');
+            // checkProps();
+          }}>
           <Image source={Imagess.scan2} style={{ height: 50, width: "100%", resizeMode: "cover", borderRadius: 5 }}></Image>
           <TextMedium text={I18n.t("scancode")} style={{ color: Color.theme, fontSize: Sizes.regular, marginTop: 3, }} />
         </TouchableOpacity>
