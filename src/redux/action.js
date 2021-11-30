@@ -120,6 +120,13 @@ export function setSuccessModal(payload) {
   };
 }
 
+export function setSuccessPoints(payload) {
+  return {
+    type: Types.SUCCESS_POINTS,
+    payload,
+  };
+}
+
 export function setLanguage(payload) {
   return {
     type: Types.LANGUAGE,

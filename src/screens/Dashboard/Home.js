@@ -16,6 +16,8 @@ import {
   TextRegular,
   TextSemiBold,
 } from '../../components/TextView';
+import axios from "axios";
+
 import styles from '../../utility/Style';
 import Imagess from '../../utility/Image';
 import SliderImg from '../../components/SliderImg';
@@ -87,7 +89,7 @@ const HomeScreen = props => {
     React.useCallback(() => {
       checkProps();
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
-      fetchLocation();
+      // fetchLocation();
     }, [])
   );
 
@@ -100,13 +102,10 @@ const HomeScreen = props => {
 
   const checkProps = () => {
     if (Constant.scanData) {
-      let options = {
-        method: "POST",
-        headers: {
-          "Accept": 'application/json',
-          'Content-Type': 'application/json',
-        }
-      }
+      let headers = {
+        // "Accept": 'application/json',÷
+        'Content-Type': 'application/json; charset=UTF-8',
+      };
       console.log('scan data', Constant.scanData);
       console.log('executing data');
       let data = Constant.scanData.split(',');
@@ -118,37 +117,34 @@ const HomeScreen = props => {
       };
       setPoints(obj.points);
       setScanPoints(true);
-      // dispatch(Actions.scanQr(obj));
-      options.body = JSON.stringify(obj);
+
       dispatch(Actions.setLoading(true));
-      fetch(Constant.API_URL + "scan_qr.php", {
-        method: 'POST', // or 'PUT'
-        headers: {
-          'Content-Type': 'text/html; charset=UTF-8',
-        },
-        body: JSON.stringify(obj),
-      })
-        .then(data => {
-          console.log("data received", data);
-          return data.json();
-        })
-        .then(response => {
-          console.log('Success:', response);
-          dispatch(Actions.setLoading(false));
-          if (response.message) {
-            showToast(response.message);
-          }
-          if (response.status && response.message) {
-            dispatch(Actions.setSuccessModal(true));
-            dispatch(Actions.getHomeData());
-          }
-        })
-        .catch((error) => {
-          dispatch(Actions.setLoading(false));
-          console.error('Error:', error);
-        }).finally(() => {
-          dispatch(Actions.setLoading(false));
-        });
+
+      scanQrCode(obj, headers)
+      // fetch(Constant.API_URL + "scan_qr.php", {
+      //   method: 'POST', // or 'PUT'
+      //   headers: new Headers({ 'Content-Type': 'text/plain; charset=UTF-8' }),
+      //   body: JSON.stringify(obj),
+      // })
+      //   .then(data => {
+      //     console.log("data received", data);
+      //     return data.json();
+      //   })
+      //   .then(response => {
+      // console.log('Success:', response);
+      // dispatch(Actions.setLoading(false));
+      // showResponse(response);
+      // if (response.status && response.message) {
+      //   dispatch(Actions.setSuccessModal(true));
+      //   dispatch(Actions.getHomeData());
+      // }
+      //   })
+      //   .catch((error) => {
+      // dispatch(Actions.setLoading(false));
+      // console.error('Error:', error);
+      //   }).finally(() => {
+      //     dispatch(Actions.setLoading(false));
+      //   });
     } else {
       dispatch(Actions.getHomeData());
     }
@@ -156,6 +152,24 @@ const HomeScreen = props => {
       dispatch(Actions.setLoading(false));
     }, 6000);
   };
+
+
+  function scanQrCode(obj, headers) {
+    axios.post(Constant.API_URL + "scan_qr.php", obj, { headers })
+      .then(response => {
+        console.log('Success:', response);
+        // dispatch(Actions.setLoading(false));
+        // showResponse(response.data);
+        // if (response.data && response.data.status && response.data.message) {
+        //   dispatch(Actions.setSuccessModal(true));
+        //   dispatch(Actions.getHomeData());
+        // }
+      })
+      .catch(error => {
+        // dispatch(Actions.setLoading(false));
+        console.error('Error:', error);
+      });
+  }
 
   const TokenBox = () => {
     let { token, list, language } = props;
@@ -273,9 +287,7 @@ const HomeScreen = props => {
         <>
           <SuccessModal
             visible={isSuccess}
-            points={points}
             offerDetail={offerDetail}
-            scanPoints={scanPoints}
           />
           <WelcomeModal />
         </> : null}

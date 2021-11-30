@@ -26,7 +26,8 @@ import {
   getConfig,
   getVideos,
   getYtVideos,
-  getContent
+  getContent,
+  successPoints
 } from './reducer';
 import getListSaga from './saga';
 import { all, fork } from 'redux-saga/effects';
@@ -36,6 +37,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // creating reducers
 const rootReducer = combineReducers({
+  successPoints,
   isLoading,
   getLanguage,
   isRtl,

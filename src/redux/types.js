@@ -19,6 +19,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const SIGN_UP = 'SIGN_UP';
 export const SCAN_QR = 'SCAN_QR';
 export const IS_SUCCESS = 'IS_SUCCESS';
+export const SUCCESS_POINTS = "SUCCESS_POINTS";
 export const HELP = 'HELP';
 export const SEND_QUERY = 'SEND_QUERY';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';

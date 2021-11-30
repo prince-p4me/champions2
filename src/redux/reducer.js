@@ -18,6 +18,8 @@ let points = {
   balance: 0,
 };
 
+let successData = { visible: false, points: 0 };
+
 export const getBanners = (state = [], action) => {
   switch (action.type) {
     case Types.BANNERS_LIST:
@@ -57,6 +59,15 @@ export const isLoading = (state = false, action) => {
 export const isSuccess = (state = false, action) => {
   switch (action.type) {
     case Types.IS_SUCCESS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const successPoints = (state = 0, action) => {
+  switch (action.type) {
+    case Types.SUCCESS_POINTS:
       return action.payload;
     default:
       return state;

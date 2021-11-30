@@ -25,7 +25,7 @@ import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 
 const SuccessModal = props => {
-  const { visible, close, points, offerDetail, scanPoints } = props;
+  const { visible, close, offerDetail, scanPoints } = props;
   const user = useSelector(state => state.getUser);
 
   const isRtl = useSelector(state => state.isRtl);
@@ -33,7 +33,7 @@ const SuccessModal = props => {
   const data = useSelector(state => state.getPoints);
 
   const isSuccess = useSelector(state => state.isSuccess);
-  // const offerDetail = useSelector(state => state.getOfferDetail);
+  const points = useSelector(state => state.successPoints);
 
   console.log({ props333331: props });
 
@@ -104,7 +104,7 @@ const SuccessModal = props => {
             //     : Images.gift
             // }
             source={
-              points && scanPoints
+              points || scanPoints
                 ? Images.gift
                 : { uri: Constant.IMAGE_URL + offerDetail.image }
             }
