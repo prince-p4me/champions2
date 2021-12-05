@@ -115,7 +115,7 @@ const SignupScreen = () => {
                     </View> */}
           <TextInput
             style={{ flex: 1, padding: 7 }}
-            placeholder="Name"
+            placeholder={I18n.t("full_name")}
             keyboardType="default"
             value={name}
             onChangeText={name => setName(name)}
@@ -127,7 +127,7 @@ const SignupScreen = () => {
           </View>
           <TextInput
             style={{ flex: 1, padding: 7 }}
-            placeholder="Enter your 10 digits mobile number"
+            placeholder={I18n.t("mobile_place_holder")}
             keyboardType="numeric"
             value={mobile}
             returnKeyLabel="Done"
@@ -197,7 +197,7 @@ const SignupScreen = () => {
             text={i18n.t('chooselanguage')}
             style={{ marginEnd: 7 }}
           />
-          <ChangeLanguage />
+          <ChangeLanguage isAuth={true} />
         </View>
       </View>
     </View>

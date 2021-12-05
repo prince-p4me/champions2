@@ -35,6 +35,15 @@ const Referral = () => {
   const isRtl = useSelector(state => state.isRtl);
   const [code, setCode] = useState('');
   const dispatch = useDispatch();
+  const forceUpdate = React.useReducer(bool => !bool)[1];
+  let language = useSelector(state => state.getLanguage);
+
+  useEffect(() => {
+    setTimeout(() => {
+      I18n.locale = language;
+      forceUpdate();
+    }, 10);
+  }, [language]);
 
   const process = () => {
     if (code.length) {

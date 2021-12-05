@@ -35,8 +35,7 @@ const OtpScreen = props => {
   const [code, setCode] = useState('');
   let [counter, setCounter] = useState(59);
 
-  const [latitude, setLat] = useState(0);
-  const [longitude, setLong] = useState(0);
+  const [isFetchingAdress, setAddressFetched] = useState(false);
 
   const { mobile, login: isLogin, name, confirmation } = props.route.params;
   const address = useSelector(state => state.getAddressLatLng);
@@ -101,8 +100,8 @@ const OtpScreen = props => {
   const getLocation = () => {
     Geolocation.getCurrentPosition(info => {
       console.log("location fetched", info);
-      setLat(info.coords.latitude);
-      setLong(info.coords.longitude);
+      // setLat(info.coords.latitude);
+      // setLong(info.coords.longitude);
       dispatch(Actions.getAddressLatLng(info.coords));
     }, error => {
       console.log("Error in fetching location", error);
@@ -142,6 +141,7 @@ const OtpScreen = props => {
   };
 
   const verifyOtp = () => {
+    setAddressFetched(false);
     if (address && address.full_address) {
       let obj = {
         mobile: number,
@@ -155,6 +155,9 @@ const OtpScreen = props => {
       }
       dispatch(Actions.verifyOtp({ ...obj, ...address }));
       setCode("");
+    } else {
+      accessLocation();
+      setAddressFetched(true);
     }
   }
 

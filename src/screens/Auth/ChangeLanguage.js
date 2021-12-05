@@ -13,10 +13,12 @@ import Toast from 'react-native-simple-toast';
 import RNRestart from 'react-native-restart';
 
 const ChangeLanguage = props => {
+  const { isAuth } = props;
+  const language = useSelector((state) => state.getLanguage);
+  console.log("language", language);
   const [langLabel, setLangLabel] = useState('English');
   const dropdownInput = useRef(null);
   const dispatch = useDispatch();
-  const language = useSelector((state) => state.getLanguage);
 
   useEffect(() => {
     console.log('language 1 is ', language);
@@ -50,9 +52,11 @@ const ChangeLanguage = props => {
           // I18n.locale = langTypes[langIndex];
           console.log('language changed ', language);
           // console.log('restarting');
-          setTimeout(() => {
-            RNRestart.Restart();
-          }, 2500);
+          if (!isAuth) {
+            setTimeout(() => {
+              RNRestart.Restart();
+            }, 2500);
+          }
 
           if (langTypes[langIndex] == 'ur') {
             Toast.showWithGravity(

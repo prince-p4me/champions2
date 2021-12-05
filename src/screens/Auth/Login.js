@@ -48,7 +48,8 @@ const LoginScreen = () => {
   const [mobile, setMobile] = useState('');
   const dispatch = useDispatch();
   let language = useSelector(state => state.getLanguage);
-  const isRtl = useSelector(state => state.isRtl);
+  // const isRtl = useSelector(state => state.isRtl);
+  const isRtl = (language == "ur");
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
   useEffect(() => {
@@ -120,7 +121,7 @@ const LoginScreen = () => {
       <TouchableOpacity
         style={{
           width: 30,
-          alignSelf: 'flex-start',
+          alignSelf: isRtl ? "flex-end" : 'flex-start',
         }}
         onPress={() => Navigation.goBack()}>
         {isRtl ? (
@@ -158,7 +159,7 @@ const LoginScreen = () => {
           </View>
           <TextInput
             style={{ flex: 1, padding: 7 }}
-            placeholder="Enter your 10 digits mobile number"
+            placeholder={I18n.t("mobile_place_holder")}
             keyboardType="numeric"
             value={mobile}
             onChangeText={mobile => setMobile(mobile)}
@@ -225,7 +226,7 @@ const LoginScreen = () => {
             style={{ marginEnd: 7 }}
           />
 
-          <ChangeLanguage />
+          <ChangeLanguage isAuth={true} />
         </View>
       </View>
     </View>
