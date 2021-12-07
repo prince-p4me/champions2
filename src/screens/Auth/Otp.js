@@ -65,17 +65,6 @@ const OtpScreen = props => {
   );
 
   const accessLocation = async () => {
-    // if (number && number == Constant.testData) {
-    //   let obj = {
-    //     full_address: "Testing",
-    //     state: "Testing",
-    //     pincode: "100000",
-    //     city: 'Testing',
-    //     lat_long: "12000,09788"
-    //   }
-    //   dispatch(Actions.setAddressLatLng(obj));
-    //   return;
-    // }
     const permission =
       parseInt(Platform.Version, 10) < 13
         ? PERMISSIONS.IOS.LOCATION_ALWAYS
@@ -100,8 +89,6 @@ const OtpScreen = props => {
   const getLocation = () => {
     Geolocation.getCurrentPosition(info => {
       console.log("location fetched", info);
-      // setLat(info.coords.latitude);
-      // setLong(info.coords.longitude);
       dispatch(Actions.getAddressLatLng(info.coords));
     }, error => {
       console.log("Error in fetching location", error);
@@ -115,7 +102,10 @@ const OtpScreen = props => {
       [
         {
           text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
+          onPress: () => {
+            console.log("Cancel Pressed");
+            Navigation.navigate("SignIn");
+          },
           style: "cancel"
         },
         {

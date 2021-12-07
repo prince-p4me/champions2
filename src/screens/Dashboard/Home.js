@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   ScrollView,
-  Image, Text,
+  Image, Platform,
   Linking,
   SafeAreaView,
   DeviceEventEmitter,
   TextInput,
   TouchableOpacity,
-  FlatList,
+  Alert,
 } from 'react-native';
 import Header from '../../components/Header';
 import {
@@ -49,6 +49,7 @@ import Geolocation from '@react-native-community/geolocation';
 import YoutubeSection from '../../components/YoutubeSection';
 import * as ApiService from "../../services/Api";
 import { showResponse, showToast } from '../../utility/Index';
+import { PERMISSIONS, check, request, RESULTS } from 'react-native-permissions'
 
 const HomeScreen = props => {
   const [points, setPoints] = useState('');
@@ -66,17 +67,6 @@ const HomeScreen = props => {
   const language = useSelector(state => state.getLanguage);
   const user = useSelector(state => state.getUser);
   const forceUpdate = React.useReducer(bool => !bool)[1];
-  // const youtubelist = useSelector(state => state.getYtVideos);
-
-  // useEffect(() => {
-  //   fetch(
-  //     Constant.API_URL + "videos.php")
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       console.log({ json });
-  //       setYoutTubelist(json.data);
-  //     })
-  // }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -89,15 +79,66 @@ const HomeScreen = props => {
     React.useCallback(() => {
       checkProps();
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
-      // fetchLocation();
+      accessLocation();
     }, [])
   );
 
-  const fetchLocation = () => {
-    console.log("fetching address");
+  const accessLocation = async () => {
+    const permission =
+      parseInt(Platform.Version, 10) < 13
+        ? PERMISSIONS.IOS.LOCATION_ALWAYS
+        : PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
+    const res = await check(permission);
+    console.log("result is", res);
+    if (res == RESULTS.GRANTED) {
+      console.log("location access provided");
+      getLocation();
+    } else {
+      var result = await request(permission);
+      console.log("result is ", result);
+      if (result == RESULTS.GRANTED) {
+        console.log("location access provided");
+        getLocation();
+      } else {
+        showAlert();
+      }
+    }
+  }
+
+  const getLocation = () => {
     Geolocation.getCurrentPosition(info => {
+      console.log("location fetched", info);
       dispatch(Actions.getAddressLatLng(info.coords));
+    }, error => {
+      console.log("Error in fetching location", error);
+      showAlert();
     });
+  }
+
+  const showAlert = () => {
+    const msg = parseInt(Platform.Version, 10) < 13 ? "always" : "when using the app";
+    Alert.alert("Location not provided!!!", "Please provide location access as " + msg + " to proceed further",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {
+            console.log("Cancel Pressed");
+            // Navigation.navigate("SignIn");
+            dispatch(Actions.logOut());
+          },
+          style: "cancel"
+        },
+        {
+          text: "GO TO SETTINGS", onPress: () => {
+            console.log("OK Pressed");
+            Linking.openSettings().then(() => {
+              console.log("opened settings")
+            }).catch(err => {
+              console.log("error while opening settings", err);
+            })
+          }
+        }
+      ])
   }
 
   const checkProps = () => {
