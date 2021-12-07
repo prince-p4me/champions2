@@ -104,7 +104,7 @@ const OtpScreen = props => {
           text: "Cancel",
           onPress: () => {
             console.log("Cancel Pressed");
-            Navigation.navigate("SignIn");
+            Navigation.goBack("SignIn");
           },
           style: "cancel"
         },

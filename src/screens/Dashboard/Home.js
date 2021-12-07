@@ -36,7 +36,6 @@ import { connect } from 'react-redux';
 import * as Navigation from '../../navigation/navigation';
 import ReviewLayout from '../../components/ReviewLayout';
 
-import { request, PERMISSIONS } from 'react-native-permissions';
 import MenuContainer from '../../components/MenuContainer';
 
 import Color from '../../utility/Color';
