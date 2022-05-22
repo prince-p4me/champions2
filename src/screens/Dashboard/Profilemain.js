@@ -22,33 +22,14 @@ import ProfilePicModal from '../../components/ProfilePicModal';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import Color from '../../utility/Color';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import Constant from '../../utility/Constant';
 import { showToast } from '../../utility/Index';
 
 import About from '../../assets/imgs/user.jpeg';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const languages = ['English', 'Hindi', 'Punjabi', 'Bangla', 'Urdu'];
 const langTypes = ['en', 'hn', 'pu', 'ba', 'ur'];
 
-const createFormData = (photo, body) => {
-  const data = new FormData();
-
-  data.append('photo', {
-    name: photo.fileName,
-    type: photo.type,
-    uri:
-      Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
-  });
-
-  Object.keys(body).forEach(key => {
-    data.append(key, body[key]);
-  });
-
-  return data;
-};
-
-const Profilemain = props => {
+const Profilemain = () => {
   const user = useSelector(state => state.getUser);
   let [modalVisible, setModalVisible] = useState(false);
   let [languageList, updateLanguageList] = useState(Language);
@@ -183,11 +164,28 @@ const Profilemain = props => {
           disabled={false}
           style={styles.closeImage}
           onPress={() => Navigation.navigate('Editprofile')}>
-          <Image
-            source={Images.aadhar}
-            style={styles.image}
-            resizeMode="contain"></Image>
-          <TextRegular style={styles.textstyle} text={I18n.t('Aadhar')} />
+          <View
+            style={{
+              flex: 5,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={Images.aadhar}
+              style={styles.image}
+              resizeMode="contain"></Image>
+            <TextRegular style={styles.textstyle} text={I18n.t('Aadhar')} />
+          </View>
+          {user.aadhaar_number && <View
+            style={{
+              flex: 5,
+              alignItems: 'flex-end',
+            }}>
+            <TextRegular
+              style={[styles.textstyle, { color: Color.theme }]}
+              text={user.aadhaar_number}
+            />
+          </View>}
         </TouchableOpacity>
         <View style={styles.line} />
         <TouchableOpacity

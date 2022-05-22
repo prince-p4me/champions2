@@ -54,6 +54,7 @@ const HomeScreen = props => {
   const [points, setPoints] = useState('');
   const [scanPoints, setScanPoints] = useState(false);
   const isLoading = useSelector(state => state.isLoading);
+  const user = useSelector(state => state.getUser);
 
   const [youtbelist, setYoutTubelist] = useState([]);
 
@@ -64,7 +65,6 @@ const HomeScreen = props => {
   const isRtl = useSelector(state => state.isRtl);
   const offerDetail = useSelector(state => state.getOfferDetail);
   const language = useSelector(state => state.getLanguage);
-  const user = useSelector(state => state.getUser);
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
   useEffect(() => {
@@ -187,6 +187,12 @@ const HomeScreen = props => {
       //   });
     } else {
       dispatch(Actions.getHomeData());
+      ApiService.getUserData().then((res) => {
+        if (res.data[0]) {
+          res.data[0].id = user.id;
+        }
+        dispatch(Actions.updateUser(res.data[0]));
+      })
     }
     setTimeout(() => {
       dispatch(Actions.setLoading(false));

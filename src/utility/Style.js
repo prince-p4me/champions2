@@ -3,6 +3,25 @@ import Color from './Color';
 import Constant from './Constant';
 
 export default StyleSheet.create({
+  languageItem: {
+    alignItems: 'center', borderBottomWidth: 3,
+    borderColor: Colors.bgGray,
+    marginBottom: 15
+  },
+  textstyle: {
+    marginStart: 20,
+  },
+  image: {
+    height: 25,
+    width: 25,
+    tintColor: Color.theme
+  },
+  closeImage: {
+    backgroundColor: '#fff',
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   notification: {
     paddingStart: 15, height: "100%",
     justifyContent: "center",

@@ -300,3 +300,31 @@ export function updateLocation() {
   data.user_id = store.getState().getUser.id;
   return callApi(Constants.API_URL + 'location_update.php', data, 'POST');
 }
+
+export function getStates() {
+  console.log('----------getStates Api Call ------------------');
+  return callApi(Constants.API_URL + 'states.php', {}, 'GET');
+}
+
+export function getCategory() {
+  console.log('----------getcategory Api Call ------------------');
+  return callApi(Constants.API_URL + 'category.php', null, 'GET');
+}
+
+export function getReligions() {
+  console.log('----------getReligions Api Call ------------------');
+  return callApi(Constants.API_URL + 'religions.php', null, 'GET');
+}
+
+export function getCities(data) {
+  console.log('----------getCities Api Call ------------------');
+  return callApi(Constants.API_URL + 'cities.php', data, 'POST');
+}
+
+export function getUserData() {
+  const data = {
+    user_id: store.getState().getUser.id
+  };
+  console.log('----------getUserData Api Call ------------------');
+  return callApi(Constants.API_URL + 'user_profile.php', data, 'POST');
+}

@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -14,26 +14,35 @@ import Colors from '../../utility/Color';
 import styles from '../../utility/Style';
 import Loader from '../../components/Loader';
 import * as Actions from '../../redux/action';
+import RNRestart from 'react-native-restart';
 
 import Images from '../../utility/Image';
 import Constant from '../../utility/Constant';
 import * as Navigation from '../../navigation/navigation';
 import I18n from '../../services/i18n';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import BottomTile from '../../components/BottomTile';
 import Color from '../../utility/Color';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import TextInput from '../../components/TextInput';
 import ProfilePicModal from '../../components/ProfilePicModal';
+import * as API from "../../services/Api";
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
-import {showToast} from '../../utility/Index';
+import { showToast } from '../../utility/Index';
 import DatePicker from 'react-native-datepicker';
+import { TextRegular } from '../../components/TextView';
+import LanguageModal from '../../components/LanguageModal';
+import Language from '../../assets/language/language.json';
+const languages = ['English', 'Hindi', 'Punjabi', 'Bangla', 'Urdu'];
+const langTypes = ['en', 'hn', 'pu', 'ba', 'ur'];
 
 const EditProfile = () => {
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
+  const [bought_from, setboughtFrom] = useState('');
+  const [pincode, setPinCode] = useState('');
+  const [full_adress, setFulladdress] = useState('');
   const [email, setEmail] = useState('');
   const [dob, setDob] = useState('01-12-1994');
   const [aadhar, setAadhar] = useState('');
@@ -43,6 +52,21 @@ const EditProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.getUser);
   const datePickerRef = useRef(null);
+  let [modalVisible, setModalVisible] = useState(false);
+  let [languageList, updateLanguageList] = useState(Language);
+  let [states, setStates] = useState([]);
+  let [selectedState, setSelectedState] = useState(null);
+
+  let [categories, setCategories] = useState([]);
+  let [category, setSelectCategory] = useState(null);
+  let [allStates, setAllStates] = useState([]);
+  let [cities, setCities] = useState([]);
+  let [city, selectCity] = useState(null);
+
+  let [religions, setReligions] = useState([]);
+  let [religion, selectReligion] = useState(null);
+  let language = useSelector(state => state.getLanguage);
+  const forceUpdate = React.useReducer(bool => !bool)[1];
 
   const [adharImgUploaded, setUploaded] = useState(null);
 
@@ -65,7 +89,111 @@ const EditProfile = () => {
     if (user.aadhaar_photo) {
       setUploaded(user.aadhaar_photo);
     }
+    if (user.state && allStates.length) {
+      setSelectedState(user.state);
+      getCities(user.state);
+    }
+    if (user.city) {
+      selectCity(user.city);
+    }
+    if (user.pincode) {
+      setPinCode(user.pincode);
+    }
+    if (user.full_adress) {
+      setFulladdress(user.full_adress);
+    }
+    if (user.bought_from) {
+      setboughtFrom(user.bought_from);
+    }
+    if (user.religion) {
+      selectReligion(user.religion);
+    }
   }, []);
+
+  const getLanguage = () => {
+    let index = langTypes.findIndex(lang => lang === language);
+    return languages[index];
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      I18n.locale = language;
+      forceUpdate();
+    }, 100);
+  }, [language]);
+
+  useEffect(() => {
+    dispatch(Actions.setLoading(true));
+    API.getStates().then((res) => {
+      console.log(res);
+      let data = [];
+      if (res.data) {
+        res.data.forEach((val) => {
+          data.push(val.name);
+        });
+      }
+      setAllStates(res.data);
+      setStates(data);
+      dispatch(Actions.setLoading(false));
+      if (user.state) {
+        getCities(user.state);
+      }
+    });
+    API.getCategory().then((res) => {
+      console.log(res);
+      let data = [];
+      if (res.data) {
+        res.data.forEach((val) => {
+          data.push(val.name);
+        });
+      }
+      setCategories(data);
+      dispatch(Actions.setLoading(false));
+    });
+    API.getReligions().then((res) => {
+      console.log(res);
+      let data = [];
+      if (res.data) {
+        res.data.forEach((val) => {
+          data.push(val.name);
+        });
+      }
+      setReligions(data);
+      dispatch(Actions.setLoading(false));
+    });
+  }, [])
+
+  useEffect(() => {
+    selectCity(null);
+    setCities([]);
+    getCities(selectedState);
+  }, [selectedState]);
+
+  const getCities = (state) => {
+    let obj = {};
+    if (!allStates.length) {
+      return;
+    }
+    for (let i = 0; i < allStates.length; i++) {
+      if (state === allStates[i].name) {
+        obj = allStates[i];
+        break;
+      }
+    }
+    if (!obj.id) {
+      return
+    }
+    API.getCities({ state_id: obj.id }).then((res) => {
+      let data = [];
+      if (res.data) {
+        res.data.forEach((val) => {
+          data.push(val.name);
+        });
+      }
+      setCities(data);
+      dispatch(Actions.setLoading(false));
+    });
+  };
 
   const chooseImage = imageType => {
     let option = {
@@ -93,7 +221,7 @@ const EditProfile = () => {
       });
     } else if (imageType == 'gallery') {
       launchImageLibrary(option, response => {
-        console.log({response: response});
+        console.log({ response: response });
         if (response.didCancel) {
           showToast('Please select your profile picture');
           return;
@@ -128,6 +256,16 @@ const EditProfile = () => {
     // }
     else if (mobile == '' || (mobile.length && mobile.length < 10)) {
       message = 'Please enter valid 10 digit mobile number.';
+    } else if (!selectedState) {
+      message = "Please select your state";
+    } else if (!city) {
+      message = "Please select your city";
+    } else if (!bought_from) {
+      message = "Please enter where did your buy";
+    } else if (!pincode) {
+      message = "Please enter your pincode";
+    } else if (!full_adress) {
+      message = "Please enter your full address";
     }
 
     // else if (dob == '') {
@@ -155,13 +293,60 @@ const EditProfile = () => {
       aadhaar_number: aadhar,
       aadhaar_photo: user.aadhaar_photo,
       profile_photo: user.profile_photo,
+      state: selectedState,
+      city,
+      pincode,
+      full_adress,
+      bought_from,
+      category,
+      religion,
     };
 
     dispatch(Actions.updateProfile(userInfo));
   };
 
+  const renderModal = () => {
+    return (
+      <>
+        <LanguageModal
+          visible={modalVisible}
+          Language={languageList}
+          onPress={item => {
+            if (item && item.code) {
+              dispatch(Actions.setLanguage(item.code));
+              dispatch(Actions.setRtl(item.code == 'ur'));
+              I18n.locale = item.code;
+              setTimeout(() => {
+                RNRestart.Restart();
+              }, 2500);
+            }
+            setModalVisible(false);
+          }}
+          onChangeLanguage={text => {
+            console.log(text);
+            if (text == '' || !text) {
+              //   alert(Language.length);
+              console.log({ Language: Language });
+              updateLanguageList(Language);
+              return;
+            }
+
+            languageList = Language.filter(function (item) {
+              console.log('232');
+              console.log(item.name.toLowerCase());
+              console.log(text.toLowerCase());
+              return item.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
+            });
+            updateLanguageList(languageList);
+          }}
+        />
+      </>
+    );
+  };
+
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
+      {renderModal()}
       <Header
         back={true}
         title={I18n.t('editdetails')}
@@ -169,21 +354,48 @@ const EditProfile = () => {
         help={true}
       />
       <ScrollView
-        contentContainerStyle={[
-          styles.container,
-          {padding: 14, backgroundColor: Colors.white},
-        ]}>
+        contentContainerStyle={{
+          padding: 14, backgroundColor: Colors.white,
+          flexGrow: 1, alignItems: "center"
+        }}>
+        <TouchableOpacity
+          style={[styles.closeImage, styles.languageItem]}
+          onPress={() => setModalVisible(true)}>
+          <View
+            style={{
+              flex: 7,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={Images.language}
+              style={styles.image}
+              resizeMode="contain"></Image>
+            <TextRegular style={styles.textstyle} text={I18n.t('language')} />
+          </View>
+          <View
+            style={{
+              flex: 3,
+              alignItems: 'flex-end',
+            }}>
+            <TextRegular
+              style={[styles.textstyle, { color: Color.theme }]}
+              text={getLanguage()}
+            />
+          </View>
+        </TouchableOpacity>
         <TextInput
           value={name}
-          lable="Full Name"
+          lable="Full Name *"
           icon="user-o"
           returnKeyType="next"
+          keyboardType="default"
           placeholder="Full name of user"
           onChangeText={full_name => setName(full_name)}
         />
         <TextInput
           value={mobile}
-          lable="Mobile Number"
+          lable="Mobile Number *"
           icon="mobile-phone"
           placeholder="+91-**********"
           keyboardType="phone-pad"
@@ -209,7 +421,78 @@ const EditProfile = () => {
             setDatePicker(true);
             datePickerRef.current.onPressDate();
           }}
+          keyboardType="default"
         />
+
+        <TextInput
+          value={selectedState || user?.state}
+          lable="Select State *"
+          icon="dashboard"
+          placeholder="Select State"
+          dropdownData={states}
+          onChangeText={value => setSelectedState(value)}
+          keyboardType="default"
+        />
+
+        <TextInput
+          value={city || user.city}
+          lable="Select City *"
+          icon="dashboard"
+          placeholder="Select City"
+          dropdownData={cities}
+          onChangeText={value => selectCity(value)}
+          keyboardType="default"
+        />
+
+        <TextInput
+          value={bought_from}
+          lable="Bought from *"
+          icon="user-o"
+          placeholder="Bought from"
+          keyboardType="default"
+          returnKeyType="next"
+          onChangeText={bought_from => setboughtFrom(bought_from)}
+        />
+
+        <TextInput
+          value={pincode}
+          lable="Pincode *"
+          icon="location-arrow"
+          placeholder="Pincode"
+          keyboardType="default"
+          returnKeyType="next"
+          onChangeText={pincode => setPinCode(pincode)}
+        />
+
+        <TextInput
+          value={full_adress}
+          lable="Full Address *"
+          icon="location-arrow"
+          placeholder="Pincode"
+          keyboardType="default"
+          returnKeyType="next"
+          onChangeText={full_adress => setPinCode(full_adress)}
+        />
+
+        <TextInput
+          value={category || user?.category}
+          lable="Select Category"
+          icon="dashboard"
+          placeholder="Select Category"
+          dropdownData={categories}
+          onChangeText={value => setSelectCategory(value)}
+          keyboardType="default"
+        />
+        <TextInput
+          value={religion || user?.religion}
+          lable="Select Religion"
+          icon="dashboard"
+          placeholder="Select Religion"
+          dropdownData={religions}
+          onChangeText={value => selectReligion(value)}
+          keyboardType="default"
+        />
+
         <TextInput
           value={aadhar}
           lable="Aadhar Card ID Number"
@@ -249,7 +532,7 @@ const EditProfile = () => {
 
       <DatePicker
         date={dob}
-        style={{width: 0, height: 0, opacity: 0}}
+        style={{ width: 0, height: 0, opacity: 0 }}
         ref={datePickerRef}
         mode="date"
         placeholder="select date"
@@ -264,7 +547,7 @@ const EditProfile = () => {
       />
 
       <BottomTile title={I18n.t('uploadprofile')} onPress={updateProfile} />
-      <SafeAreaView style={{backgroundColor: Colors.theme}}></SafeAreaView>
+      <SafeAreaView style={{ backgroundColor: Colors.theme }}></SafeAreaView>
     </View>
   );
 };

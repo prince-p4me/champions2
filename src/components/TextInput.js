@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { TextMedium, TextRegular } from './TextView';
 import PropTypes from 'prop-types';
 import Sizes from '../utility/Sizes';
 import Colors from '../utility/Color';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
+import ModalDropdown from 'react-native-modal-dropdown';
+import Images from '../utility/Image';
 
 const InputBox = props => {
   const {
@@ -23,11 +25,14 @@ const InputBox = props => {
     onChangeText,
     placeholder,
     rightIcon,
-    maxLength
+    maxLength,
+    dropdownData
   } = props;
   const isRtl = useSelector(state => state.isRtl);
-  console.log("isRtl", isRtl);
+  // console.log("isRtl", isRtl);
   const size = icon == 'mobile-phone' ? 40 : 24;
+  const dropdownInput = React.useRef(null);
+
   if (onPress) {
     return (
       <TouchableOpacity
@@ -95,17 +100,34 @@ const InputBox = props => {
       )}
       <View style={[styles.inputBox, borderColor && { borderBottomColor: borderColor }]}>
         <TextRegular text={lable} style={{ fontSize: Sizes.regular }} />
-        <TextInput
-          style={styles.input}
-          value={value}
-          placeholder={placeholder}
-          placeholderTextColor={Colors.border}
-          onChangeText={text => onChangeText(text)}
-          keyboardType={keyboardType || 'default'}
-          onSubmitEditing={props?.onSubmitEditing}
-          returnKeyType={returnKeyType || 'next'}
-          maxLength={maxLength || 1000}
-        />
+        {dropdownData ?
+          <ModalDropdown
+            dropdownStyle={{ width: '70%' }}
+            dropdownTextStyle={{ fontSize: Sizes.medium, color: Colors.text }}
+            textStyle={{ fontSize: Sizes.medium, color: Colors.text }}
+            ref={dropdownInput}
+            options={dropdownData}
+            style={{ width: "100%", paddingVertical: 5 }}
+            onSelect={(index) => {
+              onChangeText(dropdownData[index]);
+            }}
+            defaultValue={value}
+          /> :
+          <TextInput
+            style={styles.input}
+            value={value}
+            placeholder={placeholder}
+            placeholderTextColor={Colors.border}
+            onChangeText={text => onChangeText(text)}
+            keyboardType={keyboardType || 'default'}
+            onSubmitEditing={props?.onSubmitEditing}
+            returnKeyType={returnKeyType || 'next'}
+            maxLength={maxLength || 1000}
+          />}
+        {dropdownData && <Image source={Images.dropdown} style={[{
+          width: 15, height: 15, tintColor: Colors.theme,
+          position: "absolute", bottom: 5
+        }, isRtl ? { left: 14 } : { right: 14 }]}></Image>}
       </View>
     </View>
   );

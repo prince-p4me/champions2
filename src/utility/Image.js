@@ -45,4 +45,5 @@ export default Images = {
   scan2: require('../assets/imgs/scan-2.png'),
   download: require('../assets/imgs/download.png'),
   youtube: require('../assets/imgs/youtube.png'),
+  dropdown: require('../assets/imgs/arrow-down-sign-to-navigate.png')
 };
