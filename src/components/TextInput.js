@@ -26,7 +26,8 @@ const InputBox = props => {
     placeholder,
     rightIcon,
     maxLength,
-    dropdownData
+    dropdownData,
+    row
   } = props;
   const isRtl = useSelector(state => state.isRtl);
   // console.log("isRtl", isRtl);
@@ -89,7 +90,7 @@ const InputBox = props => {
     );
   }
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, row && { height: 70 }]}>
       {icon && (
         <View style={styles.iconBox}>
           <Icon
@@ -123,6 +124,7 @@ const InputBox = props => {
             onSubmitEditing={props?.onSubmitEditing}
             returnKeyType={returnKeyType || 'next'}
             maxLength={maxLength || 1000}
+            multiline={row ? true : false}
           />}
         {dropdownData && <Image source={Images.dropdown} style={[{
           width: 15, height: 15, tintColor: Colors.theme,
@@ -172,7 +174,8 @@ const propTypes = {
   iconColor: PropTypes.string,
   rightButton: PropTypes.string,
   rightPress: PropTypes.func,
-  maxLength: PropTypes.number
+  maxLength: PropTypes.number,
+  row: PropTypes.number
 };
 
 InputBox.propTypes = propTypes;

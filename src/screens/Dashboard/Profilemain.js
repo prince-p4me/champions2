@@ -176,16 +176,16 @@ const Profilemain = () => {
               resizeMode="contain"></Image>
             <TextRegular style={styles.textstyle} text={I18n.t('Aadhar')} />
           </View>
-          {user.aadhaar_number && <View
+          {user?.aadhaar_number ? <View
             style={{
               flex: 5,
               alignItems: 'flex-end',
             }}>
             <TextRegular
               style={[styles.textstyle, { color: Color.theme }]}
-              text={user.aadhaar_number}
+              text={user?.aadhaar_number}
             />
-          </View>}
+          </View> : null}
         </TouchableOpacity>
         <View style={styles.line} />
         <TouchableOpacity

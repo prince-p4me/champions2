@@ -128,5 +128,17 @@
     "skip": "Skip",
     "all_video": "Our Videos",
     "scancode": "Scan the code in the coupon inside the 10X Rice packet and earn plenty of points.",
-    "scancode2": "PRODUCT CATALOGUE"
+    "scancode2": "PRODUCT CATALOGUE",
+    "email": "Email",
+    "dob": "Date of Birth",
+    "select_state": "Select State",
+    "select_city": "Select City",
+    "bought_from": "Bought from",
+    "Full_Address": "Full Address",
+    "Select_Category": "Select Category",
+    "Select_Religion": "Select Religion",
+    "pincode": "Pincode",
+    "aadhar": "Aadhar Card ID Number",
+    "upload_aadhar": "Upload Aadhar ID Photo",
+    "UPLOAD": "UPLOAD"
 }

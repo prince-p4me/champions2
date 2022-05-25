@@ -49,6 +49,7 @@ import YoutubeSection from '../../components/YoutubeSection';
 import * as ApiService from "../../services/Api";
 import { showResponse, showToast } from '../../utility/Index';
 import { PERMISSIONS, check, request, RESULTS } from 'react-native-permissions'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = props => {
   const [points, setPoints] = useState('');
@@ -82,6 +83,15 @@ const HomeScreen = props => {
     }, [])
   );
 
+  const isLocationTouched = async () => {
+    return AsyncStorage.getItem("accessed", (data) => {
+      console.log("data", data);
+      if (data) {
+        return JSON.parse(data);
+      } else false;
+    });
+  }
+
   const accessLocation = async () => {
     const permission =
       parseInt(Platform.Version, 10) < 13
@@ -98,7 +108,7 @@ const HomeScreen = props => {
       if (result == RESULTS.GRANTED) {
         console.log("location access provided");
         getLocation();
-      } else {
+      } else if (isLocationTouched()) {
         showAlert();
       }
     }
@@ -110,11 +120,15 @@ const HomeScreen = props => {
       dispatch(Actions.getAddressLatLng(info.coords));
     }, error => {
       console.log("Error in fetching location", error);
-      showAlert();
+      const locationAccessed = JSON.parse(!AsyncStorage.getItem("accessed", "false") ?? "false");
+      if (isLocationTouched()) {
+        showAlert();
+      }
     });
   }
 
   const showAlert = () => {
+    AsyncStorage.setItem("accessed", "true");
     const msg = parseInt(Platform.Version, 10) < 13 ? "always" : "when using the app";
     Alert.alert("Location not provided!!!", "Please provide location access as " + msg + " to proceed further",
       [
@@ -123,7 +137,7 @@ const HomeScreen = props => {
           onPress: () => {
             console.log("Cancel Pressed");
             // Navigation.navigate("SignIn");
-            dispatch(Actions.logOut());
+            // dispatch(Actions.logOut());
           },
           style: "cancel"
         },
@@ -188,17 +202,20 @@ const HomeScreen = props => {
     } else {
       dispatch(Actions.getHomeData());
       ApiService.getUserData().then((res) => {
-        if (res.data[0]) {
-          res.data[0].id = user.id;
+        const obj = { ...res.data[0] };
+        if (obj) {
+          obj.id = user.id;
         }
-        dispatch(Actions.updateUser(res.data[0]));
+        dispatch(Actions.updateUser(obj));
+        if (!obj.name || !obj.mobile || !obj.state || !obj.bought_from || !obj.city || !obj.pincode || !obj.full_adress) {
+          Navigation.navigate('Editprofile');
+        }
       })
     }
     setTimeout(() => {
       dispatch(Actions.setLoading(false));
     }, 6000);
   };
-
 
   function scanQrCode(obj, headers) {
     axios.post(Constant.API_URL + "scan_qr.php", obj, { headers })

@@ -386,16 +386,16 @@ const EditProfile = () => {
         </TouchableOpacity>
         <TextInput
           value={name}
-          lable="Full Name *"
+          lable={I18n.t('full_name') + " *"}
           icon="user-o"
           returnKeyType="next"
           keyboardType="default"
-          placeholder="Full name of user"
+          placeholder={I18n.t('full_name') + " *"}
           onChangeText={full_name => setName(full_name)}
         />
         <TextInput
           value={mobile}
-          lable="Mobile Number *"
+          lable={I18n.t('mobile') + " *"}
           icon="mobile-phone"
           placeholder="+91-**********"
           keyboardType="phone-pad"
@@ -405,7 +405,7 @@ const EditProfile = () => {
         />
         <TextInput
           value={email}
-          lable="Email"
+          lable={I18n.t('email') + " *"}
           icon="envelope"
           placeholder="abc@your-domain.com"
           keyboardType="email-address"
@@ -414,7 +414,7 @@ const EditProfile = () => {
         />
         <TextInput
           value={dob}
-          lable="Date of Birth"
+          lable={I18n.t("dob")}
           icon="calendar-o"
           placeholder="03-JAN-1994"
           onPress={() => {
@@ -426,9 +426,9 @@ const EditProfile = () => {
 
         <TextInput
           value={selectedState || user?.state}
-          lable="Select State *"
+          lable={I18n.t("select_state") + " *"}
           icon="dashboard"
-          placeholder="Select State"
+          placeholder={I18n.t("select_state")}
           dropdownData={states}
           onChangeText={value => setSelectedState(value)}
           keyboardType="default"
@@ -436,9 +436,9 @@ const EditProfile = () => {
 
         <TextInput
           value={city || user.city}
-          lable="Select City *"
+          lable={I18n.t("select_city") + " *"}
           icon="dashboard"
-          placeholder="Select City"
+          placeholder={I18n.t("select_city")}
           dropdownData={cities}
           onChangeText={value => selectCity(value)}
           keyboardType="default"
@@ -446,9 +446,9 @@ const EditProfile = () => {
 
         <TextInput
           value={bought_from}
-          lable="Bought from *"
+          lable={I18n.t("bought_from") + " *"}
           icon="user-o"
-          placeholder="Bought from"
+          placeholder={I18n.t("bought_from")}
           keyboardType="default"
           returnKeyType="next"
           onChangeText={bought_from => setboughtFrom(bought_from)}
@@ -456,9 +456,9 @@ const EditProfile = () => {
 
         <TextInput
           value={pincode}
-          lable="Pincode *"
+          lable={I18n.t("pincode") + " *"}
           icon="location-arrow"
-          placeholder="Pincode"
+          placeholder={I18n.t("pincode")}
           keyboardType="default"
           returnKeyType="next"
           onChangeText={pincode => setPinCode(pincode)}
@@ -466,28 +466,29 @@ const EditProfile = () => {
 
         <TextInput
           value={full_adress}
-          lable="Full Address *"
+          lable={I18n.t("Full_Address") + " *"}
           icon="location-arrow"
-          placeholder="Pincode"
+          placeholder={I18n.t("Full_Address")}
           keyboardType="default"
           returnKeyType="next"
-          onChangeText={full_adress => setPinCode(full_adress)}
+          row={3}
+          onChangeText={full_adress => setFulladdress(full_adress)}
         />
 
         <TextInput
           value={category || user?.category}
-          lable="Select Category"
+          lable={I18n.t("Select_Category")}
           icon="dashboard"
-          placeholder="Select Category"
+          placeholder={I18n.t("Select_Category")}
           dropdownData={categories}
           onChangeText={value => setSelectCategory(value)}
           keyboardType="default"
         />
         <TextInput
           value={religion || user?.religion}
-          lable="Select Religion"
+          lable={I18n.t("Select_Religion")}
           icon="dashboard"
-          placeholder="Select Religion"
+          placeholder={I18n.t("Select_Religion")}
           dropdownData={religions}
           onChangeText={value => selectReligion(value)}
           keyboardType="default"
@@ -495,7 +496,7 @@ const EditProfile = () => {
 
         <TextInput
           value={aadhar}
-          lable="Aadhar Card ID Number"
+          lable={I18n.t("aadhar")}
           keyboardType="numeric"
           icon="dashboard"
           iconColor="rgb(203,86,91)"
@@ -507,14 +508,14 @@ const EditProfile = () => {
 
         <TextInput
           value={responseImg && responseImg.fileName}
-          lable="Upload Aadhar ID Photo"
+          lable={I18n.t("upload_aadhar")}
           icon="address-card-o"
           placeholder="aadhar_photo.png"
           onPress={() => {
             setProfilePicVisible(true);
           }}
           rightTick={adharImgUploaded}
-          rightButton="UPLOAD"
+          rightButton={I18n.t("UPLOAD")}
         />
       </ScrollView>
 

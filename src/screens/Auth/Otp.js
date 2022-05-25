@@ -42,11 +42,11 @@ const OtpScreen = props => {
   const token = useSelector(state => state.getFcmToken);
   const number = isLogin ? mobile : mobile.mobile;
 
-  console.log(address);
-  console.log('mobile', number);
-  console.log('isLogin', isLogin);
-  console.log('name', name);
-  console.log('confirmation', confirmation);
+  // console.log(address);
+  // console.log('mobile', number);
+  // console.log('isLogin', isLogin);
+  // console.log('name', name);
+  // console.log('confirmation', confirmation);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -104,7 +104,7 @@ const OtpScreen = props => {
           text: "Cancel",
           onPress: () => {
             console.log("Cancel Pressed");
-            Navigation.goBack("SignIn");
+            // Navigation.goBack("SignIn");
           },
           style: "cancel"
         },
