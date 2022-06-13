@@ -349,4 +349,11 @@ export function getTancC(payload) {
   };
 }
 
+export function getProfile(payload) {
+  return {
+    type: Types.GET_PROFILE,
+    payload,
+  };
+}
+
 // add another actions further

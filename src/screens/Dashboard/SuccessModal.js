@@ -52,8 +52,9 @@ const SuccessModal = props => {
 
         <TouchableOpacity
           style={styles.dashButton}
-          onPress={async () => {
-            await Clipboard.setString(message);
+          disabled={!user.referral_code}
+          onPress={() => {
+            Clipboard.setString(message);
             Toast.showWithGravity(
               'Message copied successfully . . .',
               Toast.LONG,
@@ -62,7 +63,7 @@ const SuccessModal = props => {
           }}>
           <View style={{ flex: 1 }}>
             <TextMedium
-              text={"Referral code:-" + user.referral_code}
+              text={"Referral code:-" + (user.referral_code ? user.referral_code : "N/A")}
               style={[styles.congratsLink, { color: Colors.darkBGgray }]}
             />
           </View>
@@ -109,20 +110,9 @@ const SuccessModal = props => {
                 : { uri: Constant.IMAGE_URL + offerDetail.image }
             }
             resizeMode="contain"
-            style={{
-              width: '100%',
-              justifyContent: 'flex-end',
-              height: 120,
-              marginTop: 50,
-              marginBottom: 20,
-            }}>
+            style={styles.background}>
             <View
-              style={{
-                width: '100%',
-                alignItems: 'center',
-                position: 'absolute',
-                bottom: -85,
-              }}>
+              style={styles.background1}>
               <TextMedium text={i18n.t('congrat')} style={styles.congrats} />
               <TextMedium text={i18n.t('won_points')} style={styles.congrats} />
               <View style={[styles.congratsText, styles.congratTxt]}>
@@ -142,9 +132,9 @@ const SuccessModal = props => {
               textStyle={styles.outlineBtnText}
               onPress={() => {
                 console.log('going to redeem history');
-                dispatch(Actions.getOfferDetail(offer_info));
                 dispatch(Actions.setSuccessModal(false));
                 Navigation.navigate('OfferAll', { data });
+                dispatch(Actions.getOfferDetail(offer_info));
               }}></FullButton>
           </View>
         </View>
@@ -171,6 +161,19 @@ const SuccessModal = props => {
 };
 
 const styles = StyleSheet.create({
+  background: {
+    width: '100%',
+    justifyContent: 'flex-end',
+    height: 120,
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  background1: {
+    width: '100%',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: -85,
+  },
   closeImage: {
     width: 24,
     height: 24,

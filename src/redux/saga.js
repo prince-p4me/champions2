@@ -298,6 +298,7 @@ function* uploadImage({ type, payload }) {
         if (response2 && response.status) {
           yield put({ type: Types.USER, payload: payload });
         }
+        Navigation.navigate("Home");
       } catch (error) {
         console.log('upload error login', JSON.stringify(error));
       }
@@ -313,6 +314,7 @@ function* updateProfile({ type, payload }) {
     payload.id = payload?.user_id;
     yield put({ type: Types.USER, payload: payload });
     yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    Navigation.navigate("Home");
   } catch (error) {
     console.log('upload error login', JSON.stringify(error));
   }
@@ -448,6 +450,7 @@ function* getWinners({ type, payload }) {
 function* getTransactionCategory({ type, payload }) {
   if (payload.user_id) {
     try {
+      yield put({ type: Types.SET_LOADING, payload: true }); //hide loading
       let response = yield call(Apiservice.getTransactionByCategory, payload); //calling Api
       console.log('response in saga', JSON.stringify(response));
       yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
@@ -559,7 +562,7 @@ function* getTransaction({ type, payload }) {
 function* getOfferDetail({ type, payload }) {
   try {
     if (payload?.offer_id) {
-      yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+      // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
       let response = yield call(Apiservice.getOfferDetail, payload); //calling Api
       console.log('response in getTransaction saga', JSON.stringify(response));
       yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
@@ -770,6 +773,24 @@ function* fetchYtVideos({ type, payload }) {
   }
 }
 
+function* getProfile() {
+  try {
+    // yield put({ type: Types.SET_LOADING, payload: true }); //show loading
+    yield put({ type: Types.SET_LOADING, payload: true }); //hide loading
+
+    let response = yield call(Apiservice.getUserData); //calling Api
+    console.log('response in saga', JSON.stringify(response));
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+    if (response && response?.status && response?.data?.length) {
+      const user = store.getState().getUser;
+      yield put({ type: Types.USER, payload: { ...user, ...response.data[0] } }); //hide loading
+    } else showResponse(response);
+  } catch (error) {
+    console.log(error);
+    yield put({ type: Types.SET_LOADING, payload: false }); //hide loading
+  }
+}
+
 // Watcher
 export default function* watcher() {
   // Take Last Action Only
@@ -809,4 +830,5 @@ export default function* watcher() {
   yield takeLatest(Types.UPDATE_LOCATION, updateLocation);
   yield takeLatest(Types.GET_VIDEOS, getVideos);
   yield takeLatest(Types.GET_YOUTUBE_LIST, fetchYtVideos);
+  yield takeLatest(Types.GET_PROFILE, getProfile);
 }

@@ -53,6 +53,10 @@ const Profilemain = () => {
     }, 100);
   }, [language]);
 
+  useEffect(() => {
+    dispatch(Actions.getProfile())
+  }, []);
+
   const renderHelpSection = () => {
     return (
       <>

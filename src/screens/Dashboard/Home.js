@@ -79,7 +79,7 @@ const HomeScreen = props => {
     React.useCallback(() => {
       checkProps();
       DeviceEventEmitter.emit(Constant.FETCH_COUNT);
-      accessLocation();
+      checkProfile();
     }, [])
   );
 
@@ -108,7 +108,7 @@ const HomeScreen = props => {
       if (result == RESULTS.GRANTED) {
         console.log("location access provided");
         getLocation();
-      } else if (isLocationTouched()) {
+      } else {
         showAlert();
       }
     }
@@ -121,9 +121,7 @@ const HomeScreen = props => {
     }, error => {
       console.log("Error in fetching location", error);
       const locationAccessed = JSON.parse(!AsyncStorage.getItem("accessed", "false") ?? "false");
-      if (isLocationTouched()) {
-        showAlert();
-      }
+      showAlert();
     });
   }
 
@@ -138,6 +136,7 @@ const HomeScreen = props => {
             console.log("Cancel Pressed");
             // Navigation.navigate("SignIn");
             // dispatch(Actions.logOut());
+            Navigation.navigate('Editprofile');
           },
           style: "cancel"
         },
@@ -152,6 +151,21 @@ const HomeScreen = props => {
           }
         }
       ])
+  }
+
+  const checkProfile = () => {
+    ApiService.getUserData().then((res) => {
+      const obj = { ...res.data[0] };
+      if (obj) {
+        obj.id = user.id;
+      }
+      dispatch(Actions.updateUser(obj));
+      if (!obj.name || !obj.mobile || !obj.bought_from) {
+        Navigation.navigate('Editprofile');
+      } else if (!obj.city || !obj.pincode || !obj.full_adress || !obj.state) {
+        accessLocation();
+      }
+    })
   }
 
   const checkProps = () => {
@@ -201,16 +215,6 @@ const HomeScreen = props => {
       //   });
     } else {
       dispatch(Actions.getHomeData());
-      ApiService.getUserData().then((res) => {
-        const obj = { ...res.data[0] };
-        if (obj) {
-          obj.id = user.id;
-        }
-        dispatch(Actions.updateUser(obj));
-        if (!obj.name || !obj.mobile || !obj.state || !obj.bought_from || !obj.city || !obj.pincode || !obj.full_adress) {
-          Navigation.navigate('Editprofile');
-        }
-      })
     }
     setTimeout(() => {
       dispatch(Actions.setLoading(false));

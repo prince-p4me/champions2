@@ -113,7 +113,7 @@ const MyDashboard = () => {
       <TextRegular text={'No Data Found'} style={{ textAlign: 'center' }} />
     );
   };
-  function getTransaction(type) {
+  const getTransaction = (type) => {
     let obj = {
       user_id: user.id,
       type: type,
@@ -121,7 +121,9 @@ const MyDashboard = () => {
     dispatch(Actions.getTransactionCategory(obj));
   }
   useEffect(() => {
-    getTransaction('QR Scan');
+    setTimeout(() => {
+      getTransaction('QR Scan');
+    }, 1000)
   }, []);
 
   const ButtonBar = () => {
