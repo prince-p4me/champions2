@@ -160,10 +160,10 @@ const HomeScreen = props => {
         obj.id = user.id;
       }
       dispatch(Actions.updateUser(obj));
-      if (!obj.name || !obj.mobile || !obj.bought_from) {
-        Navigation.navigate('Editprofile');
-      } else if (!obj.city || !obj.pincode || !obj.full_adress || !obj.state) {
+      if (!obj.city || !obj.pincode || !obj.full_adress || !obj.state) {
         accessLocation();
+      } else if (!obj.name || !obj.mobile || !obj.bought_from) {
+        Navigation.navigate('Editprofile');
       }
     })
   }
