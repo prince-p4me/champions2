@@ -124,6 +124,7 @@ const InputBox = props => {
             onSubmitEditing={props?.onSubmitEditing}
             returnKeyType={returnKeyType || 'next'}
             maxLength={maxLength || 1000}
+            numberOfLines={row}
             multiline={row ? true : false}
           />}
         {dropdownData && <Image source={Images.dropdown} style={[{
@@ -167,7 +168,7 @@ const propTypes = {
   placeholder: PropTypes.string,
   returnKeyType: PropTypes.string,
   icon: PropTypes.any,
-  keyboardType: PropTypes.oneOf(['default', 'email-address', 'phone-pad', 'next']),
+  keyboardType: PropTypes.oneOf(['default', 'email-address', 'phone-pad', 'next', 'number-pad']),
   onChangeText: PropTypes.func,
   onSubmitEditing: PropTypes.func,
   onPress: PropTypes.func,

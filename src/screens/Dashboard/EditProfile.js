@@ -34,6 +34,7 @@ import DatePicker from 'react-native-datepicker';
 import { TextRegular } from '../../components/TextView';
 import LanguageModal from '../../components/LanguageModal';
 import Language from '../../assets/language/language.json';
+import { Keyboard } from 'react-native';
 const languages = ['English', 'Hindi', 'Punjabi', 'Bangla', 'Urdu'];
 const langTypes = ['en', 'hn', 'pu', 'ba', 'ur'];
 
@@ -89,8 +90,10 @@ const EditProfile = () => {
     if (user.aadhaar_photo) {
       setUploaded(user.aadhaar_photo);
     }
-    if (user.state && allStates.length) {
+    if (user.state) {
       setSelectedState(user.state);
+    }
+    if (allStates.length && user.state) {
       getCities(user.state);
     }
     if (user.city) {
@@ -108,7 +111,7 @@ const EditProfile = () => {
     if (user.religion) {
       selectReligion(user.religion);
     }
-  }, []);
+  }, [user]);
 
   const getLanguage = () => {
     let index = langTypes.findIndex(lang => lang === language);
@@ -164,7 +167,7 @@ const EditProfile = () => {
   }, [])
 
   useEffect(() => {
-    selectCity(null);
+    // selectCity(null);
     setCities([]);
     getCities(selectedState);
   }, [selectedState]);
@@ -248,7 +251,7 @@ const EditProfile = () => {
   const updateProfile = () => {
     let message = '';
     const regex = /\S+@\S+\.\S+/;
-    if (name == '') {
+    if (name == '' || !name) {
       message = 'Please enter your name';
     }
     // else if (email == '' || (email && !regex.test(email))) {
@@ -459,7 +462,7 @@ const EditProfile = () => {
           lable={I18n.t("pincode") + " *"}
           icon="location-arrow"
           placeholder={I18n.t("pincode")}
-          keyboardType="default"
+          keyboardType="number-pad"
           returnKeyType="next"
           onChangeText={pincode => setPinCode(pincode)}
         />
@@ -471,8 +474,11 @@ const EditProfile = () => {
           placeholder={I18n.t("Full_Address")}
           keyboardType="default"
           returnKeyType="next"
-          row={3}
+          // row={3}
           onChangeText={full_adress => setFulladdress(full_adress)}
+        // onSubmitEditing={() => {
+        //   Keyboard.dismiss();
+        // }}
         />
 
         <TextInput
