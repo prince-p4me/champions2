@@ -1,22 +1,26 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import * as Actions from "../redux/action"
 import { useSelector, useDispatch } from 'react-redux';
 import { View, Image } from 'react-native';
-import { TextBold, TextSemiBold, TextThin } from './TextView';
+import { TextSemiBold, TextThin } from './TextView';
 import i18n from '../services/i18n';
 
-import star from '../assets/imgs/star.png';
 import earned from '../assets/imgs/earned.png';
 import Redeem from '../assets/imgs/Redeem.png';
 import Balance from '../assets/imgs/Balance.png';
 import Sizes from "../utility/Sizes"
 import styles from '../utility/Style';
-import QRCodeContainer from './QRCodeContainer';
 
 const RewardPointlayout = props => {
+  const dispatch = useDispatch();
   const { bgColor } = props;
   const isRtl = useSelector((state) => state.isRtl);
   const align = isRtl ? "right" : "left";
   const data = useSelector((state) => state.getPoints);
+
+  useEffect(() => {
+    dispatch(Actions.getPoints());
+  }, []);
 
   return (
     <View style={[styles.pointTypesContainerreward, bgColor && { backgroundColor: bgColor }]}>

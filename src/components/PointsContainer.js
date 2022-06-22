@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, Image } from 'react-native';
 import { TextBold, TextSemiBold, TextThin } from './TextView';
 import i18n from '../services/i18n';
+import * as Actions from "../redux/action"
 
 import star from '../assets/imgs/star.png';
 import earned from '../assets/imgs/earned.png';
@@ -12,15 +13,19 @@ import Sizes from '../utility/Sizes';
 import styles from '../utility/Style';
 import {
   TouchableOpacity,
-  TouchableHighlight,
 } from 'react-native-gesture-handler';
 
 import * as Navigation from '../navigation/navigation';
 
 const PointsContainer = () => {
+  const dispatch = useDispatch();
   const isRtl = useSelector(state => state.isRtl);
   const align = isRtl ? 'right' : 'left';
   const data = useSelector(state => state.getPoints);
+
+  useEffect(() => {
+    dispatch(Actions.getPoints());
+  }, []);
 
   return (
     <View>
