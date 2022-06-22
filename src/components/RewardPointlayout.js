@@ -61,4 +61,4 @@ const RewardPointlayout = props => {
   );
 };
 
-export default RewardPointlayout;
+export default React.memo(RewardPointlayout);

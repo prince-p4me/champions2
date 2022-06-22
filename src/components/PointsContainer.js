@@ -82,4 +82,4 @@ const PointsContainer = () => {
   );
 };
 
-export default PointsContainer;
+export default React.memo(PointsContainer);
