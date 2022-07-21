@@ -162,7 +162,8 @@ const HomeScreen = props => {
       dispatch(Actions.updateUser(obj));
       if (!obj.city || !obj.pincode || !obj.full_adress || !obj.state) {
         accessLocation();
-      } else if (!obj.name || !obj.mobile || !obj.bought_from) {
+      }
+      if (!obj.name || !obj.mobile || !obj.bought_from) {
         Navigation.navigate('Editprofile');
       }
     })
