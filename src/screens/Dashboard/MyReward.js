@@ -9,6 +9,7 @@ import RewardPointlayout from '../../components/RewardPointlayout';
 import PointsWonLayout from '../../components/PointsWonLayout';
 import QRCodeContainer from '../../components/QRCodeContainer';
 import * as Actions from '../../redux/action';
+import SuccessModal from './SuccessModal';
 
 // import { NavigationEvents } from 'react-navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -97,9 +98,11 @@ const PointWonLayout = item => {
   }
 };
 
-const MyDashboard = () => {
-  const [transactionType, setTransactionType] = useState('QR Scan');
+const MyReward = () => {
+  const [transactionType, setTransactionType] = useState('Redeemed');
   const transactionList = useSelector(state => state.getTransactionByCategory);
+  const isSuccess = useSelector(state => state.isSuccess);
+  const offerDetail = useSelector(state => state.getOfferDetail);
 
   console.log({ transactionList: transactionList });
   const user = useSelector(state => state.getUser);
@@ -122,7 +125,7 @@ const MyDashboard = () => {
   }
   useEffect(() => {
     setTimeout(() => {
-      getTransaction('QR Scan');
+      getTransaction('Redeemed');
     }, 1000)
   }, []);
 
@@ -172,36 +175,43 @@ const MyDashboard = () => {
         back={true}
         help={true}
       />
-      <ScrollView
+      <SuccessModal
+        visible={isSuccess}
+        offerDetail={offerDetail}
+      />
+      {/* <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}>
         <RewardPointlayout />
         <QRCodeContainer bgColor={Color.lightGreen} />
-        <ButtonBar />
-        {transactionList.length > 0 && (
-          <FlatList
-            columnWrapperStyle={{
-              flexGrow: 1,
-              justifyContent: 'center',
-            }}
-            keyExtractor={(item, index) => `key-${index}`}
-            data={transactionList}
-            numColumns={2}
-            renderItem={({ item, index }) => <PointWonLayout item={item} />}
-            scrollEnabled={false}
-            // keyExtractor={(item, index) => index.toString()}
-            ListFooterComponent={<View style={{ height: 50 }}></View>}
-          // ListHeaderComponent={<ButtonBar />}
-          />
-        )}
-      </ScrollView>
+        <ButtonBar /> */}
+      {/* {transactionList.length > 0 && ( */}
+      <FlatList
+        columnWrapperStyle={{ justifyContent: 'center', }}
+        keyExtractor={(item, index) => `key-${index}`}
+        data={transactionList}
+        numColumns={2}
+        renderItem={({ item, index }) => <PointWonLayout item={item} />}
+        // scrollEnabled={false}
+        keyExtractor={(item, index) => index.toString()}
+        ListFooterComponent={<View style={{ height: 50 }}></View>}
+        ListHeaderComponent={
+          <>
+            <RewardPointlayout />
+            <QRCodeContainer bgColor={Color.lightGreen} />
+            <ButtonBar />
+          </>
+        }
+      />
+      {/* )} */}
+      {/* </ScrollView> */}
     </View>
   );
   // }
 };
 
 // export default connect(mapStateToProps, mapDispatchToProps)(MyReward);
-export default MyDashboard;
+export default MyReward;
 
 const styles1 = StyleSheet.create({
   buttons: {

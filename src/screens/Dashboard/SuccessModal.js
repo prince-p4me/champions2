@@ -35,9 +35,6 @@ const SuccessModal = props => {
   const isSuccess = useSelector(state => state.isSuccess);
   const points = useSelector(state => state.successPoints);
 
-  console.log({ props333331: props });
-
-  console.log({ offerDetail352222222: offerDetail });
   const renderRefer = () => {
     const message = "Hey, 10X Champions is an application to get some rewards points. Doing shopping with Grmfoodkraft Pvt. Ltd.  You'll get a QR code after scanning that QR code some Reward Points are saved in your wallet and you can Redeem interesting offers from the application\n\n\nClick here & install 10X Champions - \n iOS :- " +
       Constant.iosApp + ("\nAndroid :- " + Constant.android + user.referral_code) + "\n\nUse my referral code:-" + user.referral_code;

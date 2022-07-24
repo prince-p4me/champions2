@@ -56,13 +56,13 @@ const HomeScreen = props => {
   const [scanPoints, setScanPoints] = useState(false);
   const isLoading = useSelector(state => state.isLoading);
   const user = useSelector(state => state.getUser);
+  const isSuccess = useSelector(state => state.isSuccess);
 
   const [youtbelist, setYoutTubelist] = useState([]);
 
   const dispatch = useDispatch();
 
   const list = useSelector(state => state.getBanners);
-  const isSuccess = useSelector(state => state.isSuccess);
   const isRtl = useSelector(state => state.isRtl);
   const offerDetail = useSelector(state => state.getOfferDetail);
   const language = useSelector(state => state.getLanguage);
