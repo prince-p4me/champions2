@@ -17,10 +17,11 @@ const RewardPointlayout = props => {
   const isRtl = useSelector((state) => state.isRtl);
   const align = isRtl ? "right" : "left";
   const data = useSelector((state) => state.getPoints);
+  const isSuccess = useSelector(state => state.isSuccess);
 
   useEffect(() => {
     dispatch(Actions.getPoints());
-  }, []);
+  }, [isSuccess]);
 
   return (
     <View style={[styles.pointTypesContainerreward, bgColor && { backgroundColor: bgColor }]}>

@@ -212,7 +212,7 @@ export function redeemOffer(payload) {
 
 export function getTransactionCategory(payload) {
   return {
-    type: Types.TRANSACTION_CATEGORY,
+    type: Types.TRANSACTION_CATEGORY_SAGA,
     payload,
   };
 }

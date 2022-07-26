@@ -818,7 +818,7 @@ export default function* watcher() {
   yield takeLatest(Types.GET_REVIEWS, getAppReviews);
   yield takeLatest(Types.GET_RECIPES, getRecipes);
   yield takeLatest(Types.GET_WINNERS, getWinners);
-  yield takeLatest(Types.TRANSACTION_CATEGORY, getTransactionCategory);
+  yield takeLatest(Types.TRANSACTION_CATEGORY_SAGA, getTransactionCategory);
   yield takeLatest(Types.ADD_ADDRESS, addAdress);
   yield takeLatest(Types.DELETE_ADDRESS, deleteAddress);
   yield takeLatest(Types.GET_NOTIFICATIONS, getNotification);

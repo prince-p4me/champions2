@@ -46,6 +46,8 @@ const onSuccess = e => {
     .catch(error => {
       store.dispatch(Actions.setLoading(false));
       // dispatch(Actions.setLoading(false));
+      showResponse({ message: "Something went wrong" });
+      Navigation.goBack();
       console.error('Error:', error);
     });
 };

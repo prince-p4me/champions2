@@ -97,9 +97,10 @@ const PointWonLayout = item => {
     );
   }
 };
+import { useFocusEffect } from '@react-navigation/native';
 
 const MyReward = () => {
-  const [transactionType, setTransactionType] = useState('Redeemed');
+  const [transactionType, setTransactionType] = useState('QR Scan');
   const transactionList = useSelector(state => state.getTransactionByCategory);
   const isSuccess = useSelector(state => state.isSuccess);
   const offerDetail = useSelector(state => state.getOfferDetail);
@@ -116,18 +117,22 @@ const MyReward = () => {
       <TextRegular text={'No Data Found'} style={{ textAlign: 'center' }} />
     );
   };
+
   const getTransaction = (type) => {
     let obj = {
       user_id: user.id,
       type: type,
     };
     dispatch(Actions.getTransactionCategory(obj));
-  }
-  useEffect(() => {
-    setTimeout(() => {
-      getTransaction('Redeemed');
-    }, 1000)
-  }, []);
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setTimeout(() => {
+        getTransaction('QR Scan');
+      }, 1000)
+    }, [isSuccess])
+  );
 
   const ButtonBar = () => {
     // if (transactionList.length > 0)

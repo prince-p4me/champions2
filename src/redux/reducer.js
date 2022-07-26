@@ -151,7 +151,7 @@ export const getTransactionByCategory = (state = [], action) => {
     case Types.TRANSACTION_CATEGORY:
       return action.payload;
     default:
-      return [];
+      return state;
   }
 };
 
